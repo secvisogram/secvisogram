@@ -1,7 +1,7 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const GitRevisionPlugin = require('git-revision-webpack-plugin')
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const Webpack = require('webpack')
 const gitRevisionPlugin = new GitRevisionPlugin()
 
