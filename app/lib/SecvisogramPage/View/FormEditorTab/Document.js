@@ -57,11 +57,18 @@ export default React.memo(
             <AggregateSeverity
               {...documentLevelMetaDataProps('aggregate_severity')}
             />
-            <TextAttribute
+            <EnumAttribute
               {...documentLevelMetaDataProps('category')}
               label="Document category"
               description="Defines a short canonical name, chosen by the document producer, which will inform the end user as to the category of document."
-              placeholder="Security Advisory"
+              freeSolo={true}
+              options={[
+                'generic_csaf',
+                'security_incident_response',
+                'informational_advisory',
+                'security_advisory',
+                'vex',
+              ]}
             />
             <EnumAttribute
               {...documentLevelMetaDataProps('csaf_version')}
