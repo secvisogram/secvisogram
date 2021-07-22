@@ -59,7 +59,7 @@
     "css-loader": "^5.2.7",
     "electron": "^13.1.7",
     "electron-mocha": "^10.1.0",
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "git-revision-webpack-plugin": "^5.0.0",
