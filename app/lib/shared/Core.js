@@ -10,6 +10,8 @@ import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities'
 
+const secvisogramName = 'Secvisogram'
+
 /* eslint-disable */
 const secvisogramVersion =
   typeof SECVISOGRAM_VERSION !== 'undefined'
@@ -21,7 +23,7 @@ const secvisogramVersion =
 
 const setGeneratorFields = (/** @type {Date} */ date) =>
   compose(
-    set('document.tracking.generator.engine.name', 'Secvisogram'),
+    set('document.tracking.generator.engine.name', secvisogramName),
     set('document.tracking.generator.engine.version', secvisogramVersion),
     set('document.tracking.generator.date', date.toISOString())
   )
@@ -160,6 +162,13 @@ export default async function createCore() {
           : schemaValidatorLenient
         const documentEntity = new DocumentEntity({ schemaValidator })
         return documentEntity.preview({ document })
+      },
+
+      getGeneratorEngineData() {
+        return {
+          name: secvisogramName,
+          version: secvisogramVersion,
+        }
       },
     },
   }

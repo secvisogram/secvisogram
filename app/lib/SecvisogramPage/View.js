@@ -23,6 +23,10 @@ const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
  *  data: {
  *    doc: unknown
  *  } | null
+ *  generatorEngineData: {
+ *    name: string
+ *    version: string
+ *  }
  *  activeTab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON'
  *  alert?: {
  *    confirmLabel: string
@@ -63,6 +67,7 @@ function View({
   stripResult,
   previewResult,
   strict,
+  generatorEngineData,
   onSetStrict,
   onDownload,
   onOpen,
@@ -106,25 +111,30 @@ function View({
    *
    * @see {Reducer}
    */
-  const onUpdate = /** @type {((update: {}) => void) & ((dataPath: string, update: {}) => void)} */ (React.useCallback(
-    (/** @type {any} */ newValue, /** @type {any?} */ update) => {
-      if (typeof newValue === 'string') {
-        dispatch({
-          type: 'CHANGE_FORM_DOC',
-          dataPath: newValue,
-          timestamp: new Date(),
-          update: update,
-        })
-      } else {
-        dispatch({
-          type: 'CHANGE_FORM_DOC',
-          timestamp: new Date(),
-          update: newValue,
-        })
-      }
-    },
-    []
-  ))
+  const onUpdate =
+    /** @type {((update: {}) => void) & ((dataPath: string, update: {}) => void)} */ (
+      React.useCallback(
+        (/** @type {any} */ newValue, /** @type {any?} */ update) => {
+          if (typeof newValue === 'string') {
+            dispatch({
+              type: 'CHANGE_FORM_DOC',
+              dataPath: newValue,
+              timestamp: new Date(),
+              update: update,
+              generatorEngineData,
+            })
+          } else {
+            dispatch({
+              type: 'CHANGE_FORM_DOC',
+              timestamp: new Date(),
+              update: newValue,
+              generatorEngineData,
+            })
+          }
+        },
+        [generatorEngineData]
+      )
+    )
 
   /**
    * Is used to replace the complete document in the json editor.

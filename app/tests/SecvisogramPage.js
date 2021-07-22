@@ -5,6 +5,11 @@ import ViewReducer from '../lib/SecvisogramPage/View/Reducer'
 suite('SecvisogramPage', () => {
   suite('View', () => {
     suite('Reducer', () => {
+      const generatorEngineData = {
+        name: 'Secvisogram',
+        version: 'some-version',
+      }
+
       test('The document can be updated', () => {
         let { state } = Fixture()
         const timestamp = new Date('2020-01-01')
@@ -13,6 +18,7 @@ suite('SecvisogramPage', () => {
           type: 'CHANGE_FORM_DOC',
           update: { foo: { $set: 42 } },
           timestamp,
+          generatorEngineData,
         })
 
         expect(state.formValues.doc.foo).to.equal(42)
@@ -43,6 +49,7 @@ suite('SecvisogramPage', () => {
           dataPath: '/foobar/test',
           timestamp,
           update: { $set: 42 },
+          generatorEngineData,
         })
 
         expect(state.formValues.doc.foobar.test).to.equal(42)
@@ -51,10 +58,10 @@ suite('SecvisogramPage', () => {
         )
         expect(
           state.formValues.doc.document.tracking.generator.engine.name
-        ).to.equal('Secvisogram')
+        ).to.equal(generatorEngineData.name)
         expect(
           state.formValues.doc.document.tracking.generator.engine.version
-        ).to.equal('unidentified version')
+        ).to.equal(generatorEngineData.version)
       })
 
       test('The form can be reset', () => {

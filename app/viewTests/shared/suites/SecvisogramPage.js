@@ -66,6 +66,7 @@ const props = {
     },
   },
   activeTab: /** @type {'EDITOR'} */ ('EDITOR'),
+  generatorEngineData: { name: 'Secvisogram', version: 'unidentified version' },
   onSetStrict: console.log.bind(console, 'onSetStrict'),
   onNew: console.log.bind(console, 'onNew'),
   onDownload: console.log.bind(console, 'onDownload'),

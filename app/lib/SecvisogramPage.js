@@ -89,6 +89,7 @@ createCore().then((core) => {
           stripResult={stripResult}
           previewResult={previewResult}
           data={data}
+          generatorEngineData={core.document.getGeneratorEngineData()}
           alert={alert}
           strict={strict}
           onLockTab={React.useCallback(() => {
