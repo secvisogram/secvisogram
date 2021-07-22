@@ -256,6 +256,27 @@ export const tests = [
     ),
   },
   {
+    title: 'Editor with an invalid current_release_date value',
+    render: () => (
+      <View
+        {...props}
+        data={{
+          ...props.data,
+          doc: {
+            ...props.data.doc,
+            document: {
+              ...props.data.doc.document,
+              tracking: {
+                ...props.data.doc.document.tracking,
+                current_release_date: '2020-01-01T',
+              },
+            },
+          },
+        }}
+      />
+    ),
+  },
+  {
     title: 'Editor (seed-1)',
     render: () => (
       <View

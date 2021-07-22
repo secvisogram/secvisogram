@@ -12,6 +12,7 @@ const DatePicker = (
   const [dateString, timeString] = React.useMemo(() => {
     if (!value) return ['', '']
     const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return ['', '']
     return [
       formatDate(date),
       date.getHours().toString().padStart(2, '0') +
