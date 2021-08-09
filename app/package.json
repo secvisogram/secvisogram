@@ -16,7 +16,7 @@
     "dev": "webpack serve --mode development --port=$npm_config_port"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.12.2",
