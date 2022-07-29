@@ -151,72 +151,6 @@ describe('SecvisogramPage', () => {
     })
   })
 
-  describe('can create a new document from filesystem in connected mode', function () {
-    for (const user of getUsers().filter((user) =>
-      canCreateDocuments(user.groups)
-    )) {
-      it(`user: ${user.preferredUsername}`, function () {
-        cy.intercept(
-          '/.well-known/appspecific/de.bsi.secvisogram.json',
-          getLoginEnabledConfig()
-        ).as('wellKnownAppConfig')
-        cy.intercept(getLoginEnabledConfig().userInfoUrl, getUserInfo(user)).as(
-          'apiGetUserInfo'
-        )
-        cy.intercept(
-          '/api/v1/advisories/templates',
-          getGetTemplatesResponse()
-        ).as('apiGetTemplates')
-
-        cy.visit('?tab=EDITOR')
-        cy.wait('@wellKnownAppConfig')
-        cy.wait('@apiGetUserInfo')
-
-        cy.get('[data-testid="user_info"]').should('exist')
-
-        cy.get('[data-testid="new_document_button"]').click()
-
-        cy.get(`[data-testid="new_document-file_selector_button"]`).click()
-        cy.get(`[data-testid="new_document-file_input"]`).selectFile({
-          contents: /** @type {any} */ (Cypress.Buffer).from(
-            JSON.stringify(sampleUploadDocument)
-          ),
-          fileName: 'some_file.json',
-          mimeType: 'application/json',
-          lastModified: Date.now(),
-        })
-
-        cy.get(`[data-testid="new_document-create_document_button"]`).click()
-        cy.get('[data-testid="new_document_dialog"]').then((el) => {
-          expect(/** @type {any} */ (el[0]).open).to.be.false
-        })
-        cy.get('[data-testid="attribute-/document/title"] input').should(
-          'have.value',
-          sampleUploadDocument.document.title
-        )
-
-        const createAdvisoryResponse = getCreateAdvisoryResponse()
-        cy.intercept('POST', '/api/v1/advisories', createAdvisoryResponse).as(
-          'apiCreateAdvisory'
-        )
-        cy.intercept(
-          'GET',
-          `/api/v1/advisories/${createAdvisoryResponse.id}/`,
-          getGetAdvisoryDetailResponse({
-            advisoryId: createAdvisoryResponse.id,
-          })
-        ).as('apiGetAdvisoryDetail')
-        cy.get('[data-testid="save_button"]').click()
-        cy.wait('@apiCreateAdvisory').then((xhr) => {
-          expect(xhr.request.body.csaf).deep.equal(sampleUploadDocument)
-          expect(xhr.request.body.summary).to.equal('-')
-          expect(xhr.request.body.legacyVersion).to.equal('')
-        })
-        cy.wait('@apiGetAdvisoryDetail')
-      })
-    }
-  })
-
   describe('can create a new document from template in standalone mode', function () {
     for (const template of [
       { templateId: 'MINIMAL', templateContent: docMin },
@@ -270,10 +204,12 @@ describe('SecvisogramPage', () => {
     }
   })
 
-  describe('can create a new document based on a template', function () {
+  describe('can create a new document in connected mode', function () {
     for (const user of getUsers()) {
-      for (const template of getTemplates()) {
-        it(`user: ${user.preferredUsername}, templateId: ${template.templateId}`, function () {
+      for (const mode of /** @type {const} */ (['TEMPLATE', 'FILESYSTEM'])) {
+        it(`user: ${user.preferredUsername}, mode: ${mode}`, function () {
+          const [template] = getTemplates()
+
           cy.intercept(
             '/.well-known/appspecific/de.bsi.secvisogram.json',
             getLoginEnabledConfig()
@@ -298,25 +234,50 @@ describe('SecvisogramPage', () => {
             cy.get('[data-testid="new_document_button"]').click()
             cy.wait('@apiGetTemplates')
 
-            for (const template of getTemplates()) {
+            if (mode === 'TEMPLATE') {
+              for (const template of getTemplates()) {
+                cy.get(
+                  `select[data-testid="new_document-templates-select"] option[value="${template.templateId}"]`
+                ).should('exist')
+              }
               cy.get(
-                `select[data-testid="new_document-templates-select"] option[value="${template.templateId}"]`
-              ).should('exist')
-            }
-            cy.get(
-              `select[data-testid="new_document-templates-select"]`
-            ).select(template.templateId)
+                `select[data-testid="new_document-templates-select"]`
+              ).select(template.templateId)
 
-            cy.intercept(
-              `/api/v1/advisories/templates/${template.templateId}`,
-              getGetTemplateContentResponse({ template })
-            ).as('apiGetTemplateContent')
-            cy.get(
-              `[data-testid="new_document-create_document_button"]`
-            ).click()
-            cy.get('[data-testid="new_document_dialog"]').then((el) => {
-              expect(/** @type {any} */ (el[0]).open).to.be.false
-            })
+              cy.intercept(
+                `/api/v1/advisories/templates/${template.templateId}`,
+                getGetTemplateContentResponse({ template })
+              ).as('apiGetTemplateContent')
+              cy.get(
+                `[data-testid="new_document-create_document_button"]`
+              ).click()
+              cy.get('[data-testid="new_document_dialog"]').then((el) => {
+                expect(/** @type {any} */ (el[0]).open).to.be.false
+              })
+            } else {
+              cy.get(
+                `[data-testid="new_document-file_selector_button"]`
+              ).click()
+              cy.get(`[data-testid="new_document-file_input"]`).selectFile({
+                contents: /** @type {any} */ (Cypress.Buffer).from(
+                  JSON.stringify(sampleUploadDocument)
+                ),
+                fileName: 'some_file.json',
+                mimeType: 'application/json',
+                lastModified: Date.now(),
+              })
+
+              cy.get(
+                `[data-testid="new_document-create_document_button"]`
+              ).click()
+              cy.get('[data-testid="new_document_dialog"]').then((el) => {
+                expect(/** @type {any} */ (el[0]).open).to.be.false
+              })
+              cy.get('[data-testid="attribute-/document/title"] input').should(
+                'have.value',
+                sampleUploadDocument.document.title
+              )
+            }
 
             const createAdvisoryResponse = getCreateAdvisoryResponse()
             cy.intercept(
@@ -332,10 +293,26 @@ describe('SecvisogramPage', () => {
               })
             ).as('apiGetAdvisoryDetail')
             cy.get('[data-testid="save_button"]').click()
+
+            const summary = 'Summary'
+            const legacyVersion = 'Legacy version'
+            cy.get('[data-testid="submit_version-summary-textarea"]').type(
+              summary
+            )
+            cy.get(
+              '[data-testid="submit_version-legacy_version-textarea"]'
+            ).type(legacyVersion)
+            cy.get('[data-testid="submit_version-submit"]').click()
             cy.wait('@apiCreateAdvisory').then((xhr) => {
-              expect(xhr.request.body.csaf).deep.equal(template.templateContent)
-              expect(xhr.request.body.summary).to.equal('-')
-              expect(xhr.request.body.legacyVersion).to.equal('')
+              if (mode === 'TEMPLATE') {
+                expect(xhr.request.body.csaf).deep.equal(
+                  template.templateContent
+                )
+              } else {
+                expect(xhr.request.body.csaf).deep.equal(sampleUploadDocument)
+              }
+              expect(xhr.request.body.summary).to.equal(summary)
+              expect(xhr.request.body.legacyVersion).to.equal(legacyVersion)
             })
             cy.wait('@apiGetAdvisoryDetail')
           }

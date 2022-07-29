@@ -17,6 +17,7 @@ import PreviewTab from './View/PreviewTab.js'
 import Reducer from './View/Reducer.js'
 import Alert from './View/shared/Alert.js'
 import useDebounce from './View/shared/useDebounce.js'
+import VersionSummaryDialog from './View/VersionSummaryDialog.js'
 
 const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
 
@@ -73,6 +74,19 @@ function View({
       modal?.showModal()
     }
   }, [newDocumentDialog])
+
+  const [versionSummaryDialog, setVersionSummaryDialog] = React.useState(
+    /** @type {JSX.Element | null} */ (null)
+  )
+  const versionSummaryDialogRef = React.useRef(
+    /** @type {HTMLDialogElement | null} */ (null)
+  )
+  React.useEffect(() => {
+    if (versionSummaryDialog) {
+      const modal = /** @type {any} */ (versionSummaryDialogRef.current)
+      modal?.showModal()
+    }
+  }, [versionSummaryDialog])
 
   const [advisoryState, setAdvisoryState] = React.useState(
     /** @type {import('./View/types.js').AdvisoryState | null} */ (
@@ -292,6 +306,7 @@ function View({
     <>
       {alert}
       {newDocumentDialog}
+      {versionSummaryDialog}
       <div className="mx-auto w-full h-screen flex flex-col">
         <div>
           <div className="flex justify-between bg-gray-700">
@@ -503,13 +518,33 @@ function View({
                     className="text-gray-300 hover:bg-gray-500 hover:text-white text-sm font-bold p-2 h-auto"
                     onClick={() => {
                       if (advisoryState.type === 'NEW_ADVISORY') {
-                        setSaving(true)
-                        onCreateAdvisory({ csaf: formValues.doc }, ({ id }) => {
-                          onLoadAdvisory({ advisoryId: id }, (advisory) => {
-                            setAdvisoryState({ type: 'ADVISORY', advisory })
-                            setSaving(false)
-                          })
-                        })
+                        setVersionSummaryDialog(
+                          <VersionSummaryDialog
+                            ref={versionSummaryDialogRef}
+                            onSubmit={({ summary, legacyVersion }) => {
+                              setSaving(true)
+                              onCreateAdvisory(
+                                {
+                                  csaf: formValues.doc,
+                                  summary,
+                                  legacyVersion,
+                                },
+                                ({ id }) => {
+                                  onLoadAdvisory(
+                                    { advisoryId: id },
+                                    (advisory) => {
+                                      setAdvisoryState({
+                                        type: 'ADVISORY',
+                                        advisory,
+                                      })
+                                      setSaving(false)
+                                    }
+                                  )
+                                }
+                              )
+                            }}
+                          />
+                        )
                       } else if (advisoryState.type === 'ADVISORY') {
                         setSaving(true)
                         onUpdateAdvisory(
