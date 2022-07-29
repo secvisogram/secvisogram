@@ -546,22 +546,37 @@ function View({
                           />
                         )
                       } else if (advisoryState.type === 'ADVISORY') {
-                        setSaving(true)
-                        onUpdateAdvisory(
-                          {
-                            advisoryId: advisoryState.advisory.advisoryId,
-                            revision: advisoryState.advisory.revision,
-                            csaf: formValues.doc,
-                          },
-                          () => {
-                            onLoadAdvisory(
-                              { advisoryId: advisoryState.advisory.advisoryId },
-                              (advisory) => {
-                                setAdvisoryState({ type: 'ADVISORY', advisory })
-                                setSaving(false)
-                              }
-                            )
-                          }
+                        setVersionSummaryDialog(
+                          <VersionSummaryDialog
+                            ref={versionSummaryDialogRef}
+                            onSubmit={({ summary, legacyVersion }) => {
+                              setSaving(true)
+                              onUpdateAdvisory(
+                                {
+                                  advisoryId: advisoryState.advisory.advisoryId,
+                                  revision: advisoryState.advisory.revision,
+                                  csaf: formValues.doc,
+                                  summary,
+                                  legacyVersion,
+                                },
+                                () => {
+                                  onLoadAdvisory(
+                                    {
+                                      advisoryId:
+                                        advisoryState.advisory.advisoryId,
+                                    },
+                                    (advisory) => {
+                                      setAdvisoryState({
+                                        type: 'ADVISORY',
+                                        advisory,
+                                      })
+                                      setSaving(false)
+                                    }
+                                  )
+                                }
+                              )
+                            }}
+                          />
                         )
                       }
                     }}

@@ -66,12 +66,22 @@ describe('SecvisogramPage / EditorTab', function () {
             ).as('apiUpdateAdvisory')
             cy.get('[data-testid="save_button"]').click()
 
+            const summary = 'Summary'
+            const legacyVersion = 'Legacy version'
+            cy.get('[data-testid="submit_version-summary-textarea"]').type(
+              summary
+            )
+            cy.get(
+              '[data-testid="submit_version-legacy_version-textarea"]'
+            ).type(legacyVersion)
+            cy.get('[data-testid="submit_version-submit"]').click()
+
             cy.wait('@apiUpdateAdvisory').then((xhr) => {
               expect(xhr.request.body.csaf.document.title).to.equal(
                 documentTitle
               )
-              expect(xhr.request.body.summary).to.equal('-')
-              expect(xhr.request.body.legacyVersion).to.equal('')
+              expect(xhr.request.body.summary).to.equal(summary)
+              expect(xhr.request.body.legacyVersion).to.equal(legacyVersion)
             })
             cy.wait('@apiGetAdvisoryDetail')
           } else {

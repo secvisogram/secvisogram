@@ -62,6 +62,8 @@ export interface Props {
       advisoryId: string
       revision: string
       csaf: {}
+      summary: string
+      legacyVersion: string
     },
     callback: () => void
   ): void
