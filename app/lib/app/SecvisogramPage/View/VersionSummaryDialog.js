@@ -28,6 +28,7 @@ const VersionSummaryDialog = React.forwardRef(
           </svg>
         </button>
       </header>
+      <p className="p-4">Please provide a summary of your changes and an optional legacy version.</p>
       <form
         method="dialog"
         id="submit_version-form"
