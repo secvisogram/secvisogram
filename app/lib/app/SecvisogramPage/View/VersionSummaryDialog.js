@@ -63,13 +63,12 @@ const VersionSummaryDialog = React.forwardRef(
           >
             Legacy Version
           </label>
-          <textarea
+          <input
             className="border border-gray-400 py-1 px-2 w-full shadow-inner rounded"
             data-testid="submit_version-legacy_version-textarea"
             id="submit_version-legacy_version-textarea"
             name="legacy_version"
-            required
-          ></textarea>
+          ></input>
         </div>
       </form>
       <footer className="p-2 border-t flex justify-between items-center">
