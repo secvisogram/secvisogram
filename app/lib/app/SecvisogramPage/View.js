@@ -302,6 +302,19 @@ function View({
     [activeTab, onChangeTab, formValues.doc, isTabLocked]
   )
 
+  const getSummaryAndLegacyVersion = () => {
+    const tracking = formValues.doc.document.tracking
+    if (tracking) {
+      const majorVersion = (typeof tracking.version === 'string') ? parseInt(tracking.version.split(".")[0]) : tracking.version
+      if (majorVersion >= 1) {
+        return tracking?.revision_history.sort(
+          (/** @type {{date: string}} */ a, /** @type {{date: string}} */ z) => new Date(z.date).getTime() - new Date(a.date).getTime()
+        )[0]
+      }
+    }
+    return {summary: "", legacy_version: ""}
+  }
+
   return (
     <>
       {alert}
@@ -543,6 +556,7 @@ function View({
                                 }
                               )
                             }}
+                            latestRevision={{summary: "", legacy_version: ""}}
                           />
                         )
                       } else if (advisoryState.type === 'ADVISORY') {
@@ -576,6 +590,7 @@ function View({
                                 }
                               )
                             }}
+                            latestRevision={getSummaryAndLegacyVersion()}
                           />
                         )
                       }

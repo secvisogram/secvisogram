@@ -10,5 +10,5 @@ export interface TypedValidationError {
 }
 
 export interface FormValues {
-  doc: {}
+  doc: {document?: any}
 }

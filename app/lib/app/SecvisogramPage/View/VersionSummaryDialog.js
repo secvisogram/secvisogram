@@ -5,9 +5,12 @@ const VersionSummaryDialog = React.forwardRef(
    *
    * @param {object} props
    * @param {(params: { summary: string; legacyVersion: string }) => void} props.onSubmit
+   * @param {{summary: string, legacy_version: string}} props.latestRevision
    * @returns
    */
-  ({ onSubmit }, ref) => (
+  ({ onSubmit, latestRevision }, ref) =>
+  {
+    return (
     <dialog ref={ref} className="rounded p-0 w-full max-w-3xl shadow">
       <form method="dialog" id={`submit_version-close_form`} />
       <header className="w-full flex items-center justify-end border-b p-2">
@@ -57,6 +60,7 @@ const VersionSummaryDialog = React.forwardRef(
             name="summary"
             required
             rows={5}
+            defaultValue={latestRevision.summary}
           ></textarea>
           <label
             className="block"
@@ -69,6 +73,7 @@ const VersionSummaryDialog = React.forwardRef(
             data-testid="submit_version-legacy_version-textarea"
             id="submit_version-legacy_version-textarea"
             name="legacy_version"
+            defaultValue={latestRevision.legacy_version}
           ></input>
         </div>
       </form>
@@ -84,7 +89,7 @@ const VersionSummaryDialog = React.forwardRef(
         </button>
       </footer>
     </dialog>
-  )
+  )}
 )
 
 export default VersionSummaryDialog
