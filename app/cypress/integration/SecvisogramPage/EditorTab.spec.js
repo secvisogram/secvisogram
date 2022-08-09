@@ -7,6 +7,11 @@ import {
   getUserInfo,
   getUsers,
 } from '../../fixtures/cmsBackendData.js'
+import {
+  advisoryIdV1,
+  latestRevisionHistoryLegacyVersion,
+  latestRevisionHistorySummary
+} from "../../fixtures/samples/cmsBackendData/tests.js";
 
 describe('SecvisogramPage / EditorTab', function () {
   describe('can save documents', function () {
@@ -66,14 +71,26 @@ describe('SecvisogramPage / EditorTab', function () {
             ).as('apiUpdateAdvisory')
             cy.get('[data-testid="save_button"]').click()
 
+            // check if the input fields are pre-filled with the latest revision history item data
+            // for draft documents (version < 1) and if no revision history is given the fields should be empty
+            let expectedSummary = ''
+            let expectedLegacyVersion = ''
+            if (advisory.advisoryId === advisoryIdV1) {
+              expectedSummary = latestRevisionHistorySummary
+              expectedLegacyVersion = latestRevisionHistoryLegacyVersion
+            }
+
+            cy.get('[data-testid="submit_version-summary-textarea"]')
+              .should('have.value', expectedSummary)
+              .as('prefilledSummary')
+            cy.get('[data-testid="submit_version-legacy_version-textarea"]')
+              .should('have.value', expectedLegacyVersion)
+              .as('prefilledLegacyVersion')
+
             const summary = 'Summary'
             const legacyVersion = 'Legacy version'
-            cy.get('[data-testid="submit_version-summary-textarea"]').type(
-              summary
-            )
-            cy.get(
-              '[data-testid="submit_version-legacy_version-textarea"]'
-            ).type(legacyVersion)
+            cy.get('@prefilledSummary').clear().type(summary)
+            cy.get('@prefilledLegacyVersion').clear().type(legacyVersion)
             cy.get('[data-testid="submit_version-submit"]').click()
 
             cy.wait('@apiUpdateAdvisory').then((xhr) => {
