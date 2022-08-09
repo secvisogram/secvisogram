@@ -300,7 +300,7 @@ describe('SecvisogramPage', () => {
               summary
             )
             cy.get(
-              '[data-testid="submit_version-legacy_version-textarea"]'
+              '[data-testid="submit_version-legacy_version-input"]'
             ).type(legacyVersion)
             cy.get('[data-testid="submit_version-submit"]').click()
             cy.wait('@apiCreateAdvisory').then((xhr) => {

@@ -83,7 +83,7 @@ describe('SecvisogramPage / EditorTab', function () {
             cy.get('[data-testid="submit_version-summary-textarea"]')
               .should('have.value', expectedSummary)
               .as('prefilledSummary')
-            cy.get('[data-testid="submit_version-legacy_version-textarea"]')
+            cy.get('[data-testid="submit_version-legacy_version-input"]')
               .should('have.value', expectedLegacyVersion)
               .as('prefilledLegacyVersion')
 
