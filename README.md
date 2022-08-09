@@ -54,6 +54,24 @@ Now you can start a development server as follows:
 
 The application is now running and accessible at http://localhost:8080. Use the `--port` argument for alternative ports, e.g. `npm run dev --port=8081`.
 
+You can configure the application by providing a json config under the
+following path `.well-known/appspecific/de.bsi.secvisogram.json`.
+During development this file has to be in `app/public/.well-known/appspecific`.
+This is only needed when you are using secvisogram in combination with the
+[CSAF CMS Server](https://github.com/secvisogram/csaf-cms-backend). If no
+config is available secvisogram will fall back to the standalone mode which is
+the same as `"loginAvailable": false`.
+
+```json
+{
+  "loginAvailable": true,
+  "loginUrl": "/oauth2/sign_in?rd=http%3A%2F%2Flocalhost%3A8080",
+  "logoutUrl": "/oauth2/sign_out?rd=http%3A%2F%2Flocalhost%3A8080",
+  "userInfoUrl": "/oauth2/userinfo",
+  "validatorUrl": "http://localhost:8082"
+}
+```
+
 [(back to top)](#bsi-secvisogram-csaf-20-web-editor)
 
 ### Deploying to Production
