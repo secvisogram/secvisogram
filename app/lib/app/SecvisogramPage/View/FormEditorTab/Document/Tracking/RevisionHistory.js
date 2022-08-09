@@ -4,6 +4,7 @@ import DateAttribute from '../../shared/DateAttribute.js'
 import { Version } from '../../shared/definitions.js'
 import ObjectContainer from '../../shared/ObjectContainer.js'
 import TextAreaAttribute from '../../shared/TextAreaAttribute.js'
+import TextAttribute from '../../shared/TextAttribute.js'
 
 /**
  * @param {{
@@ -38,7 +39,7 @@ export default function RevisionHistory(props) {
                 label="Date of the revision"
                 description="The date of the revision entry"
               />
-              <TextAreaAttribute
+              <TextAttribute
                 {...revisionHistoryItemProps('legacy_revision')}
                 label="Legacy version of the revision"
                 description="Contains the version string used in an existing document with the same content."
