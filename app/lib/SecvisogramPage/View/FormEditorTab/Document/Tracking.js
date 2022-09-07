@@ -33,17 +33,17 @@ export default React.memo(
       >
         {(trackingProps) => (
           <>
+            <TextAttribute
+              {...trackingProps('id')}
+              label="Security Bulletin ID"
+              description="The ID is a simple label that provides for a wide range of numbering values, types, and schemes. Its value SHOULD be assigned and maintained by the original document issuing authority."
+              pattern="^[\S](.*[\S])?$"
+              placeholder="Example Bulletin ID - 5201395"
+            />
             <DateAttribute
               {...trackingProps('current_release_date')}
               label="Current release date"
               description="The date when the current revision of this document was released"
-            />
-            <TextAttribute
-              {...trackingProps('id')}
-              label="Unique identifier for the document"
-              description="The ID is a simple label that provides for a wide range of numbering values, types, and schemes. Its value SHOULD be assigned and maintained by the original document issuing authority."
-              pattern="^[\S](.*[\S])?$"
-              placeholder="Example Company - 2019-YH3234"
             />
             <DateAttribute
               {...trackingProps('initial_release_date')}

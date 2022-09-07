@@ -60,13 +60,13 @@ export default React.memo(
               label="Security Bulletin Summary"
               description="Holds the summary associated with the Security Bulletin."
             />
-            <Publisher {...documentLevelMetaDataProps('publisher')} />
             <References
               {...documentLevelMetaDataProps('references')}
               label="Document references"
               description="Holds a list of references associated with the whole document."
             />
             <Tracking {...documentLevelMetaDataProps('tracking')} />
+            <Publisher {...documentLevelMetaDataProps('publisher')} />
           </>
         )}
       </ObjectContainer>
