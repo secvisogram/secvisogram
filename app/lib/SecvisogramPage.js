@@ -209,7 +209,7 @@ core.document.newDocMin().then((doc) => {
           },
           [handleError]
         )}
-        onNewDocMin={React.useCallback(() => {
+        onNewDoc={React.useCallback(() => {
           return core.document
             .newDocMin()
             .then((doc) => {

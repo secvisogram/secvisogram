@@ -24,7 +24,7 @@ import useDebounce from './shared/useDebounce.js'
  *  onChange(doc: {} | null): void
  *  onOpen(file: File): Promise<void | {}>
  *  onDownload(doc: {}): void
- *  onNewDocMin(): Promise<void | {}>
+ *  onNewDoc(): Promise<void | {}>
  *  onLockTab(): void
  *  onUnlockTab(): void
  * }} props
@@ -37,7 +37,7 @@ export default function JsonEditorTab({
   onChange,
   onOpen,
   onDownload,
-  onNewDocMin,
+  onNewDoc: onNewDoc,
   onLockTab,
   onUnlockTab,
 }) {
@@ -93,11 +93,11 @@ export default function JsonEditorTab({
     setShowErrors(!showErrors)
   }
 
-  const confirmMin = () => {
-    onNewDocMin().then((newDoc) => {
+  const confirmNewDoc = () => {
+    onNewDoc().then((newDoc) => {
       editorRef.current?.setValue(JSON.stringify(newDoc, null, 2))
     })
-    hideMin()
+    hideDoc()
   }
 
   const handleOpen = (/** @type {File} */ file) => {
@@ -171,20 +171,20 @@ export default function JsonEditorTab({
   }, [errors])
 
   const {
-    show: showMin,
-    hide: hideMin,
-    Alert: MinAlert,
+    show: showDoc,
+    hide: hideDoc,
+    Alert: DocAlert,
   } = useAlert({
     description:
       'This will create a new CSAF document. All current content will be lost. Are you sure?',
     confirmLabel: 'Yes, create new document',
     cancelLabel: 'No, resume editing',
-    confirm: confirmMin,
+    confirm: confirmNewDoc,
   })
 
   return (
     <>
-      <MinAlert />
+      <DocAlert />
       <div className="json-editor flex h-full mr-3 bg-white">
         <div className="p-3 w-full">
           <div className={'relative ' + (showErrors ? 'h-4/5' : 'h-full')}>
@@ -227,10 +227,10 @@ export default function JsonEditorTab({
             <button
               type="button"
               className="mb-2 py-1 px-3 rounded shadow border border-blue-400 bg-blue-400 text-white hover:text-blue-400 hover:bg-white"
-              onClick={showMin}
+              onClick={showDoc}
             >
               <FontAwesomeIcon className="mr-1" icon={faFile} />
-              New (minimal fields)
+              New
             </button>
             <label
               htmlFor="openFile"

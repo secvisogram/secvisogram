@@ -25,7 +25,7 @@ import { useAlert } from './shared/Alert.js'
  *  onUpdate: ((update: {}) => void) & ((instancePath: string, update: {}) => void)
  *  onOpen(file: File): void
  *  onDownload(doc: {}): void
- *  onNewDocMin(): void
+ *  onNewDoc(): void
  *  onCollectProductIds(): Promise<void | {id: string, name: string}[]>
  *  onCollectGroupIds(): Promise<void | {id: string, name: string}[]>
  * }} props
@@ -36,7 +36,7 @@ export default function FormEditorTab({
   onUpdate,
   onOpen,
   onDownload,
-  onNewDocMin,
+  onNewDoc: onNewDoc,
   onCollectProductIds,
   onCollectGroupIds,
 }) {
@@ -48,9 +48,9 @@ export default function FormEditorTab({
     if (!showErrors) setExpanded(true)
   }
 
-  const confirmMin = () => {
-    onNewDocMin()
-    hideMin()
+  const confirmNewDoc = () => {
+    onNewDoc()
+    hideDoc()
   }
 
   /**
@@ -76,20 +76,20 @@ export default function FormEditorTab({
   const { doc } = formValues
 
   const {
-    show: showMin,
-    hide: hideMin,
-    Alert: MinAlert,
+    show: showDoc,
+    hide: hideDoc,
+    Alert: DocAlert,
   } = useAlert({
     description:
       'This will create a new CSAF document. All current content will be lost. Are you sure?',
     confirmLabel: 'Yes, create new document',
     cancelLabel: 'No, resume editing',
-    confirm: confirmMin,
+    confirm: confirmNewDoc,
   })
 
   return (
     <>
-      <MinAlert />
+      <DocAlert />
       <div ref={ref} className="form-editor flex h-full mr-3 bg-white">
         <div className="p-3 w-full">
           <div className={'overflow-auto ' + (showErrors ? 'h-4/5' : 'h-full')}>
@@ -138,10 +138,10 @@ export default function FormEditorTab({
             <button
               type="button"
               className="mb-2 py-1 px-3 rounded shadow border border-blue-400 bg-blue-400 text-white hover:text-blue-400 hover:bg-white"
-              onClick={showMin}
+              onClick={showDoc}
             >
               <FontAwesomeIcon className="mr-1" icon={faFile} />
-              New (minimal fields)
+              New
             </button>
             <label
               htmlFor="openFile"

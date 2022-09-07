@@ -42,9 +42,9 @@ const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
  *  onSetStrict(strict: boolean): void
  *  onDownload(doc: {}): void
  *  onOpen(file: File): Promise<void | {}>
- *  onChangeTab(tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON', document: {}): void
+ *  onChangeTab(tab: 'EDITOR' | 'SOURCE' | 'CSAF-JSON', document: {}): void
  *  onValidate(document: {}): void
- *  onNewDocMin(): Promise<void | {}>
+ *  onNewDoc(): Promise<void | {}>
  *  onStrip(document: {}): void
  *  onPreview(document: {}): void
  *  onExportCSAF(doc: {}): void
@@ -72,7 +72,7 @@ function View({
   onOpen,
   onChangeTab,
   onValidate,
-  onNewDocMin,
+  onNewDoc: onNewDoc,
   onStrip,
   onPreview,
   onExportCSAF,
@@ -229,7 +229,8 @@ function View({
           <div>
             <button {...tabButtonProps('EDITOR')}>Form Editor</button>
             <button {...tabButtonProps('SOURCE')}>JSON Editor</button>
-            <button {...tabButtonProps('PREVIEW')}>Preview</button>
+            {/* Inaccessible for WebSphere fork, unless we implement HTML rendering
+            <button {...tabButtonProps('PREVIEW')}>Preview</button> */}
             <button {...tabButtonProps('CSAF-JSON')}>CSAF Document</button>
           </div>
           <div className="mr-4">
@@ -262,7 +263,7 @@ function View({
                 onUpdate={onUpdate}
                 onOpen={onOpen}
                 onDownload={onDownload}
-                onNewDocMin={onNewDocMin}
+                onNewDoc={onNewDoc}
                 onCollectProductIds={onCollectProductIdsCallback}
                 onCollectGroupIds={onCollectGroupIdsCallback}
               />
@@ -275,7 +276,7 @@ function View({
                 onChange={onReplaceDoc}
                 onOpen={onOpen}
                 onDownload={onDownload}
-                onNewDocMin={onNewDocMin}
+                onNewDoc={onNewDoc}
                 onLockTab={onLockTab}
                 onUnlockTab={onUnlockTab}
               />
