@@ -3,7 +3,6 @@ import * as mandatoryTests from '../../../csaf-validator-lib/mandatoryTests.js'
 import * as schemaTests from '../../../csaf-validator-lib/schemaTests.js'
 import strip from '../../../csaf-validator-lib/strip.js'
 import validate from '../../../csaf-validator-lib/validate.js'
-import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities.js'
 
@@ -110,15 +109,6 @@ export default function createCore() {
       async newDocMin() {
         return setGeneratorFields(new Date())({
           ...doc_min,
-        })
-      },
-
-      /**
-       * Provides a maximal new document.
-       */
-      async newDocMax() {
-        return setGeneratorFields(new Date())({
-          ...doc_max,
         })
       },
 

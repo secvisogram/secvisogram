@@ -226,23 +226,6 @@ core.document.newDocMin().then((doc) => {
             })
             .catch(handleError)
         }, [handleError])}
-        onNewDocMax={React.useCallback(() => {
-          return core.document
-            .newDocMax()
-            .then((doc) => {
-              setState((state) => ({
-                ...state,
-                data: {
-                  ...state.data,
-                  doc: doc,
-                },
-              }))
-              uniqueGroupId(true)
-              uniqueProductId(true)
-              return doc
-            })
-            .catch(handleError)
-        }, [handleError])}
         onStrip={React.useCallback(
           (document) => {
             core.document

@@ -45,7 +45,6 @@ const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
  *  onChangeTab(tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON', document: {}): void
  *  onValidate(document: {}): void
  *  onNewDocMin(): Promise<void | {}>
- *  onNewDocMax(): Promise<void | {}>
  *  onStrip(document: {}): void
  *  onPreview(document: {}): void
  *  onExportCSAF(doc: {}): void
@@ -74,7 +73,6 @@ function View({
   onChangeTab,
   onValidate,
   onNewDocMin,
-  onNewDocMax,
   onStrip,
   onPreview,
   onExportCSAF,
@@ -265,7 +263,6 @@ function View({
                 onOpen={onOpen}
                 onDownload={onDownload}
                 onNewDocMin={onNewDocMin}
-                onNewDocMax={onNewDocMax}
                 onCollectProductIds={onCollectProductIdsCallback}
                 onCollectGroupIds={onCollectGroupIdsCallback}
               />
@@ -279,7 +276,6 @@ function View({
                 onOpen={onOpen}
                 onDownload={onDownload}
                 onNewDocMin={onNewDocMin}
-                onNewDocMax={onNewDocMax}
                 onLockTab={onLockTab}
                 onUnlockTab={onUnlockTab}
               />

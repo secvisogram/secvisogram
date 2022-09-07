@@ -3,7 +3,6 @@ import {
   faCog,
   faExclamationTriangle,
   faFile,
-  faFileAlt,
   faFolderOpen,
   faSave,
   faWindowClose,
@@ -26,7 +25,6 @@ import useDebounce from './shared/useDebounce.js'
  *  onOpen(file: File): Promise<void | {}>
  *  onDownload(doc: {}): void
  *  onNewDocMin(): Promise<void | {}>
- *  onNewDocMax(): Promise<void | {}>
  *  onLockTab(): void
  *  onUnlockTab(): void
  * }} props
@@ -40,7 +38,6 @@ export default function JsonEditorTab({
   onOpen,
   onDownload,
   onNewDocMin,
-  onNewDocMax,
   onLockTab,
   onUnlockTab,
 }) {
@@ -101,13 +98,6 @@ export default function JsonEditorTab({
       editorRef.current?.setValue(JSON.stringify(newDoc, null, 2))
     })
     hideMin()
-  }
-
-  const confirmMax = () => {
-    onNewDocMax().then((newDoc) => {
-      editorRef.current?.setValue(JSON.stringify(newDoc, null, 2))
-    })
-    hideMax()
   }
 
   const handleOpen = (/** @type {File} */ file) => {
@@ -192,22 +182,9 @@ export default function JsonEditorTab({
     confirm: confirmMin,
   })
 
-  const {
-    show: showMax,
-    hide: hideMax,
-    Alert: MaxAlert,
-  } = useAlert({
-    description:
-      'This will create a new CSAF document. All current content will be lost. Are you sure?',
-    confirmLabel: 'Yes, create new document',
-    cancelLabel: 'No, resume editing',
-    confirm: confirmMax,
-  })
-
   return (
     <>
       <MinAlert />
-      <MaxAlert />
       <div className="json-editor flex h-full mr-3 bg-white">
         <div className="p-3 w-full">
           <div className={'relative ' + (showErrors ? 'h-4/5' : 'h-full')}>
@@ -254,14 +231,6 @@ export default function JsonEditorTab({
             >
               <FontAwesomeIcon className="mr-1" icon={faFile} />
               New (minimal fields)
-            </button>
-            <button
-              type="button"
-              className="mb-2 py-1 px-3 rounded shadow border border-blue-400 bg-blue-400 text-white hover:text-blue-400 hover:bg-white"
-              onClick={showMax}
-            >
-              <FontAwesomeIcon className="mr-1" icon={faFileAlt} />
-              New (all fields)
             </button>
             <label
               htmlFor="openFile"
