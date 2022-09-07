@@ -1,16 +1,8 @@
 import '@reach/combobox/styles.css'
 import React from 'react'
-import AggregateSeverity from './Document/AggregateSeverity.js'
-import Distribution from './Document/Distribution.js'
 import Publisher from './Document/Publisher.js'
 import Tracking from './Document/Tracking.js'
-import {
-  Acknowledgments,
-  Lang,
-  Notes,
-  References,
-} from './shared/definitions.js'
-import EnumAttribute from './shared/EnumAttribute.js'
+import { Notes, References } from './shared/definitions.js'
 import ObjectContainer from './shared/ObjectContainer.js'
 import TextAttribute from './shared/TextAttribute.js'
 import validationErrorShallowEqual from './shared/validationErrorShallowEqual.js'
@@ -57,62 +49,22 @@ export default React.memo(
       >
         {(documentLevelMetaDataProps) => (
           <>
-            <Acknowledgments
-              {...documentLevelMetaDataProps('acknowledgments')}
-              label="Document acknowledgments"
-              description="Contains a list of acknowledgment elements associated with the whole document."
-            />
-            <AggregateSeverity
-              {...documentLevelMetaDataProps('aggregate_severity')}
-            />
-            <EnumAttribute
-              {...documentLevelMetaDataProps('category')}
-              label="Document category"
-              description="Defines a short canonical name, chosen by the document producer, which will inform the end user as to the category of document."
-              freeSolo={true}
-              options={[
-                'csaf_base',
-                'csaf_security_incident_response',
-                'csaf_informational_advisory',
-                'csaf_security_advisory',
-                'csaf_vex',
-              ]}
-            />
-            <EnumAttribute
-              {...documentLevelMetaDataProps('csaf_version')}
-              label="CSAF version"
-              description="Gives the version of the CSAF specification which the document was generated for."
-              options={['2.0']}
-            />
-            <Distribution {...documentLevelMetaDataProps('distribution')} />
-            <Lang
-              {...documentLevelMetaDataProps('lang')}
-              label="Document language"
-              description="Identifies the language used by this document, corresponding to IETF BCP 47 / RFC 5646."
-              deletable
+            <TextAttribute
+              {...documentLevelMetaDataProps('title')}
+              label="Security Bulletin Title"
+              description="This SHOULD be a canonical name for the Security Bulletin, and sufficiently unique to distinguish it from similar documents."
+              placeholder="Example Security Bulletin: IBM WebSphere Application Server is vulnerable to Cross-site Scripting (CVE-2022-22477)"
             />
             <Notes
               {...documentLevelMetaDataProps('notes')}
-              label="Document notes"
-              description="Holds notes associated with the whole document."
+              label="Security Bulletin Summary"
+              description="Holds the summary associated with the Security Bulletin."
             />
             <Publisher {...documentLevelMetaDataProps('publisher')} />
             <References
               {...documentLevelMetaDataProps('references')}
               label="Document references"
               description="Holds a list of references associated with the whole document."
-            />
-            <Lang
-              {...documentLevelMetaDataProps('source_lang')}
-              label="Source language"
-              description="If this copy of the document is a translation then the value of this property describes from which language this document was translated."
-              deletable
-            />
-            <TextAttribute
-              {...documentLevelMetaDataProps('title')}
-              label="Title of this document"
-              description="This SHOULD be a canonical name for the document, and sufficiently unique to distinguish it from similar documents."
-              placeholder="Example Company Cross-Site-Scripting Vulnerability in Example Generator"
             />
             <Tracking {...documentLevelMetaDataProps('tracking')} />
           </>
