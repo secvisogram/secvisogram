@@ -5,7 +5,6 @@ import CsafTab from './View/CsafTab.js'
 import FormEditorTab from './View/FormEditorTab.js'
 import JsonEditorTab from './View/JsonEditorTab.js'
 import LoadingIndicator from './View/LoadingIndicator.js'
-import PreviewTab from './View/PreviewTab.js'
 import Reducer from './View/Reducer.js'
 import Alert from './View/shared/Alert.js'
 import useDebounce from './View/shared/useDebounce.js'
@@ -27,7 +26,7 @@ const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
  *    name: string
  *    version: string
  *  }
- *  activeTab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON'
+ *  activeTab: 'EDITOR' | 'SOURCE' | 'CSAF-JSON'
  *  alert?: {
  *    confirmLabel: string
  *    cancelLabel: string
@@ -37,7 +36,6 @@ const secvisogramVersion = SECVISOGRAM_VERSION // eslint-disable-line
  *    onCancel(): void
  *  } | null
  *  stripResult: React.ComponentProps<typeof CsafTab>['stripResult']
- *  previewResult: React.ComponentProps<typeof PreviewTab>['previewResult']
  *  strict: boolean
  *  onSetStrict(strict: boolean): void
  *  onDownload(doc: {}): void
@@ -64,7 +62,6 @@ function View({
   data,
   alert,
   stripResult,
-  previewResult,
   strict,
   generatorEngineData,
   onSetStrict,
@@ -74,9 +71,7 @@ function View({
   onValidate,
   onNewDoc: onNewDoc,
   onStrip,
-  onPreview,
   onExportCSAF,
-  onExportHTML,
   onLockTab,
   onUnlockTab,
   onCollectProductIds,
@@ -153,10 +148,6 @@ function View({
     onStrip(formValues.doc)
   }, [formValues.doc, onStrip])
 
-  const onPreviewCallback = React.useCallback(() => {
-    onPreview(formValues.doc)
-  }, [formValues.doc, onPreview])
-
   const onExportCSAFCallback = React.useCallback(() => {
     onExportCSAF(formValues.doc)
   }, [formValues.doc, onExportCSAF])
@@ -229,8 +220,6 @@ function View({
           <div>
             <button {...tabButtonProps('EDITOR')}>Form Editor</button>
             <button {...tabButtonProps('SOURCE')}>JSON Editor</button>
-            {/* Inaccessible for WebSphere fork, unless we implement HTML rendering
-            <button {...tabButtonProps('PREVIEW')}>Preview</button> */}
             <button {...tabButtonProps('CSAF-JSON')}>CSAF Document</button>
           </div>
           <div className="mr-4">
@@ -279,14 +268,6 @@ function View({
                 onNewDoc={onNewDoc}
                 onLockTab={onLockTab}
                 onUnlockTab={onUnlockTab}
-              />
-            ) : activeTab === 'PREVIEW' ? (
-              <PreviewTab
-                previewResult={previewResult}
-                onPreview={onPreviewCallback}
-                formValues={formValues}
-                validationErrors={errors}
-                onExport={onExportHTML}
               />
             ) : activeTab === 'CSAF-JSON' ? (
               <CsafTab
