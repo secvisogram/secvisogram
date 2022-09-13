@@ -43,7 +43,6 @@ core.document.newDocMin().then((doc) => {
         errors,
         alert,
         stripResult,
-        previewResult,
         strict,
       },
       setState,
@@ -90,7 +89,6 @@ core.document.newDocMin().then((doc) => {
         isSaving={false}
         errors={errors}
         stripResult={stripResult}
-        previewResult={previewResult}
         data={data}
         generatorEngineData={core.document.getGeneratorEngineData()}
         alert={alert}

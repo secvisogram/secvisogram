@@ -77,12 +77,8 @@ const props = {
   onSave: console.log.bind(console, 'onSave'),
   onChangeTab: console.log.bind(console, 'onChangeTab'),
   onValidate: console.log.bind(console, 'onValidate'),
-  onNewDocMin: () => {
-    console.log('onNewDocMin')
-    return new Promise(() => {})
-  },
-  onNewDocMax: () => {
-    console.log('onNewDocMax')
+  onNewDoc: () => {
+    console.log('onNewDoc')
     return new Promise(() => {})
   },
   onStrip: (/** @type {any[]} */ ...args) => {
@@ -302,50 +298,6 @@ export const tests = [
   {
     title: 'Source (locked)',
     render: () => <View {...props} activeTab="SOURCE" isTabLocked={true} />,
-  },
-  {
-    title: 'Advisory (seed-1)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed1) }}
-        activeTab="PREVIEW"
-      />
-    ),
-  },
-  {
-    title: 'Advisory (seed-2)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed2) }}
-        activeTab="PREVIEW"
-      />
-    ),
-  },
-  {
-    title: 'PREVIEW',
-    render: () => <View {...props} activeTab="PREVIEW" />,
-  },
-  {
-    title: 'PREVIEW (seed-1)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed1) }}
-        activeTab="PREVIEW"
-      />
-    ),
-  },
-  {
-    title: 'PREVIEW (seed-2)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed2) }}
-        activeTab="PREVIEW"
-      />
-    ),
   },
   {
     title: 'CSAF-JSON',
