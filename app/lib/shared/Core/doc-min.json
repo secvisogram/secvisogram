@@ -38,6 +38,12 @@
       ],
       "status": "",
       "version": ""
-    }
+    },
+    "notes": [
+      {
+        "category": "summary",
+        "text": ""
+      }
+    ]
   }
 }

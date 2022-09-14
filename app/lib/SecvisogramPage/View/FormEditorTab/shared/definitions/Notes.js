@@ -58,13 +58,6 @@ const Note = React.memo(
       >
         {(noteProps) => (
           <>
-            <TextAttribute
-              {...noteProps('audience')}
-              label="Audience of note"
-              description="Indicate who is intended to read it."
-              placeholder="all"
-              deletable
-            />
             <EnumAttribute
               {...noteProps('category')}
               label="Note category"
