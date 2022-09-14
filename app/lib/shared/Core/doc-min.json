@@ -1,12 +1,29 @@
 {
   "document": {
-    "category": "",
+    "category": "csaf_security_advisory",
     "csaf_version": "2.0",
-    "publisher": {
-      "category": "",
-      "name": "",
-      "namespace": ""
+    "distribution": {
+      "tlp": {
+        "label": "WHITE"
+      }
     },
+    "publisher": {
+      "category": "vendor",
+      "name": "IBM Support",
+      "namespace": "https://www.ibm.com"
+    },
+    "references": [
+      {
+        "category": "external",
+        "summary": "Security Bulletin web URL",
+        "url": "https://www.ibm.com/support/pages/node/$bulletinIdPlaceholder"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical link to Security Bulletin CSAF",
+        "url": "https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/automation/bulletins/$bulletinIdPlaceholder.json"
+      }
+    ],
     "title": "",
     "tracking": {
       "current_release_date": "",
@@ -21,6 +38,12 @@
       ],
       "status": "",
       "version": ""
-    }
+    },
+    "notes": [
+      {
+        "category": "summary",
+        "text": ""
+      }
+    ]
   }
 }

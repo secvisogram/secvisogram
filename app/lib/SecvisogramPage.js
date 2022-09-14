@@ -43,7 +43,6 @@ core.document.newDocMin().then((doc) => {
         errors,
         alert,
         stripResult,
-        previewResult,
         strict,
       },
       setState,
@@ -90,7 +89,6 @@ core.document.newDocMin().then((doc) => {
         isSaving={false}
         errors={errors}
         stripResult={stripResult}
-        previewResult={previewResult}
         data={data}
         generatorEngineData={core.document.getGeneratorEngineData()}
         alert={alert}
@@ -209,26 +207,9 @@ core.document.newDocMin().then((doc) => {
           },
           [handleError]
         )}
-        onNewDocMin={React.useCallback(() => {
+        onNewDoc={React.useCallback(() => {
           return core.document
             .newDocMin()
-            .then((doc) => {
-              setState((state) => ({
-                ...state,
-                data: {
-                  ...state.data,
-                  doc: doc,
-                },
-              }))
-              uniqueGroupId(true)
-              uniqueProductId(true)
-              return doc
-            })
-            .catch(handleError)
-        }, [handleError])}
-        onNewDocMax={React.useCallback(() => {
-          return core.document
-            .newDocMax()
             .then((doc) => {
               setState((state) => ({
                 ...state,

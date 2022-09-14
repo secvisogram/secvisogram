@@ -3,7 +3,6 @@
  * json-schema.
  */
 
-export { default as Acknowledgments } from './definitions/Acknowledgments.js'
 export { default as Branches } from './definitions/Branches.js'
 export { default as FullProductName } from './definitions/FullProductName.js'
 export { default as Lang } from './definitions/Lang.js'
