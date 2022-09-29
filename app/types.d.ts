@@ -19,3 +19,5 @@ declare module '*.json' {
   const content: {}
   export default content
 }
+
+declare module "*.md"
