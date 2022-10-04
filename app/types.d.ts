@@ -21,3 +21,9 @@ declare module '*.json' {
 }
 
 declare module "*.md"
+
+
+declare module '*/metaData2.json' {
+  const metadata: Object
+  export default metadata
+}
