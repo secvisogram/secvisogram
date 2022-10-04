@@ -4,9 +4,9 @@ import {
   GenericEditor,
   ObjectFieldsEditor,
 } from './WizardPanel/shared/shared/editors.js'
-import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {faComment, faExclamationTriangle, faQuestionCircle, faWindowClose} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import HelpPanel from "./WizardPanel/HelpPanel.js";
+import InfoPanel from "./WizardPanel/InfoPanel.js";
 
 export default function WizardPanel() {
   const level = 0
@@ -36,103 +36,135 @@ export default function WizardPanel() {
   //   })
   // )
 
-  const [helpPanelOpen, setHelpPanelOpen] = useState(false)
+  const [sidePanelContent, setSidePanelContent] = useState("")
 
   return (
     <>
-      <div className={"p-3 " + (helpPanelOpen ? "w-4/5" : "w-full")}>
-        <div className="flex">
-          <ul>
-            {schema.metaInfo.propertyList.map((_property) => {
-              const property =
-                /** @type {import('./WizardPanel/shared/types').Property} */ (
-                _property
-              )
-              return (
-                <React.Fragment key={property.fullName.join('.')}>
-                  <li>
-                    <button
-                      type="button"
-                      className={
-                        selectedPath[level] === property.fullName[level]
-                          ? 'underline'
-                          : ''
-                      }
-                      onClick={() => {
-                        setSelectedPath(property.fullName)
-                      }}
-                    >
-                      {property.title}
-                    </button>
-                    {schema.addMenuItemsForChildObjects &&
-                    property.type === 'OBJECT' ? (
-                      <ul className="ml-2">
-                        {property.metaInfo.propertyList
-                          ?.filter((p) => ['OBJECT', 'ARRAY'].includes(p.type))
-                          .map((childProperty) => {
-                            const childLevel = level + 1
-                            return (
-                              <li key={childProperty.fullName.join('.')}>
-                                <button
-                                  type="button"
-                                  className={
-                                    selectedPath[childLevel] ===
-                                    childProperty.fullName[childLevel]
-                                      ? 'underline'
-                                      : ''
-                                  }
-                                  onClick={() => {
-                                    setSelectedPath(childProperty.fullName)
-                                  }}
-                                >
-                                  {childProperty.title}
-                                </button>
-                              </li>
-                            )
-                          })}
-                      </ul>
-                    ) : null}
-                  </li>
-                </React.Fragment>
-              )
-            })}
-          </ul>
-          {selectedPath.length && selectedProperty ? (
-            selectedPath.length === 1 && selectedProperty.type === 'OBJECT' ? (
-              <ObjectFieldsEditor
-                property={selectedProperty}
-                instancePath={selectedProperty.fullName}
-              />
-            ) : (
-              <GenericEditor
-                property={selectedProperty}
-                instancePath={selectedProperty.fullName}
-              />
-            )
-          ) : null}
+      <div className="flex justify-between w-full">
+
+        <div className="flex w-full">
+          <div className={"p-3 " + (sidePanelContent ? "w-4/5" : "w-full")}>
+            <div className="flex">
+              <ul>
+                {schema.metaInfo.propertyList.map((_property) => {
+                  const property =
+                    /** @type {import('./WizardPanel/shared/types').Property} */ (
+                    _property
+                  )
+                  return (
+                    <React.Fragment key={property.fullName.join('.')}>
+                      <li>
+                        <button
+                          type="button"
+                          className={
+                            selectedPath[level] === property.fullName[level]
+                              ? 'underline'
+                              : ''
+                          }
+                          onClick={() => {
+                            setSelectedPath(property.fullName)
+                          }}
+                        >
+                          {property.title}
+                        </button>
+                        {schema.addMenuItemsForChildObjects &&
+                        property.type === 'OBJECT' ? (
+                          <ul className="ml-2">
+                            {property.metaInfo.propertyList
+                              ?.filter((p) => ['OBJECT', 'ARRAY'].includes(p.type))
+                              .map((childProperty) => {
+                                const childLevel = level + 1
+                                return (
+                                  <li key={childProperty.fullName.join('.')}>
+                                    <button
+                                      type="button"
+                                      className={
+                                        selectedPath[childLevel] ===
+                                        childProperty.fullName[childLevel]
+                                          ? 'underline'
+                                          : ''
+                                      }
+                                      onClick={() => {
+                                        setSelectedPath(childProperty.fullName)
+                                      }}
+                                    >
+                                      {childProperty.title}
+                                    </button>
+                                  </li>
+                                )
+                              })}
+                          </ul>
+                        ) : null}
+                      </li>
+                    </React.Fragment>
+                  )
+                })}
+              </ul>
+              {selectedPath.length && selectedProperty ? (
+                selectedPath.length === 1 && selectedProperty.type === 'OBJECT' ? (
+                  <ObjectFieldsEditor
+                    property={selectedProperty}
+                    instancePath={selectedProperty.fullName}
+                  />
+                ) : (
+                  <GenericEditor
+                    property={selectedProperty}
+                    instancePath={selectedProperty.fullName}
+                  />
+                )
+              ) : null}
+            </div>
+          </div>
+          {
+            sidePanelContent ?
+              <div className="p-3 relative overflow-y-auto w-1/5 bg-gray-200 border border-l-4">
+                <div className="p-3 absolute right-0 top-0">
+                  <button
+                    onClick={() => setSidePanelContent(null)}
+                  >
+                    <FontAwesomeIcon className="fa-1x" icon={faWindowClose}/>
+                  </button>
+                </div>
+                {
+                  sidePanelContent === "INFO" ?
+                    <InfoPanel
+                      selectedPath={selectedProperty.fullName.join(".")}
+                    /> :
+                    sidePanelContent === "COMMENTS" ?
+                      <div>comments for {selectedProperty.fullName.join(".")}</div> :
+                      sidePanelContent === "ERRORS" ?
+                        <div>errors for {selectedProperty.fullName.join(".")}</div> :
+                        null
+                }
+              </div> : null
+          }
         </div>
-        {
-          helpPanelOpen ? null :
-            (
-              <div className="p-3 absolute inset-y-0 right-0">
-                <button
-                  onClick={() => {
-                    setHelpPanelOpen(true)
-                  }}
-                >
-                  <FontAwesomeIcon className="fa-2x" icon={faInfoCircle}/>
-                </button>
-              </div>
+
+        <div className="flex flex-col bg-gray-300">
+          {
+            [
+              { targetString: "INFO", icon: faQuestionCircle },
+              { targetString: "COMMENTS", icon: faComment },
+              { targetString: "ERRORS", icon: faExclamationTriangle}
+            ].map(
+              (tup) => (
+                <>
+                  <button
+                    className={"p-3 " + (sidePanelContent === tup.targetString ? "bg-gray-200" : "")}
+                    onClick={() => {
+                      setSidePanelContent(tup.targetString)
+                    }}
+                  >
+                    <FontAwesomeIcon className="fa-2x" icon={tup.icon}/>
+                  </button>
+                </>
+              )
             )
-        }
+          }
+        </div>
+
       </div>
-      {helpPanelOpen ?
-        <HelpPanel
-          selectedPath={selectedProperty.fullName.join(".")}
-          closeHandler={() => setHelpPanelOpen(false)}
-        />
-        : null
-      }
+
     </>
   )
 }
