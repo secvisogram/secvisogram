@@ -12,6 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import InfoPanel from './WizardPanel/InfoPanel.js'
+import CommentPanel from './WizardPanel/CommentPanel.js'
+import ErrorPanel from './WizardPanel/ErrorPanel.js'
 
 export default function WizardPanel() {
   const level = 0
@@ -132,9 +134,13 @@ export default function WizardPanel() {
               {sidePanelContent === 'INFO' ? (
                 <InfoPanel selectedPath={selectedProperty.fullName.join('.')} />
               ) : sidePanelContent === 'COMMENTS' ? (
-                <div>comments for {selectedProperty.fullName.join(".")}</div>
+                <CommentPanel
+                  selectedPath={selectedProperty.fullName.join('.')}
+                />
               ) : sidePanelContent === 'ERRORS' ? (
-                <div>errors for {selectedProperty.fullName.join(".")}</div>
+                <ErrorPanel
+                  selectedPath={'/' + selectedProperty.fullName.join('/')}
+                />
               ) : null}
             </div>
           ) : null}
