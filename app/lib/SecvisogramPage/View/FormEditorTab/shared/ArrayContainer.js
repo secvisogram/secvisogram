@@ -81,17 +81,21 @@ export default function ArrayContainer({ children, ...props }) {
               })}
             </div>
           ))}
-          <div className="mb-2">
-            <DefaultButton
-              onClick={() => {
-                props.onUpdate(props.instancePath, {
-                  $push: [props.defaultItemValue()],
-                })
-              }}
-            >
+          { !(props.section === "Document") &&
+            (
+              <div className="mb-2">
+              <DefaultButton
+                onClick={() => {
+                  props.onUpdate(props.instancePath, {
+                    $push: [props.defaultItemValue()],
+                  })
+                }}
+              >
               <FontAwesomeIcon icon={faPlus} />
-            </DefaultButton>
-          </div>
+              </DefaultButton>
+              </div>
+            )
+          }          
         </>
       )}
     </Container>

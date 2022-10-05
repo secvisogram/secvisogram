@@ -31,6 +31,7 @@ export default React.memo(
           category: '',
           text: '',
         })}
+        section={props.section}
       >
         {(itemProps) => <Note {...itemProps} />}
       </ArrayContainer>
@@ -58,31 +59,18 @@ const Note = React.memo(
       >
         {(noteProps) => (
           <>
-            <EnumAttribute
-              {...noteProps('category')}
-              label="Note category"
-              description="Choice of what kind of note this is."
-              options={[
-                'description',
-                'details',
-                'faq',
-                'general',
-                'legal_disclaimer',
-                'other',
-                'summary',
-              ]}
-            />
             <TextAttribute
               {...noteProps('title')}
               label="Title of note"
               description="Provides a concise description of what is contained in the text of the note."
               placeholder="Details"
               deletable
+              canBeAdded={false}
             />
             <TextAreaAttribute
               {...noteProps('text')}
-              label="Note contents"
-              description="The contents of the note. Content varies depending on type."
+              label="Summary"
+              description="The contents of the note. Content varies depending on type."              
             />
           </>
         )}
