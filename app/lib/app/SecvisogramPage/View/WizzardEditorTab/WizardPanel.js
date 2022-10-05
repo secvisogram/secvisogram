@@ -1,12 +1,17 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import schema from './WizardPanel/schema.js'
 import {
   GenericEditor,
   ObjectFieldsEditor,
 } from './WizardPanel/shared/shared/editors.js'
-import {faComment, faExclamationTriangle, faQuestionCircle, faWindowClose} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import InfoPanel from "./WizardPanel/InfoPanel.js";
+import {
+  faComment,
+  faExclamationTriangle,
+  faQuestionCircle,
+  faWindowClose,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import InfoPanel from './WizardPanel/InfoPanel.js'
 
 export default function WizardPanel() {
   const level = 0
@@ -36,21 +41,20 @@ export default function WizardPanel() {
   //   })
   // )
 
-  const [sidePanelContent, setSidePanelContent] = useState("")
+  const [sidePanelContent, setSidePanelContent] = useState('')
 
   return (
     <>
       <div className="flex justify-between w-full">
-
         <div className="flex w-full">
-          <div className={"p-3 " + (sidePanelContent ? "w-4/5" : "w-full")}>
+          <div className={'p-3 ' + (sidePanelContent ? 'w-4/5' : 'w-full')}>
             <div className="flex">
               <ul>
                 {schema.metaInfo.propertyList.map((_property) => {
                   const property =
                     /** @type {import('./WizardPanel/shared/types').Property} */ (
-                    _property
-                  )
+                      _property
+                    )
                   return (
                     <React.Fragment key={property.fullName.join('.')}>
                       <li>
@@ -71,7 +75,9 @@ export default function WizardPanel() {
                         property.type === 'OBJECT' ? (
                           <ul className="ml-2">
                             {property.metaInfo.propertyList
-                              ?.filter((p) => ['OBJECT', 'ARRAY'].includes(p.type))
+                              ?.filter((p) =>
+                                ['OBJECT', 'ARRAY'].includes(p.type)
+                              )
                               .map((childProperty) => {
                                 const childLevel = level + 1
                                 return (
@@ -101,7 +107,8 @@ export default function WizardPanel() {
                 })}
               </ul>
               {selectedPath.length && selectedProperty ? (
-                selectedPath.length === 1 && selectedProperty.type === 'OBJECT' ? (
+                selectedPath.length === 1 &&
+                selectedProperty.type === 'OBJECT' ? (
                   <ObjectFieldsEditor
                     property={selectedProperty}
                     instancePath={selectedProperty.fullName}
@@ -115,56 +122,46 @@ export default function WizardPanel() {
               ) : null}
             </div>
           </div>
-          {
-            sidePanelContent ?
-              <div className="p-3 relative overflow-y-auto w-1/5 bg-gray-200 border border-l-4">
-                <div className="p-3 absolute right-0 top-0">
-                  <button
-                    onClick={() => setSidePanelContent(null)}
-                  >
-                    <FontAwesomeIcon className="fa-1x" icon={faWindowClose}/>
-                  </button>
-                </div>
-                {
-                  sidePanelContent === "INFO" ?
-                    <InfoPanel
-                      selectedPath={selectedProperty.fullName.join(".")}
-                    /> :
-                    sidePanelContent === "COMMENTS" ?
-                      <div>comments for {selectedProperty.fullName.join(".")}</div> :
-                      sidePanelContent === "ERRORS" ?
-                        <div>errors for {selectedProperty.fullName.join(".")}</div> :
-                        null
-                }
-              </div> : null
-          }
+          {sidePanelContent ? (
+            <div className="p-3 relative overflow-y-auto w-1/5 bg-gray-200 border border-l-4">
+              <div className="p-3 absolute right-0 top-0">
+                <button onClick={() => setSidePanelContent('')}>
+                  <FontAwesomeIcon className="fa-1x" icon={faWindowClose} />
+                </button>
+              </div>
+              {sidePanelContent === 'INFO' ? (
+                <InfoPanel selectedPath={selectedProperty.fullName.join('.')} />
+              ) : sidePanelContent === 'COMMENTS' ? (
+                <div>comments for {selectedProperty.fullName.join(".")}</div>
+              ) : sidePanelContent === 'ERRORS' ? (
+                <div>errors for {selectedProperty.fullName.join(".")}</div>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="flex flex-col bg-gray-300">
-          {
-            [
-              { targetString: "INFO", icon: faQuestionCircle },
-              { targetString: "COMMENTS", icon: faComment },
-              { targetString: "ERRORS", icon: faExclamationTriangle}
-            ].map(
-              (tup) => (
-                <>
-                  <button
-                    className={"p-3 " + (sidePanelContent === tup.targetString ? "bg-gray-200" : "")}
-                    onClick={() => {
-                      setSidePanelContent(tup.targetString)
-                    }}
-                  >
-                    <FontAwesomeIcon className="fa-2x" icon={tup.icon}/>
-                  </button>
-                </>
-              )
-            )
-          }
+          {[
+            { targetString: 'INFO', icon: faQuestionCircle },
+            { targetString: 'COMMENTS', icon: faComment },
+            { targetString: 'ERRORS', icon: faExclamationTriangle },
+          ].map((tup) => (
+            <>
+              <button
+                className={
+                  'p-3 ' +
+                  (sidePanelContent === tup.targetString ? 'bg-gray-200' : '')
+                }
+                onClick={() => {
+                  setSidePanelContent(tup.targetString)
+                }}
+              >
+                <FontAwesomeIcon className="fa-2x" icon={tup.icon} />
+              </button>
+            </>
+          ))}
         </div>
-
       </div>
-
     </>
   )
 }
