@@ -81,7 +81,7 @@ export default function ArrayContainer({ children, ...props }) {
               })}
             </div>
           ))}
-          { !(props.section === "Document") &&
+          { !(props.section === "Document" && props.isNote) &&
             (
               <div className="mb-2">
               <DefaultButton
