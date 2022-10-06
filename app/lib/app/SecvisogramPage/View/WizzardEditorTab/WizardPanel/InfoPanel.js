@@ -15,15 +15,20 @@ import metadata from '../../../../../../../data/metaData2.json'
 export default function InfoPanel({ selectedPath }) {
   const [mdText, setMdText] = useState('')
 
+  const addInernalDocuPrefix = (/** @type string */ htmlString) =>
+    // adds the required prefix to all internal links
+    htmlString.replace(/href="(?!http|#)/g, 'href="/docs/user/')
+
   const getRenderedMarkdown = () => {
     if (selectedPath) {
       const meta = metadata[`$.${selectedPath}`]
       const usage_path = meta.user_documentation.usage.generic
       fetch(usage_path)
         .then((resp) => resp.text())
-        .then(
-          (mdText) => setMdText(mdText)
-        )
+        .then((mdText) => {
+          const rendered = marked(mdText)
+          setMdText(addInernalDocuPrefix(rendered))
+        })
     }
   }
 
