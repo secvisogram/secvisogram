@@ -1,5 +1,5 @@
-import React from "react";
-import DocumentEditorContext from "../../shared/DocumentEditorContext.js";
+import React from 'react'
+import DocumentEditorContext from '../../shared/DocumentEditorContext.js'
 
 /**
  * Defines the content of the side bar displaying errors for a selected path
@@ -8,19 +8,28 @@ import DocumentEditorContext from "../../shared/DocumentEditorContext.js";
  *   selectedPath: string
  * }} props
  */
-export default function ErrorPanel({selectedPath}) {
-
+export default function ErrorPanel({ selectedPath }) {
   const { doc, errors, updateDoc } = React.useContext(DocumentEditorContext)
 
-  const errorsForPath = errors.filter((error) => error.instancePath === selectedPath)
+  const errorsUnderPath = errors.filter((error) =>
+    error.instancePath.startsWith(selectedPath)
+  )
 
   return (
-    <>
-      {errorsForPath.map((error, i) => (
+    <div>
+      <h1
+        className={
+          'mb-4 text-xl font-bold ' +
+          (errorsUnderPath.length === 0 ? 'text-green-500' : 'text-red-500')
+        }
+      >
+        {errorsUnderPath.length} errors for {selectedPath}
+      </h1>
+      {errorsUnderPath.map((error, i) => (
         <div key={i}>
           <b>{error.instancePath}</b>: {error.message}
         </div>
       ))}
-    </>
+    </div>
   )
 }
