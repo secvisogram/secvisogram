@@ -131,15 +131,15 @@ export default function WizardPanel() {
                   <FontAwesomeIcon className="fa-1x" icon={faWindowClose} />
                 </button>
               </div>
-              {sidePanelContent === 'INFO' ? (
+              {sidePanelContent === 'ERRORS' ? (
+                <ErrorPanel
+                  selectedPath={'/' + selectedProperty.fullName.join('/')}
+                />
+              ) : sidePanelContent === 'INFO' ? (
                 <InfoPanel selectedPath={selectedProperty.fullName.join('.')} />
               ) : sidePanelContent === 'COMMENTS' ? (
                 <CommentPanel
                   selectedPath={selectedProperty.fullName.join('.')}
-                />
-              ) : sidePanelContent === 'ERRORS' ? (
-                <ErrorPanel
-                  selectedPath={'/' + selectedProperty.fullName.join('/')}
                 />
               ) : null}
             </div>
@@ -148,9 +148,9 @@ export default function WizardPanel() {
 
         <div className="flex flex-col bg-gray-300">
           {[
+            { targetString: 'ERRORS', icon: faExclamationTriangle },
             { targetString: 'INFO', icon: faQuestionCircle },
             { targetString: 'COMMENTS', icon: faComment },
-            { targetString: 'ERRORS', icon: faExclamationTriangle },
           ].map((tup) => (
             <>
               <button
