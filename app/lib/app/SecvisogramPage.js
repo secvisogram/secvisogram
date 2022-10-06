@@ -17,7 +17,7 @@ import sitemap from './shared/sitemap.js'
 const alertSaveInvalid = {
   label: 'Validation',
   description:
-    'Open validation issues: Your document is yet not CSAF 2.0 compliant!',
+    'Open validation issues: Your document is not yet CSAF 2.0 compliant!',
   cancelLabel: 'Resume editing (Recommended)',
   confirmLabel: 'Save invalid document',
 }
