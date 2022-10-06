@@ -125,7 +125,7 @@ export default function WizardPanel() {
             </div>
           </div>
           {sidePanelContent ? (
-            <div className="p-3 relative overflow-y-auto w-1/5 bg-gray-200 border border-l-4">
+            <div className="p-3 relative w-1/5 bg-gray-200 border border-l-4">
               <div className="p-3 absolute right-0 top-0">
                 <button onClick={() => setSidePanelContent('')}>
                   <FontAwesomeIcon className="fa-1x" icon={faWindowClose} />

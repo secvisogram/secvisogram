@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { marked } from 'marked'
 
 import metadata from '../../../../../../../data/metaData2.json'
@@ -28,9 +30,25 @@ export default function InfoPanel({ selectedPath }) {
   useEffect(getRenderedMarkdown, [selectedPath])
 
   return (
-    <div
-      className="helpContent"
-      dangerouslySetInnerHTML={{ __html: marked(mdText) }}
-    />
+    <>
+      <button
+        type="button"
+        onClick={() =>
+          document.getElementById('iframe').contentWindow.history.back()
+        }
+      >
+        <FontAwesomeIcon className="fa-1x" icon={faArrowLeft} /> Back
+      </button>
+      ||
+      <button
+        type="button"
+        onClick={() =>
+          document.getElementById('iframe').contentWindow.history.forward()
+        }
+      >
+        Forward <FontAwesomeIcon className="fa-1x" icon={faArrowRight} />
+      </button>
+      <iframe id="iframe" className="w-full h-full" srcDoc={mdText} />
+    </>
   )
 }
