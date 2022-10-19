@@ -1,4 +1,4 @@
-**Name - Usage**
+**Name - Verwendung**
 
 Wird von dem erzeugenden Programm ausgefüllt und stellt den Namen des Programms dar.
 

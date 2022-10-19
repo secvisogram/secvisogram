@@ -4,6 +4,7 @@ export interface Property {
   type: string
   fullName: string[]
   metaInfo: MetaInfo
+  addMenuItemsForChildObjects?: boolean
 }
 
 interface MetaInfo {

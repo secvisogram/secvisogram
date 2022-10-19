@@ -8,6 +8,7 @@ const props = {
   data: {
     templates: [{ templateId: '1234', templateDescription: 'Test template' }],
   },
+  onClose() {},
 }
 
 export const tests = [

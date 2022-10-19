@@ -1,3 +1,3 @@
-# Product Groups - Usage
+# Product Groups - Verwendung
 
-There is no usage documentation yet.
+Es gibt noch keine Nutzungsdokumentation.

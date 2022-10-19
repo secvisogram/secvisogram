@@ -1,4 +1,4 @@
-import APIRequest from '../APIRequest.js'
+import ApiRequest from '../ApiRequest.js'
 
 /**
  * @typedef {object} UserInfo
@@ -14,8 +14,8 @@ import APIRequest from '../APIRequest.js'
  * @returns {Promise<UserInfo>}
  */
 export async function getUserInfo(userInfoUrl) {
-  const response = await new APIRequest(new Request(userInfoUrl))
-    .produces('application/json')
+  const response = await new ApiRequest(new Request(userInfoUrl))
+    .setContentType('application/json')
     .send()
 
   return await response.json()

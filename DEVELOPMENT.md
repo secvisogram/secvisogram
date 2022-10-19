@@ -37,7 +37,7 @@ This document gives an overview on how to develop Secvisogram, the general techn
 
 - Git
 - VSCode
-- Node.js (version 14 LTS)
+- Node.js (version 16 LTS)
 - Firefox stable
 
 Secvisogram recommends using Visual Studio Code as the source code IDE. A `.vscode`-profile is included in this project. It lists recommended extensions, improving the development experience.
@@ -92,29 +92,29 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 
 ### Frameworks & Libraries
 
-| Domain        | Package        | Description & Justification                                                                                                             |
-| ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Build         | Webpack        | Bundles the source-code and coordinates the build-pipeline with transpilation-tools like postcss and babel                              |
-|               | npm            | Is the package-manager which is used to install dependencies and update or remove them                                                  |
-|               | Dependabot     | Automated dependency updates. See [https://dependabot.com/](https://dependabot.com/)                                                    |
-|               | postcss        | Used to compile tailwindcss stylesheet. See [https://postcss.org/](https://postcss.org/)                                                |
-|               | babel          | JavaScript transcompiler to convert ECMAScript ES6+ code into older JavaScript. See [https://babeljs.io/](https://babeljs.io/)          |
-| Linting       | eslint         | Lints the source-code for its quality and accordance to configured rules                                                                |
-| Styling       | tailwind       | A utility-first CSS framework. See [https://tailwindcss.com/](https://tailwindcss.com/)                                                 |
-|               | fontawesome    | Font-based icons set                                                                                                                    |
-| IDE           | VS Code        | De facto standard IDE for web development. See [https://code.visualstudio.com/](https://code.visualstudio.com/)                         |
-| Codestyle     | Prettier       | An opinionated code formatter to enforce a consistent coding-style. See [https://prettier.io/](https://prettier.io/)                    |
-| Typechecking  | Typescript     | ES with TS annotations. See [Typescript JSDoc supported types](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) |
-| UI            | React          | A JavaScript library for building user interfaces. See [https://reactjs.org/](https://reactjs.org/)                                     |
-|               | Reach-UI       | Reach-UI is library of primitive components to build accessible user-interfaces. See [https://reach.tech/](https://reach.tech/)         |
-| Validation    | AJV            | Performs the JSON Schema validation according to the CSAF specification. See [AJV](https://github.com/ajv-validator/ajv)                |
-| HTML-Template | mustache       | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                               |
-| Testing       | electron-mocha | Mocha testing in Electron. See [electron-mocha](https://github.com/jprichardson/electron-mocha)                                         |
-|               | mocha          | Mocha is a feature-rich JavaScript test framework. See [https://mochajs.org/](https://mochajs.org/)                                     |
-| Parsing       | xml2js         | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                              |
-|               | json-pointer   | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                |
-| CLI           | yargs          | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                       |
-| JSON-Editor   | ACE editor     | Ace is an embeddable code editor written in JavaScript. See [https://ace.c9.io/](https://ace.c9.io/)                                    |
+| Domain        | Package        | Description & Justification                                                                                                                               |
+| ------------- |----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Build         | Webpack        | Bundles the source-code and coordinates the build-pipeline with transpilation-tools like postcss and babel                                                |
+|               | npm            | Is the package-manager which is used to install dependencies and update or remove them                                                                    |
+|               | Dependabot     | Automated dependency updates. See [https://dependabot.com/](https://dependabot.com/)                                                                      |
+|               | postcss        | Used to compile tailwindcss stylesheet. See [https://postcss.org/](https://postcss.org/)                                                                  |
+|               | babel          | JavaScript transcompiler to convert ECMAScript ES6+ code into older JavaScript. See [https://babeljs.io/](https://babeljs.io/)                            |
+| Linting       | eslint         | Lints the source-code for its quality and accordance to configured rules                                                                                  |
+| Styling       | tailwind       | A utility-first CSS framework. See [https://tailwindcss.com/](https://tailwindcss.com/)                                                                   |
+|               | fontawesome    | Font-based icons set                                                                                                                                      |
+| IDE           | VS Code        | De facto standard IDE for web development. See [https://code.visualstudio.com/](https://code.visualstudio.com/)                                           |
+| Codestyle     | Prettier       | An opinionated code formatter to enforce a consistent coding-style. See [https://prettier.io/](https://prettier.io/)                                      |
+| Typechecking  | Typescript     | ES with TS annotations. See [Typescript JSDoc supported types](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)                   |
+| UI            | React          | A JavaScript library for building user interfaces. See [https://reactjs.org/](https://reactjs.org/)                                                       |
+|               | Reach-UI       | Reach-UI is library of primitive components to build accessible user-interfaces. See [https://reach.tech/](https://reach.tech/)                           |
+| Validation    | AJV            | Performs the JSON Schema validation according to the CSAF specification. See [AJV](https://github.com/ajv-validator/ajv)                                  |
+| HTML-Template | mustache       | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                                                 |
+| Testing       | electron-mocha | Mocha testing in Electron. See [electron-mocha](https://github.com/jprichardson/electron-mocha)                                                           |
+|               | mocha          | Mocha is a feature-rich JavaScript test framework. See [https://mochajs.org/](https://mochajs.org/)                                                       |
+| Parsing       | xml2js         | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                                                |
+|               | json-pointer   | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                                  |
+| CLI           | yargs          | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                                         |
+| JSON-Editor   | monaco editor  | monaco is an embeddable code editor written in JavaScript. See [https://github.com/microsoft/monaco-editor/](https://github.com/microsoft/monaco-editor/) |
 
 <a id="markdown-building-secvisogram" name="building-secvisogram"></a>
 

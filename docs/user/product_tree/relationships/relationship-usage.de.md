@@ -1,9 +1,9 @@
-# Relationship - Usage
+# Relationship - Verwendung
 
-Eine Beziehung, gelesen als "<Produktreferenz> <Kategorie> <relates_to_product_reference>".
+Eine Beziehung gelesen als `<product_reference> <category> <relates_to_product_reference>`
 
-Beziehungen sind besonders nützlich für Hotfixes, bei denen das verwundbare Produkt "mit" dem Fix installiert wird.
+Beziehungen sind besonders nützlich für Hotfixes, bei denen das verwundbare Produkt `installed_with` der Fix ist.
 
 *Beispiel:*
 
-* "Produkt A installiert mit Produkt B
+* `product A installed with product B`

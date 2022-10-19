@@ -20,17 +20,23 @@ export default function mandatoryTest_6_1_16(doc) {
     hasTrackingStatusField(doc) &&
     doc.document.tracking.revision_history.length > 0
   ) {
-    const version =
+    /**
+     * @param {string} version
+     * @returns
+     */
+    const normalizeVersion = (version) =>
       doc.document.tracking.status == 'draft'
-        ? doc.document.tracking.version.split(/[+-]/)[0]
-        : doc.document.tracking.version.split('+')[0]
+        ? version.split(/[+-]/)[0]
+        : version.split('+')[0]
+
     if (
-      doc.document.tracking.revision_history
-        .slice()
-        .sort(
-          (a, z) => new Date(z.date).getTime() - new Date(a.date).getTime()
-        )[0]
-        .number.split('+')[0] !== version
+      normalizeVersion(
+        doc.document.tracking.revision_history
+          .slice()
+          .sort(
+            (a, z) => new Date(z.date).getTime() - new Date(a.date).getTime()
+          )[0].number
+      ) !== normalizeVersion(doc.document.tracking.version)
     ) {
       isValid = false
       errors.push({

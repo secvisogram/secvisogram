@@ -1,6 +1,6 @@
-**Text - Usage**
+**Text - Verwendung**
 
-Stellt die Gesamtbeurteilung dar und sollte eine Zeichenfolge aus einer geschlossenen Menge sein.
+Stellt die Gesamtbeurteilung dar und sollte eine Zeichenkette aus einer geschlossenen Menge sein.
 Die Menge kann herstellerspezifisch sein oder aus einer anwendbaren Norm stammen.
 
 *Beispiele:*

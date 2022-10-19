@@ -1,5 +1,5 @@
-# Aggregate Severity - Usage
+# Aggregate Severity - Verwendung
 
-Einschätzung des Anbieters, wie kritisch die Schwachstellen des Dokuments insgesamt sind.
+Einschätzung des Anbieters, wie kritisch die Schwachstellen in dem Dokument insgesamt sind.
 
-Dies könnte zum Beispiel die textliche Beschreibung des Basisschweregrads sein, der der höchsten CVSS-Punktzahl entspricht.
+Dies könnte z. B. die textliche Beschreibung des Basisschweregrads sein, der der höchsten CVSS-Punktzahl entspricht.

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useErrorHandler } from 'react-error-boundary'
 import {
   changeWorkflowState,
   createNewVersion,
@@ -10,61 +9,53 @@ import DocumentsTabView from './DocumentsTab/View.js'
 
 /** @typedef {React.ComponentProps<typeof DocumentsTabView>} ViewProps */
 
+const messageForStatus = (/** @type { number } */ status) => {
+  switch (status) {
+    case 422:
+      return 'The document is not valid and can therefore not be published.'
+    case 503:
+      return 'There was an error reaching the validation service. Please try again later.'
+    default:
+      return 'Encountered an error with status code: ' + status
+  }
+}
+
 /**
  * @param {Pick<ViewProps, 'onOpenAdvisory'>} props
  * @returns
  */
 export default function DocumentsTab(props) {
-  const handleError = useErrorHandler()
-
-  /** @type {ViewProps['onGetData']} */
-  const onGetData = React.useCallback(
-    (callback) => {
-      getData().then(callback).catch(handleError)
-    },
-    [handleError]
-  )
-
   return (
     <DocumentsTabView
       {...props}
-      onGetData={onGetData}
-      onDeleteAdvisory={(params, callback) => {
-        deleteAdvisory(params).then(callback).catch(handleError)
+      onGetData={getData}
+      onDeleteAdvisory={deleteAdvisory}
+      onChangeWorkflowState={async ({
+        advisoryId,
+        workflowState,
+        documentTrackingStatus,
+        proposedTime,
+      }) => {
+        const { revision } = await getAdvisoryDetail({ advisoryId })
+        await changeWorkflowState({
+          advisoryId,
+          revision,
+          workflowState,
+          documentTrackingStatus,
+          proposedTime,
+        }).catch((err) => {
+          const message = messageForStatus(err.status)
+          throw new Error(message)
+        })
       }}
-      onChangeWorkflowState={(
-        { advisoryId, workflowState, documentTrackingStatus, proposedTime },
-        callback
-      ) => {
-        getAdvisoryDetail({ advisoryId })
-          .then(({ revision }) =>
-            changeWorkflowState({
-              advisoryId,
-              revision,
-              workflowState,
-              documentTrackingStatus,
-              proposedTime,
-            })
-          )
-          .then(
-            () => ({ statusCode: 200 }),
-            (err) => {
-              if (err.status === 422) {
-                return { statusCode: 422 }
-              }
-              throw err
-            }
-          )
-          .then(callback, handleError)
-      }}
-      onCreateNewVersion={({ advisoryId }, callback) => {
-        getAdvisoryDetail({
+      onCreateNewVersion={async ({ advisoryId }) => {
+        const advisoryDetail = await getAdvisoryDetail({
           advisoryId: advisoryId,
         })
-          .then((advisoryDetail) =>
-            createNewVersion({ advisoryId, revision: advisoryDetail.revision })
-          )
-          .then(callback, handleError)
+        await createNewVersion({
+          advisoryId,
+          revision: advisoryDetail.revision,
+        })
       }}
     />
   )

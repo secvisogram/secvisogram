@@ -60,6 +60,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
           const advisoryDetail = getGetAdvisoryDetailResponse({
             advisoryId: advisory.advisoryId,
           })
+          cy.setCookie("XSRF-TOKEN", "test-Value-123")
           cy.intercept(
             {
               method: 'DELETE',
@@ -195,6 +196,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
                 new Date(proposedTime).toISOString()
               )
             }
+            cy.setCookie("XSRF-TOKEN", "test-Value-123")
             cy.intercept(
               'PATCH',
               apiChangeWorkflowStateURL.pathname +
@@ -233,10 +235,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
               .submit()
             cy.wait('@apiChangeWorkflowState')
             if (!advisory.isValid) {
-              cy.get('[data-testid="error_dialog"]').should((els) => {
-                const el = /** @type {HTMLDialogElement} */ (els[0])
-                expect(el.open).to.be.true
-              })
+              cy.get('[data-testid="error_toast_message"]').should('contain', 'document is not valid')
             } else {
               cy.wait('@apiGetAdvisories')
             }
@@ -285,6 +284,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
             Cypress.config().baseUrl ?? undefined
           )
           createNewVersionURL.searchParams.set('revision', advisory.revision)
+          cy.setCookie("XSRF-TOKEN", "test-Value-123")
           cy.intercept('PATCH', createNewVersionURL.href, { body: '' }).as(
             'apiCreateVersion'
           )

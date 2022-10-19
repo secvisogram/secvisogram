@@ -1,4 +1,4 @@
-# SKUs - Usage
+# SKUs - Verwendung
 
 SKUs eignen sich besonders gut für Produkte im Direktvertrieb.
 

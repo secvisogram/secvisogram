@@ -72,8 +72,18 @@ const props = {
       <DocumentsTabView {...documentsTabViewSample.basic.props} {...props} />
     )
   ),
-  onUpdateAdvisory() {},
-  onLoadAdvisory() {},
+  async onUpdateAdvisory() {},
+  onLoadAdvisory: async () => ({
+    advisoryId: '123',
+    revision: '1-123',
+    changeable: true,
+    csaf: {
+      document: {
+        title: 'asd asd',
+      },
+    },
+    documentTrackingId: 'document-tracking-id',
+  }),
   onSetStrict: console.log.bind(console, 'onSetStrict'),
   onNew: console.log.bind(console, 'onNew'),
   onDownload: console.log.bind(console, 'onDownload'),
@@ -132,12 +142,13 @@ const props = {
     console.log('onCollectGroupIds')
     return new Promise(() => {})
   },
-  onServiceValidate() {},
-  onGetDocMin() {},
-  onGetDocMax() {},
-  onCreateAdvisory() {},
-  onGetTemplates() {},
-  onGetTemplateContent() {},
+  onServiceValidate: async () => ({ tests: [], isValid: true }),
+  onPrepareDocumentForTemplate: async () => ({ document: {} }),
+  onGetDocMin: async () => ({}),
+  onGetDocMax: async () => ({}),
+  onCreateAdvisory: async () => ({ id: 'my-id', revision: '1-123' }),
+  onGetTemplates: async () => [],
+  onGetTemplateContent: async () => ({}),
 }
 
 export const basic = { props }

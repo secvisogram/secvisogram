@@ -1,7 +1,7 @@
-**Issuing Authority - Usage**
+**Issuing Authority - Verwendung**
 
 Dient der Festlegung von Zuständigkeiten.
-Kann auch zur Festlegung der geografischen Zuständigkeit verwendet werden, z. B. Cert nur für nationale Sicherheitsforscher und/oder Anbieter.
+Kann auch verwendet werden, um die geografische Zuständigkeit festzulegen, z. B. Cert nur für nationale Sicherheitsforscher und/oder Anbieter.
 Es wird meist für sektorale, geografische oder organisatorische Spezialisierung verwendet.
 
 *Beispiel:*

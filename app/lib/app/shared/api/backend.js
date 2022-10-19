@@ -1,4 +1,5 @@
-import APIRequest from '../APIRequest.js'
+import ApiRequest from '../ApiRequest.js'
+import CsrfApiRequest from "../CsrfApiRequest.js"
 
 /**
  * @param {object} params
@@ -7,15 +8,13 @@ import APIRequest from '../APIRequest.js'
  * @param {string} params.legacyVersion
  */
 export async function createAdvisory({ csaf, summary, legacyVersion }) {
-  const res = await new APIRequest(
+  const res = await new CsrfApiRequest(
     new Request('/api/v1/advisories', { method: 'POST' })
   )
-    .jsonRequestBody({ csaf, summary, legacyVersion })
+    .setJsonRequestBody({ csaf, summary, legacyVersion })
     .send()
 
-  /** @type {{ id: string; revision: string }} */
-  const advisoryData = await res.json()
-  return advisoryData
+  return await res.json()
 }
 
 /**
@@ -38,12 +37,12 @@ export async function updateAdvisory({
     window.location.href
   )
   apiURL.searchParams.set('revision', revision)
-  await new APIRequest(
+  await new CsrfApiRequest(
     new Request(apiURL.toString(), {
       method: 'PATCH',
     })
   )
-    .jsonRequestBody({ csaf, summary, legacyVersion })
+    .setJsonRequestBody({ csaf, summary, legacyVersion })
     .send()
 }
 
@@ -53,7 +52,7 @@ export async function updateAdvisory({
  */
 export async function getAdvisoryDetail({ advisoryId }) {
   return (
-    await new APIRequest(
+    await new CsrfApiRequest(
       new Request(`/api/v1/advisories/${advisoryId}/`)
     ).send()
   ).json()
@@ -92,7 +91,7 @@ export async function changeWorkflowState({
       proposedTime.toISOString()
     )
   }
-  return new APIRequest(
+  return new CsrfApiRequest(
     new Request(changeWorkflowStateURL.toString(), {
       method: 'PATCH',
     })
@@ -110,9 +109,59 @@ export async function createNewVersion({ advisoryId, revision }) {
     window.location.href
   )
   createNewVersionAPIURL.searchParams.set('revision', revision)
-  await new APIRequest(
+  await new CsrfApiRequest(
     new Request(createNewVersionAPIURL.href, {
       method: 'PATCH',
     })
   ).send()
+}
+
+export async function getTemplates() {
+  return new CsrfApiRequest(new Request('/api/v1/advisories/templates'))
+    .setContentType('application/json')
+    .send()
+    .then((res) => res.json())
+}
+
+/**
+ * @param {object} params
+ * @param {string} params.templateId
+ * @returns
+ */
+export async function getTemplateContent({ templateId }) {
+  return new CsrfApiRequest(
+    new Request(`/api/v1/advisories/templates/${templateId}`)
+  )
+    .setContentType('application/json')
+    .send()
+    .then((templateContentRes) => templateContentRes.json())
+}
+
+/**
+ * @param {object} params
+ * @param {string} params.advisoryId
+ * @param {string} params.revision
+ */
+export async function deleteAdvisory({ advisoryId, revision }) {
+  const deleteURL = new URL(
+    `/api/v1/advisories/${advisoryId}/`,
+    window.location.href
+  )
+  deleteURL.searchParams.set('revision', revision)
+  await new CsrfApiRequest(
+    new Request(deleteURL.toString(), { method: 'DELETE' })
+  ).send()
+}
+
+export async function getAdvisories() {
+  const res = await new CsrfApiRequest(new Request('/api/v1/advisories/'))
+    .setContentType('application/json')
+    .send()
+  return await res.json()
+}
+
+export async function callAboutInfo() {
+  return await new ApiRequest(new Request('/api/v1/about'))
+    .setContentType('text/html')
+    .send()
 }

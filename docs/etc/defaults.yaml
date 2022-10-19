@@ -1,0 +1,9 @@
+---
+table-of-contents: true
+toc-depth: 4
+number-sections: true
+standalone: true
+metadata:
+  title: 'CSAF Author Guide'
+  author:
+    - 'Secvisogram'

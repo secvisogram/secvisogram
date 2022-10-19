@@ -1,3 +1,3 @@
-# Generator - Usage
+# Generator - Verwendung
 
-Der Generator, der für die Erstellung des CSAF-Dokuments verwendet wurde.
+Der Generator, der verwendet wurde, um das CSAF-Dokument zu erstellen.

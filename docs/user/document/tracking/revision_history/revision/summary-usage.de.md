@@ -1,4 +1,4 @@
-**Summary - Usage**
+**Summary - Verwendung**
 
 Die Zusammenfassung hilft dem Leser bei der ersten Einschätzung während der Inspektion.
 

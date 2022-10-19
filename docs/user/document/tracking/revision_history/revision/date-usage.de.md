@@ -1,4 +1,4 @@
-**Date - Usage**
+**Date - Verwendung**
 
 Das Datum, an dem diese Version veröffentlicht wurde. Für Vorabversionen wird das geplante Veröffentlichungsdatum verwendet.
 Für End- und Zwischenversionen wird das tatsächliche Veröffentlichungsdatum verwendet.

@@ -4,7 +4,7 @@ export default React.forwardRef(
   /**
    * @param {import('./EditWorkflowStateDialog/types.js').Props} props
    */
-  ({ data, onSubmit }, ref) => {
+  ({ data, onSubmit, onClose }, ref) => {
     const [newWorkflowState, setNewWorkflowState] = React.useState('')
 
     return (
@@ -12,6 +12,7 @@ export default React.forwardRef(
         className="rounded p-0 w-full max-w-lg shadow"
         ref={ref}
         data-testid="edit_workflow_state_dialog"
+        onClose={onClose}
       >
         {data ? (
           <>
@@ -19,7 +20,8 @@ export default React.forwardRef(
               method="dialog"
               id={`advisory-${data.advisoryId}-edit_workflow_state_dialog-close_form`}
             />
-            <header className="w-full flex items-center justify-end border-b p-2">
+            <header className="w-full flex items-center justify-between border-b p-2">
+              <h2 className="text-lg">Change workflow state</h2>
               <button
                 type="submit"
                 name="cancel"

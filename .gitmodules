@@ -1,3 +1,0 @@
-[submodule "vendor/ace-builds"]
-	path = app/vendor/ace-builds
-	url = https://github.com/ajaxorg/ace-builds.git

@@ -1,0 +1,31 @@
+{
+  "document": {
+    "category": "csaf_base",
+    "csaf_version": "2.0",
+    "publisher": {
+      "category": "discoverer",
+      "name": "test",
+      "namespace": "http://example.test"
+    },
+    "title": "test_1",
+    "tracking": {
+      "current_release_date": "2022-01-01T00:00:00.000Z",
+      "id": "111",
+      "initial_release_date": "2022-01-01T00:00:00.000Z",
+      "revision_history": [
+        {
+          "date": "2022-01-01T00:00:00.000Z",
+          "number": "1.0.0",
+          "summary": "\"Initial Publication\""
+        },
+        {
+          "date": "2022-01-01T00:00:00.001Z",
+          "number": "1.0.1-1.0",
+          "summary": "New Version"
+        }
+      ],
+      "status": "draft",
+      "version": "1.0.1-1.0"
+    }
+  }
+}

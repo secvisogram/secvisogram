@@ -1,5 +1,5 @@
-**Name - Usage**
+**Name - Verwendung**
 
-Der Wert wird außerdem durch die Kategorie der Branche definiert.
+Der Wert wird durch die Kategorie des Zweigs weiter definiert.
 
-Wenn die "Kategorie" "product_version_range" lautet, sollte der "Name" der VERS-Spezifikation entsprechen, d. h. mit dem Regex "vers:[a-z\\.\\\-\\+][a-z0-9\\\.\\-\+]*/.+" übereinstimmen.
+Wenn `category` `product_version_range` ist, sollte `name` der VERS-Spezifikation entsprechen, d. h. mit der Regex `^vers:[a-z\\.\\-\\+][a-z0-9\\.\\-\\+]*/.+`

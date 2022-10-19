@@ -1,5 +1,4 @@
 import {
-  faBook,
   faCheckCircle,
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons'
@@ -22,7 +21,7 @@ import React from 'react'
  *   onExport(): void
  * }} props
  */
-export default function CsafTab({ stripResult, onStrip, onExport }) {
+export default function CsafTab({ stripResult, onStrip }) {
   /**
    * Strips the document initially.
    */
@@ -71,25 +70,8 @@ export default function CsafTab({ stripResult, onStrip, onExport }) {
         </div>
       </div>
       <div className="pl-3 pr-6 py-6 w-72 flex flex-col justify-between">
+        <div className="flex flex-col"></div>
         <div className="flex flex-col">
-          <h2 className="mb-4 text-l font-bold">Sanitized document</h2>
-          <span className="mb-4 text-gray-500">
-            Here you can always find a stripped-down, CSAF-standard-compliant
-            version of your document, containing only the valid and non-empty
-            fields.
-          </span>
-          <button
-            type="button"
-            className="mb-2 py-1 px-3 rounded shadow border border-green-500 bg-green-500 text-white hover:text-green-500 hover:bg-white"
-            onClick={() => {
-              onExport()
-            }}
-          >
-            <FontAwesomeIcon className="mr-1" icon={faBook} />
-            Export CSAF
-          </button>
-        </div>
-        <div>
           <h2 className="mb-4 text-xl font-bold">Validation Status</h2>
           {hasErrors ? (
             <div>

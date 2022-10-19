@@ -1,3 +1,3 @@
-# Names - Usage
+# Names - Verwendung
 
-Namen der einzelnen Beitragszahler, keine Namen von Organisationen.
+Namen der einzelnen Mitwirkenden, keine Namen von Organisationen.

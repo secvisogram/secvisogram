@@ -1,9 +1,9 @@
-# Aliases - Usage
+# Aliases - Verwendung
 
-Aliasnamen können verwendet werden, um die Nummer, Kennung oder Bezeichnung anzugeben, die der Koordinator, der Hersteller, der Lieferant oder eine andere Partei diesem Hinweis, Fall oder Problem zugewiesen hat.
+Aliasnamen können verwendet werden, um die Nummer, die Kennung oder den Namen anzugeben, die/der dieser Beratung, diesem Fall oder dieser Frage vom Koordinator, Hersteller, Lieferanten oder einer anderen Partei zugewiesen wurde.
 Dazu können auch interne Ticketnummern gehören.
 
-Die Aliasnamen sollten nicht zur Auflistung der Bezeichner einzelner Schwachstellen verwendet werden, die in `/vulnerabilities[]/ids` aufgeführt sind.
+Die Aliasnamen sollten nicht zur Auflistung von Bezeichnern einzelner Schwachstellen verwendet werden, die in `/vulnerabilities[]/ids` aufgeführt sind.
 
 *Beispiele:*
 

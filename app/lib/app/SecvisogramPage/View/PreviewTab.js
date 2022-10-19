@@ -1,8 +1,6 @@
 import {
   faCheckCircle,
-  faCode,
   faExclamationTriangle,
-  faPrint,
   faWindowClose,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,9 +21,7 @@ import HTMLTemplate from './shared/HTMLTemplate.js'
  * }} props
  */
 export default function PreviewTab({
-  formValues,
   validationErrors: errors,
-  onExport,
   onPreview,
   previewResult,
 }) {
@@ -59,14 +55,6 @@ export default function PreviewTab({
    */
   const toggleShowRendered = () => {
     setShowRendered(!showRendered)
-  }
-
-  const printIframe = () => {
-    if (!iframeRef.current?.contentWindow) return
-    const iframeWindow = iframeRef.current.contentWindow
-
-    iframeRef.current.focus()
-    iframeWindow.print()
   }
 
   return (
@@ -151,28 +139,6 @@ export default function PreviewTab({
               Rendered
             </label>
           </div>
-          <button
-            type="button"
-            className="mb-2 py-1 px-3 rounded shadow border border-green-500 bg-green-500 text-white hover:text-green-500 hover:bg-white"
-            onClick={() => {
-              onExport(html, formValues.doc)
-            }}
-          >
-            <FontAwesomeIcon className="mr-1" icon={faCode} />
-            Export Preview
-          </button>
-          {showRendered && (
-            <button
-              type="button"
-              className="mb-2 py-1 px-3 rounded shadow border border-green-500 bg-green-500 text-white hover:text-green-500 hover:bg-white"
-              onClick={() => {
-                printIframe()
-              }}
-            >
-              <FontAwesomeIcon className="mr-1" icon={faPrint} />
-              Print Preview
-            </button>
-          )}
         </div>
         <div>
           <h2 className="mb-4 text-xl font-bold">Validation Status</h2>

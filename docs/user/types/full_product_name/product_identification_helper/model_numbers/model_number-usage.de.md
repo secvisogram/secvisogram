@@ -1,3 +1,3 @@
-**Model Number - Usage**
+**Model Number - Verwendung**
 
-Es sollten keine Versionsketten von Produkten sein.
+Es sollten keine Versionsstrings von Produkten sein.

@@ -1,4 +1,4 @@
-# Version specification
+# Version - Specification
 
 The Version (`version_t`) type has value type `string` with `pattern` (regular expression):
 

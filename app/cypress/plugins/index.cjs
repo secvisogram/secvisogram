@@ -12,6 +12,7 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 const webpackPreprocessor = require('@cypress/webpack-preprocessor')
+const { rm } = require('fs/promises')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -36,4 +37,14 @@ module.exports = (on, config) => {
       },
     })
   )
+
+  on('task', {
+    /**
+     * @param {string} path
+     */
+    async rm(path) {
+      await rm(path, { recursive: true, force: true })
+      return null
+    },
+  })
 }

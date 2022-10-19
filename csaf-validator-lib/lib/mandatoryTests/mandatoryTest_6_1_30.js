@@ -62,7 +62,7 @@ export default function mandatoryTest_6_1_30(doc) {
       }
     }
   })
-  if (typeof doc.document.tracking.version === 'string') {
+  if (versioningSchema != null && typeof doc.document.tracking.version === 'string') {
     if (
       versioningSchema !== detectVersionSchema(doc.document.tracking.version)
     ) {

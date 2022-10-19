@@ -1,9 +1,9 @@
-# Notes - Usage
+# Notes - Verwendung
 
-Ein Vermerk der Kategorie `Zusammenfassung` sollte aus zwei bis drei Sätzen bestehen und kaum technische Details enthalten.
+Eine Notiz der Kategorie `summary` sollte aus zwei bis drei Sätzen bestehen und kaum technische Details enthalten.
 
-Ein Vermerk der Kategorie "Beschreibung" sollte aus ein bis drei Absätzen bestehen und möglicherweise einige technische Details enthalten.
+Ein Vermerk der Kategorie `description` sollte aus einem bis drei Absätzen mit möglicherweise einigen technischen Details bestehen.
 
-Ein Vermerk der Kategorie "Details" sollte eine ausführliche Beschreibung enthalten, die die Länge einer "Beschreibung" übersteigt und tiefer in die technischen Details geht.
+Eine Notiz der Kategorie `details` sollte eine ausführliche Beschreibung enthalten, die die Länge einer `description` überschreitet und auf technische Details eingeht.
 
 Grundsätzlich sollte mindestens eine Zusammenfassung aufgeführt werden, eine Beschreibung ist vorzuziehen.

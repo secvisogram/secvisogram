@@ -1,25 +1,23 @@
 import {
   faCheckCircle,
-  faCog,
   faExclamationTriangle,
   faWindowClose,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as jsonMap from 'json-source-map'
 import React from 'react'
+import MonacoEditor from 'react-monaco-editor'
+import sortObjectKeys from '../../shared/sortObjectKeys.js'
+import editorSchema from './JsonEditorTab/editorSchema.js'
 import useDebounce from './shared/useDebounce.js'
 
 /**
- * Embeds the ace editor.
- * @see https://ace.c9.io/
- *
  * @param {{
  *  originalValues: import('../shared/types').FormValues
  *  formValues: import('../shared/types').FormValues
  *  validationErrors: import('../shared/types').TypedValidationError[]
- *  strict: boolean
- *  onSetStrict(strict: boolean): void
+ *  sortButtonRef: React.MutableRefObject<HTMLButtonElement | null>
  *  onChange(doc: {} | null): void
- *  onDownload(doc: {}): void
  *  onLockTab(): void
  *  onUnlockTab(): void
  * }} props
@@ -28,60 +26,54 @@ export default function JsonEditorTab({
   originalValues,
   formValues,
   validationErrors: errors,
-  strict,
-  onSetStrict,
+  sortButtonRef,
   onChange,
   onLockTab,
   onUnlockTab,
 }) {
   const { doc } = formValues
 
-  /**
-   * Holds the reference to the container element of the ace editor.
-   */
-  const ref = React.useRef(/** @type {HTMLDivElement | null} */ (null))
-
-  /**
-   * Holds the instance of the ace editor.
-   */
-  const editorRef =
-    /** @type {React.MutableRefObject<import('../../../../vendor/ace-builds/ace').Ace.Editor | undefined>} */ (
-      React.useRef()
+  const [editor, setEditor] = React.useState(
+    /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
+      null
     )
-  /**
-   * Initializes the ace editor.
-   */
-  React.useEffect(() => {
-    const editorEl = /** @type {HTMLDivElement} */ (ref.current)
-    if (!editorRef.current) {
-      editorRef.current = ace.edit(editorEl)
-    }
-    const changeHandler = () => {
-      setState((state) => ({
-        ...state,
-        value: editorRef.current?.getValue() ?? '',
-      }))
-    }
-    editorEl.style.fontSize = '14px'
+  )
+  const [monaco, setMonaco] = React.useState(
+    /** @type {import ("react-monaco-editor").monaco | null} */ (null)
+  )
 
-    editorRef.current.session.setMode('ace/mode/json')
-    editorRef.current.setTheme('ace/theme/eclipse')
-    editorRef.current.setOptions({
-      foldStyle: 'markbeginend',
-      fadeFoldWidgets: true,
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true,
-      enableSnippets: true,
-    })
-    editorRef.current.on('change', changeHandler)
-
-    return () => {
-      editorRef.current?.off('change', changeHandler)
-      editorRef.current?.destroy()
-    }
-  }, [])
+  const stringifiedDoc = React.useMemo(
+    () => JSON.stringify(doc, null, 2),
+    [doc]
+  )
 
   const initialMountRef = React.useRef(true)
+
+  React.useEffect(() => {
+    const saveButton = sortButtonRef.current
+    if (!saveButton) return
+
+    saveButton.addEventListener('click', clickHandler)
+
+    function clickHandler() {
+      editor
+        ?.getModel()
+        ?.setValue(
+          JSON.stringify(
+            sortObjectKeys(
+              new Intl.Collator(),
+              JSON.parse(editor.getModel()?.getValue() ?? '{}')
+            ),
+            null,
+            2
+          )
+        )
+    }
+
+    return () => {
+      saveButton.removeEventListener('click', clickHandler)
+    }
+  }, [sortButtonRef, editor])
 
   /**
    * The initial value of the state used to prevent a re-render of the ace editor
@@ -95,39 +87,24 @@ export default function JsonEditorTab({
    * Updates the editor value if the document was changed outside (e.g. created from template)
    */
   React.useEffect(() => {
-    if (!initialMountRef.current && editorRef.current) {
-      editorRef.current?.setValue(initialValue)
+    if (!initialMountRef.current && editor) {
+      editor.getModel()?.setValue(initialValue)
     }
-  }, [initialValue])
+  }, [initialValue, editor])
 
-  /**
-   * Holds the value and potential parse errors of the ace editor input.
-   */
   const [{ value, parseError }, setState] = React.useState(() => ({
     value: JSON.stringify(doc, null, 2),
     parseError: null,
   }))
   React.useEffect(() => {
-    if (initialMountRef.current && editorRef.current) {
+    if (initialMountRef.current && editor) {
       initialMountRef.current = false
-      editorRef.current.setValue(value)
+      editor.getModel()?.setValue(value)
     }
-  }, [value])
+  }, [value, editor])
 
-  const [showExpertSettings, setShowExpertSettings] = React.useState(!strict)
   const [showErrors, setShowErrors] = React.useState(false)
   const debouncedValue = useDebounce(value)
-
-  /**
-   * Toggles between strict and lenient validation.
-   */
-  const toggleStrict = () => {
-    onSetStrict(!strict)
-  }
-
-  const toggleExpertSettings = () => {
-    setShowExpertSettings(!showExpertSettings)
-  }
 
   const toggleShowErrors = () => {
     setShowErrors(!showErrors)
@@ -142,7 +119,7 @@ export default function JsonEditorTab({
   }, [parseError, onLockTab, onUnlockTab])
 
   /**
-   * Parses the ace editor input and replaces the document.
+   * Parses the editor input and replaces the document.
    */
   React.useEffect(() => {
     /** @type {{} | null} */
@@ -163,14 +140,114 @@ export default function JsonEditorTab({
     }
   }, [errors])
 
+  React.useEffect(() => {
+    if (monaco && editor && debouncedValue) {
+      /** @type {jsonMap.ParseResult} */
+      let result
+      try {
+        result = jsonMap.parse(debouncedValue)
+      } catch (e) {
+        return
+      }
+
+      const errorList = errors
+        .map((error) => ({
+          error,
+          positionData: result.pointers[error.instancePath],
+        }))
+        .filter((e) => e.positionData)
+        .map(({ error, positionData }) => ({
+          startLineNumber: positionData.value.line + 1,
+          startColumn: positionData.value.column + 1,
+          endLineNumber: positionData.valueEnd.line + 1,
+          endColumn: positionData.valueEnd.column + 1,
+          message: error.message,
+          severity:
+            error.type === 'error'
+              ? monaco.MarkerSeverity.Error
+              : error.type === 'warning'
+              ? monaco.MarkerSeverity.Warning
+              : monaco.MarkerSeverity.Info,
+        }))
+
+      const model = editor.getModel()
+      if (model) {
+        monaco.editor.setModelMarkers(model, 'setMarkers', errorList)
+      }
+    }
+  }, [errors, monaco, editor, debouncedValue])
+
+  const setCursor = (/** @type {string} */ jsonPath) => {
+    if (editor) {
+      let result
+      try {
+        result = jsonMap.parse(debouncedValue)
+      } catch (/** @type {any} */ e) {
+        return
+      }
+
+      let positionData = result.pointers[jsonPath]
+      if (positionData) {
+        editor.setPosition({
+          lineNumber: positionData.value.line + 1,
+          column: positionData.value.column + 2,
+        })
+        editor.revealLine(positionData.value.line + 1)
+        editor.focus()
+      }
+    }
+  }
+
+  const editorDidMount = (
+    /** @type {any } */ editor,
+    /** @type {any} */ monaco
+  ) => {
+    /** @type {any} */
+    const win = window
+    if (win.Cypress) {
+      win.MONACO_EDITOR = editor
+    }
+    setEditor(editor)
+    setMonaco(monaco)
+
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      enableSchemaRequest: true,
+      schemas: [
+        {
+          uri: '',
+          fileMatch: ['*'],
+          schema: editorSchema,
+        },
+      ],
+    })
+  }
+
+  const onChangeMonaco = (/** @type {any} */ newValue) => {
+    setState((state) => ({
+      ...state,
+      value: newValue,
+    }))
+  }
+
+  const options = {
+    selectOnLineNumbers: true,
+    automaticLayout: true,
+  }
   return (
     <>
       <div className="json-editor flex h-full mr-3 bg-white">
-        <div className="p-3 w-full">
+        <div className=" w-full">
           <div className={'relative ' + (showErrors ? 'h-4/5' : 'h-full')}>
-            <div
-              ref={ref}
-              className="absolute top-0 right-0 bottom-0 left-0 h-full bg-white"
+            <MonacoEditor
+              width="100%"
+              height="100%"
+              language="json"
+              theme="vs-white"
+              options={options}
+              defaultValue={stringifiedDoc}
+              onChange={onChangeMonaco}
+              editorDidMount={editorDidMount}
             />
           </div>
           <div
@@ -199,6 +276,9 @@ export default function JsonEditorTab({
                           ? ' validation_error-info text-blue-500'
                           : ''
                       } underline`}
+                      onClick={() => {
+                        setCursor(error.instancePath)
+                      }}
                     >
                       <b>{error.instancePath}</b>:{' '}
                       <span className="validation_error-message">
@@ -219,42 +299,8 @@ export default function JsonEditorTab({
           </div>
         </div>
         <div className="pl-3 pr-6 py-6 w-72 flex flex-col justify-between">
-          <div className="flex flex-col"></div>
+          <div className="flex flex-col" />
           <div>
-            {showExpertSettings ? (
-              <div className="mb-6">
-                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                  <input
-                    checked={strict}
-                    type="checkbox"
-                    name="toggle"
-                    id="toggleExpertSettings"
-                    onChange={toggleStrict}
-                    className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-                  />
-                  <label
-                    htmlFor="toggleExpertSettings"
-                    className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                  />
-                </div>
-                <label
-                  htmlFor="toggleExpertSettings"
-                  className="text-xs text-gray-500"
-                >
-                  Disallow non-standard properties
-                </label>
-              </div>
-            ) : (
-              <button
-                type="button"
-                className="py-1 px-3 mb-6 h-9 underline text-gray-500"
-                onClick={toggleExpertSettings}
-              >
-                <FontAwesomeIcon className="mr-1" icon={faCog} />
-                Show expert settings
-              </button>
-            )}
-
             <h2 className="mb-4 text-xl font-bold">Validation Status</h2>
             {errors.length === 0 ? (
               <>

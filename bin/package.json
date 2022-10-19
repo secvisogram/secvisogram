@@ -8,7 +8,7 @@
   },
   "bin": "cli.js",
   "keywords": [
-    "CASF",
+    "CSAF",
     "Secvisogram",
     "Common Security Advisory Framework"
   ],

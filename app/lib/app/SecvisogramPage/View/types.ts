@@ -1,25 +1,7 @@
 import React from 'react'
+import { Advisory, AdvisoryState } from '../shared/types.js'
 import CsafTab from './CsafTab.js'
 import PreviewTab from './PreviewTab.js'
-
-type Advisory = {
-  advisoryId: string
-  revision: string
-  changeable: boolean
-  csaf: {
-    document?: {
-      title?: string
-    }
-  }
-  documentTrackingId: string
-}
-
-export type AdvisoryState =
-  | {
-      type: 'ADVISORY'
-      advisory: Advisory
-    }
-  | { type: 'NEW_ADVISORY'; csaf: {} }
 
 export interface Props {
   isLoading: boolean
@@ -50,7 +32,6 @@ export interface Props {
   } | null
   stripResult: React.ComponentProps<typeof CsafTab>['stripResult']
   previewResult: React.ComponentProps<typeof PreviewTab>['previewResult']
-  strict: boolean
   DocumentsTab: React.ComponentType<{
     onOpenAdvisory(
       params: {
@@ -59,19 +40,14 @@ export interface Props {
       callback: () => void
     ): void
   }>
-  onLoadAdvisory(
-    params: { advisoryId: string },
-    callback: (advisory: Advisory) => void
-  ): void
-  onUpdateAdvisory(
-    params: {
-      advisoryId: string
-      revision: string
-      csaf: {}
-    },
-    callback: () => void
-  ): void
-  onSetStrict(strict: boolean): void
+  onLoadAdvisory(params: { advisoryId: string }): Promise<Advisory>
+  onUpdateAdvisory(params: {
+    advisoryId: string
+    revision: string
+    csaf: {}
+    summary: string
+    legacyVersion: string
+  }): Promise<void>
   onDownload(doc: {}): void
   onOpen(file: File): Promise<void | {}>
   onChangeTab(
@@ -85,24 +61,24 @@ export interface Props {
     document: {}
   ): void
   onValidate(document: {}): void
-  onServiceValidate(
-    params: { validatorUrl: string; csaf: {} },
-    callback: (result: {
-      tests: Array<{
-        errors: Array<{ instancePath: string; message: string }>
-        warnings: Array<{ instancePath: string; message: string }>
-        infos: Array<{ instancePath: string; message: string }>
-      }>
-    }) => void
-  ): void
-  onGetDocMin(callback: (csaf: {}) => void): void
-  onGetDocMax(callback: (csaf: {}) => void): void
-  onCreateAdvisory(
-    params: { csaf: {} },
-    callback: (advisoryData: { id: string; revision: string }) => void
-  ): void
+  onServiceValidate(params: { validatorUrl: string; csaf: {} }): Promise<{
+    isValid: boolean
+    tests: Array<{
+      errors: Array<{ instancePath: string; message: string }>
+      warnings: Array<{ instancePath: string; message: string }>
+      infos: Array<{ instancePath: string; message: string }>
+    }>
+  }>
+  onGetDocMin(): Promise<{}>
+  onGetDocMax(): Promise<{}>
+  onCreateAdvisory(params: {
+    csaf: {}
+    summary: string
+    legacyVersion: string
+  }): Promise<{ id: string; revision: string }>
   onStrip(document: {}): void
   onPreview(document: {}): void
+  onPrepareDocumentForTemplate(document: {}): Promise<{ document: {} }>
   onExportCSAF(doc: {}): void
   onExportHTML(html: string, doc: {}): void
   onLockTab(): void
@@ -113,13 +89,8 @@ export interface Props {
   onCollectGroupIds(document: {}): Promise<
     void | { id: string; name: string }[]
   >
-  onGetTemplates(
-    callback: (
-      templates: Array<{ templateId: string; templateDescription: string }>
-    ) => void
-  ): void
-  onGetTemplateContent(
-    params: { templateId: string },
-    callback: (templateContent: {}) => void
-  ): void
+  onGetTemplates(): Promise<
+    Array<{ templateId: string; templateDescription: string }>
+  >
+  onGetTemplateContent(params: { templateId: string }): Promise<{}>
 }

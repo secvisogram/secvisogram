@@ -1,4 +1,4 @@
-# Document - Usage
+# Document - Verwendung
 
 Enthält alle Metadaten, die zur Identifizierung des Hinweises erforderlich sind.
 Dazu gehören unter anderem der Titel und die Kategorie (Profil) des Dokuments sowie der Herausgeber und die Versionsgeschichte.

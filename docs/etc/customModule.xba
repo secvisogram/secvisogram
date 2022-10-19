@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="MyModule" script:language="StarBasic">REM  *****  BASIC  *****
+
+Sub UpdateIndexes(filePath as String)
+    dim FileProperties(1) As New com.sun.star.beans.PropertyValue
+    FileProperties(0).Name = "Hidden"
+    FileProperties(0).value = true
+    loadedComponent = StarDesktop.loadComponentFromURL("file://" &amp; filePath, "_blank", 0, FileProperties())
+    document = loadedComponent.CurrentController.Frame
+    rem UpdateAllIndexes
+    dim dispatcher as object
+    dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+    dispatcher.executeDispatch(document, ".uno:UpdateAllIndexes", "", 0, Array())
+    dispatcher.executeDispatch(document, ".uno:Save", "", 0, Array())
+    document.close(true)
+End Sub
+</script:module>

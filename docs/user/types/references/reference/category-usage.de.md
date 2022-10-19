@@ -1,13 +1,13 @@
-# Category - Usage
+# Category - Verwendung
 
 Die Kategorie einer Referenz sollte immer explizit angegeben werden.
 
-`extern`: verweist z.B. auf einen Support-Artikel, der Installations- und Update-Verfahren beschreibt, wo Beschreibungen von Hotfixes zu finden sind oder auf eine Beschreibung von Neustart-Verfahren.
+`external`: verweist z.B. auf einen Support-Artikel, der Installations- und Update-Verfahren beschreibt, wo Beschreibungen von Hotfixes zu finden sind oder auf eine Beschreibung von Neustartverfahren
 
-`self`: verweist z.B. auf genau die gleiche Schwachstelle in der für Menschen lesbaren Empfehlung
+`self`Links z.B. zu genau der gleichen Schwachstelle in dem für Menschen lesbaren Hinweis
 
-Bei Schwachstellen verweist die Kategorie normalerweise auf einen `externen` Verweis.
+Bei Schwachstellen verweist die Kategorie in der Regel auf einen Verweis auf `external`.
 Für das Dokument sind Verweise mit der Kategorie `self` üblicher.
 
 In den Dokumentenverweisen müssen die kanonische URL und der Verweis auf den menschenlesbaren Hinweis die Kategorie `self` haben.
-Alle anderen Verweise sind in der Regel `extern`.
+Alle anderen Verweise sind normalerweise `external`.

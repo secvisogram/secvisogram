@@ -69,7 +69,7 @@ export default {
       strippedVersion: {},
     },
     {
-      valid: true,
+      valid: false,
       content: {
         ...MINIMAL_DOC,
         emptyAdditionalStringProp: '',

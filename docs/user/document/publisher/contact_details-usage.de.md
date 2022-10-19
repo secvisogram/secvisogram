@@ -1,4 +1,4 @@
-**Contact Details - Usage**
+**Contact Details - Verwendung**
 
 Listet die Möglichkeiten zur Kontaktaufnahme mit dem Herausgeber der Hinweise auf.
 
@@ -8,4 +8,4 @@ Im Zweifelsfall kann auch eine Website mit einem Kontaktformular angegeben werde
 Für schnelle Rückfragen kann auch eine Telefonnummer angegeben werden.
 Die Angabe von Postadressen ist ungewöhnlich, aber möglich.
 
-Es kann nützlich sein, insbesondere wenn eine Telefonnummer angegeben wird, da man so eine Vorstellung davon bekommt, in welcher Zeitzone sich das Team befindet.
+Sie kann nützlich sein, insbesondere wenn eine Telefonnummer angegeben wird, da man so eine Vorstellung davon bekommt, in welcher Zeitzone sich das Team befindet.

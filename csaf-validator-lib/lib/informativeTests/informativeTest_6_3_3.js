@@ -35,7 +35,7 @@ export default function informativeTest_6_3_3(doc) {
     if (!vulnerability.cve) {
       ctx.infos.push({
         instancePath: `/vulnerabilities/${vulnerabilityIndex}`,
-        message: 'missing cve',
+        message: 'missing CVE',
       })
     }
   })

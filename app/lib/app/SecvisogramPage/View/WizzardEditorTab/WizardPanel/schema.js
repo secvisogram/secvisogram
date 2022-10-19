@@ -1,3 +1,5 @@
+/** @typedef {import('./shared/types').Property} Property */
+
 export default {
   key: '',
   fullName: [],

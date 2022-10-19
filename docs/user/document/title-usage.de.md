@@ -1,4 +1,4 @@
-**Title - Usage**
+**Title - Verwendung**
 
 Der Titel sollte dem Benutzer einen schnellen Überblick über den Inhalt des Dokuments geben.
 
@@ -7,6 +7,6 @@ können mehrere beispielhafte Produkte aufgeführt werden.
 
 *Beispiele:*
 
-* Produkt A von RCE betroffen".
+* `Product A affected by RCE`
 * `Multiple Products affected by Log4Shell Vulnerability`
-* `Produktfamilie X von Sicherheitslücke Y betroffen`
+* `Product Family X affected by Vulnerability Y`

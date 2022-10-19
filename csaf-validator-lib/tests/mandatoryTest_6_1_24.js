@@ -10,7 +10,7 @@ const validExamples = await readExampleFiles(
   new URL('mandatoryTest_6_1_24/valid', import.meta.url)
 )
 
-describe('Optional test 6.2.14', function () {
+describe('Mandatory test 6.1.24', function () {
   describe('failing examples', function () {
     for (const [title, failingExample] of failingExamples) {
       it(title, async function () {

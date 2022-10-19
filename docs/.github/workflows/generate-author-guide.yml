@@ -1,0 +1,44 @@
+name: generate-author-guide
+
+on:
+  push:
+    tags:
+      - 'v**'
+
+jobs:
+  generate-author-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4.2.0
+        with:
+          python-version: '3.10'
+      - name: merge usage documentation files into one
+        run: python scripts/md_merge.py --input user --lang en --output . --name author_guide.md
+      - name: convert markdown to docx
+        uses: docker://pandoc/latex:2.19
+        with:
+          args: >-
+            author_guide.md
+            -f markdown
+            -t docx
+            -o author_guide.docx
+            --lua-filter=etc/filters.lua
+            --defaults=etc/defaults.yaml
+      - name: convert docx to PDF/UA
+        uses: jmservera/libreoffice-action@v0.2
+        with:
+          command:
+            libreoffice --headless --terminate_after_init
+            && cp etc/customModule.xba ${HOME}/.config/libreoffice/4/user/basic/Standard/
+            && sed -i '4i\ <library:element library:name="customModule"/>' ${HOME}/.config/libreoffice/4/user/basic/Standard/script.xlb
+            && sed -i '3i<item oor:path="/org.openoffice.Office.Common/Save/Document"><prop oor:name="WarnAlienFormat" oor:op="fuse"><value>false</value></prop></item>' ${HOME}/.config/libreoffice/4/user/registrymodifications.xcu
+            && libreoffice --headless --invisible "macro:///Standard.customModule.UpdateIndexes(${GITHUB_WORKSPACE}/author_guide.docx)"
+            && sed -i '3i<item oor:path="/org.openoffice.Office.Common/Filter/PDF/Export"><prop oor:name="PDFUACompliance" oor:op="fuse"><value>true</value></prop></item>' ${HOME}/.config/libreoffice/4/user/registrymodifications.xcu
+            && libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir . author_guide.docx
+      - name: release author guide
+        uses: softprops/action-gh-release@v1
+        with:
+          files: author_guide.pdf

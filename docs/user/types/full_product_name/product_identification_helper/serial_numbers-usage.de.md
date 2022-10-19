@@ -1,4 +1,4 @@
-# Serial Numbers - Usage
+# Serial Numbers - Verwendung
 
 Seriennummern eignen sich besonders gut für die Identifizierung von Hardware.
 Die auf dieser Hardware installierte Software muss über Beziehungen abgebildet werden (`/product_tree/relationships`).

@@ -1,4 +1,5 @@
 import cvss2js from 'cvss2js'
+import { getEnvironmentalScoreFromVectorString } from '../shared/cvss2.js'
 import { cvss30 as CVSS, cvss31 as CVSS31 } from '../shared/first.js'
 
 /**
@@ -158,7 +159,8 @@ function safelyParseCVSSV2Vector(vectorString) {
       success: true,
       baseMetricScore: cvss2js.getBaseScore(vectorString),
       temporalMetricScore: cvss2js.getTemporalScore(vectorString),
-      environmentalMetricScore: cvss2js.getEnvironmentalScore(vectorString),
+      environmentalMetricScore:
+        getEnvironmentalScoreFromVectorString(vectorString),
     }
   } catch (e) {
     return {

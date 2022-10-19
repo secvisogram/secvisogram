@@ -1,7 +1,7 @@
-# Group ID - Usage
+# Group ID - Verwendung
 
-Identifiziert eine Gruppe von Produkten im gesamten Dokument eindeutig.
+Kennzeichnet eine Gruppe von Produkten im gesamten Dokument eindeutig.
 
 Um das Auffinden von Fehlern zu erleichtern, wird empfohlen, ein Präfix zur Unterscheidung von Produkt-IDs zu verwenden.
 
-Eine weitere Beschreibung dieses Typs finden Sie unter [types](types/product_group_id-usage.de.md).
+Eine weitere Beschreibung dieses Typs finden Sie unter [Typen](types/product_group_id-usage.de.md).

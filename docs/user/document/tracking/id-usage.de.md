@@ -1,4 +1,4 @@
-**ID - Usage**
+**ID - Verwendung**
 
 Der eindeutige Name des Dokuments innerhalb der ausstellenden Partei.
 
@@ -9,9 +9,9 @@ Die Tracking-ID bleibt konstant, wenn eine neue Version des Dokuments veröffent
 
 Der Dateiname des Dokuments wird von dieser ID abgeleitet, wie in der [Spezifikation](https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html#51-filename) beschrieben.
 
-Die ID ist in der Regel eine Kombination aus einem kurzen Identifikator der herausgebenden Partei, dem Jahr und einer fortlaufenden Nummer.
+Die ID ist in der Regel eine Kombination aus einer kurzen Kennung der herausgebenden Partei, dem Jahr und einer fortlaufenden Nummer.
 Das empfohlene Format ist "CompanyAbbreviation-YYYY-#####".
 
 *Beispiele:*
 
-* `ECSA-2022-00123` (Beispiel für einen Sicherheitshinweis des Unternehmens)
+* `ECSA-2022-00123` (Beispiel eines Sicherheitshinweises des Unternehmens)

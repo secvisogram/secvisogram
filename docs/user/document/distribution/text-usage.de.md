@@ -1,4 +1,4 @@
-**Text - Usage**
+**Text - Verwendung**
 
 Eine textliche Beschreibung, wie das Dokument verteilt werden kann.
 

@@ -4,7 +4,7 @@ export default React.forwardRef(
   /**
    * @param {import('./NewDocumentDialog/types.js').Props} props
    */
-  ({ defaultSource = 'TEMPLATE', data, onSubmit }, ref) => {
+  ({ defaultSource = 'TEMPLATE', data, onSubmit, onClose }, ref) => {
     const [source, setSource] = React.useState(defaultSource)
 
     return (
@@ -12,6 +12,7 @@ export default React.forwardRef(
         className="rounded p-0 w-full max-w-lg shadow"
         ref={ref}
         data-testid="new_document_dialog"
+        onClose={onClose}
       >
         {data ? (
           <>

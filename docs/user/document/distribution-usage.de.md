@@ -1,4 +1,4 @@
-# Distribution - Usage
+# Distribution - Verwendung
 
 Gibt an, wie und an wen das Dokument verteilt werden kann.
 

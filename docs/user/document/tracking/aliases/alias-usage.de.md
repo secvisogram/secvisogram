@@ -1,3 +1,3 @@
-**Alias - Usage**
+**Alias - Verwendung**
 
 Ein Alias-Name.

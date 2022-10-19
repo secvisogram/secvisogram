@@ -263,26 +263,6 @@ export const tests = [
     render: () => <View {...props} activeTab="SOURCE" isTabLocked={true} />,
   },
   {
-    title: 'Advisory (seed-1)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed1) }}
-        activeTab="PREVIEW"
-      />
-    ),
-  },
-  {
-    title: 'Advisory (seed-2)',
-    render: () => (
-      <View
-        {...props}
-        data={{ ...props.data, doc: /** @type {any} */ (seed2) }}
-        activeTab="PREVIEW"
-      />
-    ),
-  },
-  {
     title: 'PREVIEW',
     render: () => <View {...props} activeTab="PREVIEW" />,
   },
@@ -335,25 +315,7 @@ export const tests = [
           <DocumentsTabView
             {...documentsTabViewSample.withoutData.props}
             {...props}
-          />
-        )}
-      />
-    ),
-  },
-  {
-    title: 'DOCUMENTS tab with error',
-    render: () => (
-      <View
-        {...secvisogramPageViewSample.documentsTab.props}
-        DocumentsTab={(props) => (
-          <DocumentsTabView
-            {...documentsTabViewSample.basic.props}
-            {...props}
-            defaultError={{
-              title: 'Error',
-              message:
-                'The document is not valid and can therefore not be published.',
-            }}
+            onGetData={() => new Promise(() => {})}
           />
         )}
       />

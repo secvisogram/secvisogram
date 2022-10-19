@@ -8,4 +8,5 @@ export interface Props {
       | { source: 'TEMPLATE'; templateId: string }
       | { source: 'FILESYSTEM'; file: File }
   ): void
+  onClose(): void
 }

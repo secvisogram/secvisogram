@@ -43,24 +43,27 @@ export default function informativeTest_6_3_9(doc) {
     return ctx
   }
 
-  /** @type {string[]} */
-  let productPath = []
-
   /**
    * @param {string} prefix
    * @param {unknown[]} branches
+   * @param {string[]} [productPath]
    */
-  const checkBranches = (prefix, branches) => {
+  const checkBranches = (prefix, branches, productPath = []) => {
+    const productPathCopy = [...productPath]
     for (const [branchIndex, branch] of branches.entries()) {
       if (!validateBranch(branch)) {
         continue
       }
 
       if (typeof branch.category === 'string') {
-        productPath.push(branch.category)
+        productPathCopy.push(branch.category)
       }
       if (branch.branches) {
-        checkBranches(`${prefix}${branchIndex}/branches/`, branch.branches)
+        checkBranches(
+          `${prefix}${branchIndex}/branches/`,
+          branch.branches,
+          productPathCopy
+        )
       } else {
         if (typeof branch.product?.product_id === 'string') {
           const mandatoryCategoryIndexes = [
@@ -69,9 +72,8 @@ export default function informativeTest_6_3_9(doc) {
             'product_version',
           ].map((category) => ({
             category,
-            index: productPath.indexOf(category),
+            index: productPathCopy.indexOf(category),
           }))
-          productPath = []
 
           for (const index of mandatoryCategoryIndexes) {
             if (index.index === -1) {

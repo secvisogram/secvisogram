@@ -1,6 +1,6 @@
-**URL - Usage**
+**URL - Verwendung**
 
-Link zur Website eines Beitragsleistenden.
+Link zur Website eines Mitwirkenden.
 
 *Beispiel:*
 

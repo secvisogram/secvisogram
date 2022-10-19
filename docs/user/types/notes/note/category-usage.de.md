@@ -1,3 +1,3 @@
-**Category - Usage**
+**Category - Verwendung**
 
-Definiert die allgemeine Kategorie der Notiz.
+Legt die allgemeine Kategorie der Notiz fest.

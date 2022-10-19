@@ -1,4 +1,4 @@
-**Text - Usage**
+**Text - Verwendung**
 
 Inhalt der Notiz. Umfang und Tiefe werden durch die Kategorie der Notiz bestimmt.
 

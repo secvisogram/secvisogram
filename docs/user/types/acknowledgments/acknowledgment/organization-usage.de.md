@@ -1,3 +1,3 @@
-**Organization - Usage**
+**Organization - Verwendung**
 
-Einzelne Organisationen oder Zugehörigkeit von Namen zu dieser Organisation.
+Einzelne Organisationen oder Zugehörigkeiten von Namen zu dieser Organisation.

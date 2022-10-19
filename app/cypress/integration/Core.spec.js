@@ -13,7 +13,6 @@ describe('Core', () => {
       it(documentTest.title ?? `Test #${i + 1}`, async () => {
         const result = await core.document.validate({
           document: documentTest.content,
-          strict: false,
         })
         expect(result.isValid).to.equal(documentTest.valid)
         if (typeof documentTest.expectedNumberOfErrors === 'number') {
@@ -36,7 +35,6 @@ describe('Core', () => {
       for (const document of fixture.documents) {
         const result = await core.document.validate({
           document: document.content,
-          strict: false,
         })
         expect(result.isValid).to.equal(document.valid)
         if (document.valid) {

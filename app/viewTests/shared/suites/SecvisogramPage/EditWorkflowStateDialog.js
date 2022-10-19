@@ -7,8 +7,9 @@ const props = {
   onSubmit() {},
   data: {
     advisoryId: 'my-advisory',
-    allowedStateChanges: ['Draft', 'Published'],
+    allowedStateChanges: ['Draft', 'RfPublication'],
   },
+  onClose() {},
 }
 
 export const tests = [

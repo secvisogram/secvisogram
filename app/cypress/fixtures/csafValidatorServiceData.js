@@ -29,7 +29,7 @@ export function getValidationResponse({ document: { document } }) {
             },
           ],
           isValid: false,
-          name: 'csaf_2_0_strict',
+          name: 'csaf_2_0',
         },
       ],
     }
@@ -42,7 +42,7 @@ export function getValidationResponse({ document: { document } }) {
           infos: [],
           warnings: [],
           isValid: true,
-          name: 'csaf_2_0_strict',
+          name: 'csaf_2_0',
         },
       ],
     }

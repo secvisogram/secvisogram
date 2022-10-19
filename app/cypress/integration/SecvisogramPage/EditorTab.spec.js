@@ -7,6 +7,11 @@ import {
   getUserInfo,
   getUsers,
 } from '../../fixtures/cmsBackendData.js'
+import {
+  advisoryIdV1,
+  latestRevisionHistoryLegacyVersion,
+  latestRevisionHistorySummary
+} from "../../fixtures/samples/cmsBackendData/tests.js";
 
 describe('SecvisogramPage / EditorTab', function () {
   describe('can save documents', function () {
@@ -59,6 +64,7 @@ describe('SecvisogramPage / EditorTab', function () {
             .type(documentTitle)
 
           if (canChangeDocument(user.user)) {
+            cy.setCookie("XSRF-TOKEN", "test-Value-123")
             cy.intercept(
               'PATCH',
               `/api/v1/advisories/${advisory.advisoryId}/?revision=${advisoryDetail.revision}`,
@@ -66,12 +72,35 @@ describe('SecvisogramPage / EditorTab', function () {
             ).as('apiUpdateAdvisory')
             cy.get('[data-testid="save_button"]').click()
 
+            // check if the input fields are pre-filled with the latest revision history item data
+            // for draft documents (version < 1) and if no revision history is given the fields should be empty
+            let expectedSummary = ''
+            let expectedLegacyVersion = ''
+            if (advisory.advisoryId === advisoryIdV1) {
+              expectedSummary = latestRevisionHistorySummary
+              expectedLegacyVersion = latestRevisionHistoryLegacyVersion
+            }
+
+            cy.get('[data-testid="submit_version-summary-textarea"]')
+              .should('have.value', expectedSummary)
+              .as('prefilledSummary')
+            cy.get('[data-testid="submit_version-legacy_version-input"]')
+              .should('have.value', expectedLegacyVersion)
+              .as('prefilledLegacyVersion')
+
+            const summary = 'Summary'
+            const legacyVersion = 'Legacy version'
+            cy.get('@prefilledSummary').clear().type(summary)
+            cy.get('@prefilledLegacyVersion').clear().type(legacyVersion)
+            cy.get('[data-testid="submit_version-submit"]').click()
+            cy.get('[data-testid="submit_version"]').should('not.exist')
+
             cy.wait('@apiUpdateAdvisory').then((xhr) => {
               expect(xhr.request.body.csaf.document.title).to.equal(
                 documentTitle
               )
-              expect(xhr.request.body.summary).to.equal('-')
-              expect(xhr.request.body.legacyVersion).to.equal('')
+              expect(xhr.request.body.summary).to.equal(summary)
+              expect(xhr.request.body.legacyVersion).to.equal(legacyVersion)
             })
             cy.wait('@apiGetAdvisoryDetail')
           } else {

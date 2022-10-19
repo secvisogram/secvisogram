@@ -16,5 +16,11 @@ export default function csaf_2_0(doc) {
    *  }>}
    */
   const errors = validate.errors ?? []
-  return { isValid, errors }
+  return {
+    isValid,
+    errors: errors.map((e) => ({
+      ...e,
+      message: e.message ?? 'unexpected empty error message',
+    })),
+  }
 }

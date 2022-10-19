@@ -8,4 +8,5 @@ export interface Props {
     documentTrackingStatus: string | null
     proposedTime: Date | null
   }): void
+  onClose(): void
 }

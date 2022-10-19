@@ -1,4 +1,4 @@
-**Lang - Usage**
+**Lang - Verwendung**
 
 Der verwendete Wert muss ein gültiger Sprachcode sein und darf keine für den privaten Gebrauch reservierten Unterelemente enthalten.
 
