@@ -2,6 +2,7 @@ import React from 'react'
 import DocumentEditorContext from '../../../shared/DocumentEditorContext.js'
 import WizardContext from '../shared/WizardContext.js'
 import FieldsEditor from './shared/FieldsEditor.js'
+import SideBarContext from '../../../../../shared/context/SideBarContext.js'
 
 /**
  * @param {object} props
@@ -216,6 +217,7 @@ function ComplexObjectEditor({ parentProperty, property, instancePath }) {
  */
 function Menu({ level = 0, property, instancePath }) {
   const { selectedPath, setSelectedPath } = React.useContext(WizardContext)
+  const sideBarData = React.useContext(SideBarContext)
   const fieldProperties = property.metaInfo.propertyList?.filter(
     (p) => !['OBJECT', 'ARRAY'].includes(p.type)
   )
@@ -231,6 +233,7 @@ function Menu({ level = 0, property, instancePath }) {
             className={`italic ${!selectedMenuPath.length ? 'underline' : ''}`}
             onClick={() => {
               setSelectedPath(instancePath)
+              sideBarData.setSideBarSelectedPath(instancePath)
             }}
           >
             Fields
@@ -252,6 +255,7 @@ function Menu({ level = 0, property, instancePath }) {
                   }
                   onClick={() => {
                     setSelectedPath([...instancePath, childProperty.key])
+                    sideBarData.setSideBarSelectedPath([...instancePath, childProperty.key])
                   }}
                 >
                   {childProperty.title}

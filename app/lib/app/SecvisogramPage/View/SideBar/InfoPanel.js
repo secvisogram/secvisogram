@@ -9,7 +9,7 @@ import metadata from '../../../../../../data/metaData2.json'
  * Defines the content of the side bar displaying documentation of a selected path
  *
  * @param {{
- *   selectedPath: string
+ *   selectedPath: string[]
  * }} props
  */
 export default function InfoPanel({ selectedPath }) {
@@ -20,8 +20,9 @@ export default function InfoPanel({ selectedPath }) {
     htmlString.replace(/href="(?!http|#)/g, 'href="/docs/user/')
 
   const getRenderedMarkdown = () => {
-    if (selectedPath) {
-      const meta = metadata[`$.${selectedPath}`]
+    const jsonPath = `$.${selectedPath.join(".")}`
+    if (jsonPath in metadata) {
+      const meta = metadata[jsonPath]
       const usage_path = meta.user_documentation.usage.generic
       fetch(usage_path)
         .then((resp) => resp.text())

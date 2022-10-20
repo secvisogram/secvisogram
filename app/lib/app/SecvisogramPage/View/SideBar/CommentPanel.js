@@ -4,7 +4,7 @@ import React from 'react'
  * Defines the content of the side bar displaying comments for a selected path
  *
  * @param {{
- *   selectedPath: string
+ *   selectedPath: string[]
  * }} props
  */
 export default function CommentPanel({ selectedPath }) {
@@ -12,7 +12,7 @@ export default function CommentPanel({ selectedPath }) {
 
   return (
     <>
-      <div>comments for {selectedPath}</div>
+      <div>comments for {selectedPath.join('/')}</div>
     </>
   )
 }

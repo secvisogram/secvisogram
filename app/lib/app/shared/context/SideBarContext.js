@@ -6,8 +6,8 @@ import React from 'react'
  * @property {(value: boolean) => void} setSideBarIsOpen
  * @property {string[]} sideBarSelectedPath
  * @property {(selectedPath: string[]) => void} setSideBarSelectedPath
- * @property {'errors' | 'comments' | 'documentation'} sideBarContent
- * @property {(content: 'errors' | 'comments' | 'documentation') => void} setSideBarContent
+ * @property {'ERRORS' | 'COMMENTS' | 'INFO'} sideBarContent
+ * @property {(content: 'ERRORS' | 'COMMENTS' | 'INFO') => void} setSideBarContent
  */
 
 /** @type {SideBarContext} */
@@ -16,7 +16,7 @@ const defaultValue = {
   setSideBarIsOpen: (() => {}),
   sideBarSelectedPath: ([]),
   setSideBarSelectedPath: (() => {}),
-  sideBarContent: 'errors',
+  sideBarContent: 'ERRORS',
   setSideBarContent: (() => {}),
 }
 
