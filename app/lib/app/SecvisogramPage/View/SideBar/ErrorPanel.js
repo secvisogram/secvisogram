@@ -1,5 +1,5 @@
 import React from 'react'
-import DocumentEditorContext from '../../shared/DocumentEditorContext.js'
+import DocumentEditorContext from '../shared/DocumentEditorContext.js'
 
 /**
  * Defines the content of the side bar displaying errors for a selected path

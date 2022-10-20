@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { marked } from 'marked'
 
-import metadata from '../../../../../../../data/metaData2.json'
+import metadata from '../../../../../../data/metaData2.json'
 
 /**
  * Defines the content of the side bar displaying documentation of a selected path
