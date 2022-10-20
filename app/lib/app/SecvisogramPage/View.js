@@ -793,15 +793,18 @@ function View({
                 onCollectGroupIds={onCollectGroupIdsCallback}
               />
             ) : activeTab === 'SOURCE' ? (
-              <JsonEditorTab
-                originalValues={originalValues}
-                formValues={formValues}
-                validationErrors={errors}
-                sortButtonRef={sortButtonRef}
-                onChange={onReplaceDoc}
-                onLockTab={onLockTab}
-                onUnlockTab={onUnlockTab}
-              />
+              <div className="flex h-full">
+                <JsonEditorTab
+                  originalValues={originalValues}
+                  formValues={formValues}
+                  validationErrors={errors}
+                  sortButtonRef={sortButtonRef}
+                  onChange={onReplaceDoc}
+                  onLockTab={onLockTab}
+                  onUnlockTab={onUnlockTab}
+                />
+                <SideBar/>
+              </div>
             ) : activeTab === 'PREVIEW' ? (
               <PreviewTab
                 previewResult={previewResult}
