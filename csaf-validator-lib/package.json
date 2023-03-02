@@ -4,10 +4,12 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "test": "tsc -b . && mocha tests",
-    "test-report": "tsc -b . && mocha tests --reporter json > test-results.json",
-    "test-coverage": "c8 mocha tests",
-    "test-coverage-lcov": "c8 --reporter lcovonly mocha tests"
+    "pretest": "tsc -b .",
+    "test": "node scripts/test.js",
+    "pretest-report": "tsc -b .",
+    "test-report": "node scripts/test.js --reporter json > test-results.json",
+    "test-coverage": "c8 node scripts/test.js",
+    "test-coverage-lcov": "c8 --reporter lcovonly node scripts/test.js"
   },
   "dependencies": {
     "ajv": "^8.11.2",
@@ -36,5 +38,5 @@
     "typescript": "^4.9.4",
     "xml2js": "^0.4.23"
   },
-  "version": "1.1.0"
+  "version": "1.3.0"
 }

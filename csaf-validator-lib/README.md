@@ -43,6 +43,12 @@ subtree in your repository. After that you can reference the modules from within
   cd csaf-validator-lib && npm ci --prod
   ```
 
+- This repository includes git submodules. Make sure to initialize and update 
+  the submodules before you start working with the repository.
+  ```sh
+  git submodule update --init --recursive
+  ```
+
 - For test 6.3.8 an installation of hunspell as well as all languages that 
   you want to spell check is required.
 

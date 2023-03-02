@@ -601,7 +601,7 @@ export default /** @type {const} */ ({
       id: 'CWE-1316',
       name: 'Fabric-Address Map Allows Programming of Unwarranted Overlaps of Protected and Unprotected Ranges',
     },
-    { id: 'CWE-1317', name: 'Missing Security Checks in Fabric Bridge' },
+    { id: 'CWE-1317', name: 'Improper Access Control in Fabric Bridge' },
     {
       id: 'CWE-1318',
       name: 'Missing Support for Security Features in On-chip Fabrics or Buses',
@@ -613,7 +613,7 @@ export default /** @type {const} */ ({
     { id: 'CWE-132', name: 'DEPRECATED: Miscalculated Null Termination' },
     {
       id: 'CWE-1320',
-      name: 'Improper Protection for Out of Bounds Signal Level Alerts',
+      name: 'Improper Protection for Outbound Error Messages and Alert Signals',
     },
     {
       id: 'CWE-1321',
@@ -626,7 +626,7 @@ export default /** @type {const} */ ({
     { id: 'CWE-1323', name: 'Improper Management of Sensitive Trace Data' },
     {
       id: 'CWE-1324',
-      name: 'Sensitive Information Accessible by Physical Probing of JTAG Interface',
+      name: 'DEPRECATED: Sensitive Information Accessible by Physical Probing of JTAG Interface',
     },
     {
       id: 'CWE-1325',
@@ -680,7 +680,10 @@ export default /** @type {const} */ ({
       id: 'CWE-1351',
       name: 'Improper Handling of Hardware Behavior in Exceptionally Cold Environments',
     },
-    { id: 'CWE-1357', name: 'Reliance on Uncontrolled Component' },
+    {
+      id: 'CWE-1357',
+      name: 'Reliance on Insufficiently Trustworthy Component',
+    },
     { id: 'CWE-138', name: 'Improper Neutralization of Special Elements' },
     {
       id: 'CWE-1384',
@@ -691,6 +694,16 @@ export default /** @type {const} */ ({
       id: 'CWE-1386',
       name: 'Insecure Operation on Windows Junction / Mount Point',
     },
+    {
+      id: 'CWE-1389',
+      name: 'Incorrect Parsing of Numbers with Different Radices',
+    },
+    { id: 'CWE-1390', name: 'Weak Authentication' },
+    { id: 'CWE-1391', name: 'Use of Weak Credentials' },
+    { id: 'CWE-1392', name: 'Use of Default Credentials' },
+    { id: 'CWE-1393', name: 'Use of Default Password' },
+    { id: 'CWE-1394', name: 'Use of Default Cryptographic Key' },
+    { id: 'CWE-1395', name: 'Dependency on Vulnerable Third-Party Component' },
     { id: 'CWE-14', name: 'Compiler Removal of Code to Clear Buffers' },
     { id: 'CWE-140', name: 'Improper Neutralization of Delimiters' },
     {
@@ -1300,7 +1313,10 @@ export default /** @type {const} */ ({
     { id: 'CWE-475', name: 'Undefined Behavior for Input to API' },
     { id: 'CWE-476', name: 'NULL Pointer Dereference' },
     { id: 'CWE-477', name: 'Use of Obsolete Function' },
-    { id: 'CWE-478', name: 'Missing Default Case in Switch Statement' },
+    {
+      id: 'CWE-478',
+      name: 'Missing Default Case in Multiple Condition Expression',
+    },
     { id: 'CWE-479', name: 'Signal Handler Use of a Non-reentrant Function' },
     {
       id: 'CWE-48',
@@ -1368,7 +1384,7 @@ export default /** @type {const} */ ({
     },
     {
       id: 'CWE-526',
-      name: 'Exposure of Sensitive Information Through Environmental Variables',
+      name: 'Cleartext Storage of Sensitive Information in an Environment Variable',
     },
     {
       id: 'CWE-527',

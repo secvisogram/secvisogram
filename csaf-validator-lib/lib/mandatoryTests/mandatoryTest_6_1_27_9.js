@@ -5,6 +5,7 @@
 
 /**
  * @typedef {object} Vulnerability
+ * @property {unknown} flags
  * @property {VulnerabilityProductStatus} [product_status]
  * @property {unknown} threats
  */
@@ -76,7 +77,44 @@ export default function mandatoryTest_6_1_27_9(doc) {
           return false
         })
 
-        if (!hasMatchingThreat) {
+        /**
+         * @typedef {object} Flag
+         * @property {unknown} label
+         * @property {unknown} group_ids
+         * @property {unknown} product_ids
+         */
+
+        /** @type {(Flag | null)[]} */
+        const flags = Array.isArray(vulnerability.flags)
+          ? vulnerability.flags
+          : []
+        const hasMatchingFlag = flags.some((flag) => {
+          if (!flag) return false
+
+          const flagHasMatchingProduct =
+            Array.isArray(flag.product_ids) &&
+            flag.product_ids.includes(productId)
+          if (flagHasMatchingProduct) return true
+
+          const productGroups = doc.product_tree?.product_groups
+          const flagHasMatchingProductGroup =
+            Array.isArray(flag.group_ids) &&
+            Array.isArray(productGroups) &&
+            flag.group_ids.some((groupId) => {
+              /** @type {{ product_ids: unknown } | undefined} */
+              const group = productGroups.find((g) => g.group_id === groupId)
+              return (
+                group &&
+                Array.isArray(group.product_ids) &&
+                group.product_ids.includes(productId)
+              )
+            })
+
+          if (flagHasMatchingProductGroup) return true
+          return false
+        })
+
+        if (!hasMatchingThreat && !hasMatchingFlag) {
           isValid = false
           errors.push({
             instancePath: `/vulnerabilities/${vulnerabilityIndex}/product_status/known_not_affected/${productIdIndex}`,
