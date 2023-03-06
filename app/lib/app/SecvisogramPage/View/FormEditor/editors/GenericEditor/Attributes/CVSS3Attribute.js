@@ -53,24 +53,21 @@ export default function CVSSV3Attribute({
     [outerDocumentEditor, updateDoc, instancePath, doc, cvssVector]
   )
 
-  /** @type {(childName: string, options: string[], disableClearable: boolean) => any} */
-  function dropdownFor(childName, options, disableClearable = false) {
-    const childValue = /** @type {string} */ ((value || {})[childName]) || ''
-    return cvssDropdown(
-      instancePath,
-      childName,
-      childValue,
-      options,
-      property,
-      disabled,
-      disableClearable
-    )
-  }
+  const getChildValue = (/** @type {string} */ childName) =>
+    /** @type {string} */ ((value || {})[childName]) || ''
 
   return (
     <DocumentEditorContext.Provider value={documentEditor}>
       <div className="flex flex-col gap-4 p-4 overflow-auto shrink-0 min-w-[340px]">
-        {dropdownFor('version', ['3.0', '3.1'], true)}
+        {cvssDropdown(
+          instancePath,
+          'version',
+          getChildValue('version'),
+          ['3.0', '3.1'],
+          property,
+          disabled,
+          true
+        )}
         <TextAttribute
           label="VectorString"
           description=""
@@ -100,19 +97,70 @@ export default function CVSSV3Attribute({
           severity={value?.baseSeverity}
         ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.baseInputs')}>
-          {dropdownFor('attackVector', [
-            'NETWORK',
-            'ADJACENT_NETWORK',
-            'LOCAL',
-            'PHYSICAL',
-          ])}
-          {dropdownFor('attackComplexity', ['HIGH', 'LOW'])}
-          {dropdownFor('privilegesRequired', ['NONE', 'HIGH', 'LOW'])}
-          {dropdownFor('userInteraction', ['NONE', 'REQUIRED'])}
-          {dropdownFor('scope', ['UNCHANGED', 'CHANGED'])}
-          {dropdownFor('confidentialityImpact', ['NONE', 'HIGH', 'LOW'])}
-          {dropdownFor('integrityImpact', ['NONE', 'HIGH', 'LOW'])}
-          {dropdownFor('availabilityImpact', ['NONE', 'HIGH', 'LOW'])}
+          {cvssDropdown(
+            instancePath,
+            'attackVector',
+            getChildValue('attackVector'),
+            ['NETWORK', 'ADJACENT_NETWORK', 'LOCAL', 'PHYSICAL'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'attackComplexity',
+            getChildValue('attackComplexity'),
+            ['HIGH', 'LOW'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'privilegesRequired',
+            getChildValue('privilegesRequired'),
+            ['NONE', 'HIGH', 'LOW'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'userInteraction',
+            getChildValue('userInteraction'),
+            ['NONE', 'REQUIRED'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'scope',
+            getChildValue('scope'),
+            ['UNCHANGED', 'CHANGED'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'confidentialityImpact',
+            getChildValue('confidentialityImpact'),
+            ['NONE', 'HIGH', 'LOW'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'integrityImpact',
+            getChildValue('integrityImpact'),
+            ['NONE', 'HIGH', 'LOW'],
+            property,
+            disabled
+          )}
+          {cvssDropdown(
+            instancePath,
+            'availabilityImpact',
+            getChildValue('availabilityImpact'),
+            ['NONE', 'HIGH', 'LOW'],
+            property,
+            disabled
+          )}
         </Collapsible>
 
         <CvssScore
@@ -123,8 +171,10 @@ export default function CVSSV3Attribute({
           startCollapsed={true}
           title={t('cvssEditor.temporalInputs')}
         >
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'exploitCodeMaturity',
+            getChildValue('exploitCodeMaturity'),
             [
               'UNPROVEN',
               'PROOF_OF_CONCEPT',
@@ -132,10 +182,14 @@ export default function CVSSV3Attribute({
               'HIGH',
               'NOT_DEFINED',
             ],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+
+          {cvssDropdown(
+            instancePath,
             'remediationLevel',
+            getChildValue('remediationLevel'),
             [
               'OFFICIAL_FIX',
               'TEMPORARY_FIX',
@@ -143,12 +197,17 @@ export default function CVSSV3Attribute({
               'UNAVAILABLE',
               'NOT_DEFINED',
             ],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+
+          {cvssDropdown(
+            instancePath,
             'reportConfidence',
+            getChildValue('reportConfidence'),
             ['UNKNOWN', 'REASONABLE', 'CONFIRMED', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
         </Collapsible>
 
@@ -160,60 +219,96 @@ export default function CVSSV3Attribute({
           startCollapsed={true}
           title={t('cvssEditor.environmentalInputs')}
         >
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'confidentialityRequirement',
+            getChildValue('confidentialityRequirement'),
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+
+          {cvssDropdown(
+            instancePath,
             'integrityRequirement',
+            getChildValue('integrityRequirement'),
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+
+          {cvssDropdown(
+            instancePath,
             'availabilityRequirement',
+            getChildValue('availabilityRequirement'),
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+
+          {cvssDropdown(
+            instancePath,
             'modifiedAttackVector',
+            getChildValue('modifiedAttackVector'),
             ['NETWORK', 'ADJACENT_NETWORK', 'LOCAL', 'PHYSICAL', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedAttackComplexity',
+            getChildValue('modifiedAttackComplexity'),
             ['HIGH', 'LOW', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedPrivilegesRequired',
+            getChildValue('modifiedPrivilegesRequired'),
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedUserInteraction',
+            getChildValue('modifiedUserInteraction'),
             ['NONE', 'REQUIRED', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedScope',
+            getChildValue('modifiedScope'),
             ['UNCHANGED', 'CHANGED', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedConfidentialityImpact',
+            getChildValue('modifiedConfidentialityImpact'),
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedIntegrityImpact',
+            getChildValue('modifiedIntegrityImpact'),
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
-          {dropdownFor(
+          {cvssDropdown(
+            instancePath,
             'modifiedAvailabilityImpact',
+            getChildValue('modifiedAvailabilityImpact'),
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            property,
+            disabled
           )}
         </Collapsible>
       </div>

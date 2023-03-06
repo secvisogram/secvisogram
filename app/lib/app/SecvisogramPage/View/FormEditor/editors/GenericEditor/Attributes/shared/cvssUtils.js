@@ -21,7 +21,7 @@ function cvssDropdown(
   options,
   property,
   disabled,
-  disableClearable = true
+  disableClearable = false
 ) {
   return (
     <DropdownAttribute
