@@ -29,7 +29,7 @@
     "ajv-formats": "^2.1.1",
     "bcp47": "^1.1.2",
     "cvss2js": "^1.1.0",
-    "i18next": "^21.10.0",
+    "i18next": "^22.4.12",
     "i18next-http-backend": "^1.4.4",
     "immutability-helper": "^3.1.1",
     "json-pointer": "^0.6.2",
