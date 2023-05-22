@@ -30,7 +30,7 @@
     "bcp47": "^1.1.2",
     "cvss2js": "^1.1.0",
     "i18next": "^22.4.15",
-    "i18next-http-backend": "^2.2.0",
+    "i18next-http-backend": "^2.2.1",
     "immutability-helper": "^3.1.1",
     "json-pointer": "^0.6.2",
     "json-source-map": "^0.6.1",
