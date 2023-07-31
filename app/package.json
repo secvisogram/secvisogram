@@ -45,7 +45,7 @@
     "react-hot-keys": "^2.7.2",
     "react-i18next": "^13.0.2",
     "react-markdown": "^8.0.7",
-    "react-monaco-editor": "^0.53.0",
+    "react-monaco-editor": "^0.54.0",
     "semver": "^7.5.4",
     "shallowequal": "^1.1.0"
   },
