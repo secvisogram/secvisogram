@@ -567,7 +567,7 @@ describe('SecvisogramPage', () => {
 
         state = ViewReducer(state, {
           type: 'CHANGE_FORM_DOC',
-          update: { foo: { $set: 42 } },
+          update: { foo: 42 },
           timestamp,
           generatorEngineData,
         })
@@ -599,7 +599,7 @@ describe('SecvisogramPage', () => {
           type: 'CHANGE_FORM_DOC',
           instancePath: '/foobar/test',
           timestamp,
-          update: { $set: 42 },
+          update: 42,
           generatorEngineData,
         })
 

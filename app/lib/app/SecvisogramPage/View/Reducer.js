@@ -1,4 +1,3 @@
-import update from 'immutability-helper'
 import { parse } from 'json-pointer'
 import { compose, set } from 'lodash/fp.js'
 
@@ -59,15 +58,8 @@ export default function Reducer(state, action) {
           ...state.formValues,
           doc: setGeneratorFields(
             action.instancePath
-              ? /** @type {{}} */ (
-                  update(
-                    state.formValues.doc,
-                    /** @type {any} */ (
-                      set(parse(action.instancePath), action.update, {})
-                    )
-                  )
-                )
-              : update(state.formValues.doc, action.update)
+              ? set(parse(action.instancePath), action.update, state.formValues.doc ?? {})
+              : action.update
           ),
         },
       }

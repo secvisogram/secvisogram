@@ -30,6 +30,10 @@ export interface Props {
       callback: () => void
     ): void
   }>
+  generatorEngineData: {
+    name: string
+    version: string
+  }
   onLoadAdvisory(params: { advisoryId: string }): Promise<Advisory>
   onUpdateAdvisory(params: {
     advisoryId: string

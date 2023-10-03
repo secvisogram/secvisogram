@@ -97,6 +97,7 @@ const SecvisogramPage = () => {
       data={data}
       alert={alert}
       DocumentsTab={DocumentsTab}
+      generatorEngineData={core.document.getGeneratorEngineData()}
       onLoadAdvisory={loadAdvisory}
       onUpdateAdvisory={({
         advisoryId,
