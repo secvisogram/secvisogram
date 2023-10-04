@@ -819,5 +819,19 @@ describe('SecvisogramPage', () => {
         expect(vector.canBeUpgraded).to.be.false
       })
     })
+
+    describe('style tests', () => {
+      it('sidebar expands the right way', () => {
+        cy.visit('?tab=SOURCE')
+        cy.get('body')
+          .invoke('prop', 'scrollWidth')
+          .then((initialWidth) => {
+            cy.get('[data-testid="sideBar-ERRORS-button"]').click()
+            cy.get('body')
+              .invoke('prop', 'scrollWidth')
+              .should('eq', initialWidth)
+          })
+      })
+    })
   })
 })

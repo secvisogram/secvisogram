@@ -1073,7 +1073,7 @@ function View({
                   </div>
                 )}
                 <div
-                  className="row-span-2 relative h-full bg-white"
+                  className="row-span-2 overflow-auto relative h-full bg-white"
                   key={activeTab}
                 >
                   {activeTab === 'EDITOR' ? (
