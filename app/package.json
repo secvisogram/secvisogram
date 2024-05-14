@@ -48,7 +48,7 @@
     "react-i18next": "^14.0.0",
     "react-markdown": "^8.0.7",
     "react-monaco-editor": "^0.55.0",
-    "semver": "^7.5.4",
+    "semver": "^7.6.2",
     "shallowequal": "^1.1.0"
   },
   "devDependencies": {
