@@ -177,6 +177,8 @@ Setting the conent displayed in the sidebar is also possible by right-clicking o
 
 Note that multiline strings are not supported in JSON value fields and will break this navigation. To add line breaks type `\n` instead.
 
+The _JSON Editor_ enables users to generate a blueprint JSON file, such as for a vendor, containing essential details like `product id` or `publisher`. This JSON can be saved locally and later pasted into the editor to populate it with specific content, such as CVE details and the _Product Status_ for a VEX profile.
+
 [(back to top)](#bsi-secvisogram-csaf-20-web-editor)
 
 ### Preview (HTML view)
