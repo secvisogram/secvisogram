@@ -892,4 +892,142 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('have.value', '13:15')
     })
   })
+
+  describe("selects first suggestion in combobox when pressing enter", function () {
+    it('CWEAttribute Id', function () {
+      cy.visit('?tab=EDITOR')
+
+      // create new vulnerability and select CWE section
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
+      ).click({ force: true })
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/cwe"]'
+      ).click()
+
+      // enter letter c and press enter
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
+      )
+        .clear()
+        .type('C')
+      // wait for popup to show
+      cy.get('.shadow-popup')
+      // press enter
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
+      )
+        .type('{enter}')
+
+      // check whether both fields were updated
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
+      ).should('contain.value', 'CWE')
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      )
+        .invoke('val')
+        .should('not.be.empty')
+    })
+
+    it('CWEAttribute Name', function () {
+      cy.visit('?tab=EDITOR')
+
+      // create new vulnerability and select CWE section
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
+      ).click({ force: true })
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/cwe"]'
+      ).click()
+
+      // enter letter c
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      )
+        .clear()
+        .type('C')
+      // wait for popup to show
+      cy.get('.shadow-popup')
+      // press enter
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      )
+        .type('{enter}')
+
+      // check whether both fields were updated
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      )
+        .invoke('val')
+        .should('have.length.above', 1)
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
+      )
+        .invoke('val')
+        .should('not.be.empty')
+    })
+
+    it('AttributeId', function () {
+      cy.visit('?tab=EDITOR')
+
+      // add product
+      cy.get(
+        '[data-testid="menu_entry-/product_tree/branches-add_item_button"]'
+      ).click({ force: true })
+      cy.get(
+        '[data-testid="attribute-product_tree-branches-0-category"] input'
+      )
+        .clear()
+        .type('architecture')
+      cy.get(
+        '[data-testid="attribute-product_tree-branches-0-name"] input'
+      )
+        .clear()
+        .type('Test')
+      cy.get(
+        '[data-testid="menu_entry-/product_tree/branches/0/product"]'
+      ).click()
+      cy.get(
+        '[data-testid="attribute-product_tree-branches-0-product-name"] input'
+      )
+        .clear()
+        .type('Test')
+      cy.get(
+        '[data-testid="attribute-product_tree-branches-0-product-product_id"] input'
+      )
+        .clear()
+        .type('CSAFPID-0001')
+
+      // create new vulnerability and add product in known affected
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
+      ).click({ force: true })
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/product_status"]'
+      ).click()
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/product_status/known_affected-add_item_button"]'
+      ).click({ force: true })
+
+      // enter letter c
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-product_status-known_affected-0"] input'
+      )
+        .clear()
+        .type('C')
+      // wait for popup to show
+      cy.get('.shadow-popup')
+      // press enter
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-product_status-known_affected-0"] input'
+      )
+        .type('{enter}')
+
+      // check whether field was updated
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-product_status-known_affected-0"] input'
+      ).should('have.value', 'CSAFPID-0001')
+    })
+  })
 })

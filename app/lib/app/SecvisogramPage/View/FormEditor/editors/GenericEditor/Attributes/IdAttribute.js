@@ -57,6 +57,15 @@ export default function IdAttribute({
     /** @type {[{id: string, name: string}]} */ (entries)
   )
 
+  /** @param {string} id  */
+  const handleSelect = (id) => {
+    setTerm('')
+    updateDoc(props.instancePath, id)
+    if (!id) {
+      replaceDoc(pruneEmpty(doc))
+    }
+  }
+
   const handleFocus = () => {
     if (onCollectIds) {
       onCollectIds().then((entries) => {
@@ -84,13 +93,7 @@ export default function IdAttribute({
         <div className="w-full">
           <Combobox
             className="w-full"
-            onSelect={(id) => {
-              setTerm('')
-              updateDoc(props.instancePath, id)
-              if (!id) {
-                replaceDoc(pruneEmpty(doc))
-              }
-            }}
+            onSelect={handleSelect}
           >
             <ComboboxInput
               value={value}
@@ -99,6 +102,7 @@ export default function IdAttribute({
               onChange={handleChange}
               onFocus={handleFocus}
               disabled={disabled}
+              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && handleSelect(results?.[0].id)}
             />
             {results && (
               <ComboboxPopover className="shadow-popup">

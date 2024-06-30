@@ -34,6 +34,7 @@ export default function DropdownAttribute({
       <div className="max-w-md flex">
         <div className="w-full">
           <Autocomplete
+            autoHighlight={true}
             disableClearable={disableClearable}
             options={options}
             freeSolo={!isEnum}

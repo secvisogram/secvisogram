@@ -161,6 +161,7 @@ function CwecId({
               placeholder="^CWE-[1-9]\d{0,5}$"
               onChange={handleChange}
               disabled={disabled}
+              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && onChange(results?.[0])}
             />
             {results && (
               <ComboboxPopover className="shadow-popup">
@@ -247,6 +248,7 @@ function CwecName({
               placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..."
               onChange={handleChange}
               disabled={disabled}
+              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && onChange(results?.[0])}
             />
             {results && (
               <ComboboxPopover className="shadow-popup">
