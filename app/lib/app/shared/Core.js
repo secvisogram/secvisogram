@@ -36,6 +36,8 @@ export default function createCore() {
     document: {
       /**
        * Validates the document and returns errors that possibly occur.
+       * The validation is based on the basic tests and the tests of the
+       * corresponding CSAF-version.
        *
        * @param {object} params
        * @param {any} params.document
@@ -62,6 +64,11 @@ export default function createCore() {
           VERSION_TESTS.forEach((t) => {
             if (!TESTS.map((t) => t.name).includes(t.name)) {
               TESTS.push(t)
+            } else {
+              // eslint-disable-next-line no-console
+              console.warn(
+                `Test ${t.name} is already present in the basic tests.`
+              )
             }
           })
 
