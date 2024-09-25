@@ -1,12 +1,10 @@
 import { compose, set } from 'lodash/fp.js'
+import { getVersionTests } from '../../../../csaf-validator-lib/getVersionTests.js'
 import strip from '../../../../csaf-validator-lib/strip.js'
 import validate from '../../../../csaf-validator-lib/validate.js'
-import * as basic from '../../../../csaf-validator-lib/versions/basic.js'
 import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities.js'
-
-const BASIC_TESTS = Object.values(basic)
 
 const secvisogramName = 'Secvisogram'
 
@@ -51,44 +49,7 @@ export default function createCore() {
        */
       async validate({ document }) {
         const version = document.document.csaf_version
-        let TESTS = BASIC_TESTS
-
-        try {
-          const VERSION_TESTS = Object.values(
-            await import(
-              `../../../../csaf-validator-lib/versions/${version}/basic.js`
-            )
-          )
-
-          // Make sure that the tests are not duplicated
-          VERSION_TESTS.forEach((t) => {
-            if (!TESTS.map((t) => t.name).includes(t.name)) {
-              TESTS.push(t)
-            } else {
-              // eslint-disable-next-line no-console
-              console.warn(
-                `Test ${t.name} is already present in the basic tests.`
-              )
-            }
-          })
-
-          try {
-            const IGNORED_TESTS = Object.values(
-              await import(
-                `../../../../csaf-validator-lib/versions/${version}/ignoredTests.js`
-              )
-            )
-            TESTS = TESTS.filter((t) => !IGNORED_TESTS.includes(t.name))
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log(`No ignored tests for this version ${version}`)
-          }
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(
-            `Could not load tests for version ${version}. Falling back to basic tests.`
-          )
-        }
+        let TESTS = await getVersionTests(version)
 
         const res = await validate(TESTS, document)
         return {
@@ -160,10 +121,11 @@ export default function createCore() {
        * of removed elements.
        *
        * @param {object} params
-       * @param {{}} params.document
+       * @param {any} params.document
        */
       async strip({ document }) {
-        const res = await strip(BASIC_TESTS, document)
+        const TESTS = await getVersionTests(document.document.csaf_version)
+        const res = await strip(TESTS, document)
 
         return res
       },
