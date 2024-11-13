@@ -1,7 +1,10 @@
 import { compose, set } from 'lodash/fp.js'
-import { getVersionTests } from '../../../../csaf-validator-lib/getVersionTests.js'
+import getVersionTests, {
+  getVersionMandatoryTests,
+} from '../../../../csaf-validator-lib/getVersionTests.js'
 import strip from '../../../../csaf-validator-lib/strip.js'
 import validate from '../../../../csaf-validator-lib/validate.js'
+import editorSchema from '../SecvisogramPage/View/JsonEditorTab/editorSchema.js'
 import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities.js'
@@ -23,6 +26,17 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
     set('document.tracking.generator.engine.version', secvisogramVersion),
     set('document.tracking.generator.date', date.toISOString())
   )
+
+/**
+ * Prefetches all version-specific tests.
+ * @type {Record<string, any>}
+ */
+const versionTests = {}
+editorSchema.properties.document.properties.csaf_version.enum.forEach(
+  async (version) => {
+    versionTests[version] = await getVersionMandatoryTests(version)
+  }
+)
 
 /**
  * This is a factory-function which instantiates the business-logic object.
@@ -49,7 +63,7 @@ export default function createCore() {
        */
       async validate({ document }) {
         const version = document.document.csaf_version
-        let TESTS = await getVersionTests(version)
+        let TESTS = versionTests[version]
 
         const res = await validate(TESTS, document)
         return {
