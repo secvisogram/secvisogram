@@ -39,11 +39,11 @@ export default function DropdownAttribute({
             options={options}
             freeSolo={!isEnum}
             value={value}
-            onChange={(event, newValue) =>
-              updateDoc(props.instancePath, /** @type {string} */ (newValue))
-            }
+            onChange={(_, newValue) => {
+              updateDoc(props.instancePath, /** @type {string} */(newValue ?? ''))
+            }}
             inputValue={/** @type {string} */ (inputValue)}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_, newInputValue) => {
               setInputValue(newInputValue ?? '')
             }}
             onBlur={() => {
