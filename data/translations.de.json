@@ -214,6 +214,8 @@
     "VulnerabilitiesItemsCweIdDescription": "Enthält die ID für die zugehörige Schwachstelle.",
     "VulnerabilitiesItemsCweNameTitle": "Name der Schwachstelle",
     "VulnerabilitiesItemsCweNameDescription": "Enthält den vollständigen Namen der Schwachstelle, wie er in der CWE-Spezifikation angegeben ist.",
+    "VulnerabilitiesItemsCweVersionTitle": "CWE Version",
+    "VulnerabilitiesItemsCweVersionDescription": "Enthält die Version der CWE-Spezifikation, aus der diese Schwäche extrahiert wurde.",
     "VulnerabilitiesItemsDiscoveryDateTitle": "Datum der Entdeckung",
     "VulnerabilitiesItemsDiscoveryDateDescription": "Enthält das Datum und die Uhrzeit, zu der die Sicherheitslücke ursprünglich entdeckt wurde.",
     "VulnerabilitiesItemsFlagsTitle": "Liste der Flags",
@@ -232,6 +234,16 @@
     "VulnerabilitiesItemsIdsItemsSystemNameDescription": "Gibt den Namen des Systems zur Verfolgung oder Nummerierung von Schwachstellen an.",
     "VulnerabilitiesItemsIdsItemsTextTitle": "Text",
     "VulnerabilitiesItemsIdsItemsTextDescription": "Ist eine eindeutige Kennzeichnung oder Tracking-ID für die Schwachstelle (falls solche Informationen vorhanden sind).",
+    "VulnerabilitiesItemsMetricsTitle": "Liste der Metriken",
+    "VulnerabilitiesItemsMetricsDescription": "Enthält eine Liste von Metriken.",
+    "VulnerabilitiesItemsMetricsItemsTitle": "Metrik",
+    "VulnerabilitiesItemsMetricsItemsDescription": "Enthält alle Metadaten über die Metrik, einschließlich der Produkte, für die sie gilt, sowie die Quelle und den Inhalt selbst.",
+    "VulnerabilitiesItemsMetricsItemsContentTitle": "Inhalt",
+    "VulnerabilitiesItemsMetricsItemsContentDescription": "Gibt Informationen über (mindestens eine) Metrik oder Punktzahl für die angegebenen Produkte in Bezug auf die aktuelle Schwachstelle an.",
+    "VulnerabilitiesItemsMetricsItemsContentVersionTitle": "Version",
+    "VulnerabilitiesItemsMetricsItemsContentVersionDescription": "Enthält die Version der CWE-Spezifikation, aus der diese Schwäche extrahiert wurde.",
+    "VulnerabilitiesItemsMetricsItemsSourceTitle": "Quelle",
+    "VulnerabilitiesItemsMetricsItemsSourceDescription": "Enthält die URL der Quelle, die die Metrik ursprünglich ermittelt hat.",
     "VulnerabilitiesItemsInvolvementsTitle": "Liste der Beteiligungen",
     "VulnerabilitiesItemsInvolvementsDescription": "Enthält eine Liste von Beteiligungen.",
     "VulnerabilitiesItemsInvolvementsItemsTitle": "Beteiligung",
@@ -407,6 +419,8 @@
     "CvssV3EnvironmentalScoreTitle": "CVSS Umgebungsbewertung",
     "CvssV3EnvironmentalScoreDescription": "Die nach CVSS zugewiesene Umgebungsbewertung",
     "CvssV3EnvironmentalSeverityTitle": "CVSS Umgebungsschweregrad",
-    "CvssV3EnvironmentalSeverityDescription": "Diese Metrik gibt den Umgebungsschweregrad einer Schwachstelle an."
+    "CvssV3EnvironmentalSeverityDescription": "Diese Metrik gibt den Umgebungsschweregrad einer Schwachstelle an.",
+    "CvssV4Title": "CVSS Version 4",
+    "CvssV4Description": "Bewertung nach dem Common Vulnerability Scoring System Version 4."
   }
 }

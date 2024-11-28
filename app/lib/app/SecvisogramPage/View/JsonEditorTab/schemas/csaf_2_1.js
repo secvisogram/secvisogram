@@ -155,7 +155,7 @@ export default {
                 'The Common Platform Enumeration (CPE) attribute refers to a method for naming platforms external to this specification.',
               type: 'string',
               pattern:
-                '^(cpe:2\\.3:[aho\\*\\-](:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){5}(:(([a-zA-Z]{2,3}(-([a-zA-Z]{2}|[0-9]{3}))?)|[\\*\\-]))(:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){4})|([c][pP][eE]:/[AHOaho]?(:[A-Za-z0-9\\._\\-~%]*){0,6})$',
+                '^((cpe:2\\.3:[aho\\*\\-](:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,\\/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){5}(:(([a-zA-Z]{2,3}(-([a-zA-Z]{2}|[0-9]{3}))?)|[\\*\\-]))(:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,\\/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){4})|([c][pP][eE]:\\/[AHOaho]?(:[A-Za-z0-9\\._\\-~%]*){0,6}))$',
               minLength: 5,
             },
             hashes: {
@@ -246,7 +246,7 @@ export default {
                 'The package URL (purl) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
               type: 'string',
               format: 'uri',
-              pattern: '^pkg:[A-Za-z\\.\\-\\+][A-Za-z0-9\\.\\-\\+]*/.+',
+              pattern: '^pkg:[A-Za-z\\.\\-\\+][A-Za-z0-9\\.\\-\\+]*\\/.+',
               minLength: 7,
             },
             sbom_urls: {
@@ -476,14 +476,31 @@ export default {
       examples: ['1', '4', '0.9.0', '1.4.3', '2.40.0+21AF26D3'],
     },
   },
-  required: ['document'],
+  required: ['$schema', 'document'],
   properties: {
+    $schema: {
+      title: 'JSON Schema',
+      description:
+        'Contains the URL of the CSAF JSON schema which the document promises to be valid for.',
+      type: 'string',
+      enum: [
+        'https://docs.oasis-open.org/csaf/csaf/v2.1/csaf_json_schema.json',
+      ],
+      format: 'uri',
+    },
     document: {
       title: 'Document level meta-data',
       description:
         'Captures the meta-data about this document describing a particular set of security advisories.',
       type: 'object',
-      required: ['category', 'csaf_version', 'publisher', 'title', 'tracking'],
+      required: [
+        'category',
+        'csaf_version',
+        'distribution',
+        'publisher',
+        'title',
+        'tracking',
+      ],
       properties: {
         acknowledgments: {
           title: 'Document acknowledgments',
@@ -533,14 +550,14 @@ export default {
           description:
             'Gives the version of the CSAF specification which the document was generated for.',
           type: 'string',
-          enum: ['2.0'],
+          enum: ['2.0', '2.1'],
         },
         distribution: {
           title: 'Rules for sharing document',
           description:
             'Describe any constraints on how this document might be shared.',
           type: 'object',
-          minProperties: 1,
+          required: ['tlp'],
           properties: {
             text: {
               title: 'Textual description',
@@ -565,7 +582,8 @@ export default {
                   title: 'Label of TLP',
                   description: 'Provides the TLP label of the document.',
                   type: 'string',
-                  enum: ['AMBER', 'GREEN', 'RED', 'WHITE'],
+                  default: 'CLEAR',
+                  enum: ['AMBER', 'AMBER+STRICT', 'CLEAR', 'GREEN', 'RED'],
                 },
                 url: {
                   title: 'URL of TLP version',
@@ -609,6 +627,7 @@ export default {
               enum: [
                 'coordinator',
                 'discoverer',
+                'multiplier',
                 'other',
                 'translator',
                 'user',
@@ -957,31 +976,47 @@ export default {
             type: 'string',
             pattern: '^CVE-[0-9]{4}-[0-9]{4,}$',
           },
-          cwe: {
-            title: 'CWE',
-            description:
-              'Holds the MITRE standard Common Weakness Enumeration (CWE) for the weakness associated.',
-            type: 'object',
-            required: ['id', 'name'],
-            properties: {
-              id: {
-                title: 'Weakness ID',
-                description: 'Holds the ID for the weakness associated.',
-                type: 'string',
-                pattern: '^CWE-[1-9]\\d{0,5}$',
-                examples: ['CWE-22', 'CWE-352', 'CWE-79'],
-              },
-              name: {
-                title: 'Weakness name',
-                description:
-                  'Holds the full name of the weakness as given in the CWE specification.',
-                type: 'string',
-                minLength: 1,
-                examples: [
-                  'Cross-Site Request Forgery (CSRF)',
-                  "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
-                  "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
-                ],
+          cwes: {
+            title: 'List of CWEs',
+            description: 'Contains a list of CWEs.',
+            type: 'array',
+            minItems: 1,
+            uniqueItems: true,
+            items: {
+              title: 'CWE',
+              description:
+                'Holds the MITRE standard Common Weakness Enumeration (CWE) for the weakness associated.',
+              type: 'object',
+              required: ['id', 'name', 'version'],
+              properties: {
+                id: {
+                  title: 'Weakness ID',
+                  description: 'Holds the ID for the weakness associated.',
+                  type: 'string',
+                  pattern: '^CWE-[1-9]\\d{0,5}$',
+                  examples: ['CWE-22', 'CWE-352', 'CWE-79'],
+                },
+                name: {
+                  title: 'Weakness name',
+                  description:
+                    'Holds the full name of the weakness as given in the CWE specification.',
+                  type: 'string',
+                  minLength: 1,
+                  examples: [
+                    'Cross-Site Request Forgery (CSRF)',
+                    "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+                    "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+                  ],
+                },
+                version: {
+                  title: 'CWE version',
+                  description:
+                    'Holds the version string of the CWE specification this weakness was extracted from.',
+                  type: 'string',
+                  minLength: 1,
+                  pattern: '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
+                  examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
+                },
               },
             },
           },
@@ -1121,6 +1156,58 @@ export default {
               },
             },
           },
+          metrics: {
+            title: 'List of metrics',
+            description:
+              'Contains metric objects for the current vulnerability.',
+            type: 'array',
+            minItems: 1,
+            uniqueItems: true,
+            items: {
+              title: 'metric',
+              description:
+                'Contains all metadata about the metric including products it applies to and the source and the content itself.',
+              type: 'object',
+              required: ['content', 'products'],
+              properties: {
+                content: {
+                  title: 'Content',
+                  description:
+                    'Specifies information about (at least one) metric or score for the given products regarding the current vulnerability.',
+                  type: 'object',
+                  minProperties: 1,
+                  properties: {
+                    cvss_v2: {
+                      $ref: 'https://www.first.org/cvss/cvss-v2.0.json',
+                    },
+                    cvss_v3: {
+                      oneOf: [
+                        {
+                          $ref: 'https://www.first.org/cvss/cvss-v3.0.json',
+                        },
+                        {
+                          $ref: 'https://www.first.org/cvss/cvss-v3.1.json',
+                        },
+                      ],
+                    },
+                    cvss_v4: {
+                      $ref: 'https://www.first.org/cvss/cvss-v4.0.json',
+                    },
+                  },
+                },
+                products: {
+                  $ref: '#/$defs/products_t',
+                },
+                source: {
+                  title: 'Source',
+                  description:
+                    'Contains the URL of the source that originally determined the metric.',
+                  type: 'string',
+                  format: 'uri',
+                },
+              },
+            },
+          },
           notes: {
             title: 'Vulnerability notes',
             description: 'Holds notes associated with this vulnerability item.',
@@ -1214,9 +1301,11 @@ export default {
                     'Specifies the category which this remediation belongs to.',
                   type: 'string',
                   enum: [
+                    'fix_planned',
                     'mitigation',
                     'no_fix_planned',
                     'none_available',
+                    'optional_patch',
                     'vendor_fix',
                     'workaround',
                   ],
@@ -1293,48 +1382,6 @@ export default {
                     'Contains the URL where to obtain the remediation.',
                   type: 'string',
                   format: 'uri',
-                },
-              },
-            },
-          },
-          scores: {
-            title: 'List of scores',
-            description:
-              'contains score objects for the current vulnerability.',
-            type: 'array',
-            minItems: 1,
-            items: {
-              title: 'Score',
-              description:
-                'specifies information about (at least one) score of the vulnerability and for which products the given value applies.',
-              type: 'object',
-              minProperties: 2,
-              required: ['products'],
-              properties: {
-                cvss_v2: {
-                  $ref: new URL(
-                    'vendor/first/cvss-v2.0.json',
-                    window.location.href
-                  ).href,
-                },
-                cvss_v3: {
-                  oneOf: [
-                    {
-                      $ref: new URL(
-                        'vendor/first/cvss-v3.0.json',
-                        window.location.href
-                      ).href,
-                    },
-                    {
-                      $ref: new URL(
-                        'vendor/first/cvss-v3.1.json',
-                        window.location.href
-                      ).href,
-                    },
-                  ],
-                },
-                products: {
-                  $ref: '#/$defs/products_t',
                 },
               },
             },

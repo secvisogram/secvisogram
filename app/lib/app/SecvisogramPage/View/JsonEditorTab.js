@@ -4,10 +4,10 @@ import * as jsonMap from 'json-source-map'
 import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
 import sortObjectKeys from '../../shared/sortObjectKeys.js'
-import editorSchema from './JsonEditorTab/editorSchema.js'
+import * as schemas from './JsonEditorTab/schemas/all.js'
+import SelectedPathContext from './shared/context/SelectedPathContext.js'
 import SideBarContext from './shared/context/SideBarContext.js'
 import useDebounce from './shared/useDebounce.js'
-import SelectedPathContext from './shared/context/SelectedPathContext.js'
 
 /**
  * @param {{
@@ -47,6 +47,14 @@ export default function JsonEditorTab({
   )
 
   const initialMountRef = React.useRef(true)
+
+  const version = doc.document?.csaf_version ?? '2.0'
+  const index = /** @type {keyof typeof import('../shared/types').Property} */ `csaf_${version.replaceAll(
+    '.',
+    '_'
+  )}`
+
+  const editorSchema = React.useMemo(() => schemas[index], [index])
 
   React.useEffect(() => {
     const saveButton = sortButtonRef.current

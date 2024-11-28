@@ -1,10 +1,8 @@
 import { compose, set } from 'lodash/fp.js'
-import getVersionTests, {
-  getVersionMandatoryTests,
-} from '../../../../csaf-validator-lib/getVersionTests.js'
+// import getVersionTests from '../../../../csaf-validator-lib/getVersionTests.js'
 import strip from '../../../../csaf-validator-lib/strip.js'
 import validate from '../../../../csaf-validator-lib/validate.js'
-import editorSchema from '../SecvisogramPage/View/JsonEditorTab/editorSchema.js'
+import * as schemas from '../SecvisogramPage/View/JsonEditorTab/schemas/all.js'
 import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities.js'
@@ -32,9 +30,9 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
  * @type {Record<string, any>}
  */
 const versionTests = {}
-editorSchema.properties.document.properties.csaf_version.enum.forEach(
+schemas.csaf_2_0.properties.document.properties.csaf_version.enum.forEach(
   async (version) => {
-    versionTests[version] = await getVersionMandatoryTests(version)
+    versionTests[version] = []
   }
 )
 
@@ -138,7 +136,8 @@ export default function createCore() {
        * @param {any} params.document
        */
       async strip({ document }) {
-        const TESTS = await getVersionTests(document.document.csaf_version)
+        const version = document.document.csaf_version
+        let TESTS = versionTests[version]
         const res = await strip(TESTS, document)
 
         return res

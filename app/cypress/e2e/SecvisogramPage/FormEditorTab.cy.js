@@ -1,5 +1,5 @@
 import { getObjectMenuPaths } from '../../../lib/app/SecvisogramPage/View/FormEditor/editors/GenericEditor/ObjectEditor.js'
-import schema from '../../../lib/app/SecvisogramPage/View/FormEditor/schema.js'
+import schema from '../../../lib/app/SecvisogramPage/View/FormEditor/editors/schemas/csaf_2_0.js'
 import { getLoginEnabledConfig } from '../../fixtures/appConfigData.js'
 import {
   canChangeDocument,
@@ -168,7 +168,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
     it('can calculate the menu structure for the top level sidebar', function () {
       expect(
         getObjectMenuPaths(
-          /** @type {import('../../../lib/app/SecvisogramPage/View/FormEditor/schema.js').Property} */ (
+          /** @type {import('../../../lib/app/SecvisogramPage/View/FormEditor/editors/schemas/csaf_2_0.js').Property} */ (
             schema
           )
         )
@@ -686,12 +686,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).click()
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="date"]'
-      )
-        .type('2020-02-01')
+      ).type('2020-02-01')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="time"]'
-      )
-        .type('13:41')
+      ).type('13:41')
 
       // current release should still be empty
       cy.get('[data-testid="document/tracking-fieldButton"]').click()
@@ -757,12 +755,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).click()
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="date"]'
-      )
-        .type('2020-02-01')
+      ).type('2020-02-01')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="time"]'
-      )
-        .type('13:41')
+      ).type('13:41')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-number"] input'
       )
@@ -814,12 +810,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).click()
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="date"]'
-      )
-        .type('2019-12-31')
+      ).type('2019-12-31')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="time"]'
-      )
-        .type('12:01')
+      ).type('12:01')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-number"] input'
       )
@@ -835,12 +829,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).click()
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-1-date"] input[type="date"]'
-      )
-        .type('2020-02-01')
+      ).type('2020-02-01')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-1-date"] input[type="time"]'
-      )
-        .type('13:41')
+      ).type('13:41')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-1-number"] input'
       )
@@ -856,12 +848,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).click()
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-2-date"] input[type="date"]'
-      )
-        .type('2021-02-01')
+      ).type('2021-02-01')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-2-date"] input[type="time"]'
-      )
-        .type('13:15')
+      ).type('13:15')
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-2-number"] input'
       )
@@ -893,7 +883,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
     })
   })
 
-  describe("selects first suggestion in combobox when pressing enter", function () {
+  describe('selects first suggestion in combobox when pressing enter', function () {
     it('CWEAttribute Id', function () {
       cy.visit('?tab=EDITOR')
 
@@ -901,31 +891,25 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
       ).click({ force: true })
-      cy.get(
-        '[data-testid="menu_entry-/vulnerabilities/0/cwe"]'
-      ).click()
+      cy.get('[data-testid="menu_entry-/vulnerabilities/0/cwe"]').click()
 
       // enter letter c and press enter
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
-      )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input')
         .clear()
         .type('C')
       // wait for popup to show
       cy.get('.shadow-popup')
       // press enter
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').type(
+        '{enter}'
       )
-        .type('{enter}')
 
       // check whether both fields were updated
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
-      ).should('contain.value', 'CWE')
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').should(
+        'contain.value',
+        'CWE'
       )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
         .invoke('val')
         .should('not.be.empty')
     })
@@ -937,33 +921,24 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
       ).click({ force: true })
-      cy.get(
-        '[data-testid="menu_entry-/vulnerabilities/0/cwe"]'
-      ).click()
+      cy.get('[data-testid="menu_entry-/vulnerabilities/0/cwe"]').click()
 
       // enter letter c
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
-      )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
         .clear()
         .type('C')
       // wait for popup to show
       cy.get('.shadow-popup')
       // press enter
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input').type(
+        '{enter}'
       )
-        .type('{enter}')
 
       // check whether both fields were updated
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-name"] input'
-      )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
         .invoke('val')
         .should('have.length.above', 1)
-      cy.get(
-        '[data-testid="attribute-vulnerabilities-0-cwe-id"] input'
-      )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input')
         .invoke('val')
         .should('not.be.empty')
     })
@@ -975,14 +950,10 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="menu_entry-/product_tree/branches-add_item_button"]'
       ).click({ force: true })
-      cy.get(
-        '[data-testid="attribute-product_tree-branches-0-category"] input'
-      )
+      cy.get('[data-testid="attribute-product_tree-branches-0-category"] input')
         .clear()
         .type('architecture')
-      cy.get(
-        '[data-testid="attribute-product_tree-branches-0-name"] input'
-      )
+      cy.get('[data-testid="attribute-product_tree-branches-0-name"] input')
         .clear()
         .type('Test')
       cy.get(
@@ -1021,8 +992,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       // press enter
       cy.get(
         '[data-testid="attribute-vulnerabilities-0-product_status-known_affected-0"] input'
-      )
-        .type('{enter}')
+      ).type('{enter}')
 
       // check whether field was updated
       cy.get(

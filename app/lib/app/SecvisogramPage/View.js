@@ -15,7 +15,7 @@ import isPropertyRelevant from './shared/isPropertyRelevant.js'
 import AboutDialog from './View/AboutDialog.js'
 import CsafTab from './View/CsafTab.js'
 import ExportDocumentDialog from './View/ExportDocumentDialog.js'
-import schema from './View/FormEditor/schema.js'
+import schema from './View/FormEditor/editors/schemas/csaf_2_0.js'
 import RelevanceLevelContext from './View/FormEditor/shared/context/RelevanceLevelContext.js'
 import {
   useUniqueGroupId,

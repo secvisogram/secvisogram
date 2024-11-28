@@ -232,6 +232,16 @@
     "VulnerabilitiesItemsIdsItemsSystemNameDescription": "Indicates the name of the vulnerability tracking or numbering system.",
     "VulnerabilitiesItemsIdsItemsTextTitle": "Text",
     "VulnerabilitiesItemsIdsItemsTextDescription": "Is unique label or tracking ID for the vulnerability (if such information exists).",
+    "VulnerabilitiesItemsMetricsTitle": "List of Metrics",
+    "VulnerabilitiesItemsMetricsDescription": "Contains a list of Metrics.",
+    "VulnerabilitiesItemsMetricsItemsTitle": "Metric",
+    "VulnerabilitiesItemsMetricsItemsDescription": "Contains all metadata about the metric including products it applies to and the source and the content itself.",
+    "VulnerabilitiesItemsMetricsItemsContentTitle": "Content",
+    "VulnerabilitiesItemsMetricsItemsContentDescription": "Specifies information about (at least one) metric or score for the given products regarding the current vulnerability.",
+    "VulnerabilitiesItemsMetricsItemsContentVersionTitle": "Version",
+    "VulnerabilitiesItemsMetricsItemsContentVersionDescription": "Holds the version string of the CWE specification this weakness was extracted from.",
+    "VulnerabilitiesItemsMetricsItemsSourceTitle": "Source",
+    "VulnerabilitiesItemsMetricsItemsSourceDescription": "Contains the URL of the source that originally determined the metric.",
     "VulnerabilitiesItemsInvolvementsTitle": "List of involvements",
     "VulnerabilitiesItemsInvolvementsDescription": "Contains a list of involvements.",
     "VulnerabilitiesItemsInvolvementsItemsTitle": "Involvement",
@@ -407,6 +417,8 @@
     "CvssV3EnvironmentalScoreTitle": "CVSS Environmental Score",
     "CvssV3EnvironmentalScoreDescription": "The environmental score assigned according to CVSS",
     "CvssV3EnvironmentalSeverityTitle": "The Environmental Severity",
-    "CvssV3EnvironmentalSeverityDescription": "This metric reflects the environmental severity of a vulnerability."
+    "CvssV3EnvironmentalSeverityDescription": "This metric reflects the environmental severity of a vulnerability.",
+    "CvssV4Title": "CVSS Version 4",
+    "CvssV4Description": "Score according to the Common Vulnerability Scoring System version 4."
   }
 }

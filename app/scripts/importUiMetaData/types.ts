@@ -70,6 +70,7 @@ export interface CommonUiSchemaFields {
       | 'OBJECT_CWE'
       | 'OBJECT_CVSS_2'
       | 'OBJECT_CVSS_3'
+      | 'OBJECT_CVSS_4'
       | 'ARRAY_REVISION_HISTORY'
     relevanceLevels?: {}
   }

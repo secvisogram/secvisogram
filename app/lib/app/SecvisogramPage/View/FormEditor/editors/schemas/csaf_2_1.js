@@ -1,4 +1,4 @@
-/** @typedef {import('./shared/types').Property} Property */
+/** @typedef {import('../../shared/types').Property} Property */
 export default /** @type {const} */ ({
   key: '',
   fullName: [],
@@ -448,7 +448,7 @@ export default /** @type {const} */ ({
                   description: 'DocumentCsafVersionDescription',
                 },
               },
-              enum: ['2.0'],
+              enum: ['2.0', '2.1'],
               metaInfo: {},
               type: 'STRING',
             },
@@ -464,11 +464,11 @@ export default /** @type {const} */ ({
                   usage: 'docs/user/document/distribution-usage.en.md',
                 },
                 relevanceLevels: {
-                  csaf_base: 'want_to_have',
-                  csaf_security_incident_response: 'best_practice',
-                  csaf_informational_advisory: 'best_practice',
-                  csaf_security_advisory: 'best_practice',
-                  csaf_vex: 'want_to_have',
+                  csaf_base: 'mandatory',
+                  csaf_security_incident_response: 'mandatory',
+                  csaf_informational_advisory: 'mandatory',
+                  csaf_security_advisory: 'mandatory',
+                  csaf_vex: 'mandatory',
                 },
                 i18n: {
                   title: 'DocumentDistributionTitle',
@@ -527,11 +527,11 @@ export default /** @type {const} */ ({
                           'docs/user/document/distribution/tlp-usage.en.md',
                       },
                       relevanceLevels: {
-                        csaf_base: 'want_to_have',
-                        csaf_security_incident_response: 'want_to_have',
-                        csaf_informational_advisory: 'want_to_have',
-                        csaf_security_advisory: 'best_practice',
-                        csaf_vex: 'want_to_have',
+                        csaf_base: 'mandatory',
+                        csaf_security_incident_response: 'mandatory',
+                        csaf_informational_advisory: 'mandatory',
+                        csaf_security_advisory: 'mandatory',
+                        csaf_vex: 'mandatory',
                       },
                       i18n: {
                         title: 'DocumentDistributionTlpTitle',
@@ -573,7 +573,15 @@ export default /** @type {const} */ ({
                                 'DocumentDistributionTlpLabelDescription',
                             },
                           },
-                          enum: ['AMBER', 'GREEN', 'RED', 'WHITE'],
+                          mandatory: true,
+                          default: 'CLEAR',
+                          enum: [
+                            'AMBER',
+                            'AMBER+STRICT',
+                            'CLEAR',
+                            'GREEN',
+                            'RED',
+                          ],
                           metaInfo: {},
                           type: 'STRING',
                         },
@@ -898,6 +906,7 @@ export default /** @type {const} */ ({
                     enum: [
                       'coordinator',
                       'discoverer',
+                      'multiplier',
                       'other',
                       'translator',
                       'user',
@@ -2057,6 +2066,7 @@ export default /** @type {const} */ ({
                           'language',
                           'legacy',
                           'patch_level',
+                          'platform',
                           'product_family',
                           'product_name',
                           'product_version',
@@ -2279,7 +2289,7 @@ export default /** @type {const} */ ({
                                     },
                                     minLength: 5,
                                     pattern:
-                                      '^(cpe:2\\.3:[aho\\*\\-](:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){5}(:(([a-zA-Z]{2,3}(-([a-zA-Z]{2}|[0-9]{3}))?)|[\\*\\-]))(:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){4})|([c][pP][eE]:/[AHOaho]?(:[A-Za-z0-9\\._\\-~%]*){0,6})$',
+                                      '^((cpe:2\\.3:[aho\\*\\-](:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,\\/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){5}(:(([a-zA-Z]{2,3}(-([a-zA-Z]{2}|[0-9]{3}))?)|[\\*\\-]))(:(((\\?*|\\*?)([a-zA-Z0-9\\-\\._]|(\\\\[\\\\\\*\\?!"#\\$%&\'\\(\\)\\+,\\/:;<=>@\\[\\]\\^`\\{\\|\\}~]))+(\\?*|\\*?))|[\\*\\-])){4})|([c][pP][eE]:\\/[AHOaho]?(:[A-Za-z0-9\\._\\-~%]*){0,6}))$',
                                     metaInfo: {},
                                     type: 'STRING',
                                   },
@@ -6013,11 +6023,10 @@ export default /** @type {const} */ ({
                   type: 'STRING',
                 },
                 {
-                  key: 'cwe',
-                  fullName: ['vulnerabilities', 'cwe'],
-                  title: 'CWE',
-                  description:
-                    'Holds the MITRE standard Common Weakness Enumeration (CWE) for the weakness associated.',
+                  key: 'cwes',
+                  fullName: ['vulnerabilities', 'cwes'],
+                  title: 'List of CWEs',
+                  description: 'Contains a list of CWEs.',
                   metaData: {
                     userDocumentation: {
                       specification:
@@ -6038,75 +6047,142 @@ export default /** @type {const} */ ({
                     },
                     uiType: 'OBJECT_CWE',
                   },
-                  type: 'OBJECT',
+                  type: 'ARRAY',
                   metaInfo: {
-                    propertyList: [
-                      {
-                        key: 'id',
-                        fullName: ['vulnerabilities', 'cwe', 'id'],
-                        title: 'Weakness ID',
-                        description:
-                          'Holds the ID for the weakness associated.',
-                        metaData: {
-                          userDocumentation: {
-                            specification:
-                              'docs/user/vulnerabilities/vulnerability/cwe/id-spec.en.md',
-                            usage:
-                              'docs/user/vulnerabilities/vulnerability/cwe/id-usage.en.md',
-                          },
-                          relevanceLevels: {
-                            csaf_base: 'mandatory',
-                            csaf_security_incident_response: 'mandatory',
-                            csaf_informational_advisory: 'mandatory',
-                            csaf_security_advisory: 'mandatory',
-                            csaf_vex: 'mandatory',
-                          },
-                          i18n: {
-                            title: 'VulnerabilitiesItemsCweIdTitle',
-                            description: 'VulnerabilitiesItemsCweIdDescription',
-                          },
+                    arrayType: {
+                      key: '',
+                      fullName: ['vulnerabilities', 'cwes'],
+                      title: 'CWE',
+                      description:
+                        'Holds the MITRE standard Common Weakness Enumeration (CWE) for the weakness associated.',
+                      metaData: {
+                        userDocumentation: {
+                          specification:
+                            'docs/user/vulnerabilities/vulnerability/cwes/cwe-spec.en.md',
+                          usage:
+                            'docs/user/vulnerabilities/vulnerability/cwes/cwe-usage.en.md',
                         },
-                        examples: ['CWE-22', 'CWE-352', 'CWE-79'],
-                        pattern: '^CWE-[1-9]\\d{0,5}$',
-                        metaInfo: {},
-                        type: 'STRING',
+                        i18n: {
+                          title: 'VulnerabilitiesItemsCweTitle',
+                          description: 'VulnerabilitiesItemsCweDescription',
+                        },
+                        itemName: {
+                          itemNameTranslationKey: 'arrays.cwesItemName',
+                        },
+                        relevanceLevels: {
+                          csaf_base: 'want_to_have',
+                          csaf_security_incident_response: 'optional',
+                          csaf_informational_advisory: 'excluded',
+                          csaf_security_advisory: 'best_practice',
+                          csaf_vex: 'want_to_have',
+                        },
                       },
-                      {
-                        key: 'name',
-                        fullName: ['vulnerabilities', 'cwe', 'name'],
-                        title: 'Weakness name',
-                        description:
-                          'Holds the full name of the weakness as given in the CWE specification.',
-                        metaData: {
-                          userDocumentation: {
-                            specification:
-                              'docs/user/vulnerabilities/vulnerability/cwe/name-spec.en.md',
-                            usage:
-                              'docs/user/vulnerabilities/vulnerability/cwe/name-usage.en.md',
-                          },
-                          relevanceLevels: {
-                            csaf_base: 'mandatory',
-                            csaf_security_incident_response: 'mandatory',
-                            csaf_informational_advisory: 'mandatory',
-                            csaf_security_advisory: 'mandatory',
-                            csaf_vex: 'mandatory',
-                          },
-                          i18n: {
-                            title: 'VulnerabilitiesItemsCweNameTitle',
+                      type: 'OBJECT',
+                      metaInfo: {
+                        propertyList: [
+                          {
+                            key: 'id',
+                            fullName: ['vulnerabilities', 'cwes', 'id'],
+                            title: 'Weakness ID',
+                            mandatory: true,
                             description:
-                              'VulnerabilitiesItemsCweNameDescription',
+                              'Holds the ID for the weakness associated.',
+                            metaData: {
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/id-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/id-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'VulnerabilitiesItemsCweIdTitle',
+                                description:
+                                  'VulnerabilitiesItemsCweIdDescription',
+                              },
+                            },
+                            examples: ['CWE-22', 'CWE-352', 'CWE-79'],
+                            pattern: '^CWE-[1-9]\\d{0,5}$',
+                            metaInfo: {},
+                            type: 'STRING',
                           },
-                        },
-                        minLength: 1,
-                        examples: [
-                          'Cross-Site Request Forgery (CSRF)',
-                          "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
-                          "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+                          {
+                            key: 'name',
+                            fullName: ['vulnerabilities', 'cwes', 'name'],
+                            title: 'Weakness name',
+                            description:
+                              'Holds the full name of the weakness as given in the CWE specification.',
+                            metaData: {
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/name-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/name-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'VulnerabilitiesItemsCweNameTitle',
+                                description:
+                                  'VulnerabilitiesItemsCweNameDescription',
+                              },
+                            },
+                            minLength: 1,
+                            examples: [
+                              'Cross-Site Request Forgery (CSRF)',
+                              "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+                              "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+                            ],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
+                            key: 'version',
+                            fullName: ['vulnerabilities', 'cwes', 'version'],
+                            title: 'CWE Version',
+                            description:
+                              'Holds the version string of the CWE specification this weakness was extracted from.',
+                            metaData: {
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/version-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/cwes/cwe/version-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'VulnerabilitiesItemsCweVersionTitle',
+                                description:
+                                  'VulnerabilitiesItemsCweVersionDescription',
+                              },
+                            },
+                            minLength: 1,
+                            pattern:
+                              '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
+                            examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
                         ],
-                        metaInfo: {},
-                        type: 'STRING',
                       },
-                    ],
+                    },
                   },
                 },
                 {
@@ -6754,6 +6830,1092 @@ export default /** @type {const} */ ({
                                   'VulnerabilitiesItemsInvolvementsItemsSummaryTitle',
                                 description:
                                   'VulnerabilitiesItemsInvolvementsItemsSummaryDescription',
+                              },
+                            },
+                            minLength: 1,
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                        ],
+                      },
+                    },
+                  },
+                },
+                {
+                  key: 'metrics',
+                  fullName: ['vulnerabilities', 'metrics'],
+                  title: 'List of metrics',
+                  description:
+                    'Contains metric objects for the current vulnerability.',
+                  metaData: {
+                    userDocumentation: {
+                      specification:
+                        'docs/user/vulnerabilities/vulnerability/metrics/metrics-spec.en.md',
+                      usage:
+                        'docs/user/vulnerabilities/vulnerability/metrics/metrics-usage.en.md',
+                    },
+                    relevanceLevels: {
+                      csaf_base: 'mandatory',
+                      csaf_security_incident_response: 'mandatory',
+                      csaf_informational_advisory: 'mandatory',
+                      csaf_security_advisory: 'mandatory',
+                      csaf_vex: 'mandatory',
+                    },
+                    i18n: {
+                      title: 'VulnerabilitiesItemsMetricsTitle',
+                      description: 'VulnerabilitiesItemsMetricsDescription',
+                    },
+                  },
+                  type: 'ARRAY',
+                  metaInfo: {
+                    arrayType: {
+                      key: '',
+                      fullName: ['vulnerabilities', 'metric'],
+                      title: 'Metric',
+                      description:
+                        'Contains all metadata about the metric including products it applies to and the source and the content itself',
+                      metaData: {
+                        userDocumentation: {
+                          specification:
+                            'docs/user/vulnerabilities/vulnerability/metrics/metric-spec.en.md',
+                          usage:
+                            'docs/user/vulnerabilities/vulnerability/metrics/metric-usage.en.md',
+                        },
+                        i18n: {
+                          title: 'VulnerabilitiesItemsMetricsItemsTitle',
+                          description:
+                            'VulnerabilitiesItemsMetricsItemsDescription',
+                        },
+                        itemName: {
+                          itemNameTranslationKey: 'arrays.metricsItemName',
+                        },
+                        relevanceLevels: {
+                          csaf_base: 'optional',
+                          csaf_security_incident_response: 'nice_to_know',
+                          csaf_informational_advisory: 'excluded',
+                          csaf_security_advisory: 'nice_to_know',
+                          csaf_vex: 'nice_to_know',
+                        },
+                      },
+                      type: 'OBJECT',
+                      metaInfo: {
+                        propertyList: [
+                          {
+                            key: 'content',
+                            fullName: ['vulnerabilities', 'metrics', 'content'],
+                            title: 'Content',
+                            description:
+                              'Specifies information about (at least one) metric or score for the given products regarding the current vulnerability.',
+                            metaData: {
+                              uiType: 'OBJECT',
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/content-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/content-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'want_to_have',
+                                csaf_security_incident_response: 'want_to_have',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'best_practice',
+                                csaf_vex: 'best_practice',
+                              },
+                              i18n: {
+                                title:
+                                  'VulnerabilitiesItemsMetricsItemsContentTitle',
+                                description:
+                                  'VulnerabilitiesItemsMetricsItemsContentDescription',
+                              },
+                            },
+                            metaInfo: {
+                              propertyList: [
+                                {
+                                  key: 'version',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'version',
+                                  ],
+                                  title: 'CWE Version',
+                                  description:
+                                    'Holds the version string of the CWE specification this weakness was extracted from.',
+                                  metaData: {
+                                    userDocumentation: {
+                                      specification:
+                                        'docs/user/vulnerabilities/vulnerability/cwe/version-spec.en.md',
+                                      usage:
+                                        'docs/user/vulnerabilities/vulnerability/cwe/version-usage.en.md',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'VulnerabilitiesItemsMetricsItemsContentVersionTitle',
+                                      description:
+                                        'VulnerabilitiesItemsMetricsItemsContentVersionDescription',
+                                    },
+                                  },
+                                  minLength: 1,
+                                  pattern:
+                                    '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
+                                  examples: [
+                                    '1.0',
+                                    '3.4.1',
+                                    '4.0',
+                                    '4.11',
+                                    '4.12',
+                                  ],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'cvss_v2',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'scores',
+                                    'cvss_v2',
+                                  ],
+                                  title:
+                                    'JSON Schema for Common Vulnerability Scoring System version 2.0',
+                                  metaData: {
+                                    title: 'CVSS v2',
+                                    description:
+                                      'JSON Schema for Common Vulnerability Scoring System version 2.0',
+                                    userDocumentation: {
+                                      specification:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                      usage:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'optional',
+                                      csaf_security_incident_response:
+                                        'optional',
+                                      csaf_informational_advisory: 'excluded',
+                                      csaf_security_advisory: 'optional',
+                                      csaf_vex: 'optional',
+                                    },
+                                    i18n: {
+                                      title: 'CvssV2Title',
+                                      description: 'CvssV2Description',
+                                    },
+                                    uiType: 'OBJECT_CVSS_2',
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: {
+                                    propertyList: [
+                                      {
+                                        key: 'version',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'version',
+                                        ],
+                                        description: 'CVSS Version',
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2VersionTitle',
+                                            description:
+                                              'CvssV2VersionDescription',
+                                          },
+                                        },
+                                        enum: ['2.0'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'vectorString',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'vectorString',
+                                        ],
+                                        metaData: {
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2VectorStringTitle',
+                                            description:
+                                              'CvssV2VectorStringDescription',
+                                          },
+                                        },
+                                        pattern:
+                                          '^((AV:[NAL]|AC:[LMH]|Au:[MSN]|[CIA]:[NPC]|E:(U|POC|F|H|ND)|RL:(OF|TF|W|U|ND)|RC:(UC|UR|C|ND)|CDP:(N|L|LM|MH|H|ND)|TD:(N|L|M|H|ND)|[CIA]R:(L|M|H|ND))/)*(AV:[NAL]|AC:[LMH]|Au:[MSN]|[CIA]:[NPC]|E:(U|POC|F|H|ND)|RL:(OF|TF|W|U|ND)|RC:(UC|UR|C|ND)|CDP:(N|L|LM|MH|H|ND)|TD:(N|L|M|H|ND)|[CIA]R:(L|M|H|ND))$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'accessVector',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'accessVector',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2AccessVectorTitle',
+                                            description:
+                                              'CvssV2AccessVectorDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'NETWORK',
+                                          'ADJACENT_NETWORK',
+                                          'LOCAL',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'accessComplexity',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'accessComplexity',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2AccessComplexityTitle',
+                                            description:
+                                              'CvssV2AccessComplexityDescription',
+                                          },
+                                        },
+                                        enum: ['HIGH', 'MEDIUM', 'LOW'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'authentication',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'authentication',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2AuthenticationTitle',
+                                            description:
+                                              'CvssV2AuthenticationDescription',
+                                          },
+                                        },
+                                        enum: ['MULTIPLE', 'SINGLE', 'NONE'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'confidentialityImpact',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'confidentialityImpact',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2ConfidentialityImpactTitle',
+                                            description:
+                                              'CvssV2ConfidentialityImpactDescription',
+                                          },
+                                        },
+                                        enum: ['NONE', 'PARTIAL', 'COMPLETE'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'integrityImpact',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'integrityImpact',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2IntegrityImpactTitle',
+                                            description:
+                                              'CvssV2IntegrityImpactDescription',
+                                          },
+                                        },
+                                        enum: ['NONE', 'PARTIAL', 'COMPLETE'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'availabilityImpact',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'availabilityImpact',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'best_practice',
+                                            csaf_security_incident_response:
+                                              'best_practice',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'best_practice',
+                                            csaf_vex: 'best_practice',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2AvailabilityImpactTitle',
+                                            description:
+                                              'CvssV2AvailabilityImpactDescription',
+                                          },
+                                        },
+                                        enum: ['NONE', 'PARTIAL', 'COMPLETE'],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'baseScore',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'baseScore',
+                                        ],
+                                        metaData: {
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2BaseScoreTitle',
+                                            description:
+                                              'CvssV2BaseScoreDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'NUMBER',
+                                      },
+                                      {
+                                        key: 'exploitability',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'exploitability',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'nice_to_know',
+                                            csaf_security_incident_response:
+                                              'nice_to_know',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'nice_to_know',
+                                            csaf_vex: 'nice_to_know',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2ExploitabilityTitle',
+                                            description:
+                                              'CvssV2ExploitabilityDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'UNPROVEN',
+                                          'PROOF_OF_CONCEPT',
+                                          'FUNCTIONAL',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'remediationLevel',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'remediationLevel',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'want_to_have',
+                                            csaf_security_incident_response:
+                                              'want_to_have',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'want_to_have',
+                                            csaf_vex: 'want_to_have',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2RemediationLevelTitle',
+                                            description:
+                                              'CvssV2RemediationLevelDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'OFFICIAL_FIX',
+                                          'TEMPORARY_FIX',
+                                          'WORKAROUND',
+                                          'UNAVAILABLE',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'reportConfidence',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'reportConfidence',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'want_to_have',
+                                            csaf_security_incident_response:
+                                              'want_to_have',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'want_to_have',
+                                            csaf_vex: 'want_to_have',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2ReportConfidenceTitle',
+                                            description:
+                                              'CvssV2ReportConfidenceDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'UNCONFIRMED',
+                                          'UNCORROBORATED',
+                                          'CONFIRMED',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'temporalScore',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'temporalScore',
+                                        ],
+                                        metaData: {
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'want_to_have',
+                                            csaf_security_incident_response:
+                                              'want_to_have',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory:
+                                              'want_to_have',
+                                            csaf_vex: 'want_to_have',
+                                          },
+                                          i18n: {
+                                            title: 'CvssV2TemporalScoreTitle',
+                                            description:
+                                              'CvssV2TemporalScoreDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'NUMBER',
+                                      },
+                                      {
+                                        key: 'collateralDamagePotential',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'collateralDamagePotential',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2CollateralDamagePotentialTitle',
+                                            description:
+                                              'CvssV2CollateralDamagePotentialDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'NONE',
+                                          'LOW',
+                                          'LOW_MEDIUM',
+                                          'MEDIUM_HIGH',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'targetDistribution',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'targetDistribution',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2TargetDistributionTitle',
+                                            description:
+                                              'CvssV2TargetDistributionDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'NONE',
+                                          'LOW',
+                                          'MEDIUM',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'confidentialityRequirement',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'confidentialityRequirement',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2ConfidentialityRequirementTitle',
+                                            description:
+                                              'CvssV2ConfidentialityRequirementDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'LOW',
+                                          'MEDIUM',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'integrityRequirement',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'integrityRequirement',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2IntegrityRequirementTitle',
+                                            description:
+                                              'CvssV2IntegrityRequirementDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'LOW',
+                                          'MEDIUM',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'availabilityRequirement',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'availabilityRequirement',
+                                        ],
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2AvailabilityRequirementTitle',
+                                            description:
+                                              'CvssV2AvailabilityRequirementDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'LOW',
+                                          'MEDIUM',
+                                          'HIGH',
+                                          'NOT_DEFINED',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'environmentalScore',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'scores',
+                                          'cvss_v2',
+                                          'environmentalScore',
+                                        ],
+                                        metaData: {
+                                          userDocumentation: {
+                                            specification:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
+                                            usage:
+                                              'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
+                                          },
+                                          relevanceLevels: {
+                                            csaf_base: 'optional',
+                                            csaf_security_incident_response:
+                                              'optional',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'optional',
+                                            csaf_vex: 'optional',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'CvssV2EnvironmentalScoreTitle',
+                                            description:
+                                              'CvssV2EnvironmentalScoreDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'NUMBER',
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  key: 'cvss_v3',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'scores',
+                                    'cvss_v3',
+                                  ],
+                                  metaData: {
+                                    title: 'CVSS v3',
+                                    description:
+                                      'JSON Schema for Common Vulnerability Scoring System version 3.0',
+                                    userDocumentation: {
+                                      specification:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v3-spec.en.md',
+                                      usage:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v3-usage.en.md',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'best_practice',
+                                      csaf_security_incident_response:
+                                        'best_practice',
+                                      csaf_informational_advisory: 'excluded',
+                                      csaf_security_advisory: 'best_practice',
+                                      csaf_vex: 'best_practice',
+                                    },
+                                    i18n: {
+                                      title: 'CvssV3Title',
+                                      description: 'CvssV3Description',
+                                    },
+                                    uiType: 'OBJECT_CVSS_3',
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: { propertyList: [] },
+                                },
+                                {
+                                  key: 'cvss_v4',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'scores',
+                                    'cvss_v4',
+                                  ],
+                                  metaData: {
+                                    title: 'CVSS v4',
+                                    description:
+                                      'JSON Schema for Common Vulnerability Scoring System version 4.0',
+                                    userDocumentation: {
+                                      specification:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v4-spec.en.md',
+                                      usage:
+                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v4-usage.en.md',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'best_practice',
+                                      csaf_security_incident_response:
+                                        'best_practice',
+                                      csaf_informational_advisory: 'excluded',
+                                      csaf_security_advisory: 'best_practice',
+                                      csaf_vex: 'best_practice',
+                                    },
+                                    i18n: {
+                                      title: 'CvssV4Title',
+                                      description: 'CvssV4Description',
+                                    },
+                                    uiType: 'OBJECT_CVSS_4',
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: { propertyList: [] },
+                                },
+                              ],
+                            },
+                            type: 'OBJECT',
+                          },
+                          {
+                            key: 'product_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'metrics',
+                              'product_ids',
+                            ],
+                            title: 'List of product_ids',
+                            description:
+                              'Specifies a list of product_ids to give context to the parent item.',
+                            metaData: {
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/product_ids-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/product_ids-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'ProductsTitle',
+                                description: 'ProductsDescription',
+                              },
+                            },
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'remediations',
+                                  'product_ids',
+                                ],
+                                title: 'Reference token for product instance',
+                                description:
+                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                                metaData: {
+                                  uiType: 'STRING_PRODUCT_ID',
+                                  userDocumentation: {
+                                    specification:
+                                      'docs/user/types/product_id-spec.en.md',
+                                    usage:
+                                      'docs/user/types/product_id-usage.en.md',
+                                  },
+                                  i18n: {
+                                    title: 'ProductIdTitle',
+                                    description: 'ProductIdDescription',
+                                  },
+                                  itemName: {
+                                    itemNameTranslationKey:
+                                      'arrays.productsItemName',
+                                  },
+                                  relevanceLevels: {
+                                    csaf_base: 'mandatory',
+                                    csaf_security_incident_response:
+                                      'mandatory',
+                                    csaf_informational_advisory: 'excluded',
+                                    csaf_security_advisory: 'mandatory',
+                                    csaf_vex: 'mandatory',
+                                  },
+                                },
+                                minLength: 1,
+                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
+                          {
+                            key: 'source',
+                            fullName: ['vulnerabilities', 'metrics', 'source'],
+                            title: 'Source',
+                            description:
+                              'Contains the URL of the source that originally determined the metric.',
+                            metaData: {
+                              uiType: 'STRING',
+                              userDocumentation: {
+                                specification:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/source-spec.en.md',
+                                usage:
+                                  'docs/user/vulnerabilities/vulnerability/metrics/metric/source-usage.en.md',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'nice_to_know',
+                                csaf_security_incident_response: 'want_to_have',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'want_to_have',
+                                csaf_vex: 'want_to_have',
+                              },
+                              i18n: {
+                                title:
+                                  'VulnerabilitiesItemsMetricsItemsSourceTitle',
+                                description:
+                                  'VulnerabilitiesItemsMetricsItemsSourceDescription',
                               },
                             },
                             minLength: 1,
@@ -7865,9 +9027,11 @@ export default /** @type {const} */ ({
                               },
                             },
                             enum: [
+                              'fix_planned',
                               'mitigation',
                               'no_fix_planned',
                               'none_available',
+                              'optional_patch',
                               'vendor_fix',
                               'workaround',
                             ],
@@ -8327,894 +9491,6 @@ export default /** @type {const} */ ({
                             },
                             metaInfo: {},
                             type: 'STRING',
-                          },
-                        ],
-                      },
-                    },
-                  },
-                },
-                {
-                  key: 'scores',
-                  fullName: ['vulnerabilities', 'scores'],
-                  title: 'List of scores',
-                  description:
-                    'Contains score objects for the current vulnerability.',
-                  metaData: {
-                    userDocumentation: {
-                      specification:
-                        'docs/user/vulnerabilities/vulnerability/scores-spec.en.md',
-                      usage:
-                        'docs/user/vulnerabilities/vulnerability/scores-usage.en.md',
-                    },
-                    relevanceLevels: {
-                      csaf_base: 'nice_to_know',
-                      csaf_security_incident_response: 'nice_to_know',
-                      csaf_informational_advisory: 'excluded',
-                      csaf_security_advisory: 'best_practice',
-                      csaf_vex: 'mandatory',
-                    },
-                    i18n: {
-                      title: 'VulnerabilitiesItemsScoresTitle',
-                      description: 'VulnerabilitiesItemsScoresDescription',
-                    },
-                  },
-                  type: 'ARRAY',
-                  metaInfo: {
-                    arrayType: {
-                      key: '',
-                      fullName: ['vulnerabilities', 'scores'],
-                      title: 'Score',
-                      description:
-                        'Specifies information about (at least one) score of the vulnerability and for which products the given value applies.',
-                      metaData: {
-                        userDocumentation: {
-                          specification:
-                            'docs/user/vulnerabilities/vulnerability/scores/score-spec.en.md',
-                          usage:
-                            'docs/user/vulnerabilities/vulnerability/scores/score-usage.en.md',
-                        },
-                        i18n: {
-                          title: 'VulnerabilitiesItemsScoresItemsTitle',
-                          description:
-                            'VulnerabilitiesItemsScoresItemsDescription',
-                        },
-                        itemName: {
-                          itemNameTranslationKey: 'arrays.scoresItemName',
-                        },
-                        relevanceLevels: {
-                          csaf_base: 'nice_to_know',
-                          csaf_security_incident_response: 'nice_to_know',
-                          csaf_informational_advisory: 'excluded',
-                          csaf_security_advisory: 'best_practice',
-                          csaf_vex: 'mandatory',
-                        },
-                      },
-                      type: 'OBJECT',
-                      metaInfo: {
-                        propertyList: [
-                          {
-                            key: 'cvss_v2',
-                            fullName: ['vulnerabilities', 'scores', 'cvss_v2'],
-                            title:
-                              'JSON Schema for Common Vulnerability Scoring System version 2.0',
-                            metaData: {
-                              title: 'CVSS v2',
-                              description:
-                                'JSON Schema for Common Vulnerability Scoring System version 2.0',
-                              userDocumentation: {
-                                specification:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                usage:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                              },
-                              relevanceLevels: {
-                                csaf_base: 'optional',
-                                csaf_security_incident_response: 'optional',
-                                csaf_informational_advisory: 'excluded',
-                                csaf_security_advisory: 'optional',
-                                csaf_vex: 'optional',
-                              },
-                              i18n: {
-                                title: 'CvssV2Title',
-                                description: 'CvssV2Description',
-                              },
-                              uiType: 'OBJECT_CVSS_2',
-                            },
-                            type: 'OBJECT',
-                            metaInfo: {
-                              propertyList: [
-                                {
-                                  key: 'version',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'version',
-                                  ],
-                                  description: 'CVSS Version',
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'mandatory',
-                                      csaf_security_incident_response:
-                                        'mandatory',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'mandatory',
-                                      csaf_vex: 'mandatory',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2VersionTitle',
-                                      description: 'CvssV2VersionDescription',
-                                    },
-                                  },
-                                  enum: ['2.0'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'vectorString',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'vectorString',
-                                  ],
-                                  metaData: {
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'mandatory',
-                                      csaf_security_incident_response:
-                                        'mandatory',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'mandatory',
-                                      csaf_vex: 'mandatory',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2VectorStringTitle',
-                                      description:
-                                        'CvssV2VectorStringDescription',
-                                    },
-                                  },
-                                  pattern:
-                                    '^((AV:[NAL]|AC:[LMH]|Au:[MSN]|[CIA]:[NPC]|E:(U|POC|F|H|ND)|RL:(OF|TF|W|U|ND)|RC:(UC|UR|C|ND)|CDP:(N|L|LM|MH|H|ND)|TD:(N|L|M|H|ND)|[CIA]R:(L|M|H|ND))/)*(AV:[NAL]|AC:[LMH]|Au:[MSN]|[CIA]:[NPC]|E:(U|POC|F|H|ND)|RL:(OF|TF|W|U|ND)|RC:(UC|UR|C|ND)|CDP:(N|L|LM|MH|H|ND)|TD:(N|L|M|H|ND)|[CIA]R:(L|M|H|ND))$',
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'accessVector',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'accessVector',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2AccessVectorTitle',
-                                      description:
-                                        'CvssV2AccessVectorDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'NETWORK',
-                                    'ADJACENT_NETWORK',
-                                    'LOCAL',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'accessComplexity',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'accessComplexity',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2AccessComplexityTitle',
-                                      description:
-                                        'CvssV2AccessComplexityDescription',
-                                    },
-                                  },
-                                  enum: ['HIGH', 'MEDIUM', 'LOW'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'authentication',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'authentication',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2AuthenticationTitle',
-                                      description:
-                                        'CvssV2AuthenticationDescription',
-                                    },
-                                  },
-                                  enum: ['MULTIPLE', 'SINGLE', 'NONE'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'confidentialityImpact',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'confidentialityImpact',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2ConfidentialityImpactTitle',
-                                      description:
-                                        'CvssV2ConfidentialityImpactDescription',
-                                    },
-                                  },
-                                  enum: ['NONE', 'PARTIAL', 'COMPLETE'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'integrityImpact',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'integrityImpact',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2IntegrityImpactTitle',
-                                      description:
-                                        'CvssV2IntegrityImpactDescription',
-                                    },
-                                  },
-                                  enum: ['NONE', 'PARTIAL', 'COMPLETE'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'availabilityImpact',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'availabilityImpact',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2AvailabilityImpactTitle',
-                                      description:
-                                        'CvssV2AvailabilityImpactDescription',
-                                    },
-                                  },
-                                  enum: ['NONE', 'PARTIAL', 'COMPLETE'],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'baseScore',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'baseScore',
-                                  ],
-                                  metaData: {
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'mandatory',
-                                      csaf_security_incident_response:
-                                        'mandatory',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'mandatory',
-                                      csaf_vex: 'mandatory',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2BaseScoreTitle',
-                                      description: 'CvssV2BaseScoreDescription',
-                                    },
-                                  },
-                                  metaInfo: {},
-                                  type: 'NUMBER',
-                                },
-                                {
-                                  key: 'exploitability',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'exploitability',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'nice_to_know',
-                                      csaf_security_incident_response:
-                                        'nice_to_know',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'nice_to_know',
-                                      csaf_vex: 'nice_to_know',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2ExploitabilityTitle',
-                                      description:
-                                        'CvssV2ExploitabilityDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'UNPROVEN',
-                                    'PROOF_OF_CONCEPT',
-                                    'FUNCTIONAL',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'remediationLevel',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'remediationLevel',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'want_to_have',
-                                      csaf_security_incident_response:
-                                        'want_to_have',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'want_to_have',
-                                      csaf_vex: 'want_to_have',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2RemediationLevelTitle',
-                                      description:
-                                        'CvssV2RemediationLevelDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'OFFICIAL_FIX',
-                                    'TEMPORARY_FIX',
-                                    'WORKAROUND',
-                                    'UNAVAILABLE',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'reportConfidence',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'reportConfidence',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'want_to_have',
-                                      csaf_security_incident_response:
-                                        'want_to_have',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'want_to_have',
-                                      csaf_vex: 'want_to_have',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2ReportConfidenceTitle',
-                                      description:
-                                        'CvssV2ReportConfidenceDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'UNCONFIRMED',
-                                    'UNCORROBORATED',
-                                    'CONFIRMED',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'temporalScore',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'temporalScore',
-                                  ],
-                                  metaData: {
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'want_to_have',
-                                      csaf_security_incident_response:
-                                        'want_to_have',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'want_to_have',
-                                      csaf_vex: 'want_to_have',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2TemporalScoreTitle',
-                                      description:
-                                        'CvssV2TemporalScoreDescription',
-                                    },
-                                  },
-                                  metaInfo: {},
-                                  type: 'NUMBER',
-                                },
-                                {
-                                  key: 'collateralDamagePotential',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'collateralDamagePotential',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title:
-                                        'CvssV2CollateralDamagePotentialTitle',
-                                      description:
-                                        'CvssV2CollateralDamagePotentialDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'NONE',
-                                    'LOW',
-                                    'LOW_MEDIUM',
-                                    'MEDIUM_HIGH',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'targetDistribution',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'targetDistribution',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2TargetDistributionTitle',
-                                      description:
-                                        'CvssV2TargetDistributionDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'NONE',
-                                    'LOW',
-                                    'MEDIUM',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'confidentialityRequirement',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'confidentialityRequirement',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title:
-                                        'CvssV2ConfidentialityRequirementTitle',
-                                      description:
-                                        'CvssV2ConfidentialityRequirementDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'LOW',
-                                    'MEDIUM',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'integrityRequirement',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'integrityRequirement',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2IntegrityRequirementTitle',
-                                      description:
-                                        'CvssV2IntegrityRequirementDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'LOW',
-                                    'MEDIUM',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'availabilityRequirement',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'availabilityRequirement',
-                                  ],
-                                  metaData: {
-                                    uiType: 'STRING_ENUM',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title:
-                                        'CvssV2AvailabilityRequirementTitle',
-                                      description:
-                                        'CvssV2AvailabilityRequirementDescription',
-                                    },
-                                  },
-                                  enum: [
-                                    'LOW',
-                                    'MEDIUM',
-                                    'HIGH',
-                                    'NOT_DEFINED',
-                                  ],
-                                  metaInfo: {},
-                                  type: 'STRING',
-                                },
-                                {
-                                  key: 'environmentalScore',
-                                  fullName: [
-                                    'vulnerabilities',
-                                    'scores',
-                                    'cvss_v2',
-                                    'environmentalScore',
-                                  ],
-                                  metaData: {
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v2-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'optional',
-                                      csaf_security_incident_response:
-                                        'optional',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'optional',
-                                      csaf_vex: 'optional',
-                                    },
-                                    i18n: {
-                                      title: 'CvssV2EnvironmentalScoreTitle',
-                                      description:
-                                        'CvssV2EnvironmentalScoreDescription',
-                                    },
-                                  },
-                                  metaInfo: {},
-                                  type: 'NUMBER',
-                                },
-                              ],
-                            },
-                          },
-                          {
-                            key: 'cvss_v3',
-                            fullName: ['vulnerabilities', 'scores', 'cvss_v3'],
-                            metaData: {
-                              title: 'CVSS v3',
-                              description:
-                                'JSON Schema for Common Vulnerability Scoring System version 3.0',
-                              userDocumentation: {
-                                specification:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v3-spec.en.md',
-                                usage:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v3-usage.en.md',
-                              },
-                              relevanceLevels: {
-                                csaf_base: 'best_practice',
-                                csaf_security_incident_response:
-                                  'best_practice',
-                                csaf_informational_advisory: 'excluded',
-                                csaf_security_advisory: 'best_practice',
-                                csaf_vex: 'best_practice',
-                              },
-                              i18n: {
-                                title: 'CvssV3Title',
-                                description: 'CvssV3Description',
-                              },
-                              uiType: 'OBJECT_CVSS_3',
-                            },
-                            type: 'OBJECT',
-                            metaInfo: { propertyList: [] },
-                          },
-                          {
-                            key: 'products',
-                            fullName: ['vulnerabilities', 'scores', 'products'],
-                            title: 'List of product_ids',
-                            description:
-                              'Specifies a list of product_ids to give context to the parent item.',
-                            metaData: {
-                              userDocumentation: {
-                                specification:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/products-spec.en.md',
-                                usage:
-                                  'docs/user/vulnerabilities/vulnerability/scores/score/products-usage.en.md',
-                              },
-                              relevanceLevels: {
-                                csaf_base: 'mandatory',
-                                csaf_security_incident_response: 'mandatory',
-                                csaf_informational_advisory: 'mandatory',
-                                csaf_security_advisory: 'mandatory',
-                                csaf_vex: 'mandatory',
-                              },
-                              i18n: {
-                                title: 'ProductsTitle',
-                                description: 'ProductsDescription',
-                              },
-                            },
-                            type: 'ARRAY',
-                            metaInfo: {
-                              arrayType: {
-                                key: '',
-                                fullName: [
-                                  'vulnerabilities',
-                                  'scores',
-                                  'products',
-                                ],
-                                title: 'Reference token for product instance',
-                                description:
-                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
-                                metaData: {
-                                  uiType: 'STRING_PRODUCT_ID',
-                                  userDocumentation: {
-                                    specification:
-                                      'docs/user/types/product_id-spec.en.md',
-                                    usage:
-                                      'docs/user/types/product_id-usage.en.md',
-                                  },
-                                  i18n: {
-                                    title: 'ProductIdTitle',
-                                    description: 'ProductIdDescription',
-                                  },
-                                  itemName: {
-                                    itemNameTranslationKey:
-                                      'arrays.productsItemName',
-                                  },
-                                  relevanceLevels: {
-                                    csaf_base: 'mandatory',
-                                    csaf_security_incident_response:
-                                      'mandatory',
-                                    csaf_informational_advisory: 'mandatory',
-                                    csaf_security_advisory: 'mandatory',
-                                    csaf_vex: 'mandatory',
-                                  },
-                                },
-                                minLength: 1,
-                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
-                                metaInfo: {},
-                                type: 'STRING',
-                              },
-                            },
                           },
                         ],
                       },
