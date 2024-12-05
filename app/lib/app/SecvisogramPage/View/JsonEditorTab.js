@@ -33,12 +33,12 @@ export default function JsonEditorTab({
   const sideBarData = React.useContext(SideBarContext)
 
   const [editor, setEditor] = React.useState(
-    /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
+    /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */(
       null
     )
   )
   const [monaco, setMonaco] = React.useState(
-    /** @type {import ("react-monaco-editor").monaco | null} */ (null)
+    /** @type {import ("react-monaco-editor").monaco | null} */(null)
   )
 
   const stringifiedDoc = React.useMemo(
@@ -49,12 +49,13 @@ export default function JsonEditorTab({
   const initialMountRef = React.useRef(true)
 
   const version = doc.document?.csaf_version ?? '2.0'
-  const index = /** @type {keyof typeof import('../shared/types').Property} */ `csaf_${version.replaceAll(
+  const index = /** @type {keyof typeof schemas} */ (`csaf_${version.replaceAll(
     '.',
     '_'
-  )}`
+  )}`)
+  const schema = /** @type {keyof typeof import('../shared/types').Property} */ schemas[index]
 
-  const editorSchema = React.useMemo(() => schemas[index], [index])
+  const editorSchema = React.useMemo(() => schema, [schema])
 
   React.useEffect(() => {
     const saveButton = sortButtonRef.current
@@ -161,8 +162,8 @@ export default function JsonEditorTab({
             error.type === 'error'
               ? monaco.MarkerSeverity.Error
               : error.type === 'warning'
-              ? monaco.MarkerSeverity.Warning
-              : monaco.MarkerSeverity.Info,
+                ? monaco.MarkerSeverity.Warning
+                : monaco.MarkerSeverity.Info,
         }))
 
       const model = editor.getModel()
@@ -310,15 +311,14 @@ export default function JsonEditorTab({
                   <div key={i}>
                     <a
                       href={'#' + error.instancePath}
-                      className={`validation_error${
-                        error.type === 'warning'
-                          ? ' validation_error-warning text-yellow-600'
-                          : error.type === 'error'
+                      className={`validation_error${error.type === 'warning'
+                        ? ' validation_error-warning text-yellow-600'
+                        : error.type === 'error'
                           ? ' validation_error-error'
                           : error.type === 'info'
-                          ? ' validation_error-info text-blue-500'
-                          : ''
-                      } underline`}
+                            ? ' validation_error-info text-blue-500'
+                            : ''
+                        } underline`}
                       onClick={() => {
                         setCursor(error.instancePath)
                       }}
