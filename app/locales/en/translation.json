@@ -348,6 +348,8 @@
     "VulnerabilitiesItemsCweIdDescription": "Holds the ID for the weakness associated.",
     "VulnerabilitiesItemsCweNameTitle": "Weakness name",
     "VulnerabilitiesItemsCweNameDescription": "Holds the full name of the weakness as given in the CWE specification.",
+    "VulnerabilitiesItemsCweVersionTitle": "CWE Version",
+    "VulnerabilitiesItemsCweVersionDescription": "Contains the version of the CWE specification from which this weakness was extracted.",
     "VulnerabilitiesItemsDiscoveryDateTitle": "Discovery date",
     "VulnerabilitiesItemsDiscoveryDateDescription": "Holds the date and time the vulnerability was originally discovered.",
     "VulnerabilitiesItemsFlagsTitle": "List of flags",
