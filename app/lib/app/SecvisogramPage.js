@@ -29,16 +29,7 @@ const SecvisogramPage = () => {
   const { t } = useTranslation()
   const searchParams = new URL(location.href).searchParams
   const [
-    {
-      isLoading,
-      isTabLocked,
-      data,
-      errors,
-      alert,
-      stripResult,
-      previewResult,
-      activeTab,
-    },
+    { isLoading, isTabLocked, data, errors, alert, stripResult, previewResult },
     setState,
   ] = React.useState({
     isLoading: false,
@@ -82,8 +73,6 @@ const SecvisogramPage = () => {
       confirmLabel: t('alert.saveInvalidConfirm'),
     }
   }, [t])
-
-  console.log('activeTab', searchParams.get('tab'), activeTab)
 
   return (
     <View
@@ -189,7 +178,6 @@ const SecvisogramPage = () => {
         core.document
           .validate({ document })
           .then((result) => {
-            console.log('result', result)
             setState((state) => ({
               ...state,
               isLoading: false,
@@ -287,7 +275,6 @@ const SecvisogramPage = () => {
             .validate({ document: document })
             .then(({ isValid }) => {
               const fileName = createFileName(document, isValid, 'json')
-              console.log('isValid', isValid)
               if (!isValid) {
                 setState((state) => ({
                   ...state,
