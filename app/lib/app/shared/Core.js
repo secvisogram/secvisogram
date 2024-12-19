@@ -1,6 +1,7 @@
 import { compose, set } from 'lodash/fp.js'
 // import getVersionTests from '../../../../csaf-validator-lib/getVersionTests.js'
 import strip from '../../../../csaf-validator-lib/lib/strip.js'
+import { getBasicTests } from '../../../../csaf-validator-lib/lib/tests.js'
 import validate from '../../../../csaf-validator-lib/lib/validate.js'
 import * as schemas from '../SecvisogramPage/View/JsonEditorTab/schemas/all.js'
 import doc_max from './Core/doc-max.json'
@@ -32,7 +33,7 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
 const versionTests = {}
 schemas.csaf_2_0.properties.document.properties.csaf_version.enum.forEach(
   async (version) => {
-    versionTests[version] = []
+    versionTests[version] = await getBasicTests(version)
   }
 )
 
