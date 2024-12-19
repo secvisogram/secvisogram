@@ -10,7 +10,7 @@ const [, , REGISTRY_FILE] = process.argv
 const OUTPUT_FILE = 'lib/shared/cwec.js'
 
 /**
- * @typedef {{ ID: string; Name: string }} Weakness
+ * @typedef {{ ID: string; Name: string, Mapping_Notes: {Usage: string}, Content_History: {Submission: {Submission_Version: string}} }} Weakness
  * @typedef {{Weaknesses: {Weakness: Array<Weakness>}}} Weaknesses
  */
 
@@ -27,7 +27,12 @@ const fileXML = await parser.parseStringPromise(
 const json = {
   weaknesses: fileXML.Weaknesses.Weakness.map(
     (/** @type {Weakness} */ weakness) => {
-      return { id: `CWE-${weakness.ID}`, name: weakness.Name }
+      return {
+        id: `CWE-${weakness.ID}`,
+        name: weakness.Name,
+        usage: weakness.Mapping_Notes.Usage,
+        version: weakness.Content_History.Submission.Submission_Version,
+      }
     }
   ),
 }
