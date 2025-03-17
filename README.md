@@ -82,6 +82,26 @@ the same as `"loginAvailable": false`.
 
 Please refer to [`DEVELOPMENT.md`](DEVELOPMENT.md) for a detailed description on how to build and deploy Secvisogram in production.
 
+### Running local with validator service
+
+First [start csaf validator service in docker](https://github.com/secvisogram/csaf-validator-service?tab=readme-ov-file#docker)
+
+Then Build Secvisogram docker image
+
+```sh
+docker build -t csaf/secvisogram .
+```
+
+Start container
+
+```sh
+docker run -it --rm  -p 8080:80 --name csaf-secvisogram csaf/secvisogram
+```
+
+Secvisogram starts on http://localhost:8080
+In Secvisogramm call validation in validator service with hotkey CTRL + ALT + V
+
+
 ### Configure keybindings
 
 The following hotkeys are available by default:
