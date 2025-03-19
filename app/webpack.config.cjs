@@ -16,12 +16,6 @@ module.exports = {
       '@reach/dialog/styles.css',
     ],
     app: ['./lib/app.js'],
-    ...(process.env.NODE_ENV === 'production'
-      ? {}
-      : {
-          'view-tests': ['./viewTests/frame.js'],
-          'view-tests-canvas': ['./viewTests/canvas.js'],
-        }),
   },
   module: {
     rules: [
