@@ -99,7 +99,7 @@ docker run -it --rm  -p 8080:80 --name csaf-secvisogram csaf/secvisogram
 ```
 
 Secvisogram starts on http://localhost:8080
-In Secvisogramm call validation in validator service with hotkey CTRL + ALT + V
+In Secvisogram call validation in validator service with hotkey CTRL + ALT + V
 
 
 ### Configure keybindings
