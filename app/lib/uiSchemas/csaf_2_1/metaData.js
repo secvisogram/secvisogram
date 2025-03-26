@@ -8,7 +8,7 @@ export default {
       specification: 'docs/user/document-spec.en.md',
       usage: 'docs/user/document-usage.en.md',
     },
-    i18n: {title: 'SchemaTitle', description: 'SchemaDescription'},
+    i18n: { title: 'SchemaTitle', description: 'SchemaDescription' },
     relevanceLevels: {
       csaf_base: 'mandatory',
       csaf_security_incident_response: 'mandatory',
@@ -22,7 +22,7 @@ export default {
       specification: 'docs/user/document-spec.en.md',
       usage: 'docs/user/document-usage.en.md',
     },
-    i18n: {title: 'DocumentTitle', description: 'DocumentDescription'},
+    i18n: { title: 'DocumentTitle', description: 'DocumentDescription' },
     relevanceLevels: {
       csaf_base: 'mandatory',
       csaf_security_incident_response: 'mandatory',
@@ -369,7 +369,8 @@ export default {
   },
   '$.document.distribution.sharing_group.id': {
     userDocumentation: {
-      specification: 'docs/user/document/distribution/sharing_group/id-spec.en.md',
+      specification:
+        'docs/user/document/distribution/sharing_group/id-spec.en.md',
       usage: 'docs/user/document/distribution/sharing_group/id-usage.en.md',
     },
     relevanceLevels: {
@@ -387,7 +388,8 @@ export default {
   },
   '$.document.distribution.sharing_group.name': {
     userDocumentation: {
-      specification: 'docs/user/document/distribution/sharing_group/name-spec.en.md',
+      specification:
+        'docs/user/document/distribution/sharing_group/name-spec.en.md',
       usage: 'docs/user/document/distribution/sharing_group/name-usage.en.md',
     },
     relevanceLevels: {
@@ -1037,7 +1039,7 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'VersionTitle', description: 'VersionDescription'},
+    i18n: { title: 'VersionTitle', description: 'VersionDescription' },
     disable: {
       ifStandaloneMode: false,
       ifServerMode: true,
@@ -1097,7 +1099,7 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'VersionTitle', description: 'VersionDescription'},
+    i18n: { title: 'VersionTitle', description: 'VersionDescription' },
   },
   '$.product_tree': {
     userDocumentation: {
@@ -1128,7 +1130,7 @@ export default {
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
     },
-    i18n: {title: 'BranchesTitle', description: 'BranchesDescription'},
+    i18n: { title: 'BranchesTitle', description: 'BranchesDescription' },
   },
   '$.product_tree.branches[]': {
     addMenuItemsForChildObjects: true,
@@ -1150,7 +1152,7 @@ export default {
       specification: 'docs/user/types/branches-spec.en.md',
       usage: 'docs/user/types/branches-usage.en.md',
     },
-    i18n: {title: 'BranchesTitle', description: 'BranchesDescription'},
+    i18n: { title: 'BranchesTitle', description: 'BranchesDescription' },
   },
   '$.product_tree.branches.category': {
     userDocumentation: {
@@ -1228,7 +1230,7 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
   },
   '$.product_tree.branches.product.product_identification_helper': {
@@ -1742,7 +1744,7 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
   },
   '$.product_tree.full_product_names.product_identification_helper': {
@@ -2272,7 +2274,7 @@ export default {
       specification: 'docs/user/types/product_id-spec.en.md',
       usage: 'docs/user/types/product_id-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
     },
@@ -2400,7 +2402,7 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
   },
   '$.product_tree.relationships.full_product_name.product_identification_helper':
@@ -3299,14 +3301,14 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductsTitle', description: 'ProductsDescription'},
+    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
   '$.vulnerabilities.flags.product_ids[]': {
     userDocumentation: {
       specification: 'docs/user/types/product_id-spec.en.md',
       usage: 'docs/user/types/product_id-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
     },
@@ -3635,7 +3637,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3665,7 +3667,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3695,7 +3697,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3725,7 +3727,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3756,7 +3758,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3786,7 +3788,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3816,7 +3818,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3847,7 +3849,7 @@ export default {
       specification: 'docs/user/types/products-spec.en.md',
       usage: 'docs/user/types/products-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_PRODUCT_ID',
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
@@ -3940,7 +3942,8 @@ export default {
     userDocumentation: {
       specification:
         'docs/user/vulnerabilities/vulnerability/disclosure_date-spec.en.md',
-      usage: 'docs/user/vulnerabilities/vulnerability/disclosure_date-usage.en.md',
+      usage:
+        'docs/user/vulnerabilities/vulnerability/disclosure_date-usage.en.md',
     },
     relevanceLevels: {
       csaf_base: 'optional',
@@ -4130,14 +4133,14 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductsTitle', description: 'ProductsDescription'},
+    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
   '$.vulnerabilities.remediations.product_ids[]': {
     userDocumentation: {
       specification: 'docs/user/types/product_id-spec.en.md',
       usage: 'docs/user/types/product_id-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
     },
@@ -4312,7 +4315,7 @@ export default {
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
     },
-    i18n: {title: 'CvssV2Title', description: 'CvssV2Description'},
+    i18n: { title: 'CvssV2Title', description: 'CvssV2Description' },
     uiType: 'OBJECT_CVSS_2',
   },
   '$.vulnerabilities.metrics.content.cvss_v2.version': {
@@ -4693,7 +4696,7 @@ export default {
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
     },
-    i18n: {title: 'CvssV3Title', description: 'CvssV3Description'},
+    i18n: { title: 'CvssV3Title', description: 'CvssV3Description' },
     uiType: 'OBJECT_CVSS_3',
   },
   '$.vulnerabilities.metrics.content.cvss_v3.version': {
@@ -5283,8 +5286,7 @@ export default {
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
     },
-    i18n: {title: 'CvssV4Title', description: 'CvssV4Description'},
-    uiType: 'OBJECT_CVSS_3',
+    i18n: { title: 'CvssV4Title', description: 'CvssV4Description' },
   },
   '$.vulnerabilities.metrics.content.ssvc_v1': {
     title: 'SSVC V1',
@@ -5303,8 +5305,7 @@ export default {
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
     },
-    i18n: {title: 'SsvcV1Title', description: 'SsvcV1Description'},
-    uiType: 'OBJECT_CVSS_3',
+    i18n: { title: 'SsvcV1Title', description: 'SsvcV1Description' },
   },
   '$.vulnerabilities.metrics.products': {
     userDocumentation: {
@@ -5320,14 +5321,14 @@ export default {
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductsTitle', description: 'ProductsDescription'},
+    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
   '$.vulnerabilities.metrics.products[]': {
     userDocumentation: {
       specification: 'docs/user/types/product_id-spec.en.md',
       usage: 'docs/user/types/product_id-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
     },
@@ -5472,14 +5473,14 @@ export default {
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
     },
-    i18n: {title: 'ProductsTitle', description: 'ProductsDescription'},
+    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
   '$.vulnerabilities.threats.product_ids[]': {
     userDocumentation: {
       specification: 'docs/user/types/product_id-spec.en.md',
       usage: 'docs/user/types/product_id-usage.en.md',
     },
-    i18n: {title: 'ProductIdTitle', description: 'ProductIdDescription'},
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     itemName: {
       itemNameTranslationKey: 'arrays.productsItemName',
     },

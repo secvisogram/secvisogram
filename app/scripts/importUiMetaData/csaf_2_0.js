@@ -1,43 +1,57 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
+import { readFile, writeFile } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 import prettier from 'prettier'
 
-/** @typedef {import('./importUiMetaData/csaf2.1/csaf_json_schema.json')} CSAFJSONSchema */
-/** @typedef {import('./importUiMetaData/cvss-v2.0.json')} CVSS2JSONSchema */
-import {readFile, writeFile} from 'node:fs/promises'
-import {fileURLToPath} from 'node:url'
-import metaData from './importUiMetaData/csaf2.1/metaData.js'
+const metaData = uiSchemas['v2.0'].metaData
+
+/** @typedef {import('./csaf_2_0/csaf_json_schema.json')} CSAFJSONSchema */
+/** @typedef {import('./cvss-v2.0.json')} CVSS2JSONSchema */
 
 /** @type {CSAFJSONSchema} */
 const schema = JSON.parse(
   await readFile(
-    new URL('importUiMetaData/csaf2.1/csaf_json_schema.json', import.meta.url),
+    new URL('csaf_2_0/csaf_json_schema.json', import.meta.url),
     'utf-8'
   )
 )
 
 /** @type {CVSS2JSONSchema} */
 const cvss2Schema = JSON.parse(
-  await readFile(
-    new URL('importUiMetaData/cvss-v2.0.json', import.meta.url),
-    'utf-8'
-  )
+  await readFile(new URL('cvss-v2.0.json', import.meta.url), 'utf-8')
 )
 
-const defs = /** @type {import('./importUiMetaData/types').Defs} */ (
-  schema.$defs
+const defs = /** @type {import('./csaf_2_0/types').Defs} */ (schema.$defs)
+
+const metaDataMap = new Map(Object.entries(metaData))
+
+const outputFile = fileURLToPath(
+  new URL('../../lib/uiSchemas/csaf_2_0/content.js', import.meta.url)
+)
+const prettierString = prettier.format(
+  `/** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */
+export default /** @type {const} */ (${JSON.stringify(
+    convertSchema(
+      /** @type {import('./csaf_2_0/types').Schema} */ (schema),
+      defs,
+      []
+    )
+  )})`,
+  {
+    ...(await prettier.resolveConfig(outputFile)),
+    filepath: outputFile,
+  }
 )
 
-const metaDataRecord =
-  /** @type {Record<String, { addMenuItemsForChildObjects?: boolean; propertyOrder?: string[] } | undefined>} */ (
-  metaData
-)
+await writeFile(outputFile, prettierString, 'utf8')
 
 /**
- * @param {import('./importUiMetaData/types').Schema} subschema
- * @param {import('./importUiMetaData/types').Defs} defs
+ * @param {import('./csaf_2_0/types').Schema} subschema
+ * @param {import('./csaf_2_0/types').Defs} defs
  * @param {string[]} path
- * @returns {import('./importUiMetaData/types').UiSchema}
+ * @returns {import('./csaf_2_0/types').UiSchema}
  */
-function convertSchema(subschema, defs, path) {
+export function convertSchema(subschema, defs, path) {
   const strPath = path.join('.')
 
   let key = path.at(-1) ?? ''
@@ -50,7 +64,7 @@ function convertSchema(subschema, defs, path) {
     .replaceAll('.properties.', '.')
     .replace(/\.items$/, '[]')
     .replaceAll('.items.', '.')
-  const metaData = metaDataRecord[metaDataPath]
+  const metaData = metaDataMap.get(metaDataPath)
 
   const commonUiSchemaFields = {
     key,
@@ -58,7 +72,9 @@ function convertSchema(subschema, defs, path) {
     title: subschema.title,
     description: subschema.description,
     addMenuItemsForChildObjects:
-    metaDataRecord[metaDataPath]?.addMenuItemsForChildObjects,
+      metaData && 'addMenuItemsForChildObjects' in metaData
+        ? metaData?.addMenuItemsForChildObjects
+        : undefined,
     metaData:
       metaData &&
       Object.fromEntries(
@@ -67,14 +83,8 @@ function convertSchema(subschema, defs, path) {
   }
 
   if (
-    (strPath ===
-      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.cvss_v3') ||
-    (strPath ===
-      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.cvss_v4') ||
-    (strPath ===
-      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v1')
-
-
+    strPath ===
+    'properties.vulnerabilities.items.properties.scores.items.properties.cvss_v3'
   ) {
     return {
       ...commonUiSchemaFields,
@@ -97,9 +107,8 @@ function convertSchema(subschema, defs, path) {
         ([key]) => key !== 'branches'
       )
     )
-    const arrayType =
-      /** @type {import('./importUiMetaData/types').ObjectUiSchema} */ (
-      convertSchema({...subschema.items, properties}, defs, [
+    const arrayType = /** @type {import('./csaf_2_0/types').ObjectUiSchema} */ (
+      convertSchema({ ...subschema.items, properties }, defs, [
         ...path,
         'items',
       ])
@@ -120,14 +129,12 @@ function convertSchema(subschema, defs, path) {
   }
 
   if ('$ref' in subschema) {
-    /** @type {import('./importUiMetaData/types').UiSchema} */
+    /** @type {import('./csaf_2_0/types').UiSchema} */
     let resolvedSchema
     if (subschema.$ref === 'https://www.first.org/cvss/cvss-v2.0.json') {
       resolvedSchema = convertSchema(
-        /** @type {import('./importUiMetaData/types').Schema} */ (cvss2Schema),
-        /** @type {import('./importUiMetaData/types').Defs} */ (
-          cvss2Schema.$defs
-        ),
+        /** @type {import('./csaf_2_0/types').Schema} */ (cvss2Schema),
+        /** @type {import('./csaf_2_0/types').Defs} */ (cvss2Schema.$defs),
         path
       )
     } else {
@@ -149,8 +156,8 @@ function convertSchema(subschema, defs, path) {
 
   if (subschema.type === 'object') {
     let propertyList = Object.entries(subschema.properties)
-    const propertyOrder = metaData?.propertyOrder
-    if (propertyOrder) {
+    if (metaData && 'propertyOrder' in metaData) {
+      const propertyOrder = metaData.propertyOrder
       propertyList = propertyList
         .filter((p) => propertyOrder.includes(p[0]))
         .sort(([a], [b]) => {
@@ -206,10 +213,10 @@ function convertSchema(subschema, defs, path) {
           subschema.format === 'date-time'
             ? 'STRING_DATETIME'
             : subschema.format === 'uri'
-              ? 'STRING_URI'
-              : subschema.enum !== undefined
-                ? 'STRING_ENUM'
-                : undefined,
+            ? 'STRING_URI'
+            : subschema.enum !== undefined
+            ? 'STRING_ENUM'
+            : undefined,
         ...commonUiSchemaFields.metaData,
       },
       type: 'STRING',
@@ -226,25 +233,3 @@ function convertSchema(subschema, defs, path) {
 
   throw new Error('Unknown field encountered: ' + strPath)
 }
-
-const outputFile = fileURLToPath(
-  new URL(
-    '../lib/app/SecvisogramPage/View/FormEditor/schema.js',
-    import.meta.url
-  )
-)
-const prettierString = prettier.format(
-  "/** @typedef {import('./shared/types').Property} Property */\n" +
-  `export default /** @type {const} */ (${JSON.stringify(
-    convertSchema(
-      /** @type {import('./importUiMetaData/types').Schema} */ (schema),
-      defs,
-      []
-    )
-  )})`,
-  {
-    ...(await prettier.resolveConfig(outputFile)),
-    filepath: outputFile,
-  }
-)
-await writeFile(outputFile, prettierString, 'utf8')

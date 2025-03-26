@@ -27,3 +27,12 @@ import './commands.js'
 /** @type {any} */
 const win = window
 win.SECVISOGRAM_VERSION = 'test'
+
+beforeEach(() => {
+  cy.intercept('/api/v1/about', (req) => {
+    req.reply({ statusCode: 500 })
+  })
+  cy.intercept('/oauth2/userinfo', (req) => {
+    req.reply({ statusCode: 500 })
+  })
+})

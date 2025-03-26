@@ -106,3 +106,4 @@ type RelevanceLevel =
   | 'want_to_have'
   | 'nice_to_know'
   | 'optional'
+  | 'excluded'
