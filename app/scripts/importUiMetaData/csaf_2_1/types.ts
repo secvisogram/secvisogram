@@ -72,6 +72,10 @@ export interface CommonUiSchemaFields {
       | 'OBJECT_CVSS_3'
       | 'ARRAY_REVISION_HISTORY'
     relevanceLevels?: {}
+    i18n?: {
+      title: string
+      description: string
+    }
   }
 }
 
