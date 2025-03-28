@@ -21,7 +21,10 @@ export default /** @type {const} */ ({
             specification: 'docs/user/document-spec.en.md',
             usage: 'docs/user/document-usage.en.md',
           },
-          i18n: { title: 'DocumentTitle', description: 'DocumentDescription' },
+          i18n: {
+            title: 'v2_0.DocumentTitle',
+            description: 'v2_0.DocumentDescription',
+          },
           relevanceLevels: {
             csaf_base: 'mandatory',
             csaf_security_incident_response: 'mandatory',
@@ -53,8 +56,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'DocumentAcknowledgmentsTitle',
-                  description: 'DocumentAcknowledgmentsDescription',
+                  title: 'v2_0.DocumentAcknowledgmentsTitle',
+                  description: 'v2_0.DocumentAcknowledgmentsDescription',
                 },
               },
               type: 'ARRAY',
@@ -73,8 +76,8 @@ export default /** @type {const} */ ({
                         'docs/user/types/acknowledgments/acknowledgment-usage.en.md',
                     },
                     i18n: {
-                      title: 'AcknowledgmentsItemsTitle',
-                      description: 'AcknowledgmentsItemsDescription',
+                      title: 'v2_0.AcknowledgmentsItemsTitle',
+                      description: 'v2_0.AcknowledgmentsItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.acknowledgmentsItemName',
@@ -111,8 +114,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'want_to_have',
                           },
                           i18n: {
-                            title: 'AcknowledgmentsItemsNamesTitle',
-                            description: 'AcknowledgmentsItemsNamesDescription',
+                            title: 'v2_0.AcknowledgmentsItemsNamesTitle',
+                            description:
+                              'v2_0.AcknowledgmentsItemsNamesDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -131,9 +135,10 @@ export default /** @type {const} */ ({
                                   'docs/user/types/acknowledgments/acknowledgment/names/name-usage.en.md',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsNamesItemsTitle',
+                                title:
+                                  'v2_0.AcknowledgmentsItemsNamesItemsTitle',
                                 description:
-                                  'AcknowledgmentsItemsNamesItemsDescription',
+                                  'v2_0.AcknowledgmentsItemsNamesItemsDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey: 'arrays.namesItemName',
@@ -181,9 +186,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'nice_to_know',
                           },
                           i18n: {
-                            title: 'AcknowledgmentsItemsOrganizationTitle',
+                            title: 'v2_0.AcknowledgmentsItemsOrganizationTitle',
                             description:
-                              'AcknowledgmentsItemsOrganizationDescription',
+                              'v2_0.AcknowledgmentsItemsOrganizationDescription',
                           },
                         },
                         minLength: 1,
@@ -213,9 +218,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'nice_to_know',
                           },
                           i18n: {
-                            title: 'AcknowledgmentsItemsSummaryTitle',
+                            title: 'v2_0.AcknowledgmentsItemsSummaryTitle',
                             description:
-                              'AcknowledgmentsItemsSummaryDescription',
+                              'v2_0.AcknowledgmentsItemsSummaryDescription',
                           },
                         },
                         minLength: 1,
@@ -246,8 +251,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'nice_to_know',
                           },
                           i18n: {
-                            title: 'AcknowledgmentsItemsUrlsTitle',
-                            description: 'AcknowledgmentsItemsUrlsDescription',
+                            title: 'v2_0.AcknowledgmentsItemsUrlsTitle',
+                            description:
+                              'v2_0.AcknowledgmentsItemsUrlsDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -267,9 +273,10 @@ export default /** @type {const} */ ({
                                   'docs/user/types/acknowledgments/acknowledgment/urls/url-usage.en.md',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsUrlsItemsTitle',
+                                title:
+                                  'v2_0.AcknowledgmentsItemsUrlsItemsTitle',
                                 description:
-                                  'AcknowledgmentsItemsUrlsItemsDescription',
+                                  'v2_0.AcknowledgmentsItemsUrlsItemsDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey: 'arrays.urlsItemName',
@@ -312,8 +319,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'DocumentAggregateSeverityTitle',
-                  description: 'DocumentAggregateSeverityDescription',
+                  title: 'v2_0.DocumentAggregateSeverityTitle',
+                  description: 'v2_0.DocumentAggregateSeverityDescription',
                 },
               },
               type: 'OBJECT',
@@ -340,9 +347,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'nice_to_know',
                       },
                       i18n: {
-                        title: 'DocumentAggregateSeverityNamespaceTitle',
+                        title: 'v2_0.DocumentAggregateSeverityNamespaceTitle',
                         description:
-                          'DocumentAggregateSeverityNamespaceDescription',
+                          'v2_0.DocumentAggregateSeverityNamespaceDescription',
                       },
                     },
                     metaInfo: {},
@@ -370,8 +377,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'want_to_have',
                       },
                       i18n: {
-                        title: 'DocumentAggregateSeverityTextTitle',
-                        description: 'DocumentAggregateSeverityTextDescription',
+                        title: 'v2_0.DocumentAggregateSeverityTextTitle',
+                        description:
+                          'v2_0.DocumentAggregateSeverityTextDescription',
                       },
                     },
                     minLength: 1,
@@ -402,8 +410,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'mandatory',
                 },
                 i18n: {
-                  title: 'DocumentCategoryTitle',
-                  description: 'DocumentCategoryDescription',
+                  title: 'v2_0.DocumentCategoryTitle',
+                  description: 'v2_0.DocumentCategoryDescription',
                 },
                 options: [
                   'csaf_base',
@@ -444,8 +452,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'mandatory',
                 },
                 i18n: {
-                  title: 'DocumentCsafVersionTitle',
-                  description: 'DocumentCsafVersionDescription',
+                  title: 'v2_0.DocumentCsafVersionTitle',
+                  description: 'v2_0.DocumentCsafVersionDescription',
                 },
               },
               enum: ['2.0'],
@@ -471,8 +479,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'DocumentDistributionTitle',
-                  description: 'DocumentDistributionDescription',
+                  title: 'v2_0.DocumentDistributionTitle',
+                  description: 'v2_0.DocumentDistributionDescription',
                 },
               },
               type: 'OBJECT',
@@ -500,8 +508,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'nice_to_know',
                       },
                       i18n: {
-                        title: 'DocumentDistributionTextTitle',
-                        description: 'DocumentDistributionTextDescription',
+                        title: 'v2_0.DocumentDistributionTextTitle',
+                        description: 'v2_0.DocumentDistributionTextDescription',
                       },
                     },
                     minLength: 1,
@@ -534,8 +542,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'want_to_have',
                       },
                       i18n: {
-                        title: 'DocumentDistributionTlpTitle',
-                        description: 'DocumentDistributionTlpDescription',
+                        title: 'v2_0.DocumentDistributionTlpTitle',
+                        description: 'v2_0.DocumentDistributionTlpDescription',
                       },
                     },
                     type: 'OBJECT',
@@ -568,9 +576,9 @@ export default /** @type {const} */ ({
                               csaf_vex: 'mandatory',
                             },
                             i18n: {
-                              title: 'DocumentDistributionTlpLabelTitle',
+                              title: 'v2_0.DocumentDistributionTlpLabelTitle',
                               description:
-                                'DocumentDistributionTlpLabelDescription',
+                                'v2_0.DocumentDistributionTlpLabelDescription',
                             },
                           },
                           enum: ['AMBER', 'GREEN', 'RED', 'WHITE'],
@@ -599,9 +607,9 @@ export default /** @type {const} */ ({
                               csaf_vex: 'nice_to_know',
                             },
                             i18n: {
-                              title: 'DocumentDistributionTlpUrlTitle',
+                              title: 'v2_0.DocumentDistributionTlpUrlTitle',
                               description:
-                                'DocumentDistributionTlpUrlDescription',
+                                'v2_0.DocumentDistributionTlpUrlDescription',
                             },
                           },
                           examples: [
@@ -637,8 +645,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'DocumentLangTitle',
-                  description: 'DocumentLangDescription',
+                  title: 'v2_0.DocumentLangTitle',
+                  description: 'v2_0.DocumentLangDescription',
                 },
               },
               examples: ['de', 'en', 'fr', 'frc', 'jp'],
@@ -665,8 +673,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'DocumentNotesTitle',
-                  description: 'DocumentNotesDescription',
+                  title: 'v2_0.DocumentNotesTitle',
+                  description: 'v2_0.DocumentNotesDescription',
                 },
               },
               type: 'ARRAY',
@@ -683,8 +691,8 @@ export default /** @type {const} */ ({
                       usage: 'docs/user/types/notes/note-usage.en.md',
                     },
                     i18n: {
-                      title: 'NotesItemsTitle',
-                      description: 'NotesItemsDescription',
+                      title: 'v2_0.NotesItemsTitle',
+                      description: 'v2_0.NotesItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.notesItemName',
@@ -721,8 +729,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'nice_to_know',
                           },
                           i18n: {
-                            title: 'NotesItemsAudienceTitle',
-                            description: 'NotesItemsAudienceDescription',
+                            title: 'v2_0.NotesItemsAudienceTitle',
+                            description: 'v2_0.NotesItemsAudienceDescription',
                           },
                         },
                         minLength: 1,
@@ -757,8 +765,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'NotesItemsCategoryTitle',
-                            description: 'NotesItemsCategoryDescription',
+                            title: 'v2_0.NotesItemsCategoryTitle',
+                            description: 'v2_0.NotesItemsCategoryDescription',
                           },
                         },
                         enum: [
@@ -795,8 +803,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'NotesItemsTextTitle',
-                            description: 'NotesItemsTextDescription',
+                            title: 'v2_0.NotesItemsTextTitle',
+                            description: 'v2_0.NotesItemsTextDescription',
                           },
                         },
                         minLength: 1,
@@ -824,8 +832,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'best_practice',
                           },
                           i18n: {
-                            title: 'NotesItemsTitleTitle',
-                            description: 'NotesItemsTitleDescription',
+                            title: 'v2_0.NotesItemsTitleTitle',
+                            description: 'v2_0.NotesItemsTitleDescription',
                           },
                         },
                         minLength: 1,
@@ -862,8 +870,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'mandatory',
                 },
                 i18n: {
-                  title: 'DocumentPublisherTitle',
-                  description: 'DocumentPublisherDescription',
+                  title: 'v2_0.DocumentPublisherTitle',
+                  description: 'v2_0.DocumentPublisherDescription',
                 },
               },
               type: 'OBJECT',
@@ -891,8 +899,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentPublisherCategoryTitle',
-                        description: 'DocumentPublisherCategoryDescription',
+                        title: 'v2_0.DocumentPublisherCategoryTitle',
+                        description:
+                          'v2_0.DocumentPublisherCategoryDescription',
                       },
                     },
                     enum: [
@@ -928,9 +937,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'best_practice',
                       },
                       i18n: {
-                        title: 'DocumentPublisherContactDetailsTitle',
+                        title: 'v2_0.DocumentPublisherContactDetailsTitle',
                         description:
-                          'DocumentPublisherContactDetailsDescription',
+                          'v2_0.DocumentPublisherContactDetailsDescription',
                       },
                     },
                     minLength: 1,
@@ -962,9 +971,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'want_to_have',
                       },
                       i18n: {
-                        title: 'DocumentPublisherIssuingAuthorityTitle',
+                        title: 'v2_0.DocumentPublisherIssuingAuthorityTitle',
                         description:
-                          'DocumentPublisherIssuingAuthorityDescription',
+                          'v2_0.DocumentPublisherIssuingAuthorityDescription',
                       },
                     },
                     minLength: 1,
@@ -990,8 +999,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentPublisherNameTitle',
-                        description: 'DocumentPublisherNameDescription',
+                        title: 'v2_0.DocumentPublisherNameTitle',
+                        description: 'v2_0.DocumentPublisherNameDescription',
                       },
                     },
                     minLength: 1,
@@ -1021,8 +1030,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentPublisherNamespaceTitle',
-                        description: 'DocumentPublisherNamespaceDescription',
+                        title: 'v2_0.DocumentPublisherNamespaceTitle',
+                        description:
+                          'v2_0.DocumentPublisherNamespaceDescription',
                       },
                     },
                     examples: ['https://csaf.io', 'https://www.example.com'],
@@ -1051,8 +1061,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'best_practice',
                 },
                 i18n: {
-                  title: 'DocumentReferencesTitle',
-                  description: 'DocumentReferencesDescription',
+                  title: 'v2_0.DocumentReferencesTitle',
+                  description: 'v2_0.DocumentReferencesDescription',
                 },
               },
               type: 'ARRAY',
@@ -1070,8 +1080,8 @@ export default /** @type {const} */ ({
                       usage: 'docs/user/types/references/reference-usage.en.md',
                     },
                     i18n: {
-                      title: 'ReferencesItemsTitle',
-                      description: 'ReferencesItemsDescription',
+                      title: 'v2_0.ReferencesItemsTitle',
+                      description: 'v2_0.ReferencesItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.referencesItemName',
@@ -1109,8 +1119,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'nice_to_know',
                           },
                           i18n: {
-                            title: 'ReferencesItemsCategoryTitle',
-                            description: 'ReferencesItemsCategoryDescription',
+                            title: 'v2_0.ReferencesItemsCategoryTitle',
+                            description:
+                              'v2_0.ReferencesItemsCategoryDescription',
                           },
                         },
                         default: 'external',
@@ -1139,8 +1150,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'ReferencesItemsSummaryTitle',
-                            description: 'ReferencesItemsSummaryDescription',
+                            title: 'v2_0.ReferencesItemsSummaryTitle',
+                            description:
+                              'v2_0.ReferencesItemsSummaryDescription',
                           },
                         },
                         minLength: 1,
@@ -1168,8 +1180,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'ReferencesItemsUrlTitle',
-                            description: 'ReferencesItemsUrlDescription',
+                            title: 'v2_0.ReferencesItemsUrlTitle',
+                            description: 'v2_0.ReferencesItemsUrlDescription',
                           },
                         },
                         metaInfo: {},
@@ -1199,8 +1211,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'nice_to_know',
                 },
                 i18n: {
-                  title: 'DocumentSourceLangTitle',
-                  description: 'DocumentSourceLangDescription',
+                  title: 'v2_0.DocumentSourceLangTitle',
+                  description: 'v2_0.DocumentSourceLangDescription',
                 },
               },
               examples: ['de', 'en', 'fr', 'frc', 'jp'],
@@ -1228,8 +1240,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'mandatory',
                 },
                 i18n: {
-                  title: 'DocumentTitleTitle',
-                  description: 'DocumentTitleDescription',
+                  title: 'v2_0.DocumentTitleTitle',
+                  description: 'v2_0.DocumentTitleDescription',
                 },
               },
               minLength: 1,
@@ -1259,8 +1271,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'mandatory',
                 },
                 i18n: {
-                  title: 'DocumentTrackingTitle',
-                  description: 'DocumentTrackingDescription',
+                  title: 'v2_0.DocumentTrackingTitle',
+                  description: 'v2_0.DocumentTrackingDescription',
                 },
               },
               type: 'OBJECT',
@@ -1287,8 +1299,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'nice_to_know',
                       },
                       i18n: {
-                        title: 'DocumentTrackingAliasesTitle',
-                        description: 'DocumentTrackingAliasesDescription',
+                        title: 'v2_0.DocumentTrackingAliasesTitle',
+                        description: 'v2_0.DocumentTrackingAliasesDescription',
                       },
                     },
                     type: 'ARRAY',
@@ -1307,9 +1319,9 @@ export default /** @type {const} */ ({
                               'docs/user/document/tracking/aliases/alias-usage.en.md',
                           },
                           i18n: {
-                            title: 'DocumentTrackingAliasesItemsTitle',
+                            title: 'v2_0.DocumentTrackingAliasesItemsTitle',
                             description:
-                              'DocumentTrackingAliasesItemsDescription',
+                              'v2_0.DocumentTrackingAliasesItemsDescription',
                           },
                           itemName: {
                             itemNameTranslationKey: 'arrays.aliasesItemName',
@@ -1351,9 +1363,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentTrackingCurrentReleaseDateTitle',
+                        title: 'v2_0.DocumentTrackingCurrentReleaseDateTitle',
                         description:
-                          'DocumentTrackingCurrentReleaseDateDescription',
+                          'v2_0.DocumentTrackingCurrentReleaseDateDescription',
                       },
                     },
                     metaInfo: {},
@@ -1380,8 +1392,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'nice_to_know',
                       },
                       i18n: {
-                        title: 'DocumentTrackingGeneratorTitle',
-                        description: 'DocumentTrackingGeneratorDescription',
+                        title: 'v2_0.DocumentTrackingGeneratorTitle',
+                        description:
+                          'v2_0.DocumentTrackingGeneratorDescription',
                       },
                     },
                     type: 'OBJECT',
@@ -1414,9 +1427,9 @@ export default /** @type {const} */ ({
                               csaf_vex: 'nice_to_know',
                             },
                             i18n: {
-                              title: 'DocumentTrackingGeneratorDateTitle',
+                              title: 'v2_0.DocumentTrackingGeneratorDateTitle',
                               description:
-                                'DocumentTrackingGeneratorDateDescription',
+                                'v2_0.DocumentTrackingGeneratorDateDescription',
                             },
                           },
                           metaInfo: {},
@@ -1448,9 +1461,10 @@ export default /** @type {const} */ ({
                               csaf_vex: 'mandatory',
                             },
                             i18n: {
-                              title: 'DocumentTrackingGeneratorEngineTitle',
+                              title:
+                                'v2_0.DocumentTrackingGeneratorEngineTitle',
                               description:
-                                'DocumentTrackingGeneratorEngineDescription',
+                                'v2_0.DocumentTrackingGeneratorEngineDescription',
                             },
                           },
                           type: 'OBJECT',
@@ -1485,9 +1499,9 @@ export default /** @type {const} */ ({
                                   },
                                   i18n: {
                                     title:
-                                      'DocumentTrackingGeneratorEngineNameTitle',
+                                      'v2_0.DocumentTrackingGeneratorEngineNameTitle',
                                     description:
-                                      'DocumentTrackingGeneratorEngineNameDescription',
+                                      'v2_0.DocumentTrackingGeneratorEngineNameDescription',
                                   },
                                   disable: {
                                     ifStandaloneMode: false,
@@ -1532,9 +1546,9 @@ export default /** @type {const} */ ({
                                   },
                                   i18n: {
                                     title:
-                                      'DocumentTrackingGeneratorEngineVersionTitle',
+                                      'v2_0.DocumentTrackingGeneratorEngineVersionTitle',
                                     description:
-                                      'DocumentTrackingGeneratorEngineVersionDescription',
+                                      'v2_0.DocumentTrackingGeneratorEngineVersionDescription',
                                   },
                                   disable: {
                                     ifStandaloneMode: false,
@@ -1576,8 +1590,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentTrackingIdTitle',
-                        description: 'DocumentTrackingIdDescription',
+                        title: 'v2_0.DocumentTrackingIdTitle',
+                        description: 'v2_0.DocumentTrackingIdDescription',
                       },
                       disable: { ifStandaloneMode: false, ifServerMode: true },
                     },
@@ -1613,9 +1627,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentTrackingInitialReleaseDateTitle',
+                        title: 'v2_0.DocumentTrackingInitialReleaseDateTitle',
                         description:
-                          'DocumentTrackingInitialReleaseDateDescription',
+                          'v2_0.DocumentTrackingInitialReleaseDateDescription',
                       },
                     },
                     metaInfo: {},
@@ -1642,9 +1656,9 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentTrackingRevisionHistoryTitle',
+                        title: 'v2_0.DocumentTrackingRevisionHistoryTitle',
                         description:
-                          'DocumentTrackingRevisionHistoryDescription',
+                          'v2_0.DocumentTrackingRevisionHistoryDescription',
                       },
                       uiType: 'ARRAY_REVISION_HISTORY',
                     },
@@ -1664,9 +1678,10 @@ export default /** @type {const} */ ({
                               'docs/user/document/tracking/revision_history/revision-usage.en.md',
                           },
                           i18n: {
-                            title: 'DocumentTrackingRevisionHistoryItemsTitle',
+                            title:
+                              'v2_0.DocumentTrackingRevisionHistoryItemsTitle',
                             description:
-                              'DocumentTrackingRevisionHistoryItemsDescription',
+                              'v2_0.DocumentTrackingRevisionHistoryItemsDescription',
                           },
                           itemName: {
                             itemNameTranslationKey: 'arrays.revisionsItemName',
@@ -1710,9 +1725,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'DocumentTrackingRevisionHistoryItemsDateTitle',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsDateTitle',
                                   description:
-                                    'DocumentTrackingRevisionHistoryItemsDateDescription',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsDateDescription',
                                 },
                                 disable: {
                                   ifStandaloneMode: false,
@@ -1749,9 +1764,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'DocumentTrackingRevisionHistoryItemsLegacyVersionTitle',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsLegacyVersionTitle',
                                   description:
-                                    'DocumentTrackingRevisionHistoryItemsLegacyVersionDescription',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsLegacyVersionDescription',
                                 },
                                 disable: {
                                   ifStandaloneMode: false,
@@ -1788,8 +1803,8 @@ export default /** @type {const} */ ({
                                   csaf_vex: 'mandatory',
                                 },
                                 i18n: {
-                                  title: 'VersionTitle',
-                                  description: 'VersionDescription',
+                                  title: 'v2_0.VersionTitle',
+                                  description: 'v2_0.VersionDescription',
                                 },
                                 disable: {
                                   ifStandaloneMode: false,
@@ -1836,9 +1851,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'DocumentTrackingRevisionHistoryItemsSummaryTitle',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsSummaryTitle',
                                   description:
-                                    'DocumentTrackingRevisionHistoryItemsSummaryDescription',
+                                    'v2_0.DocumentTrackingRevisionHistoryItemsSummaryDescription',
                                 },
                                 disable: {
                                   ifStandaloneMode: false,
@@ -1875,8 +1890,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'DocumentTrackingStatusTitle',
-                        description: 'DocumentTrackingStatusDescription',
+                        title: 'v2_0.DocumentTrackingStatusTitle',
+                        description: 'v2_0.DocumentTrackingStatusDescription',
                       },
                     },
                     enum: ['draft', 'final', 'interim'],
@@ -1904,8 +1919,8 @@ export default /** @type {const} */ ({
                         csaf_vex: 'mandatory',
                       },
                       i18n: {
-                        title: 'VersionTitle',
-                        description: 'VersionDescription',
+                        title: 'v2_0.VersionTitle',
+                        description: 'v2_0.VersionDescription',
                       },
                     },
                     examples: ['1', '4', '0.9.0', '1.4.3', '2.40.0+21AF26D3'],
@@ -1939,8 +1954,8 @@ export default /** @type {const} */ ({
             csaf_vex: 'mandatory',
           },
           i18n: {
-            title: 'ProductTreeTitle',
-            description: 'ProductTreeDescription',
+            title: 'v2_0.ProductTreeTitle',
+            description: 'v2_0.ProductTreeDescription',
           },
         },
         type: 'OBJECT',
@@ -1965,8 +1980,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'best_practice',
                 },
                 i18n: {
-                  title: 'BranchesTitle',
-                  description: 'BranchesDescription',
+                  title: 'v2_0.BranchesTitle',
+                  description: 'v2_0.BranchesDescription',
                 },
               },
               type: 'ARRAY',
@@ -1986,8 +2001,8 @@ export default /** @type {const} */ ({
                       usage: 'docs/user/types/branches/branch-usage.en.md',
                     },
                     i18n: {
-                      title: 'BranchesItemsTitle',
-                      description: 'BranchesItemsDescription',
+                      title: 'v2_0.BranchesItemsTitle',
+                      description: 'v2_0.BranchesItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.branchesItemName',
@@ -2018,8 +2033,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'best_practice',
                           },
                           i18n: {
-                            title: 'BranchesTitle',
-                            description: 'BranchesDescription',
+                            title: 'v2_0.BranchesTitle',
+                            description: 'v2_0.BranchesDescription',
                           },
                         },
                         metaInfo: {},
@@ -2047,8 +2062,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'BranchesItemsCategoryTitle',
-                            description: 'BranchesItemsCategoryDescription',
+                            title: 'v2_0.BranchesItemsCategoryTitle',
+                            description:
+                              'v2_0.BranchesItemsCategoryDescription',
                           },
                         },
                         enum: [
@@ -2089,8 +2105,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'BranchesItemsNameTitle',
-                            description: 'BranchesItemsNameDescription',
+                            title: 'v2_0.BranchesItemsNameTitle',
+                            description: 'v2_0.BranchesItemsNameDescription',
                           },
                         },
                         minLength: 1,
@@ -2123,8 +2139,8 @@ export default /** @type {const} */ ({
                               'docs/user/types/branches/branch/product-usage.en.md',
                           },
                           i18n: {
-                            title: 'FullProductNameTitle',
-                            description: 'FullProductNameDescription',
+                            title: 'v2_0.FullProductNameTitle',
+                            description: 'v2_0.FullProductNameDescription',
                           },
                         },
                         type: 'OBJECT',
@@ -2157,8 +2173,9 @@ export default /** @type {const} */ ({
                                   csaf_vex: 'mandatory',
                                 },
                                 i18n: {
-                                  title: 'FullProductNameNameTitle',
-                                  description: 'FullProductNameNameDescription',
+                                  title: 'v2_0.FullProductNameNameTitle',
+                                  description:
+                                    'v2_0.FullProductNameNameDescription',
                                 },
                               },
                               minLength: 1,
@@ -2196,8 +2213,8 @@ export default /** @type {const} */ ({
                                   csaf_vex: 'mandatory',
                                 },
                                 i18n: {
-                                  title: 'ProductIdTitle',
-                                  description: 'ProductIdDescription',
+                                  title: 'v2_0.ProductIdTitle',
+                                  description: 'v2_0.ProductIdDescription',
                                 },
                               },
                               minLength: 1,
@@ -2233,9 +2250,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperDescription',
                                 },
                               },
                               type: 'OBJECT',
@@ -2272,9 +2289,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperCpeTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperCpeTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperCpeDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperCpeDescription',
                                       },
                                     },
                                     minLength: 5,
@@ -2313,9 +2330,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperHashesTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperHashesTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperHashesDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperHashesDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -2341,9 +2358,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperHashesItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperHashesItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -2395,9 +2412,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
                                                 },
                                               },
                                               type: 'ARRAY',
@@ -2424,9 +2441,9 @@ export default /** @type {const} */ ({
                                                     },
                                                     i18n: {
                                                       title:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
                                                       description:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
                                                     },
                                                     itemName: {
                                                       itemNameTranslationKey:
@@ -2482,9 +2499,9 @@ export default /** @type {const} */ ({
                                                           },
                                                           i18n: {
                                                             title:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
                                                             description:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
                                                           },
                                                         },
                                                         minLength: 1,
@@ -2535,9 +2552,9 @@ export default /** @type {const} */ ({
                                                           },
                                                           i18n: {
                                                             title:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
                                                             description:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
                                                           },
                                                         },
                                                         minLength: 32,
@@ -2588,9 +2605,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
                                                 },
                                               },
                                               minLength: 1,
@@ -2637,9 +2654,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperModelNumbersTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperModelNumbersTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperModelNumbersDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperModelNumbersDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -2665,9 +2682,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -2721,9 +2738,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperPurlTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperPurlTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperPurlDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperPurlDescription',
                                       },
                                     },
                                     minLength: 7,
@@ -2762,9 +2779,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSbomUrlsTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSbomUrlsTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSbomUrlsDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSbomUrlsDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -2791,9 +2808,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -2845,9 +2862,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSerialNumbersTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSerialNumbersTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSerialNumbersDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSerialNumbersDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -2873,9 +2890,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -2928,9 +2945,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSkusTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSkusTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSkusDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSkusDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -2956,9 +2973,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSkusItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSkusItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSkusItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSkusItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -3011,9 +3028,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperXGenericUrisTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperXGenericUrisTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperXGenericUrisDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperXGenericUrisDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -3039,9 +3056,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -3095,9 +3112,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
                                                 },
                                               },
                                               metaInfo: {},
@@ -3136,9 +3153,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
                                                 },
                                               },
                                               metaInfo: {},
@@ -3180,8 +3197,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'nice_to_know',
                 },
                 i18n: {
-                  title: 'ProductTreeFullProductNamesTitle',
-                  description: 'ProductTreeFullProductNamesDescription',
+                  title: 'v2_0.ProductTreeFullProductNamesTitle',
+                  description: 'v2_0.ProductTreeFullProductNamesDescription',
                 },
               },
               type: 'ARRAY',
@@ -3200,8 +3217,8 @@ export default /** @type {const} */ ({
                       usage: 'docs/user/types/full_product_name-usage.en.md',
                     },
                     i18n: {
-                      title: 'FullProductNameTitle',
-                      description: 'FullProductNameDescription',
+                      title: 'v2_0.FullProductNameTitle',
+                      description: 'v2_0.FullProductNameDescription',
                     },
                     addMenuItemsForChildObjects: true,
                     itemName: {
@@ -3244,8 +3261,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'FullProductNameNameTitle',
-                            description: 'FullProductNameNameDescription',
+                            title: 'v2_0.FullProductNameNameTitle',
+                            description: 'v2_0.FullProductNameNameDescription',
                           },
                         },
                         minLength: 1,
@@ -3281,8 +3298,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'ProductIdTitle',
-                            description: 'ProductIdDescription',
+                            title: 'v2_0.ProductIdTitle',
+                            description: 'v2_0.ProductIdDescription',
                           },
                         },
                         minLength: 1,
@@ -3316,9 +3333,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'FullProductNameProductIdentificationHelperTitle',
+                              'v2_0.FullProductNameProductIdentificationHelperTitle',
                             description:
-                              'FullProductNameProductIdentificationHelperDescription',
+                              'v2_0.FullProductNameProductIdentificationHelperDescription',
                           },
                         },
                         type: 'OBJECT',
@@ -3353,9 +3370,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperCpeTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperCpeTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperCpeDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperCpeDescription',
                                 },
                               },
                               minLength: 5,
@@ -3392,9 +3409,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperHashesTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperHashesTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperHashesDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperHashesDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -3419,9 +3436,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperHashesItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperHashesItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -3470,9 +3487,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
                                           },
                                         },
                                         type: 'ARRAY',
@@ -3498,9 +3515,9 @@ export default /** @type {const} */ ({
                                               },
                                               i18n: {
                                                 title:
-                                                  'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
+                                                  'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
                                                 description:
-                                                  'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
+                                                  'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
                                               },
                                               itemName: {
                                                 itemNameTranslationKey:
@@ -3553,9 +3570,9 @@ export default /** @type {const} */ ({
                                                     },
                                                     i18n: {
                                                       title:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
                                                       description:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
                                                     },
                                                   },
                                                   minLength: 1,
@@ -3603,9 +3620,9 @@ export default /** @type {const} */ ({
                                                     },
                                                     i18n: {
                                                       title:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
                                                       description:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
                                                     },
                                                   },
                                                   minLength: 32,
@@ -3653,9 +3670,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
                                           },
                                         },
                                         minLength: 1,
@@ -3700,9 +3717,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperModelNumbersTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperModelNumbersTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperModelNumbersDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperModelNumbersDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -3727,9 +3744,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -3780,9 +3797,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperPurlTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperPurlTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperPurlDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperPurlDescription',
                                 },
                               },
                               minLength: 7,
@@ -3819,9 +3836,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperSbomUrlsTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperSbomUrlsTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperSbomUrlsDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperSbomUrlsDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -3847,9 +3864,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -3898,9 +3915,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperSerialNumbersTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperSerialNumbersTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperSerialNumbersDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperSerialNumbersDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -3925,9 +3942,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -3977,9 +3994,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperSkusTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperSkusTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperSkusDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperSkusDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -4004,9 +4021,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperSkusItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperSkusItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperSkusItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperSkusItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -4056,9 +4073,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperXGenericUrisTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperXGenericUrisDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisDescription',
                                 },
                               },
                               type: 'ARRAY',
@@ -4083,9 +4100,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
+                                        'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
                                       description:
-                                        'FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
+                                        'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
                                     },
                                     itemName: {
                                       itemNameTranslationKey:
@@ -4135,9 +4152,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
                                           },
                                         },
                                         metaInfo: {},
@@ -4174,9 +4191,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
                                           },
                                         },
                                         metaInfo: {},
@@ -4214,8 +4231,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'optional',
                 },
                 i18n: {
-                  title: 'ProductTreeProductGroupsTitle',
-                  description: 'ProductTreeProductGroupsDescription',
+                  title: 'v2_0.ProductTreeProductGroupsTitle',
+                  description: 'v2_0.ProductTreeProductGroupsDescription',
                 },
                 uiType: 'WITH_GENERATED_GROUP_ID',
               },
@@ -4235,8 +4252,9 @@ export default /** @type {const} */ ({
                         'docs/user/product_tree/product_groups/product_group-usage.en.md',
                     },
                     i18n: {
-                      title: 'ProductTreeProductGroupsItemsTitle',
-                      description: 'ProductTreeProductGroupsItemsDescription',
+                      title: 'v2_0.ProductTreeProductGroupsItemsTitle',
+                      description:
+                        'v2_0.ProductTreeProductGroupsItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.productGroupsItemName',
@@ -4278,8 +4296,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'ProductGroupIdTitle',
-                            description: 'ProductGroupIdDescription',
+                            title: 'v2_0.ProductGroupIdTitle',
+                            description: 'v2_0.ProductGroupIdDescription',
                           },
                         },
                         minLength: 1,
@@ -4317,9 +4335,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'ProductTreeProductGroupsItemsProductIdsTitle',
+                              'v2_0.ProductTreeProductGroupsItemsProductIdsTitle',
                             description:
-                              'ProductTreeProductGroupsItemsProductIdsDescription',
+                              'v2_0.ProductTreeProductGroupsItemsProductIdsDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -4342,8 +4360,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/product_id-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -4386,9 +4404,10 @@ export default /** @type {const} */ ({
                             csaf_vex: 'want_to_have',
                           },
                           i18n: {
-                            title: 'ProductTreeProductGroupsItemsSummaryTitle',
+                            title:
+                              'v2_0.ProductTreeProductGroupsItemsSummaryTitle',
                             description:
-                              'ProductTreeProductGroupsItemsSummaryDescription',
+                              'v2_0.ProductTreeProductGroupsItemsSummaryDescription',
                           },
                         },
                         minLength: 1,
@@ -4423,8 +4442,8 @@ export default /** @type {const} */ ({
                   csaf_vex: 'want_to_have',
                 },
                 i18n: {
-                  title: 'ProductTreeRelationshipsTitle',
-                  description: 'ProductTreeRelationshipsDescription',
+                  title: 'v2_0.ProductTreeRelationshipsTitle',
+                  description: 'v2_0.ProductTreeRelationshipsDescription',
                 },
               },
               type: 'ARRAY',
@@ -4444,8 +4463,9 @@ export default /** @type {const} */ ({
                         'docs/user/product_tree/relationships/relationship-usage.en.md',
                     },
                     i18n: {
-                      title: 'ProductTreeRelationshipsItemsTitle',
-                      description: 'ProductTreeRelationshipsItemsDescription',
+                      title: 'v2_0.ProductTreeRelationshipsItemsTitle',
+                      description:
+                        'v2_0.ProductTreeRelationshipsItemsDescription',
                     },
                     itemName: {
                       itemNameTranslationKey: 'arrays.relationshipsItemName',
@@ -4484,9 +4504,10 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'ProductTreeRelationshipsItemsCategoryTitle',
+                            title:
+                              'v2_0.ProductTreeRelationshipsItemsCategoryTitle',
                             description:
-                              'ProductTreeRelationshipsItemsCategoryDescription',
+                              'v2_0.ProductTreeRelationshipsItemsCategoryDescription',
                           },
                         },
                         enum: [
@@ -4525,8 +4546,8 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'FullProductNameTitle',
-                            description: 'FullProductNameDescription',
+                            title: 'v2_0.FullProductNameTitle',
+                            description: 'v2_0.FullProductNameDescription',
                           },
                           addMenuItemsForChildObjects: true,
                         },
@@ -4560,8 +4581,9 @@ export default /** @type {const} */ ({
                                   csaf_vex: 'mandatory',
                                 },
                                 i18n: {
-                                  title: 'FullProductNameNameTitle',
-                                  description: 'FullProductNameNameDescription',
+                                  title: 'v2_0.FullProductNameNameTitle',
+                                  description:
+                                    'v2_0.FullProductNameNameDescription',
                                 },
                               },
                               minLength: 1,
@@ -4599,8 +4621,8 @@ export default /** @type {const} */ ({
                                   csaf_vex: 'mandatory',
                                 },
                                 i18n: {
-                                  title: 'ProductIdTitle',
-                                  description: 'ProductIdDescription',
+                                  title: 'v2_0.ProductIdTitle',
+                                  description: 'v2_0.ProductIdDescription',
                                 },
                               },
                               minLength: 1,
@@ -4636,9 +4658,9 @@ export default /** @type {const} */ ({
                                 },
                                 i18n: {
                                   title:
-                                    'FullProductNameProductIdentificationHelperTitle',
+                                    'v2_0.FullProductNameProductIdentificationHelperTitle',
                                   description:
-                                    'FullProductNameProductIdentificationHelperDescription',
+                                    'v2_0.FullProductNameProductIdentificationHelperDescription',
                                 },
                               },
                               type: 'OBJECT',
@@ -4675,9 +4697,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperCpeTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperCpeTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperCpeDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperCpeDescription',
                                       },
                                     },
                                     minLength: 5,
@@ -4716,9 +4738,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperHashesTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperHashesTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperHashesDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperHashesDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -4744,9 +4766,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperHashesItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperHashesItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -4798,9 +4820,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesDescription',
                                                 },
                                               },
                                               type: 'ARRAY',
@@ -4827,9 +4849,9 @@ export default /** @type {const} */ ({
                                                     },
                                                     i18n: {
                                                       title:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
                                                       description:
-                                                        'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
+                                                        'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsDescription',
                                                     },
                                                     itemName: {
                                                       itemNameTranslationKey:
@@ -4885,9 +4907,9 @@ export default /** @type {const} */ ({
                                                           },
                                                           i18n: {
                                                             title:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmTitle',
                                                             description:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsAlgorithmDescription',
                                                           },
                                                         },
                                                         minLength: 1,
@@ -4938,9 +4960,9 @@ export default /** @type {const} */ ({
                                                           },
                                                           i18n: {
                                                             title:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueTitle',
                                                             description:
-                                                              'FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
+                                                              'v2_0.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsValueDescription',
                                                           },
                                                         },
                                                         minLength: 32,
@@ -4991,9 +5013,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperHashesItemsFilenameDescription',
                                                 },
                                               },
                                               minLength: 1,
@@ -5040,9 +5062,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperModelNumbersTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperModelNumbersTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperModelNumbersDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperModelNumbersDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -5068,9 +5090,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperModelNumbersItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -5124,9 +5146,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperPurlTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperPurlTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperPurlDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperPurlDescription',
                                       },
                                     },
                                     minLength: 7,
@@ -5165,9 +5187,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSbomUrlsTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSbomUrlsTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSbomUrlsDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSbomUrlsDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -5194,9 +5216,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSbomUrlsItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -5248,9 +5270,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSerialNumbersTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSerialNumbersTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSerialNumbersDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSerialNumbersDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -5276,9 +5298,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSerialNumbersItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -5331,9 +5353,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperSkusTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperSkusTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperSkusDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperSkusDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -5359,9 +5381,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperSkusItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperSkusItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperSkusItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperSkusItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -5414,9 +5436,9 @@ export default /** @type {const} */ ({
                                       },
                                       i18n: {
                                         title:
-                                          'FullProductNameProductIdentificationHelperXGenericUrisTitle',
+                                          'v2_0.FullProductNameProductIdentificationHelperXGenericUrisTitle',
                                         description:
-                                          'FullProductNameProductIdentificationHelperXGenericUrisDescription',
+                                          'v2_0.FullProductNameProductIdentificationHelperXGenericUrisDescription',
                                       },
                                     },
                                     type: 'ARRAY',
@@ -5442,9 +5464,9 @@ export default /** @type {const} */ ({
                                           },
                                           i18n: {
                                             title:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
                                             description:
-                                              'FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
+                                              'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsDescription',
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
@@ -5498,9 +5520,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsNamespaceDescription',
                                                 },
                                               },
                                               metaInfo: {},
@@ -5539,9 +5561,9 @@ export default /** @type {const} */ ({
                                                 },
                                                 i18n: {
                                                   title:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriTitle',
                                                   description:
-                                                    'FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
+                                                    'v2_0.FullProductNameProductIdentificationHelperXGenericUrisItemsUriDescription',
                                                 },
                                               },
                                               metaInfo: {},
@@ -5584,9 +5606,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'ProductTreeRelationshipsItemsProductReferenceTitle',
+                              'v2_0.ProductTreeRelationshipsItemsProductReferenceTitle',
                             description:
-                              'ProductTreeRelationshipsItemsProductReferenceDescription',
+                              'v2_0.ProductTreeRelationshipsItemsProductReferenceDescription',
                           },
                         },
                         minLength: 1,
@@ -5620,9 +5642,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'ProductTreeRelationshipsItemsRelatesToProductReferenceTitle',
+                              'v2_0.ProductTreeRelationshipsItemsRelatesToProductReferenceTitle',
                             description:
-                              'ProductTreeRelationshipsItemsRelatesToProductReferenceDescription',
+                              'v2_0.ProductTreeRelationshipsItemsRelatesToProductReferenceDescription',
                           },
                         },
                         minLength: 1,
@@ -5657,8 +5679,8 @@ export default /** @type {const} */ ({
             csaf_vex: 'mandatory',
           },
           i18n: {
-            title: 'VulnerabilitiesTitle',
-            description: 'VulnerabilitiesDescription',
+            title: 'v2_0.VulnerabilitiesTitle',
+            description: 'v2_0.VulnerabilitiesDescription',
           },
         },
         type: 'ARRAY',
@@ -5676,8 +5698,8 @@ export default /** @type {const} */ ({
                 usage: 'docs/user/vulnerabilities/vulnerability-usage.en.md',
               },
               i18n: {
-                title: 'VulnerabilitiesItemsTitle',
-                description: 'VulnerabilitiesItemsDescription',
+                title: 'v2_0.VulnerabilitiesItemsTitle',
+                description: 'v2_0.VulnerabilitiesItemsDescription',
               },
               itemName: {
                 itemNameTranslationKey: 'arrays.vulnerabilitiesItemName',
@@ -5715,9 +5737,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'want_to_have',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsAcknowledgmentsTitle',
+                      title: 'v2_0.VulnerabilitiesItemsAcknowledgmentsTitle',
                       description:
-                        'VulnerabilitiesItemsAcknowledgmentsDescription',
+                        'v2_0.VulnerabilitiesItemsAcknowledgmentsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -5736,8 +5758,8 @@ export default /** @type {const} */ ({
                             'docs/user/types/acknowledgments/acknowledgment-usage.en.md',
                         },
                         i18n: {
-                          title: 'AcknowledgmentsItemsTitle',
-                          description: 'AcknowledgmentsItemsDescription',
+                          title: 'v2_0.AcknowledgmentsItemsTitle',
+                          description: 'v2_0.AcknowledgmentsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey:
@@ -5779,9 +5801,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'want_to_have',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsNamesTitle',
+                                title: 'v2_0.AcknowledgmentsItemsNamesTitle',
                                 description:
-                                  'AcknowledgmentsItemsNamesDescription',
+                                  'v2_0.AcknowledgmentsItemsNamesDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -5805,9 +5827,9 @@ export default /** @type {const} */ ({
                                   },
                                   i18n: {
                                     title:
-                                      'AcknowledgmentsItemsNamesItemsTitle',
+                                      'v2_0.AcknowledgmentsItemsNamesItemsTitle',
                                     description:
-                                      'AcknowledgmentsItemsNamesItemsDescription',
+                                      'v2_0.AcknowledgmentsItemsNamesItemsDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -5857,9 +5879,10 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'nice_to_know',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsOrganizationTitle',
+                                title:
+                                  'v2_0.AcknowledgmentsItemsOrganizationTitle',
                                 description:
-                                  'AcknowledgmentsItemsOrganizationDescription',
+                                  'v2_0.AcknowledgmentsItemsOrganizationDescription',
                               },
                             },
                             minLength: 1,
@@ -5893,9 +5916,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'nice_to_know',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsSummaryTitle',
+                                title: 'v2_0.AcknowledgmentsItemsSummaryTitle',
                                 description:
-                                  'AcknowledgmentsItemsSummaryDescription',
+                                  'v2_0.AcknowledgmentsItemsSummaryDescription',
                               },
                             },
                             minLength: 1,
@@ -5930,9 +5953,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'nice_to_know',
                               },
                               i18n: {
-                                title: 'AcknowledgmentsItemsUrlsTitle',
+                                title: 'v2_0.AcknowledgmentsItemsUrlsTitle',
                                 description:
-                                  'AcknowledgmentsItemsUrlsDescription',
+                                  'v2_0.AcknowledgmentsItemsUrlsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -5956,9 +5979,10 @@ export default /** @type {const} */ ({
                                       'docs/user/types/acknowledgments/acknowledgment/urls/url-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'AcknowledgmentsItemsUrlsItemsTitle',
+                                    title:
+                                      'v2_0.AcknowledgmentsItemsUrlsItemsTitle',
                                     description:
-                                      'AcknowledgmentsItemsUrlsItemsDescription',
+                                      'v2_0.AcknowledgmentsItemsUrlsItemsDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -6004,8 +6028,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsCveTitle',
-                      description: 'VulnerabilitiesItemsCveDescription',
+                      title: 'v2_0.VulnerabilitiesItemsCveTitle',
+                      description: 'v2_0.VulnerabilitiesItemsCveDescription',
                     },
                   },
                   pattern: '^CVE-[0-9]{4}-[0-9]{4,}$',
@@ -6033,8 +6057,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'want_to_have',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsCweTitle',
-                      description: 'VulnerabilitiesItemsCweDescription',
+                      title: 'v2_0.VulnerabilitiesItemsCweTitle',
+                      description: 'v2_0.VulnerabilitiesItemsCweDescription',
                     },
                     uiType: 'OBJECT_CWE',
                   },
@@ -6062,8 +6086,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'VulnerabilitiesItemsCweIdTitle',
-                            description: 'VulnerabilitiesItemsCweIdDescription',
+                            title: 'v2_0.VulnerabilitiesItemsCweIdTitle',
+                            description:
+                              'v2_0.VulnerabilitiesItemsCweIdDescription',
                           },
                         },
                         examples: ['CWE-22', 'CWE-352', 'CWE-79'],
@@ -6092,9 +6117,9 @@ export default /** @type {const} */ ({
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title: 'VulnerabilitiesItemsCweNameTitle',
+                            title: 'v2_0.VulnerabilitiesItemsCweNameTitle',
                             description:
-                              'VulnerabilitiesItemsCweNameDescription',
+                              'v2_0.VulnerabilitiesItemsCweNameDescription',
                           },
                         },
                         minLength: 1,
@@ -6131,9 +6156,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'nice_to_know',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsDiscoveryDateTitle',
+                      title: 'v2_0.VulnerabilitiesItemsDiscoveryDateTitle',
                       description:
-                        'VulnerabilitiesItemsDiscoveryDateDescription',
+                        'v2_0.VulnerabilitiesItemsDiscoveryDateDescription',
                     },
                   },
                   metaInfo: {},
@@ -6159,8 +6184,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsFlagsTitle',
-                      description: 'VulnerabilitiesItemsFlagsDescription',
+                      title: 'v2_0.VulnerabilitiesItemsFlagsTitle',
+                      description: 'v2_0.VulnerabilitiesItemsFlagsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -6179,9 +6204,9 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/flags/flag-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsFlagsItemsTitle',
+                          title: 'v2_0.VulnerabilitiesItemsFlagsItemsTitle',
                           description:
-                            'VulnerabilitiesItemsFlagsItemsDescription',
+                            'v2_0.VulnerabilitiesItemsFlagsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.flagsItemName',
@@ -6220,9 +6245,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsFlagsItemsDateTitle',
+                                  'v2_0.VulnerabilitiesItemsFlagsItemsDateTitle',
                                 description:
-                                  'VulnerabilitiesItemsFlagsItemsDateDescription',
+                                  'v2_0.VulnerabilitiesItemsFlagsItemsDateDescription',
                               },
                             },
                             metaInfo: {},
@@ -6249,8 +6274,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductGroupsTitle',
-                                description: 'ProductGroupsDescription',
+                                title: 'v2_0.ProductGroupsTitle',
+                                description: 'v2_0.ProductGroupsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -6275,8 +6300,9 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_group_id-spec.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductGroupIdTitle',
-                                    description: 'ProductGroupIdDescription',
+                                    title: 'v2_0.ProductGroupIdTitle',
+                                    description:
+                                      'v2_0.ProductGroupIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -6325,9 +6351,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsFlagsItemsLabelTitle',
+                                  'v2_0.VulnerabilitiesItemsFlagsItemsLabelTitle',
                                 description:
-                                  'VulnerabilitiesItemsFlagsItemsLabelDescription',
+                                  'v2_0.VulnerabilitiesItemsFlagsItemsLabelDescription',
                               },
                             },
                             enum: [
@@ -6365,8 +6391,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductsTitle',
-                                description: 'ProductsDescription',
+                                title: 'v2_0.ProductsTitle',
+                                description: 'v2_0.ProductsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -6390,8 +6416,8 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_id-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductIdTitle',
-                                    description: 'ProductIdDescription',
+                                    title: 'v2_0.ProductIdTitle',
+                                    description: 'v2_0.ProductIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -6439,8 +6465,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsIdsTitle',
-                      description: 'VulnerabilitiesItemsIdsDescription',
+                      title: 'v2_0.VulnerabilitiesItemsIdsTitle',
+                      description: 'v2_0.VulnerabilitiesItemsIdsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -6459,9 +6485,9 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/ids/id-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsIdsItemsTitle',
+                          title: 'v2_0.VulnerabilitiesItemsIdsItemsTitle',
                           description:
-                            'VulnerabilitiesItemsIdsItemsDescription',
+                            'v2_0.VulnerabilitiesItemsIdsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.idsItemName',
@@ -6499,9 +6525,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsIdsItemsSystemNameTitle',
+                                  'v2_0.VulnerabilitiesItemsIdsItemsSystemNameTitle',
                                 description:
-                                  'VulnerabilitiesItemsIdsItemsSystemNameDescription',
+                                  'v2_0.VulnerabilitiesItemsIdsItemsSystemNameDescription',
                               },
                             },
                             minLength: 1,
@@ -6530,9 +6556,10 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'VulnerabilitiesItemsIdsItemsTextTitle',
+                                title:
+                                  'v2_0.VulnerabilitiesItemsIdsItemsTextTitle',
                                 description:
-                                  'VulnerabilitiesItemsIdsItemsTextDescription',
+                                  'v2_0.VulnerabilitiesItemsIdsItemsTextDescription',
                               },
                             },
                             minLength: 1,
@@ -6565,9 +6592,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'nice_to_know',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsInvolvementsTitle',
+                      title: 'v2_0.VulnerabilitiesItemsInvolvementsTitle',
                       description:
-                        'VulnerabilitiesItemsInvolvementsDescription',
+                        'v2_0.VulnerabilitiesItemsInvolvementsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -6586,9 +6613,10 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/involvements/involvement-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsInvolvementsItemsTitle',
+                          title:
+                            'v2_0.VulnerabilitiesItemsInvolvementsItemsTitle',
                           description:
-                            'VulnerabilitiesItemsInvolvementsItemsDescription',
+                            'v2_0.VulnerabilitiesItemsInvolvementsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.involvementsItemName',
@@ -6631,9 +6659,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsInvolvementsItemsDateTitle',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsDateTitle',
                                 description:
-                                  'VulnerabilitiesItemsInvolvementsItemsDateDescription',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsDateDescription',
                               },
                             },
                             metaInfo: {},
@@ -6666,9 +6694,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsInvolvementsItemsPartyTitle',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsPartyTitle',
                                 description:
-                                  'VulnerabilitiesItemsInvolvementsItemsPartyDescription',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsPartyDescription',
                               },
                             },
                             enum: [
@@ -6708,9 +6736,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsInvolvementsItemsStatusTitle',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsStatusTitle',
                                 description:
-                                  'VulnerabilitiesItemsInvolvementsItemsStatusDescription',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsStatusDescription',
                               },
                             },
                             enum: [
@@ -6751,9 +6779,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsInvolvementsItemsSummaryTitle',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsSummaryTitle',
                                 description:
-                                  'VulnerabilitiesItemsInvolvementsItemsSummaryDescription',
+                                  'v2_0.VulnerabilitiesItemsInvolvementsItemsSummaryDescription',
                               },
                             },
                             minLength: 1,
@@ -6786,8 +6814,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsNotesTitle',
-                      description: 'VulnerabilitiesItemsNotesDescription',
+                      title: 'v2_0.VulnerabilitiesItemsNotesTitle',
+                      description: 'v2_0.VulnerabilitiesItemsNotesDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -6805,8 +6833,8 @@ export default /** @type {const} */ ({
                           usage: 'docs/user/types/notes/note-usage.en.md',
                         },
                         i18n: {
-                          title: 'NotesItemsTitle',
-                          description: 'NotesItemsDescription',
+                          title: 'v2_0.NotesItemsTitle',
+                          description: 'v2_0.NotesItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.notesItemName',
@@ -6844,8 +6872,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'nice_to_know',
                               },
                               i18n: {
-                                title: 'NotesItemsAudienceTitle',
-                                description: 'NotesItemsAudienceDescription',
+                                title: 'v2_0.NotesItemsAudienceTitle',
+                                description:
+                                  'v2_0.NotesItemsAudienceDescription',
                               },
                             },
                             minLength: 1,
@@ -6880,8 +6909,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'NotesItemsCategoryTitle',
-                                description: 'NotesItemsCategoryDescription',
+                                title: 'v2_0.NotesItemsCategoryTitle',
+                                description:
+                                  'v2_0.NotesItemsCategoryDescription',
                               },
                             },
                             enum: [
@@ -6918,8 +6948,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'NotesItemsTextTitle',
-                                description: 'NotesItemsTextDescription',
+                                title: 'v2_0.NotesItemsTextTitle',
+                                description: 'v2_0.NotesItemsTextDescription',
                               },
                             },
                             minLength: 1,
@@ -6947,8 +6977,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'best_practice',
                               },
                               i18n: {
-                                title: 'NotesItemsTitleTitle',
-                                description: 'NotesItemsTitleDescription',
+                                title: 'v2_0.NotesItemsTitleTitle',
+                                description: 'v2_0.NotesItemsTitleDescription',
                               },
                             },
                             minLength: 1,
@@ -6987,9 +7017,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsProductStatusTitle',
+                      title: 'v2_0.VulnerabilitiesItemsProductStatusTitle',
                       description:
-                        'VulnerabilitiesItemsProductStatusDescription',
+                        'v2_0.VulnerabilitiesItemsProductStatusDescription',
                     },
                   },
                   type: 'OBJECT',
@@ -7021,9 +7051,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusFirstAffectedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusFirstAffectedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusFirstAffectedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusFirstAffectedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7046,8 +7076,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7094,9 +7124,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusFirstFixedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusFirstFixedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusFirstFixedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusFirstFixedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7119,8 +7149,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7167,9 +7197,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusFixedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusFixedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusFixedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusFixedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7192,8 +7222,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7240,9 +7270,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusKnownAffectedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusKnownAffectedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusKnownAffectedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusKnownAffectedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7265,8 +7295,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7313,9 +7343,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusKnownNotAffectedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusKnownNotAffectedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusKnownNotAffectedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusKnownNotAffectedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7338,8 +7368,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7386,9 +7416,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusLastAffectedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusLastAffectedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusLastAffectedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusLastAffectedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7411,8 +7441,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7459,9 +7489,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusRecommendedTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusRecommendedTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusRecommendedDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusRecommendedDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7484,8 +7514,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7532,9 +7562,9 @@ export default /** @type {const} */ ({
                           },
                           i18n: {
                             title:
-                              'VulnerabilitiesItemsProductStatusUnderInvestigationTitle',
+                              'v2_0.VulnerabilitiesItemsProductStatusUnderInvestigationTitle',
                             description:
-                              'VulnerabilitiesItemsProductStatusUnderInvestigationDescription',
+                              'v2_0.VulnerabilitiesItemsProductStatusUnderInvestigationDescription',
                           },
                         },
                         type: 'ARRAY',
@@ -7557,8 +7587,8 @@ export default /** @type {const} */ ({
                                 usage: 'docs/user/types/products-usage.en.md',
                               },
                               i18n: {
-                                title: 'ProductIdTitle',
-                                description: 'ProductIdDescription',
+                                title: 'v2_0.ProductIdTitle',
+                                description: 'v2_0.ProductIdDescription',
                               },
                               itemName: {
                                 itemNameTranslationKey:
@@ -7603,8 +7633,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'best_practice',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsReferencesTitle',
-                      description: 'VulnerabilitiesItemsReferencesDescription',
+                      title: 'v2_0.VulnerabilitiesItemsReferencesTitle',
+                      description:
+                        'v2_0.VulnerabilitiesItemsReferencesDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -7623,8 +7654,8 @@ export default /** @type {const} */ ({
                             'docs/user/types/references/reference-usage.en.md',
                         },
                         i18n: {
-                          title: 'ReferencesItemsTitle',
-                          description: 'ReferencesItemsDescription',
+                          title: 'v2_0.ReferencesItemsTitle',
+                          description: 'v2_0.ReferencesItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.referencesItemName',
@@ -7666,9 +7697,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'want_to_have',
                               },
                               i18n: {
-                                title: 'ReferencesItemsCategoryTitle',
+                                title: 'v2_0.ReferencesItemsCategoryTitle',
                                 description:
-                                  'ReferencesItemsCategoryDescription',
+                                  'v2_0.ReferencesItemsCategoryDescription',
                               },
                             },
                             default: 'external',
@@ -7702,9 +7733,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ReferencesItemsSummaryTitle',
+                                title: 'v2_0.ReferencesItemsSummaryTitle',
                                 description:
-                                  'ReferencesItemsSummaryDescription',
+                                  'v2_0.ReferencesItemsSummaryDescription',
                               },
                             },
                             minLength: 1,
@@ -7732,8 +7763,9 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ReferencesItemsUrlTitle',
-                                description: 'ReferencesItemsUrlDescription',
+                                title: 'v2_0.ReferencesItemsUrlTitle',
+                                description:
+                                  'v2_0.ReferencesItemsUrlDescription',
                               },
                             },
                             metaInfo: {},
@@ -7766,8 +7798,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'nice_to_know',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsReleaseDateTitle',
-                      description: 'VulnerabilitiesItemsReleaseDateDescription',
+                      title: 'v2_0.VulnerabilitiesItemsReleaseDateTitle',
+                      description:
+                        'v2_0.VulnerabilitiesItemsReleaseDateDescription',
                     },
                   },
                   metaInfo: {},
@@ -7793,9 +7826,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsRemediationsTitle',
+                      title: 'v2_0.VulnerabilitiesItemsRemediationsTitle',
                       description:
-                        'VulnerabilitiesItemsRemediationsDescription',
+                        'v2_0.VulnerabilitiesItemsRemediationsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -7814,9 +7847,10 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/remediations/remediation-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsRemediationsItemsTitle',
+                          title:
+                            'v2_0.VulnerabilitiesItemsRemediationsItemsTitle',
                           description:
-                            'VulnerabilitiesItemsRemediationsItemsDescription',
+                            'v2_0.VulnerabilitiesItemsRemediationsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.remediationsItemName',
@@ -7859,9 +7893,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsCategoryTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsCategoryTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsCategoryDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsCategoryDescription',
                               },
                             },
                             enum: [
@@ -7901,9 +7935,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsDateTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsDateTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsDateDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsDateDescription',
                               },
                             },
                             metaInfo: {},
@@ -7936,9 +7970,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsDetailsTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsDetailsTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsDetailsDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsDetailsDescription',
                               },
                             },
                             minLength: 1,
@@ -7970,9 +8004,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsEntitlementsTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsEntitlementsTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsEntitlementsDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsEntitlementsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -7997,9 +8031,9 @@ export default /** @type {const} */ ({
                                   },
                                   i18n: {
                                     title:
-                                      'VulnerabilitiesItemsRemediationsItemsEntitlementsItemsTitle',
+                                      'v2_0.VulnerabilitiesItemsRemediationsItemsEntitlementsItemsTitle',
                                     description:
-                                      'VulnerabilitiesItemsRemediationsItemsEntitlementsItemsDescription',
+                                      'v2_0.VulnerabilitiesItemsRemediationsItemsEntitlementsItemsDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -8044,8 +8078,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductGroupsTitle',
-                                description: 'ProductGroupsDescription',
+                                title: 'v2_0.ProductGroupsTitle',
+                                description: 'v2_0.ProductGroupsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -8070,8 +8104,9 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_group_id-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductGroupIdTitle',
-                                    description: 'ProductGroupIdDescription',
+                                    title: 'v2_0.ProductGroupIdTitle',
+                                    description:
+                                      'v2_0.ProductGroupIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -8122,8 +8157,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductsTitle',
-                                description: 'ProductsDescription',
+                                title: 'v2_0.ProductsTitle',
+                                description: 'v2_0.ProductsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -8147,8 +8182,8 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_id-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductIdTitle',
-                                    description: 'ProductIdDescription',
+                                    title: 'v2_0.ProductIdTitle',
+                                    description: 'v2_0.ProductIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -8196,9 +8231,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsRestartRequiredTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsRestartRequiredDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredDescription',
                               },
                             },
                             type: 'OBJECT',
@@ -8233,9 +8268,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'VulnerabilitiesItemsRemediationsItemsRestartRequiredCategoryTitle',
+                                        'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredCategoryTitle',
                                       description:
-                                        'VulnerabilitiesItemsRemediationsItemsRestartRequiredCategoryDescription',
+                                        'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredCategoryDescription',
                                     },
                                   },
                                   enum: [
@@ -8281,9 +8316,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'VulnerabilitiesItemsRemediationsItemsRestartRequiredDetailsTitle',
+                                        'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredDetailsTitle',
                                       description:
-                                        'VulnerabilitiesItemsRemediationsItemsRestartRequiredDetailsDescription',
+                                        'v2_0.VulnerabilitiesItemsRemediationsItemsRestartRequiredDetailsDescription',
                                     },
                                   },
                                   minLength: 1,
@@ -8320,9 +8355,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsRemediationsItemsUrlTitle',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsUrlTitle',
                                 description:
-                                  'VulnerabilitiesItemsRemediationsItemsUrlDescription',
+                                  'v2_0.VulnerabilitiesItemsRemediationsItemsUrlDescription',
                               },
                             },
                             metaInfo: {},
@@ -8354,8 +8389,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsScoresTitle',
-                      description: 'VulnerabilitiesItemsScoresDescription',
+                      title: 'v2_0.VulnerabilitiesItemsScoresTitle',
+                      description: 'v2_0.VulnerabilitiesItemsScoresDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -8374,9 +8409,9 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/scores/score-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsScoresItemsTitle',
+                          title: 'v2_0.VulnerabilitiesItemsScoresItemsTitle',
                           description:
-                            'VulnerabilitiesItemsScoresItemsDescription',
+                            'v2_0.VulnerabilitiesItemsScoresItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.scoresItemName',
@@ -8415,8 +8450,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'optional',
                               },
                               i18n: {
-                                title: 'CvssV2Title',
-                                description: 'CvssV2Description',
+                                title: 'v2_0.CvssV2Title',
+                                description: 'v2_0.CvssV2Description',
                               },
                               uiType: 'OBJECT_CVSS_2',
                             },
@@ -8449,8 +8484,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'mandatory',
                                     },
                                     i18n: {
-                                      title: 'CvssV2VersionTitle',
-                                      description: 'CvssV2VersionDescription',
+                                      title: 'v2_0.CvssV2VersionTitle',
+                                      description:
+                                        'v2_0.CvssV2VersionDescription',
                                     },
                                   },
                                   enum: ['2.0'],
@@ -8481,9 +8517,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'mandatory',
                                     },
                                     i18n: {
-                                      title: 'CvssV2VectorStringTitle',
+                                      title: 'v2_0.CvssV2VectorStringTitle',
                                       description:
-                                        'CvssV2VectorStringDescription',
+                                        'v2_0.CvssV2VectorStringDescription',
                                     },
                                   },
                                   pattern:
@@ -8516,9 +8552,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2AccessVectorTitle',
+                                      title: 'v2_0.CvssV2AccessVectorTitle',
                                       description:
-                                        'CvssV2AccessVectorDescription',
+                                        'v2_0.CvssV2AccessVectorDescription',
                                     },
                                   },
                                   enum: [
@@ -8554,9 +8590,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2AccessComplexityTitle',
+                                      title: 'v2_0.CvssV2AccessComplexityTitle',
                                       description:
-                                        'CvssV2AccessComplexityDescription',
+                                        'v2_0.CvssV2AccessComplexityDescription',
                                     },
                                   },
                                   enum: ['HIGH', 'MEDIUM', 'LOW'],
@@ -8588,9 +8624,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2AuthenticationTitle',
+                                      title: 'v2_0.CvssV2AuthenticationTitle',
                                       description:
-                                        'CvssV2AuthenticationDescription',
+                                        'v2_0.CvssV2AuthenticationDescription',
                                     },
                                   },
                                   enum: ['MULTIPLE', 'SINGLE', 'NONE'],
@@ -8622,9 +8658,10 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2ConfidentialityImpactTitle',
+                                      title:
+                                        'v2_0.CvssV2ConfidentialityImpactTitle',
                                       description:
-                                        'CvssV2ConfidentialityImpactDescription',
+                                        'v2_0.CvssV2ConfidentialityImpactDescription',
                                     },
                                   },
                                   enum: ['NONE', 'PARTIAL', 'COMPLETE'],
@@ -8656,9 +8693,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2IntegrityImpactTitle',
+                                      title: 'v2_0.CvssV2IntegrityImpactTitle',
                                       description:
-                                        'CvssV2IntegrityImpactDescription',
+                                        'v2_0.CvssV2IntegrityImpactDescription',
                                     },
                                   },
                                   enum: ['NONE', 'PARTIAL', 'COMPLETE'],
@@ -8690,9 +8727,10 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'CvssV2AvailabilityImpactTitle',
+                                      title:
+                                        'v2_0.CvssV2AvailabilityImpactTitle',
                                       description:
-                                        'CvssV2AvailabilityImpactDescription',
+                                        'v2_0.CvssV2AvailabilityImpactDescription',
                                     },
                                   },
                                   enum: ['NONE', 'PARTIAL', 'COMPLETE'],
@@ -8723,8 +8761,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'mandatory',
                                     },
                                     i18n: {
-                                      title: 'CvssV2BaseScoreTitle',
-                                      description: 'CvssV2BaseScoreDescription',
+                                      title: 'v2_0.CvssV2BaseScoreTitle',
+                                      description:
+                                        'v2_0.CvssV2BaseScoreDescription',
                                     },
                                   },
                                   metaInfo: {},
@@ -8755,9 +8794,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'nice_to_know',
                                     },
                                     i18n: {
-                                      title: 'CvssV2ExploitabilityTitle',
+                                      title: 'v2_0.CvssV2ExploitabilityTitle',
                                       description:
-                                        'CvssV2ExploitabilityDescription',
+                                        'v2_0.CvssV2ExploitabilityDescription',
                                     },
                                   },
                                   enum: [
@@ -8795,9 +8834,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'want_to_have',
                                     },
                                     i18n: {
-                                      title: 'CvssV2RemediationLevelTitle',
+                                      title: 'v2_0.CvssV2RemediationLevelTitle',
                                       description:
-                                        'CvssV2RemediationLevelDescription',
+                                        'v2_0.CvssV2RemediationLevelDescription',
                                     },
                                   },
                                   enum: [
@@ -8835,9 +8874,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'want_to_have',
                                     },
                                     i18n: {
-                                      title: 'CvssV2ReportConfidenceTitle',
+                                      title: 'v2_0.CvssV2ReportConfidenceTitle',
                                       description:
-                                        'CvssV2ReportConfidenceDescription',
+                                        'v2_0.CvssV2ReportConfidenceDescription',
                                     },
                                   },
                                   enum: [
@@ -8873,9 +8912,9 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'want_to_have',
                                     },
                                     i18n: {
-                                      title: 'CvssV2TemporalScoreTitle',
+                                      title: 'v2_0.CvssV2TemporalScoreTitle',
                                       description:
-                                        'CvssV2TemporalScoreDescription',
+                                        'v2_0.CvssV2TemporalScoreDescription',
                                     },
                                   },
                                   metaInfo: {},
@@ -8907,9 +8946,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'CvssV2CollateralDamagePotentialTitle',
+                                        'v2_0.CvssV2CollateralDamagePotentialTitle',
                                       description:
-                                        'CvssV2CollateralDamagePotentialDescription',
+                                        'v2_0.CvssV2CollateralDamagePotentialDescription',
                                     },
                                   },
                                   enum: [
@@ -8948,9 +8987,10 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'optional',
                                     },
                                     i18n: {
-                                      title: 'CvssV2TargetDistributionTitle',
+                                      title:
+                                        'v2_0.CvssV2TargetDistributionTitle',
                                       description:
-                                        'CvssV2TargetDistributionDescription',
+                                        'v2_0.CvssV2TargetDistributionDescription',
                                     },
                                   },
                                   enum: [
@@ -8989,9 +9029,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'CvssV2ConfidentialityRequirementTitle',
+                                        'v2_0.CvssV2ConfidentialityRequirementTitle',
                                       description:
-                                        'CvssV2ConfidentialityRequirementDescription',
+                                        'v2_0.CvssV2ConfidentialityRequirementDescription',
                                     },
                                   },
                                   enum: [
@@ -9028,9 +9068,10 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'optional',
                                     },
                                     i18n: {
-                                      title: 'CvssV2IntegrityRequirementTitle',
+                                      title:
+                                        'v2_0.CvssV2IntegrityRequirementTitle',
                                       description:
-                                        'CvssV2IntegrityRequirementDescription',
+                                        'v2_0.CvssV2IntegrityRequirementDescription',
                                     },
                                   },
                                   enum: [
@@ -9068,9 +9109,9 @@ export default /** @type {const} */ ({
                                     },
                                     i18n: {
                                       title:
-                                        'CvssV2AvailabilityRequirementTitle',
+                                        'v2_0.CvssV2AvailabilityRequirementTitle',
                                       description:
-                                        'CvssV2AvailabilityRequirementDescription',
+                                        'v2_0.CvssV2AvailabilityRequirementDescription',
                                     },
                                   },
                                   enum: [
@@ -9106,9 +9147,10 @@ export default /** @type {const} */ ({
                                       csaf_vex: 'optional',
                                     },
                                     i18n: {
-                                      title: 'CvssV2EnvironmentalScoreTitle',
+                                      title:
+                                        'v2_0.CvssV2EnvironmentalScoreTitle',
                                       description:
-                                        'CvssV2EnvironmentalScoreDescription',
+                                        'v2_0.CvssV2EnvironmentalScoreDescription',
                                     },
                                   },
                                   metaInfo: {},
@@ -9139,8 +9181,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'best_practice',
                               },
                               i18n: {
-                                title: 'CvssV3Title',
-                                description: 'CvssV3Description',
+                                title: 'v2_0.CvssV3Title',
+                                description: 'v2_0.CvssV3Description',
                               },
                               uiType: 'OBJECT_CVSS_3',
                             },
@@ -9168,8 +9210,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductsTitle',
-                                description: 'ProductsDescription',
+                                title: 'v2_0.ProductsTitle',
+                                description: 'v2_0.ProductsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -9193,8 +9235,8 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_id-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductIdTitle',
-                                    description: 'ProductIdDescription',
+                                    title: 'v2_0.ProductIdTitle',
+                                    description: 'v2_0.ProductIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -9242,8 +9284,9 @@ export default /** @type {const} */ ({
                       csaf_vex: 'mandatory',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsThreatsTitle',
-                      description: 'VulnerabilitiesItemsThreatsDescription',
+                      title: 'v2_0.VulnerabilitiesItemsThreatsTitle',
+                      description:
+                        'v2_0.VulnerabilitiesItemsThreatsDescription',
                     },
                   },
                   type: 'ARRAY',
@@ -9262,9 +9305,9 @@ export default /** @type {const} */ ({
                             'docs/user/vulnerabilities/vulnerability/threats/threat-usage.en.md',
                         },
                         i18n: {
-                          title: 'VulnerabilitiesItemsThreatsItemsTitle',
+                          title: 'v2_0.VulnerabilitiesItemsThreatsItemsTitle',
                           description:
-                            'VulnerabilitiesItemsThreatsItemsDescription',
+                            'v2_0.VulnerabilitiesItemsThreatsItemsDescription',
                         },
                         itemName: {
                           itemNameTranslationKey: 'arrays.threatsItemName',
@@ -9307,9 +9350,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsThreatsItemsCategoryTitle',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsCategoryTitle',
                                 description:
-                                  'VulnerabilitiesItemsThreatsItemsCategoryDescription',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsCategoryDescription',
                               },
                             },
                             enum: ['exploit_status', 'impact', 'target_set'],
@@ -9339,9 +9382,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsThreatsItemsDateTitle',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsDateTitle',
                                 description:
-                                  'VulnerabilitiesItemsThreatsItemsDateDescription',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsDateDescription',
                               },
                             },
                             metaInfo: {},
@@ -9370,9 +9413,9 @@ export default /** @type {const} */ ({
                               },
                               i18n: {
                                 title:
-                                  'VulnerabilitiesItemsThreatsItemsDetailsTitle',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsDetailsTitle',
                                 description:
-                                  'VulnerabilitiesItemsThreatsItemsDetailsDescription',
+                                  'v2_0.VulnerabilitiesItemsThreatsItemsDetailsDescription',
                               },
                             },
                             minLength: 1,
@@ -9404,8 +9447,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductGroupsTitle',
-                                description: 'ProductGroupsDescription',
+                                title: 'v2_0.ProductGroupsTitle',
+                                description: 'v2_0.ProductGroupsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -9430,8 +9473,9 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_group_id-spec.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductGroupIdTitle',
-                                    description: 'ProductGroupIdDescription',
+                                    title: 'v2_0.ProductGroupIdTitle',
+                                    description:
+                                      'v2_0.ProductGroupIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -9482,8 +9526,8 @@ export default /** @type {const} */ ({
                                 csaf_vex: 'mandatory',
                               },
                               i18n: {
-                                title: 'ProductsTitle',
-                                description: 'ProductsDescription',
+                                title: 'v2_0.ProductsTitle',
+                                description: 'v2_0.ProductsDescription',
                               },
                             },
                             type: 'ARRAY',
@@ -9507,8 +9551,8 @@ export default /** @type {const} */ ({
                                       'docs/user/types/product_id-usage.en.md',
                                   },
                                   i18n: {
-                                    title: 'ProductIdTitle',
-                                    description: 'ProductIdDescription',
+                                    title: 'v2_0.ProductIdTitle',
+                                    description: 'v2_0.ProductIdDescription',
                                   },
                                   itemName: {
                                     itemNameTranslationKey:
@@ -9556,8 +9600,8 @@ export default /** @type {const} */ ({
                       csaf_vex: 'want_to_have',
                     },
                     i18n: {
-                      title: 'VulnerabilitiesItemsTitleTitle',
-                      description: 'VulnerabilitiesItemsTitleDescription',
+                      title: 'v2_0.VulnerabilitiesItemsTitleTitle',
+                      description: 'v2_0.VulnerabilitiesItemsTitleDescription',
                     },
                   },
                   minLength: 1,

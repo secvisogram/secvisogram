@@ -109,6 +109,13 @@ This would result in the following order `field_c, field_a, field_b, field_d, fi
 The editor will use the translation string specified here to display the
 title and description.
 
+**Information**: The import script adds a namespace to the key to distinguish between the supported CSAF version:
+
+- `v2_0`
+- `v2_1`
+
+This means that `MyTranslationString` becomes `v2_0.MyTranslationString` if it is contained in csaf 2.0 meta data file.
+
 ```json
 "i18n": {
   "title": "",
