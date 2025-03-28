@@ -66,6 +66,7 @@ function convertSchema(subschema, defs, path) {
     .replaceAll('.items.', '.')
   const metaData = metaDataMap.get(metaDataPath)
 
+  /** @type {import('./csaf_2_1/types.js').CommonUiSchemaFields} */
   const commonUiSchemaFields = {
     key,
     fullName,
@@ -75,11 +76,19 @@ function convertSchema(subschema, defs, path) {
       metaData && 'addMenuItemsForChildObjects' in metaData
         ? metaData?.addMenuItemsForChildObjects
         : undefined,
-    metaData:
-      metaData &&
-      Object.fromEntries(
+    metaData: metaData && {
+      ...Object.fromEntries(
         Object.entries(metaData).filter(([key]) => key !== 'propertyOrder')
       ),
+      i18n:
+        'i18n' in metaData
+          ? {
+              ...metaData.i18n,
+              title: 'v2_1.' + metaData.i18n.title,
+              description: 'v2_1.' + metaData.i18n.description,
+            }
+          : undefined,
+    },
   }
 
   if (
