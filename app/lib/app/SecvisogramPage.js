@@ -29,7 +29,16 @@ const SecvisogramPage = () => {
   const { t } = useTranslation()
   const searchParams = new URL(location.href).searchParams
   const [
-    { isLoading, isTabLocked, data, errors, alert, stripResult, previewResult },
+    {
+      isLoading,
+      isTabLocked,
+      data,
+      errors,
+      alert,
+      stripResult,
+      previewResult,
+      uiSchemaVersion,
+    },
     setState,
   ] = React.useState({
     isLoading: false,
@@ -62,7 +71,10 @@ const SecvisogramPage = () => {
       'EDITOR'
     ),
     isTabLocked: false,
+    /** @type {import('../uiSchemas.js').UiSchemaVersion} */
+    uiSchemaVersion: 'v2.1',
   })
+
   const { handleError } = React.useContext(AppErrorContext)
 
   const alertSaveInvalidTranslationStrings = useMemo(() => {
@@ -76,6 +88,7 @@ const SecvisogramPage = () => {
 
   return (
     <View
+      uiSchemaVersion={uiSchemaVersion}
       activeTab={
         searchParams.get('tab') === 'DOCUMENTS'
           ? 'DOCUMENTS'
@@ -357,6 +370,9 @@ const SecvisogramPage = () => {
           .then((templateContentRes) => templateContentRes.json())
       }}
       onGetBackendInfo={backend.getAboutInfo}
+      onSetUiVersion={(uiSchemaVersion) => {
+        setState((state) => ({ ...state, uiSchemaVersion }))
+      }}
     />
   )
 }

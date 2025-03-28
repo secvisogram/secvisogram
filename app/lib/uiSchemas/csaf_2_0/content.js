@@ -1,4 +1,4 @@
-/** @typedef {import('./shared/types').Property} Property */
+/** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */
 export default /** @type {const} */ ({
   key: '',
   fullName: [],

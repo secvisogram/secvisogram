@@ -1,9 +1,11 @@
 import React from 'react'
+import { UiSchemaVersion } from '../../../uiSchemas.js'
 import { Advisory, AdvisoryState } from '../shared/types.js'
 import CsafTab from './CsafTab.js'
 import PreviewTab from './PreviewTab.js'
 
 export interface Props {
+  uiSchemaVersion: UiSchemaVersion
   isLoading: boolean
   isTabLocked: boolean
   errors: import('../shared/types.js').ValidationError[]
@@ -82,4 +84,5 @@ export interface Props {
   >
   onGetTemplateContent(params: { templateId: string }): Promise<{}>
   onGetBackendInfo(): Promise<{ version: string }>
+  onSetUiVersion(uiSchemaVersion: UiSchemaVersion): void
 }
