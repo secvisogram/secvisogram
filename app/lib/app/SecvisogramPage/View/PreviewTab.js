@@ -1,6 +1,15 @@
 import React from 'react'
 import { parseMarkdown } from './PreviewTab/markdownParser.js'
-import HTMLTemplate from './shared/HTMLTemplate.js'
+import HTMLTemplate20 from './shared/HTMLTemplate2.0.js'
+import HTMLTemplate21 from './shared/HTMLTemplate2.1.js'
+
+/**
+ * @type {Object.<string, function>}
+ */
+const HtmlTemplates = {
+  'v2.0': HTMLTemplate20,
+  'v2.1': HTMLTemplate21,
+}
 
 /**
  * Defines the layout of the preview tab.
@@ -10,9 +19,14 @@ import HTMLTemplate from './shared/HTMLTemplate.js'
  *  previewResult: {
  *    doc: {}
  *  } | null
+ *  schemaVersion: import('#lib/uiSchemas.js').UiSchemaVersion
  * }} props
  */
-export default function PreviewTab({ onPreview, previewResult }) {
+export default function PreviewTab({
+  onPreview,
+  previewResult,
+  schemaVersion,
+}) {
   /**
    * Extend the document initially.
    */
@@ -25,8 +39,8 @@ export default function PreviewTab({ onPreview, previewResult }) {
   const [showRendered, setShowRendered] = React.useState(true)
   const html = React.useMemo(() => {
     const markdownParsedDoc = parseMarkdown(previewResult?.doc ?? {})
-    return HTMLTemplate({ document: markdownParsedDoc })
-  }, [previewResult?.doc])
+    return HtmlTemplates[schemaVersion]({ document: markdownParsedDoc })
+  }, [previewResult?.doc, schemaVersion])
 
   /**
    * Updates the content of the preview iframe.

@@ -1,14 +1,14 @@
 import { expect } from 'chai'
-import HTMLTemplate from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate.js'
-import DocumentEntity from '../../../../lib/core/v2_0/entities/DocumentEntity.js'
+import HTMLTemplate21 from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2.1.js'
+import DocumentEntityCsaf21 from '../../../../lib/core/v2_1/entities/DocumentEntity.js'
 import { testDocuments } from '../../../fixtures/vulnerabilityFlagsTests.js'
 
 const testDocument = (
   /** @type {any} */ document,
   /** @type {RegExp[]} */ expectedOutputs
 ) => {
-  const preview = new DocumentEntity().preview({ document })
-  const html = HTMLTemplate(preview)
+  const preview = new DocumentEntityCsaf21().preview({ document })
+  const html = HTMLTemplate21(preview)
 
   expectedOutputs.forEach((eo) => {
     // expand regex to make sure no brackets come after the given regex

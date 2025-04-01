@@ -128,8 +128,8 @@ export default class DocumentEntity {
           vulnerability,
           entries
         )
-        collectRefsInScores(
-          `/vulnerabilities/${i}/scores`,
+        collectRefsInMetrics(
+          `/vulnerabilities/${i}/metrics`,
           vulnerability,
           entries
         )
@@ -429,15 +429,15 @@ const collectProductRefsInRemediations = (
 
 /**
  * @param {string} instancePath
- * @param {{scores: any}} vulnerability
+ * @param {{metrics: any}} vulnerability
  * @param {*} entries
  */
-const collectRefsInScores = (instancePath, vulnerability, entries) => {
-  const scores = vulnerability.scores
-  if (scores) {
-    for (let i = 0; i < scores.length; ++i) {
-      const score = scores[i]
-      const products = score.products
+const collectRefsInMetrics = (instancePath, vulnerability, entries) => {
+  const metrics = vulnerability.metrics
+  if (vulnerability.metrics) {
+    for (let i = 0; i < metrics.length; ++i) {
+      const metric = metrics[i]
+      const products = metric.products
       if (products) {
         for (let j = 0; j < products.length; ++j) {
           const productId = products[j]
@@ -538,20 +538,21 @@ const collectGroupRefsInThreats = (instancePath, vulnerability, entries) => {
 /**
  * Retrieve the maximum baseScore of all scores
  *
- * @param {{scores: {cvss_v3: {baseScore: string}}[]}[]} vulnerabilities
+ * @param {{metrics: {content: {cvss_v3: {baseScore: string}}}[]}[]} vulnerabilities
  */
 const retrieveMaxBaseScore = (vulnerabilities) => {
-  if (!vulnerabilities) return '0'
   let maxBaseScore = 0
-  for (let i = 0; i < vulnerabilities.length; ++i) {
-    const vulnerability = vulnerabilities[i]
-    const scores = vulnerability.scores
-    if (scores) {
-      for (let i = 0; i < scores.length; ++i) {
-        const score = scores[i]
-        const baseScore = Number(score.cvss_v3?.baseScore) ?? 0
-        if (maxBaseScore < baseScore) {
-          maxBaseScore = baseScore
+  if (vulnerabilities) {
+    for (let i = 0; i < vulnerabilities.length; ++i) {
+      const vulnerability = vulnerabilities[i]
+      const metrics = vulnerability.metrics
+      if (metrics) {
+        for (let i = 0; i < metrics.length; ++i) {
+          const metric = metrics[i]
+          const baseScore = Number(metric?.content.cvss_v3?.baseScore) ?? 0
+          if (maxBaseScore < baseScore) {
+            maxBaseScore = baseScore
+          }
         }
       }
     }
@@ -660,7 +661,7 @@ const extendProductGroup = (productGroup, extProductIds) => {
 /**
  * Add the full product name to all products in product status
  *
- * @param {{scores: [],
+ * @param {{metrics: [],
  *          product_status: any,
  *          flags?: {
  *            label: string;
@@ -675,51 +676,51 @@ const addProductStatusPreviewAttributes = (
   productIds,
   productGroups
 ) => {
-  const extendedScoreIds = createExtendedScoreIds(
-    vulnerability.scores,
+  const extendedMetricIds = createExtendedMetricsIds(
+    vulnerability.metrics,
     productIds
   )
   const productStatus = vulnerability.product_status
   if (productStatus) {
     productStatus.known_affected = extendProductStatus(
       productStatus.known_affected,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.first_affected = extendProductStatus(
       productStatus.first_affected,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.last_affected = extendProductStatus(
       productStatus.last_affected,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.known_not_affected = extendProductStatus(
       productStatus.known_not_affected,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     addFlags(productStatus.known_not_affected, vulnerability, productGroups)
     productStatus.recommended = extendProductStatus(
       productStatus.recommended,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.fixed = extendProductStatus(
       productStatus.fixed,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.first_fixed = extendProductStatus(
       productStatus.first_fixed,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
     productStatus.under_investigation = extendProductStatus(
       productStatus.under_investigation,
-      extendedScoreIds,
+      extendedMetricIds,
       productIds
     )
   }
@@ -728,15 +729,15 @@ const addProductStatusPreviewAttributes = (
 /**
  * Collect all product ids with the matching name, vectorString and baseScore
  *
- * @param {*} scores
+ * @param {*} metrics
  * @param {{id: string, name: string}[]} productIds
  */
-const createExtendedScoreIds = (scores, productIds) => {
+const createExtendedMetricsIds = (metrics, productIds) => {
   const extendedProductIds = []
-  if (scores) {
-    for (let i = 0; i < scores.length; ++i) {
-      const score = scores[i]
-      const products = score.products
+  if (metrics) {
+    for (let i = 0; i < metrics.length; ++i) {
+      const metric = metrics[i]
+      const products = metric.products
       if (products) {
         for (let j = 0; j < products.length; ++j) {
           const productId = products[j]
@@ -744,8 +745,8 @@ const createExtendedScoreIds = (scores, productIds) => {
             extendedProductIds.push({
               id: productId,
               name: productIds.find((e) => e.id === productId)?.name ?? '',
-              vectorString: score.cvss_v3?.vectorString ?? '',
-              baseScore: score.cvss_v3?.baseScore ?? '',
+              vectorString: metric.content?.cvss_v3?.vectorString ?? '',
+              baseScore: metric.content?.cvss_v3?.baseScore ?? '',
             })
           }
         }
@@ -759,19 +760,19 @@ const createExtendedScoreIds = (scores, productIds) => {
  * Add full product name to product status
  *
  * @param {any} refs
- * @param {{id: string}[]} extendedScoreIds
+ * @param {{id: string}[]} extendedMetricIds
  * @param {{id: string;
  *          name: string;
  *        }[]} productIds
  */
-const extendProductStatus = (refs, extendedScoreIds, productIds) => {
+const extendProductStatus = (refs, extendedMetricIds, productIds) => {
   const extendedProductStatus = []
   if (refs) {
     for (let i = 0; i < refs.length; ++i) {
       let ref = refs[i]
       if (ref) {
         extendedProductStatus.push(
-          extendedScoreIds.find((e) => e.id === ref) ?? {
+          extendedMetricIds.find((e) => e.id === ref) ?? {
             id: ref,
             name:
               productIds.find((productId) => productId.id === ref)?.name ?? '',

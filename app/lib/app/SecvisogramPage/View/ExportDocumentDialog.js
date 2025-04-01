@@ -3,13 +3,15 @@ import React from 'react'
 import createFileName from '../../../shared/createFileName.js'
 import * as api from '../../shared/api.js'
 import AppErrorContext from '../../shared/context/AppErrorContext.js'
-import HTMLTemplate from './shared/HTMLTemplate.js'
+import HTMLTemplate2_0 from './shared/HTMLTemplate2.0.js'
+import HTMLTemplate2_1 from './shared/HTMLTemplate2.1.js'
 
 export default /**
  * @param {import('./ExportDocumentDialog/types.js').Props} props
  */
 ({
   defaultSource = 'CSAFJSON',
+  uiSchemaVersion,
   advisoryState,
   documentIsValid,
   formValues,
@@ -42,18 +44,16 @@ export default /**
 
   const [source, setSource] = React.useState(
     /** @type {'CSAFJSON'
-    | 'CSAFJSONSTRIPPED'
-    | 'HTMLDOCUMENT'
-    | 'PDFDOCUMENT'
-    | 'MARKDOWN'} */
+     | 'CSAFJSONSTRIPPED'
+     | 'HTMLDOCUMENT'
+     | 'PDFDOCUMENT'
+     | 'MARKDOWN'} */
     (defaultSource)
   )
   const [isLocal, setIsLocal] = React.useState(
     advisoryState?.type === 'NEW_ADVISORY'
       ? true
       : formValues !== originalValues
-      ? true
-      : false
   )
 
   const exportButtonProps = {
@@ -282,7 +282,10 @@ export default /**
                   case 'HTMLDOCUMENT':
                     onPrepareDocumentForTemplate(formValues.doc)
                       .then(({ document: doc }) => {
-                        const html = HTMLTemplate({ document: doc })
+                        const html =
+                          uiSchemaVersion === 'v2.1'
+                            ? HTMLTemplate2_1({ document: doc })
+                            : HTMLTemplate2_0({ document: doc })
                         onExportHTML(html, formValues.doc)
                       })
                       .catch(handleError)
@@ -296,7 +299,10 @@ export default /**
                         ) {
                           return
                         }
-                        const html = HTMLTemplate({ document: doc })
+                        const html =
+                          uiSchemaVersion === 'v2.1'
+                            ? HTMLTemplate2_1({ document: doc })
+                            : HTMLTemplate2_0({ document: doc })
                         const iframeWindow = iframeRef.current.contentWindow
                         iframeRef.current.contentDocument.open()
                         iframeRef.current.contentDocument.write(html)
