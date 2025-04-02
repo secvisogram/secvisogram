@@ -1,36 +1,38 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as jsonMap from 'json-source-map'
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import MonacoEditor from 'react-monaco-editor'
 import sortObjectKeys from '../../shared/sortObjectKeys.js'
-import editorSchema from './JsonEditorTab/editorSchema.js'
+import SelectedPathContext from './shared/context/SelectedPathContext.js'
 import SideBarContext from './shared/context/SideBarContext.js'
 import useDebounce from './shared/useDebounce.js'
-import SelectedPathContext from './shared/context/SelectedPathContext.js'
 
 /**
- * @param {{
- *  originalValues: import('../shared/types').FormValues
- *  formValues: import('../shared/types').FormValues
- *  validationErrors: import('../shared/types').TypedValidationError[]
- *  sortButtonRef: React.MutableRefObject<HTMLButtonElement | null>
- *  onChange(doc: {} | null): void
- *  onLockTab(): void
- *  onUnlockTab(): void
- * }} props
+ * @param {object} props
+ * @param {import('../shared/types').FormValues} props.originalValues
+ * @param {import('../shared/types').FormValues} props.formValues
+ * @param {import('../shared/types').TypedValidationError[]} props.validationErrors
+ * @param {React.MutableRefObject<HTMLButtonElement | null>} props.sortButtonRef
+ * @param {import('#lib/uiSchemas.js').UiSchemaVersion} props.uiSchemaVersion
+ * @param {(doc: {} | null) => void} props.onChange
+ * @param {() => void} props.onLockTab
+ * @param {() => void} props.onUnlockTab
  */
 export default function JsonEditorTab({
   originalValues,
   formValues,
   validationErrors: errors,
   sortButtonRef,
+  uiSchemaVersion,
   onChange,
   onLockTab,
   onUnlockTab,
 }) {
   const { doc } = formValues
   const sideBarData = React.useContext(SideBarContext)
+  const editorSchema = uiSchemas[uiSchemaVersion].jsonSchema
 
   const [editor, setEditor] = React.useState(
     /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
@@ -195,6 +197,20 @@ export default function JsonEditorTab({
     [setCursor, selectedPath]
   )
 
+  const updateEditorSettings = useCallback(() => {
+    monaco?.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      enableSchemaRequest: true,
+      schemas: [
+        {
+          uri: '',
+          fileMatch: ['*'],
+          schema: editorSchema,
+        },
+      ],
+    })
+  }, [monaco, editorSchema])
+
   const editorDidMount = (
     /** @type {any } */ editor,
     /** @type {any} */ monaco
@@ -243,18 +259,12 @@ export default function JsonEditorTab({
     setEditor(editor)
     setMonaco(monaco)
 
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
-      enableSchemaRequest: true,
-      schemas: [
-        {
-          uri: '',
-          fileMatch: ['*'],
-          schema: editorSchema,
-        },
-      ],
-    })
+    updateEditorSettings()
   }
+
+  useEffect(() => {
+    updateEditorSettings()
+  }, [updateEditorSettings])
 
   const onChangeMonaco = (/** @type {any} */ newValue) => {
     setState((state) => ({

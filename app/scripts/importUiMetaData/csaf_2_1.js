@@ -3,26 +3,19 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import prettier from 'prettier'
 
-const metaData = uiSchemas['v2.1'].metaData
+const { metaData, jsonSchema } = uiSchemas['v2.1']
 
-/** @typedef {import('./csaf_2_1/csaf_json_schema.json')} CSAFJSONSchema */
 /** @typedef {import('./cvss-v2.0.json')} CVSS2JSONSchema */
 /** @typedef {import('./csaf_2_1/cvss-v4.0.json')} CVSS4JSONSchema */
-
-/** @type {CSAFJSONSchema} */
-const schema = JSON.parse(
-  await readFile(
-    new URL('csaf_2_1/csaf_json_schema.json', import.meta.url),
-    'utf-8'
-  )
-)
 
 /** @type {CVSS2JSONSchema} */
 const cvss2Schema = JSON.parse(
   await readFile(new URL('cvss-v2.0.json', import.meta.url), 'utf-8')
 )
 
-const defs = /** @type {import('./csaf_2_1/types.js').Defs} */ (schema.$defs)
+const defs = /** @type {import('./csaf_2_1/types.js').Defs} */ (
+  jsonSchema.$defs
+)
 
 const metaDataMap = new Map(Object.entries(metaData))
 
@@ -33,7 +26,7 @@ const prettierString = prettier.format(
   `/** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */
 export default (${JSON.stringify(
     convertSchema(
-      /** @type {import('./csaf_2_1/types.js').Schema} */ (schema),
+      /** @type {import('./csaf_2_1/types.js').Schema} */ (jsonSchema),
       defs,
       []
     )

@@ -1132,6 +1132,7 @@ function View({
                       formValues={formValues}
                       validationErrors={errors}
                       sortButtonRef={sortButtonRef}
+                      uiSchemaVersion={uiSchemaVersion}
                       onChange={onReplaceDoc}
                       onLockTab={onLockTab}
                       onUnlockTab={onUnlockTab}
