@@ -17,6 +17,7 @@ import ArrayEditor from './GenericEditor/ArrayEditor.js'
 import CSAF21CweAttribute from './GenericEditor/Attributes/csaf_2_1/CweAttribute.js'
 import CVSSV2Attribute from './GenericEditor/Attributes/CVSS2Attribute.js'
 import CVSSV3Attribute from './GenericEditor/Attributes/CVSS3Attribute.js'
+import CVSSV4Attribute from './GenericEditor/Attributes/CVSS4Attribute.js'
 import CweAttribute from './GenericEditor/Attributes/CweAttribute.js'
 import DateAttribute from './GenericEditor/Attributes/DateAttribute.js'
 import DropdownAttribute from './GenericEditor/Attributes/DropdownAttribute.js'
@@ -174,6 +175,15 @@ export default function Editor({
     } else if (uiType === 'OBJECT_CVSS_3') {
       return (
         <CVSSV3Attribute
+          instancePath={instancePath}
+          value={/** @type {{[key: string]: string | number }} */ (value)}
+          property={property}
+          disabled={disabled}
+        />
+      )
+    } else if (uiType === 'OBJECT_CVSS_4') {
+      return (
+        <CVSSV4Attribute
           instancePath={instancePath}
           value={/** @type {{[key: string]: string | number }} */ (value)}
           property={property}

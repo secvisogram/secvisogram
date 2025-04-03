@@ -8107,6 +8107,7 @@ export default {
                                       title: 'v2_1.CvssV4Title',
                                       description: 'v2_1.CvssV4Description',
                                     },
+                                    uiType: 'OBJECT_CVSS_4',
                                   },
                                   type: 'OBJECT',
                                   metaInfo: { propertyList: [] },
