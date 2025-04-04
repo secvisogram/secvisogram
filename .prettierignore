@@ -16,4 +16,6 @@
 /app/public
 /app/vendor/first
 
+/bin/build
+
 cvss-v4.0.json
