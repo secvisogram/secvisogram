@@ -1,4 +1,4 @@
-import * as core from '#lib/core/v2_0.js'
+import { coreRecord } from '#lib/core.js'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import createFileName from '../shared/createFileName.js'
@@ -16,8 +16,6 @@ import sitemap from './shared/sitemap.js'
  * @typedef {import('./SecvisogramPage/shared/types').ValidationError} ValidationError
  */
 
-const doc = core.newDocMin()
-
 /**
  * Holds the application-state and provides memoized callbacks for the view
  * to communicate with the core.
@@ -30,7 +28,6 @@ const SecvisogramPage = () => {
     {
       isLoading,
       isTabLocked,
-      data,
       errors,
       alert,
       stripResult,
@@ -62,9 +59,6 @@ const SecvisogramPage = () => {
      *    doc: {}
      * } | null}
      */ (null),
-    data: {
-      doc,
-    },
     activeTab: /** @type {React.ComponentProps<typeof View>['activeTab']} */ (
       'EDITOR'
     ),
@@ -72,6 +66,9 @@ const SecvisogramPage = () => {
     /** @type {import('../uiSchemas.js').UiSchemaVersion} */
     uiSchemaVersion: 'v2.1',
   })
+  const core = coreRecord[uiSchemaVersion]
+  const [doc, setDoc] = React.useState(core.newDocMin())
+  const data = React.useMemo(() => ({ doc }), [doc])
 
   const { handleError } = React.useContext(AppErrorContext)
 
@@ -169,11 +166,8 @@ const SecvisogramPage = () => {
               setState((state) => ({
                 ...state,
                 isLoading: false,
-                data: {
-                  ...state.data,
-                  doc: parsedDoc,
-                },
               }))
+              setDoc(parsedDoc)
               resolve(parsedDoc)
             } catch (err) {
               reject(err)
@@ -209,7 +203,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onCollectProductIds={React.useCallback(
         async (document) => {
@@ -220,7 +214,7 @@ const SecvisogramPage = () => {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError, core]
       )}
       onCollectGroupIds={React.useCallback(
         async (document) => {
@@ -231,7 +225,7 @@ const SecvisogramPage = () => {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError, core]
       )}
       onGetDocMin={async () => {
         return core.newDocMin()
@@ -257,7 +251,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onPreview={React.useCallback(
         (document) => {
@@ -273,11 +267,11 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onPrepareDocumentForTemplate={React.useCallback(
         (document) => core.preview({ document }),
-        []
+        [core]
       )}
       onExportCSAF={React.useCallback(
         (document) => {
@@ -315,7 +309,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, alertSaveInvalidTranslationStrings]
+        [handleError, alertSaveInvalidTranslationStrings, core]
       )}
       onExportHTML={React.useCallback(
         (html, doc) => {
@@ -340,7 +334,7 @@ const SecvisogramPage = () => {
             }
           })
         },
-        [alertSaveInvalidTranslationStrings]
+        [alertSaveInvalidTranslationStrings, core]
       )}
       onServiceValidate={({ validatorUrl, csaf }) => {
         return validationService
