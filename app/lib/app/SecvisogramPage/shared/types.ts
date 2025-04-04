@@ -71,6 +71,7 @@ type MetaData = Readonly<{
     | 'OBJECT_CWE'
     | 'OBJECT_CVSS_2'
     | 'OBJECT_CVSS_3'
+    | 'OBJECT_CVSS_4'
     | 'ARRAY_REVISION_HISTORY'
   relevanceLevels?: {
     csaf_base: RelevanceLevel
