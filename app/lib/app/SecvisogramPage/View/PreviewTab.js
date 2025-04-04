@@ -1,14 +1,14 @@
 import React from 'react'
 import { parseMarkdown } from './PreviewTab/markdownParser.js'
-import HTMLTemplate20 from './shared/HTMLTemplate2.0.js'
-import HTMLTemplate21 from './shared/HTMLTemplate2.1.js'
+import HTMLTemplate2_0 from './shared/HTMLTemplate2_0.js'
+import HTMLTemplate2_1 from './shared/HTMLTemplate2_1.js'
 
 /**
  * @type {Object.<string, function>}
  */
 const HtmlTemplates = {
-  'v2.0': HTMLTemplate20,
-  'v2.1': HTMLTemplate21,
+  'v2.0': HTMLTemplate2_0,
+  'v2.1': HTMLTemplate2_1,
 }
 
 /**

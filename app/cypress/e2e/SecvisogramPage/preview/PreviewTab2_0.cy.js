@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import HTMLTemplate20 from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2.0.js'
+import HTMLTemplate2_0 from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2_0.js'
 import DocumentEntity from '../../../../lib/core/v2_0/entities/DocumentEntity.js'
 import { testDocuments } from '../../../fixtures/vulnerabilityFlagsTests.js'
 
@@ -8,7 +8,7 @@ const testDocument = (
   /** @type {RegExp[]} */ expectedOutputs
 ) => {
   const preview = new DocumentEntity().preview({ document })
-  const html = HTMLTemplate20(preview)
+  const html = HTMLTemplate2_0(preview)
 
   expectedOutputs.forEach((eo) => {
     // expand regex to make sure no brackets come after the given regex
