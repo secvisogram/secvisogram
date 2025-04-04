@@ -453,16 +453,17 @@ function View({
 
   const openExportDialogPreselected = (
     /** @type {'CSAFJSON'
-    | 'CSAFJSONSTRIPPED'
-    | 'HTMLDOCUMENT'
-    | 'PDFDOCUMENT'
-    | 'MARKDOWN'} */ preselected
+     | 'CSAFJSONSTRIPPED'
+     | 'HTMLDOCUMENT'
+     | 'PDFDOCUMENT'
+     | 'MARKDOWN'} */ preselected
   ) => {
     setNewExportDocumentDialog(
       <ExportDocumentDialog
         defaultSource={preselected}
         originalValues={originalValues}
         advisoryState={advisoryState}
+        uiSchemaVersion={uiSchemaVersion}
         formValues={formValues}
         documentIsValid={!errors.length}
         onPrepareDocumentForTemplate={onPrepareDocumentForTemplate}
@@ -1141,6 +1142,7 @@ function View({
                     <PreviewTab
                       previewResult={previewResult}
                       onPreview={onPreviewCallback}
+                      schemaVersion={uiSchemaVersion}
                     />
                   ) : activeTab === 'CSAF-JSON' ? (
                     <CsafTab

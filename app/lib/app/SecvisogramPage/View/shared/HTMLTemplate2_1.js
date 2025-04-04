@@ -1,5 +1,5 @@
 import Mustache from 'mustache'
-import Template from './HTMLTemplate/Template.html'
+import Template from './HTMLTemplate/TemplateCsaf2_1.html'
 
 const PRODUCT_STATUS_HEADER = `
 <thead>
@@ -94,7 +94,7 @@ const URL = `
  *
  * @param {{ document: {} }} props
  */
-export default function HTMLTemplate({ document }) {
+export default function HTMLTemplate2_1({ document }) {
   return Mustache.render(Template, document, {
     product_status_header: PRODUCT_STATUS_HEADER,
     product_status_row: PRODUCT_STATUS_ROW,
