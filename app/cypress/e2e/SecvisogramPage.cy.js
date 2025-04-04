@@ -2,8 +2,8 @@
 
 import CVSSVector from '../../lib/app/SecvisogramPage/View/FormEditor/editors/GenericEditor/Attributes/CVSS3Attribute/CVSSVector.js'
 import ViewReducer from '../../lib/app/SecvisogramPage/View/Reducer.js'
-import docMax from '../../lib/app/shared/Core/doc-max.json'
-import docMin from '../../lib/app/shared/Core/doc-min.json'
+import docMax from '../../lib/core/v2_1/doc-max.json'
+import docMin from '../../lib/core/v2_1/doc-min.json'
 import { canCreateDocuments } from '../../lib/app/shared/permissions.js'
 import { getLoginEnabledConfig } from '../fixtures/appConfigData.js'
 import {
