@@ -200,10 +200,9 @@ export default function JsonEditorTab({
   const updateEditorSettings = useCallback(() => {
     monaco?.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
-      enableSchemaRequest: true,
       schemas: [
         {
-          uri: '',
+          uri: editorSchema.$id,
           fileMatch: ['*'],
           schema: editorSchema,
         },
