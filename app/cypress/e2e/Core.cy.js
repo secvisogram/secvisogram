@@ -1,17 +1,15 @@
 /// <reference types="cypress" />
 
 import { expect } from 'chai'
-import createCore from '../../lib/app/shared/Core.js'
+import * as core from '../../lib/core/v2_0.js'
 import fixture from '../fixtures/coreFixture.js'
 import documentTests from '../fixtures/documentTests.js'
 
 describe('Core', () => {
-  const core = createCore()
-
   describe('documentTests', () => {
     documentTests.forEach((documentTest, i) => {
       it(documentTest.title ?? `Test #${i + 1}`, async () => {
-        const result = await core.document.validate({
+        const result = await core.validate({
           document: documentTest.content,
         })
         expect(result.isValid).to.equal(documentTest.valid)
@@ -33,7 +31,7 @@ describe('Core', () => {
   describe('DocumentService', () => {
     it('The document can be validated against the JSON-schema', async () => {
       for (const document of fixture.documents) {
-        const result = await core.document.validate({
+        const result = await core.validate({
           document: document.content,
         })
         expect(result.isValid).to.equal(document.valid)
@@ -48,7 +46,7 @@ describe('Core', () => {
     it('The document can be minified using the CSAF-strip algorithm', async () => {
       for (const document of fixture.documents) {
         if (document.strippedVersion === undefined) continue
-        const result = await core.document.strip({
+        const result = await core.strip({
           document: document.content,
         })
 

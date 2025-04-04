@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import DocumentEntity from '../../../../lib/app/shared/Core/entities/DocumentEntity.js'
 import HTMLTemplate from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate.js'
+import DocumentEntity from '../../../../lib/core/v2_0/entities/DocumentEntity.js'
 import secureHrefTests from '../../../fixtures/secureHrefTests.js'
 
 describe('secureHrefTests', () => {
