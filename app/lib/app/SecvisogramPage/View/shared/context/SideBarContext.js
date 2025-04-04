@@ -13,11 +13,11 @@ import React from 'react'
 /** @type {SideBarContext} */
 const defaultValue = {
   sideBarIsOpen: false,
-  setSideBarIsOpen: (() => {}),
-  sideBarSelectedPath: ([]),
-  setSideBarSelectedPath: (() => {}),
+  setSideBarIsOpen: () => {},
+  sideBarSelectedPath: [],
+  setSideBarSelectedPath: () => {},
   sideBarContent: 'ERRORS',
-  setSideBarContent: (() => {}),
+  setSideBarContent: () => {},
 }
 
 export default React.createContext(defaultValue)

@@ -735,10 +735,6 @@ export default /** @type {const} */ ({
       name: 'Exposure of Sensitive Information caused by Shared Microarchitectural Predictor State that Influences Transient Execution',
     },
     { id: 'CWE-1426', name: 'Improper Validation of Generative AI Output' },
-    {
-      id: 'CWE-1427',
-      name: 'Improper Neutralization of Input Used for LLM Prompting',
-    },
     { id: 'CWE-143', name: 'Improper Neutralization of Record Delimiters' },
     { id: 'CWE-144', name: 'Improper Neutralization of Line Delimiters' },
     { id: 'CWE-145', name: 'Improper Neutralization of Section Delimiters' },

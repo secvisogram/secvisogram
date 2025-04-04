@@ -6,7 +6,7 @@ const parseLanguageTagExtensionList = require('./cli/parseLanguageTagExtensionLi
 
 yargs(process.argv.slice(2))
   .command(
-    'generate-html-template',
+    'generate-html-template2.0',
     '',
     (/** @type {import('yargs').Argv} */ command) =>
       command

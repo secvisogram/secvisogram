@@ -40,7 +40,10 @@ export default function DropdownAttribute({
             freeSolo={!isEnum}
             value={value}
             onChange={(_, newValue) => {
-              updateDoc(props.instancePath, /** @type {string} */(newValue ?? ''))
+              updateDoc(
+                props.instancePath,
+                /** @type {string} */ (newValue ?? '')
+              )
             }}
             inputValue={/** @type {string} */ (inputValue)}
             onInputChange={(_, newInputValue) => {
