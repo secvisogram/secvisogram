@@ -32,7 +32,7 @@ export default function JsonEditorTab({
 }) {
   const { doc } = formValues
   const sideBarData = React.useContext(SideBarContext)
-  const editorSchema = uiSchemas[uiSchemaVersion].jsonSchema
+  const uiSchema = uiSchemas[uiSchemaVersion]
 
   const [editor, setEditor] = React.useState(
     /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
@@ -202,13 +202,18 @@ export default function JsonEditorTab({
       validate: true,
       schemas: [
         {
-          uri: editorSchema.$id,
+          uri: uiSchema.jsonSchema.$id,
           fileMatch: ['*'],
-          schema: editorSchema,
+          schema: uiSchema.jsonSchema,
         },
+        ...uiSchema.subJsonSchemas.map((schema) => ({
+          uri: schema.ref,
+          fileMatch: ['*'],
+          schema: schema.content,
+        })),
       ],
     })
-  }, [monaco, editorSchema])
+  }, [monaco, uiSchema])
 
   const editorDidMount = (
     /** @type {any } */ editor,
