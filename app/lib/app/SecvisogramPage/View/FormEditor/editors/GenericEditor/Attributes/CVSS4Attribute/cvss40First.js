@@ -1113,11 +1113,11 @@ export class CVSS40 {
 
     // Find the max vector to use i.e. one in the combination of all the highest
     // that is greater or equal (severity distance) than the to-be scored vector.
-    let maxVector, distances
+    let distances
     for (const vector of maxVectors) {
       distances = this.calculateSeverityDistances(vector)
       if (Object.values(distances).every((distance) => distance >= 0)) {
-        maxVector = vector
+        //        maxVector = vector
         break
       }
     }
