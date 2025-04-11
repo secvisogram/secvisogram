@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import CVSSVector from '../../lib/app/SecvisogramPage/View/FormEditor/editors/GenericEditor/Attributes/CVSS3Attribute/CVSSVector.js'
 import ViewReducer from '../../lib/app/SecvisogramPage/View/Reducer.js'
 import docMax from '../../lib/core/v2_1/doc-max.json'
 import docMin from '../../lib/core/v2_1/doc-min.json'
