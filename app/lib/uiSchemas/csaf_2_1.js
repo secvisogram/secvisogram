@@ -1,3 +1,4 @@
+import ssvcV1 from './csaf_2_1/ssvc-v1.js'
 import cvssV20 from './cvss-v2.0.js'
 import cvssV30 from './cvss-v3.0.js'
 import cvssV31 from './cvss-v3.1.js'
@@ -15,4 +16,8 @@ export const subJsonSchemas = [
   { ref: 'https://www.first.org/cvss/cvss-v3.0.json', content: cvssV30 },
   { ref: 'https://www.first.org/cvss/cvss-v3.1.json', content: cvssV31 },
   { ref: 'https://www.first.org/cvss/cvss-v4.0.json', content: cvssV40 },
+  {
+    ref: 'https://certcc.github.io/SSVC/data/schema/v1/Decision_Point_Value_Selection-1-0-1.schema.json',
+    content: ssvcV1,
+  },
 ]
