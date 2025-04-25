@@ -1,3 +1,10 @@
+/**
+ * This module exports the ui schemas and the associated meta data
+ * (including the csaf json schema) for all supported CSAF versions.
+ *
+ * See app/scripts/importUiMetaData/README.md for more information.
+ */
+
 /** @typedef {keyof uiSchemas} UiSchemaVersion */
 
 export const uiSchemas = {
