@@ -1,7 +1,6 @@
 export {
   optionalTest_6_2_1,
   optionalTest_6_2_2,
-  optionalTest_6_2_3,
   optionalTest_6_2_4,
   optionalTest_6_2_5,
   optionalTest_6_2_6,
@@ -20,3 +19,4 @@ export {
   optionalTest_6_2_19,
   optionalTest_6_2_20,
 } from '../optionalTests.js'
+export { optionalTest_6_2_3 } from './optionalTests/optionalTest_6_2_3.js'

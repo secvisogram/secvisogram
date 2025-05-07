@@ -6,8 +6,13 @@ import xml2js from 'xml2js'
 
 // The registry file can be downloaded from https://cwe.mitre.org/data/xml/cwec_latest.xml.zip
 
+const fileNameRegex = /^cwec_v(?<version>.+)\.xml/
+
 const [, , REGISTRY_FILE] = process.argv
-const OUTPUT_FILE = 'lib/shared/cwec.js'
+const fileNameMatch = fileNameRegex.exec(REGISTRY_FILE)
+if (!fileNameMatch) throw new Error('Failed to parse filename')
+const version = fileNameMatch.groups?.version
+const OUTPUT_FILE = `lib/cwec/${version}.js`
 
 /**
  * @typedef {{ ID: string; Name: string }} Weakness
@@ -34,11 +39,8 @@ const json = {
 
 await writeFile(
   OUTPUT_FILE,
-  prettier.format(
-    `export default /** @type {const} */ (${JSON.stringify(json)})`,
-    {
-      ...(await prettier.resolveConfig(OUTPUT_FILE)),
-      filepath: OUTPUT_FILE,
-    }
-  )
+  prettier.format(`export default (${JSON.stringify(json)})`, {
+    ...(await prettier.resolveConfig(OUTPUT_FILE)),
+    filepath: OUTPUT_FILE,
+  })
 )
