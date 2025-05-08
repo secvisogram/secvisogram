@@ -1,7 +1,7 @@
 import {
   faInfoCircle,
-  faMagic,
   faLightbulb,
+  faMagic,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { t } from 'i18next'
@@ -17,18 +17,17 @@ import AttributeErrors from './AttributeErrors.js'
  * Abstracts the base functionality for all input fields in the editor.
  * It uses the data path to filter the associated validation errors.
  *
- * @param {{
- *  label: string
- *  description: string
- *  instancePath: string[]
- *  children?: React.ReactNode | ((params: {}) => React.ReactNode)
- *  property: import('../../../../shared/types').Property
- *  disabled: boolean
- *  fillFunction?: () => void
- *  fillDefaultFunction?: () => void
- *  fillFunctionIcon?: import('@fortawesome/fontawesome-svg-core').IconProp
- * }} props
- * @template V
+ * @param {object} props
+ * @param {string} props.label
+ * @param {string} props.description
+ * @param {string[]} props.instancePath
+ * @param {React.ReactNode | ((params: {}) => React.ReactNode)} [props.children]
+ * @param {import('../../../../shared/types').Property} props.property
+ * @param {boolean} props.disabled
+ * @param {() => void} [props.fillFunction]
+ * @param {() => void} [props.fillDefaultFunction]
+ * @param {import('@fortawesome/fontawesome-svg-core').IconProp} [props.fillFunctionIcon]
+ * @param {number} [props.maxErrorWidth]
  */
 export default function Attribute({
   label,
@@ -40,6 +39,7 @@ export default function Attribute({
   fillFunction,
   fillDefaultFunction,
   fillFunctionIcon,
+  maxErrorWidth,
 }) {
   const { errors, doc } = React.useContext(DocumentEditorContext)
   const { selectedRelevanceLevel, relevanceLevels } = React.useContext(
@@ -131,7 +131,10 @@ export default function Attribute({
         ) : null}
       </div>
       {children}
-      <AttributeErrors validationErrors={localValidationErrors} />
+      <AttributeErrors
+        validationErrors={localValidationErrors}
+        maxWidth={maxErrorWidth}
+      />
     </section>
   ) : null
 }

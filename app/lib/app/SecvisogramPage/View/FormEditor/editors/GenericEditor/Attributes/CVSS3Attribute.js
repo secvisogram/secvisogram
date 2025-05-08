@@ -81,6 +81,7 @@ export default function CVSSV3Attribute({
           property={property}
           disabled={disabled}
           required={true}
+          maxErrorWidth={400}
         />
         {canBeUpgraded ? (
           <div className="mb-2">
