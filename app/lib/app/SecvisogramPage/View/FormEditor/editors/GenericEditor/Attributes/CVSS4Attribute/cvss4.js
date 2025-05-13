@@ -977,6 +977,19 @@ export function convertOptionsArrayToObjectByValue(optionsArray) {
 }
 
 /**
+ * @param {string} metricTypeId
+ * @return {string[]}
+ */
+export function metricGroupsFormMetricTypeId(metricTypeId) {
+  /** @type {any} */
+  const metricGroups = flatMetrics
+    .filter((metric) => metric.metricTypeId === metricTypeId)
+    .map((metric) => metric.metricGroup)
+
+  return [...new Set(metricGroups)]
+}
+
+/**
  * @param {{optionName: string, optionValue: string, optionKey: string}[]} optionsArray
  * @return {any}
  */

@@ -5,7 +5,11 @@ import TextAttribute from './TextAttribute.js'
 import Collapsible from './shared/Collapsible.js'
 import CvssScore from './shared/cvssScore.js'
 import { cvssDropdown } from './shared/cvssUtils.js'
-import { Cvss4JsonWrapper, flatMetrics } from './CVSS4Attribute/cvss4.js'
+import {
+  Cvss4JsonWrapper,
+  flatMetrics,
+  metricGroupsFormMetricTypeId,
+} from './CVSS4Attribute/cvss4.js'
 
 /**
  * @param {{
@@ -50,6 +54,41 @@ export default function CVSSV4Attribute({
     [outerDocumentEditor, updateDoc, instancePath, doc, cvss40]
   )
 
+  /** @type {(metricTypeId: string) => any} */
+  function dropdownGroupsFor(metricTypeId) {
+    return (
+      <div>
+        {metricGroupsFormMetricTypeId(metricTypeId).map((group) =>
+          cvssDropdownGroup(metricTypeId, group)
+        )}
+      </div>
+    )
+  }
+
+  /**
+   * @param {string} metricTypeId
+   * @param {string} groupName
+   */
+  function cvssDropdownGroup(metricTypeId, groupName) {
+    return (
+      <div>
+        {groupName}
+        {flatMetrics
+          .filter(
+            (metric) =>
+              metric.metricTypeId === metricTypeId &&
+              metric.metricGroup === groupName
+          )
+          .map((metric) =>
+            dropdownFor(
+              metric.jsonName,
+              metric.options.map((option) => option.optionValue)
+            )
+          )}
+      </div>
+    )
+  }
+
   /** @type {(childName: string, options: string[], disableClearable?: boolean) => any} */
   function dropdownFor(childName, options, disableClearable = false) {
     const childValue = /** @type {string} */ ((value || {})[childName]) || ''
@@ -84,27 +123,13 @@ export default function CVSSV4Attribute({
           severity={value?.baseSeverity}
         ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.baseInputs')}>
-          {flatMetrics
-            .filter((metric) => metric.metricTypeId === 'BASE')
-            .map((metric) =>
-              dropdownFor(
-                metric.jsonName,
-                metric.options.map((option) => option.optionValue)
-              )
-            )}
+          {dropdownGroupsFor('BASE')}
         </Collapsible>
         <Collapsible
           startCollapsed={true}
           title={t('cvssEditor.supplementalInputs')}
         >
-          {flatMetrics
-            .filter((metric) => metric.metricTypeId === 'SUPPLEMENTAL')
-            .map((metric) =>
-              dropdownFor(
-                metric.jsonName,
-                metric.options.map((option) => option.optionValue)
-              )
-            )}
+          {dropdownGroupsFor('SUPPLEMENTAL')}
         </Collapsible>
 
         <CvssScore
@@ -115,14 +140,7 @@ export default function CVSSV4Attribute({
           startCollapsed={true}
           title={t('cvssEditor.environmentalInputs')}
         >
-          {flatMetrics
-            .filter((metric) => metric.metricTypeId === 'ENVIRONMENTAL')
-            .map((metric) =>
-              dropdownFor(
-                metric.jsonName,
-                metric.options.map((option) => option.optionValue, false)
-              )
-            )}
+          {dropdownGroupsFor('ENVIRONMENTAL')}
         </Collapsible>
 
         <CvssScore
@@ -130,14 +148,7 @@ export default function CVSSV4Attribute({
           severity={value?.threatScore}
         ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.threatInputs')}>
-          {flatMetrics
-            .filter((metric) => metric.metricTypeId === 'THREAT')
-            .map((metric) =>
-              dropdownFor(
-                metric.jsonName,
-                metric.options.map((option) => option.optionValue)
-              )
-            )}
+          {dropdownGroupsFor('THREAT')}
         </Collapsible>
       </div>
     </DocumentEditorContext.Provider>
