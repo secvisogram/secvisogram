@@ -7192,7 +7192,7 @@ export default {
                             'v2_1.VulnerabilitiesItemsScoresItemsDescription',
                         },
                         itemName: {
-                          itemNameTranslationKey: 'arrays.scoresItemName',
+                          itemNameTranslationKey: 'arrays.metricItemName',
                         },
                         relevanceLevels: {
                           csaf_base: 'nice_to_know',
