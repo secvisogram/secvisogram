@@ -20,16 +20,14 @@ export default function Collapsible({ startCollapsed, title, children }) {
         className="border border-gray-400 py-1 px-2 bg-gray-50 hover:bg-gray-200 rounded w-full"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
-        <div className="flex justify-between ...">
-          <div>{title}</div>
-          <div>
-            {isCollapsed ? (
-              <FontAwesomeIcon icon={faPlus} />
-            ) : (
-              <FontAwesomeIcon icon={faMinus} />
-            )}
-          </div>
-        </div>
+        <span className="flex justify-between items-center">
+          <span>{title}</span>
+          {isCollapsed ? (
+            <FontAwesomeIcon icon={faPlus} />
+          ) : (
+            <FontAwesomeIcon icon={faMinus} />
+          )}
+        </span>
       </button>
       {!isCollapsed ? (
         <div className="flex flex-col border-x border-b border-gray-400 rounded-b p-4 -mt-1 w-full">

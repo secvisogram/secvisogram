@@ -4257,7 +4257,7 @@ export default {
       description: 'VulnerabilitiesItemsScoresItemsDescription',
     },
     itemName: {
-      itemNameTranslationKey: 'arrays.scoresItemName',
+      itemNameTranslationKey: 'arrays.metricItemName',
     },
   },
   '$.vulnerabilities.metrics.content': {
