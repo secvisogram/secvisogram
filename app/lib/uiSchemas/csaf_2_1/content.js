@@ -6341,6 +6341,12 @@ export default {
                       description:
                         'Holds the MITRE standard Common Weakness Enumeration (CWE) for the weakness associated.',
                       metaData: {
+                        userDocumentation: {
+                          specification:
+                            'docs/user/vulnerabilities/vulnerability/cwes-spec.en.md',
+                          usage:
+                            'docs/user/vulnerabilities/vulnerability/cwes-usage.en.md',
+                        },
                         relevanceLevels: {
                           csaf_base: 'want_to_have',
                           csaf_security_incident_response: 'optional',
@@ -6348,6 +6354,12 @@ export default {
                           csaf_security_advisory: 'best_practice',
                           csaf_vex: 'want_to_have',
                         },
+                        i18n: {
+                          title: 'v2_1.VulnerabilitiesItemsCwesTitle',
+                          description:
+                            'v2_1.VulnerabilitiesItemsCwesDescription',
+                        },
+                        uiType: 'OBJECT_CWE',
                       },
                       type: 'OBJECT',
                       metaInfo: {
