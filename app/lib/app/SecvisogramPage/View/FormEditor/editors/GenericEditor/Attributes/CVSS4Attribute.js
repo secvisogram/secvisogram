@@ -1,15 +1,15 @@
 import { t } from 'i18next'
-import React from 'react'
+import React, { Fragment } from 'react'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
-import TextAttribute from './TextAttribute.js'
-import Collapsible from './shared/Collapsible.js'
-import CvssScore from './shared/cvssScore.js'
-import { cvssDropdown } from './shared/cvssUtils.js'
 import {
   Cvss4JsonWrapper,
   flatMetrics,
   metricGroupsFormMetricTypeId,
 } from './CVSS4Attribute/cvss4.js'
+import TextAttribute from './TextAttribute.js'
+import Collapsible from './shared/Collapsible.js'
+import CvssScore from './shared/cvssScore.js'
+import { cvssDropdown } from './shared/cvssUtils.js'
 
 /**
  * @param {{
@@ -28,8 +28,6 @@ export default function CVSSV4Attribute({
   const { doc, updateDoc, ...outerDocumentEditor } = React.useContext(
     DocumentEditorContext
   )
-  console.log('initial value ')
-  console.log(value)
   const cvss40 = React.useMemo(() => new Cvss4JsonWrapper(value || {}), [value])
 
   /** @type {React.ContextType<typeof DocumentEditorContext>} */
@@ -40,8 +38,6 @@ export default function CVSSV4Attribute({
       updateDoc(updatedInstancePath, updatedValue) {
         const field = updatedInstancePath.at(-1)
 
-        console.log(field)
-        console.log(updatedValue)
         if (field === 'vectorString' && typeof updatedValue === 'string') {
           cvss40.updateFromVectorString(updatedValue)
         } else if (typeof field === 'string') {
@@ -56,13 +52,11 @@ export default function CVSSV4Attribute({
 
   /** @type {(metricTypeId: string) => any} */
   function dropdownGroupsFor(metricTypeId) {
-    return (
-      <div>
-        {metricGroupsFormMetricTypeId(metricTypeId).map((group) =>
-          cvssDropdownGroup(metricTypeId, group)
-        )}
-      </div>
-    )
+    return metricGroupsFormMetricTypeId(metricTypeId).map((group) => (
+      <Fragment key={metricTypeId}>
+        {cvssDropdownGroup(metricTypeId, group)}
+      </Fragment>
+    ))
   }
 
   /**
@@ -79,12 +73,14 @@ export default function CVSSV4Attribute({
               metric.metricTypeId === metricTypeId &&
               metric.metricGroup === groupName
           )
-          .map((metric) =>
-            dropdownFor(
-              metric.jsonName,
-              metric.options.map((option) => option.optionValue)
-            )
-          )}
+          .map((metric) => (
+            <Fragment key={metric.jsonName}>
+              {dropdownFor(
+                metric.jsonName,
+                metric.options.map((option) => option.optionValue)
+              )}
+            </Fragment>
+          ))}
       </div>
     )
   }
