@@ -1,10 +1,13 @@
 # 1. Builder image
 FROM node:18-alpine AS compile-image
 
- # install git and get bare github data for GitRevisionPlugin
+ # install git
 RUN apk update; \
-    apk add --no-cache git; \
-    git clone --bare --depth=1 https://github.com/secvisogram/secvisogram.git /work/
+    apk add --no-cache git;
+
+## and get github data for GitRevisionPlugin
+COPY .git /work/app/.git
+
 
 # Set the working directory. If it doesn't exists, it'll be created
 WORKDIR /work/app
@@ -21,5 +24,4 @@ RUN npm ci; \
 # start secvisogram in docker
 FROM nginx:alpine
 # configure access to csaf-validator-service on localhost
-COPY docker/de.bsi.secvisogram.json /usr/share/nginx/html/.well-known/appspecific/de.bsi.secvisogram.json
 COPY --from=compile-image  /work/app/dist /usr/share/nginx/html
