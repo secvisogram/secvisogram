@@ -1,4 +1,4 @@
-import { Autocomplete } from '@mui/lab'
+import { Autocomplete } from '@mui/material'
 import { TextField } from '@mui/material'
 import React from 'react'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'

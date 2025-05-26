@@ -1,18 +1,11 @@
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxPopover,
-} from '@reach/combobox'
-import { matchSorter } from 'match-sorter'
 import React from 'react'
 import cwec from '../../../../../../../../../csaf-validator-lib/lib/shared/cwec.js'
-import useDebounce from '../../../../shared/useDebounce.js'
 import Attribute from './shared/Attribute.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import { isEmpty } from 'lodash/fp.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
+import {Autocomplete} from '@mui/material'
+import { TextField } from '@mui/material'
 
 /**
  * helper function getting path and value for a child
@@ -84,23 +77,6 @@ export default function CweAttribute({ property, instancePath, disabled }) {
 }
 
 /**
- * @param {string} term
- * @returns {any[] | null}
- */
-function useCwecMatch(term) {
-  const throttledTerm = useDebounce(term, 100)
-  return React.useMemo(
-    () =>
-      throttledTerm.trim() === ''
-        ? null
-        : matchSorter(cwec.weaknesses, throttledTerm, {
-            keys: [(item) => `${item.id}, ${item.name}`],
-          }),
-    [throttledTerm]
-  )
-}
-
-/**
  * @param {{
  *  label: string
  *  description: string
@@ -123,24 +99,24 @@ function CwecId({
   const [inputValue, setInputValue] = React.useState(
     /** @type string */ (value)
   )
-  const [term, setTerm] = React.useState(/** @type string */ (value))
-  const results = useCwecMatch(term)
-  /** @param {React.ChangeEvent<HTMLInputElement>} event  */
-  const handleChange = (event) => {
-    setInputValue(event.target.value)
-    setTerm(event.target.value)
+
+  const handleChange = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ newValue) => {
+    setInputValue(newValue)
   }
 
-  /** @param {string} id  */
-  const handleSelect = (id) => {
-    setTerm('')
+  const handleSelect = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ id) => {
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     onChange({ id: id, name: name })
   }
 
+  const displayIdAndName = (/** @type string */ id) => {
+    if(!id) return ""
+    const name = cwec.weaknesses.find((w) => w.id === id)?.name
+    return `${id}, ${name}`
+  }
+
   React.useEffect(() => {
     setInputValue(/** @type string */ (value))
-    setTerm('')
   }, [value])
 
   return (
@@ -153,34 +129,27 @@ function CwecId({
     >
       <div className="max-w-md flex">
         <div className="w-full">
-          <Combobox className="w-full" onSelect={handleSelect}>
-            <ComboboxInput
-              value={inputValue}
-              className="border border-gray-400 py-1 px-2 w-full shadow-inner rounded"
-              pattern="^CWE-[1-9]\d{0,5}$"
-              placeholder="^CWE-[1-9]\d{0,5}$"
-              onChange={handleChange}
-              disabled={disabled}
-              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && onChange(results?.[0])}
-            />
-            {results && (
-              <ComboboxPopover className="shadow-popup">
-                {results.length > 0 ? (
-                  <ComboboxList>
-                    {results.slice(0, 10).map((result, index) => (
-                      <ComboboxOption key={index} value={result.id}>
-                        {`${result.id}, ${result.name}`}
-                      </ComboboxOption>
-                    ))}
-                  </ComboboxList>
-                ) : (
-                  <span style={{ display: 'block', margin: 8 }}>
-                    No results found
-                  </span>
-                )}
-              </ComboboxPopover>
+          <Autocomplete
+            value={inputValue}
+            disablePortal
+            disableClearable
+            forcePopupIcon={false}
+            options={cwec.weaknesses.map(cwe => cwe.id)}
+            renderOption={(props, option) => (
+              <li {...props} key={option}>
+                {displayIdAndName(option)}
+              </li>
             )}
-          </Combobox>
+            noOptionsText={'No results found'}
+            renderInput={(params) => <TextField {...params} label="" placeholder="^CWE-[1-9]\d{0,5}$" size="small"/>}
+            onInputChange={(event, newInputValue) => {
+              handleChange(event, newInputValue)
+            }}
+            onChange={(event, id) => {
+             handleSelect(event, id)
+            }}
+            isOptionEqualToValue={(option, value) => option === value || value===""}
+          />
         </div>
       </div>
     </Attribute>
@@ -210,25 +179,24 @@ function CwecName({
   const [inputValue, setInputValue] = React.useState(
     /** @type string */ (value)
   )
-  const [term, setTerm] = React.useState(/** @type string */ (value))
-  const results = useCwecMatch(term)
 
-  /** @param {React.ChangeEvent<HTMLInputElement>} event  */
-  const handleChange = (event) => {
-    setInputValue(event.target.value)
-    setTerm(event.target.value)
+  const handleChange = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ newValue) => {
+    setInputValue(newValue)
   }
 
-  /** @param {string} name  */
-  const handleSelect = (name) => {
-    setTerm('')
+  const handleSelect = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ name) => {
     const id = cwec.weaknesses.find((w) => w.name === name)?.id
     onChange({ id: id, name: name })
   }
 
+  const displayIdAndName = (/** @type string */ name) => {
+    if(!name) return ""
+    const id = cwec.weaknesses.find((w) => w.name === name)?.id
+    return `${id}, ${name}`
+  }
+
   React.useEffect(() => {
     setInputValue(/** @type string */ (value))
-    setTerm('')
   }, [value])
 
   return (
@@ -241,33 +209,27 @@ function CwecName({
     >
       <div className="max-w-md flex">
         <div className="w-full">
-          <Combobox className="w-full" onSelect={handleSelect}>
-            <ComboboxInput
+            <Autocomplete
               value={inputValue}
-              className="border border-gray-400 py-1 px-2 w-full shadow-inner rounded"
-              placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..."
-              onChange={handleChange}
-              disabled={disabled}
-              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && onChange(results?.[0])}
+              disablePortal
+              disableClearable
+              forcePopupIcon={false}
+              options={cwec.weaknesses.map(cwe => cwe.name)}
+              renderOption={(props, option) => (
+                <li {...props} key={option}>
+                  {displayIdAndName(option)}
+                </li>
+              )}
+              noOptionsText={'No results found'}
+              renderInput={(params) => <TextField {...params} label="" placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..." size="small"/>}
+              onInputChange={(event, newInputValue) => {
+                handleChange(event, newInputValue)
+              }}
+              onChange={(event, name) => {
+                handleSelect(event, name)
+              }}
+              isOptionEqualToValue={(option, value) => option === value || value===""}
             />
-            {results && (
-              <ComboboxPopover className="shadow-popup">
-                {results.length > 0 ? (
-                  <ComboboxList>
-                    {results.slice(0, 10).map((result, index) => (
-                      <ComboboxOption key={index} value={result.name}>
-                        {`${result.id}, ${result.name}`}
-                      </ComboboxOption>
-                    ))}
-                  </ComboboxList>
-                ) : (
-                  <span style={{ display: 'block', margin: 8 }}>
-                    No results found
-                  </span>
-                )}
-              </ComboboxPopover>
-            )}
-          </Combobox>
         </div>
       </div>
     </Attribute>
