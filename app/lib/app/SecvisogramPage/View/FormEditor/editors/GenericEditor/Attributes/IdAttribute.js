@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Attribute from './shared/Attribute.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
-import {Autocomplete, TextField} from "@mui/material";
+import { Autocomplete, TextField } from '@mui/material'
 
 /**
  * @param {{
@@ -16,18 +16,17 @@ import {Autocomplete, TextField} from "@mui/material";
  *  disabled: boolean
  * }} props
  */
-export default function IdAttribute({
-  onCollectIds,
-  disabled,
-  ...props
-}) {
+export default function IdAttribute({ onCollectIds, disabled, ...props }) {
   const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
 
   const [value, setValue] = React.useState(/** @type string */ (props.value))
   const [entries, setEntries] = React.useState(new Array())
 
   /** @param {string} id  */
-  const handleSelect = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ id) => {
+  const handleSelect = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ id
+  ) => {
     updateDoc(props.instancePath, id)
     if (!id) {
       replaceDoc(pruneEmpty(doc))
@@ -45,13 +44,16 @@ export default function IdAttribute({
   }
 
   const displayIdAndName = (/** @type string */ id) => {
-    if(!id) return ""
+    if (!id) return ''
     const name = entries.find((w) => w.id === id)?.name
     return `${id} - ${name}`
   }
 
   /** @param {React.ChangeEvent<HTMLInputElement>} event  */
-  const handleChange = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ newValue) => {
+  const handleChange = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ newValue
+  ) => {
     setValue(newValue)
   }
 
@@ -61,7 +63,7 @@ export default function IdAttribute({
 
   useEffect(() => {
     loadEntries()
-  }, []);
+  }, [])
 
   return (
     <Attribute disabled={disabled} {...props}>
@@ -72,21 +74,25 @@ export default function IdAttribute({
             disablePortal
             disableClearable
             forcePopupIcon={false}
-            options={entries.map(entry=> entry.id)}
+            options={entries.map((entry) => entry.id)}
             renderOption={(props, option) => (
               <li {...props} key={option}>
                 {displayIdAndName(option)}
               </li>
             )}
             noOptionsText={'No results found'}
-            renderInput={(params) => <TextField {...params} label="" placeholder="" size="small"/>}
+            renderInput={(params) => (
+              <TextField {...params} label="" placeholder="" size="small" />
+            )}
             onInputChange={(event, newInputValue) => {
               handleChange(event, newInputValue)
             }}
             onChange={(event, id) => {
               handleSelect(event, id)
             }}
-            isOptionEqualToValue={(option, value) => option === value || value===""}
+            isOptionEqualToValue={(option, value) =>
+              option === value || value === ''
+            }
           />
         </div>
       </div>
