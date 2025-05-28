@@ -1,17 +1,18 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
 import React, { useEffect } from 'react'
 
 import ReactMarkdown from 'react-markdown'
-import metadata from '../../../../../scripts/importUiMetaData/metaData.js'
 
 /**
  * Defines the content of the SideBar displaying documentation of a selected path
  *
- * @param {{
- *   selectedPath: string[]
- * }} props
+ * @param {object} props
+ * @param {string[]} props.selectedPath
+ * @param {import('#lib/uiSchemas').UiSchemaVersion} props.uiSchemaVersion
  */
-export default function InfoPanel({ selectedPath }) {
+export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
   const [mdText, setMdText] = React.useState('')
+  const { metaData } = uiSchemas[uiSchemaVersion]
 
   const updateMarkdownText = (/** @type string */ mdPath) => {
     if (mdPath) {
@@ -29,12 +30,12 @@ export default function InfoPanel({ selectedPath }) {
     }
 
     const jsonPath = `$.${selectedPath.join('.')}`.replaceAll(/\.\d+/g, '')
-    if (jsonPath in metadata) {
+    if (jsonPath in metaData) {
       // @ts-ignore
-      const meta = metadata[jsonPath]
+      const meta = metaData[jsonPath]
       updateMarkdownText(meta.userDocumentation.usage)
     }
-  }, [selectedPath])
+  }, [selectedPath, metaData])
 
   return (
     <article className="prose p-3" data-testid="infoPanel-content">

@@ -11,7 +11,11 @@ import SideBarContext from '../shared/context/SideBarContext.js'
 import ErrorPanel from './ErrorPanel.js'
 import InfoPanel from './InfoPanel.js'
 
-export default function SideBar() {
+/**
+ * @param {object} props
+ * @param {import('#lib/uiSchemas.js').UiSchemaVersion} props.uiSchemaVersion
+ */
+export default function SideBar({ uiSchemaVersion }) {
   const sideBarData = React.useContext(SideBarContext)
 
   return (
@@ -24,7 +28,10 @@ export default function SideBar() {
                 sideBarSelectedPath={sideBarData.sideBarSelectedPath}
               />
             ) : sideBarData.sideBarContent === 'DOCUMENTATION' ? (
-              <InfoPanel selectedPath={sideBarData.sideBarSelectedPath} />
+              <InfoPanel
+                selectedPath={sideBarData.sideBarSelectedPath}
+                uiSchemaVersion={uiSchemaVersion}
+              />
             ) : null}
           </div>
         ) : null}

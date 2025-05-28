@@ -91,10 +91,7 @@ export default function IdAttribute({
     <Attribute disabled={disabled} {...props}>
       <div className="max-w-md flex">
         <div className="w-full">
-          <Combobox
-            className="w-full"
-            onSelect={handleSelect}
-          >
+          <Combobox className="w-full" onSelect={handleSelect}>
             <ComboboxInput
               value={value}
               className="border border-gray-400 py-1 px-2 w-full shadow-inner rounded"
@@ -102,7 +99,12 @@ export default function IdAttribute({
               onChange={handleChange}
               onFocus={handleFocus}
               disabled={disabled}
-              onKeyDown={(e) => e.key === 'Enter' && results && results?.length > 0 && handleSelect(results?.[0].id)}
+              onKeyDown={(e) =>
+                e.key === 'Enter' &&
+                results &&
+                results?.length > 0 &&
+                handleSelect(results?.[0].id)
+              }
             />
             {results && (
               <ComboboxPopover className="shadow-popup">

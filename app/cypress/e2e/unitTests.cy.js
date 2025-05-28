@@ -219,11 +219,19 @@ describe('Unit Test Functions', function () {
   context('fillFieldFunctions.js', function () {
     context('getNextIdForPrefix', function () {
       it('should return next product id', function () {
-        const nextProductId = getNextIdForPrefix(PRODUCT_PREFIX, 'product_id', testDocuments.baseTestDocument)
+        const nextProductId = getNextIdForPrefix(
+          PRODUCT_PREFIX,
+          'product_id',
+          testDocuments.baseTestDocument
+        )
         expect(nextProductId).to.eq(3)
       })
       it('should return next group id', function () {
-        const nextGroupId = getNextIdForPrefix(GROUP_PREFIX, 'group_id', testDocuments.productGroupsDocument)
+        const nextGroupId = getNextIdForPrefix(
+          GROUP_PREFIX,
+          'group_id',
+          testDocuments.productGroupsDocument
+        )
         expect(nextGroupId).to.eq(2)
       })
     })

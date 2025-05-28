@@ -6,13 +6,22 @@
   - [Strict Mode](#strict-mode)
   - [API](#api)
     - [Interfaces](#interfaces)
-    - [Module `schemaTests.js`](#module-schematestsjs)
-    - [Module `mandatoryTests.js`](#module-mandatorytestsjs)
-    - [Module `optionalTests.js`](#module-optionaltestsjs)
-    - [Module `informativeTests.js`](#module-informativetestsjs)
-    - [Module `basic.js`](#module-basicjs)
-    - [Module `extended.js`](#module-extendedjs)
-    - [Module `full.js`](#module-fulljs)
+    - CSAF 2.0
+      - [Module `schemaTests.js`](#module-schematestsjs)
+      - [Module `mandatoryTests.js`](#module-mandatorytestsjs)
+      - [Module `optionalTests.js`](#module-optionaltestsjs)
+      - [Module `informativeTests.js`](#module-informativetestsjs)
+      - [Module `basic.js`](#module-basicjs)
+      - [Module `extended.js`](#module-extendedjs)
+      - [Module `full.js`](#module-fulljs)
+    - CSAF 2.1
+      - [Module `csaf_2_1/schemaTests.js`](#module-csaf_2_1schematestsjs)
+      - [Module `csaf_2_1/mandatoryTests.js`](#module-csaf_2_1mandatorytestsjs)
+      - [Module `csaf_2_1/optionalTests.js`](#module-csaf_2_1optionaltestsjs)
+      - [Module `csaf_2_1/informativeTests.js`](#module-csaf_2_1informativetestsjs)
+      - [Module `csaf_2_1/basic.js`](#module-csaf_2_1basicjs)
+      - [Module `csaf_2_1/extended.js`](#module-csaf_2_1extendedjs)
+      - [Module `csaf_2_1/full.js`](#module-csaf_2_1fulljs)
     - [Module `validate.js`](#module-validatejs)
     - [Module `validateStrict.js`](#module-validatestrictjs)
     - [Module `strip.js`](#module-stripjs)
@@ -37,6 +46,7 @@ After that you can reference the modules from within your JavaScript application
 There is an [official package](https://www.npmjs.com/package/@secvisogram/csaf-validator-lib) in the npm registry.
 
 You can add it to your project using the following command:
+
 ```sh
 npm install @secvisogram/csaf-validator-lib
 ```
@@ -52,30 +62,33 @@ You can also include this library as a subtree in your repository.
   ```
 
 - install dependencies
+
   ```sh
   cd csaf-validator-lib && npm ci --prod
   ```
 
-- This repository includes git submodules. Make sure to initialize and update 
+- This repository includes git submodules. Make sure to initialize and update
   the submodules before you start working with the repository.
+
   ```sh
   git submodule update --init --recursive
   ```
 
-- For test 6.3.8 an installation of hunspell as well as all languages that 
+- For test 6.3.8 an installation of hunspell as well as all languages that
   you want to spell check is required.
 
 ### Managing Hunspell languages
 
 A CSAF Document can contain a [language](https://docs.oasis-open.org/csaf/csaf/v2.0/cs02/csaf-v2.0-cs02.html#3216-document-property---language).
 For example, valid entries could be `en` or `en-US`. When running test 6.3.8 we
-try to match this language to the list of installed hunspell languages. If the 
+try to match this language to the list of installed hunspell languages. If the
 region is specified (like in `en-US`) and the corresponding language is
 installed the test will run. If you want/need to check a `en` language
 specifically with `en-US` (or any other variant) you need to make sure that you
 link `en` to `en-US` using a symlink.
 
 Example of linking `en` to `en-US`:
+
 ```sh
 ln -s /usr/share/hunspell/en_US.aff /usr/share/hunspell/en.aff
 ln -s /usr/share/hunspell/en_US.dic /usr/share/hunspell/en.dic
@@ -83,9 +96,9 @@ ln -s /usr/share/hunspell/en_US.dic /usr/share/hunspell/en.dic
 
 You can find out what languages you have installed by running `hunspell -D`.
 
-If you need additional languages they are most likely available in the 
+If you need additional languages they are most likely available in the
 repository of your distribution. If you have a custom dictionary
-copy them in the directory provided by the command above. Hunspell should 
+copy them in the directory provided by the command above. Hunspell should
 automatically recognize them.
 
 [(back to top)](#bsi-csaf-validator-lib)
@@ -117,7 +130,7 @@ automatically recognize them.
 The library has two validate functions, `validate` and `validateStrict`.
 `validateStrict` checks whether the test that should be executed was defined in
 the library. Otherwise, it throws an error. To extend the library you can use
-the `validate` function instead. In such case, **the calling function is 
+the `validate` function instead. In such case, **the calling function is
 responsible for checking** whether the test function passed to the
 `csaf-validator-lib` is benign. **Calling arbitrary** functions (especially
 those resulting from user input) may result in a **code execution
@@ -127,9 +140,9 @@ To proceed this dangerous path, use the `validate` function.
 
 [(back to top)](#bsi-csaf-validator-lib)
 
-### API
+## API
 
-#### Interfaces
+### Interfaces
 
 ```typescript
 interface Result {
@@ -158,6 +171,8 @@ type DocumentTest = (doc: any) => TestResult | Promise<TestResult>
 ```
 
 [(back to top)](#bsi-csaf-validator-lib)
+
+### CSAF 2.0
 
 #### Module `schemaTests.js`
 
@@ -281,19 +296,143 @@ This module exports all tests included in `extended.js` and all informative test
 
 [(back to top)](#bsi-csaf-validator-lib)
 
-#### Module `validate.js`
+### CSAF 2.1
+
+#### Module `csaf_2_1/schemaTests.js`
+
+```typescript
+export const csaf_2_0_strict: DocumentTest
+export const csaf_2_0: DocumentTest
+```
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/mandatoryTests.js`
+
+```typescript
+export const mandatoryTest_6_1_1: DocumentTest
+export const mandatoryTest_6_1_2: DocumentTest
+export const mandatoryTest_6_1_3: DocumentTest
+export const mandatoryTest_6_1_4: DocumentTest
+export const mandatoryTest_6_1_5: DocumentTest
+export const mandatoryTest_6_1_6: DocumentTest
+export const mandatoryTest_6_1_7: DocumentTest
+export const mandatoryTest_6_1_8: DocumentTest
+export const mandatoryTest_6_1_9: DocumentTest
+export const mandatoryTest_6_1_10: DocumentTest
+export const mandatoryTest_6_1_11: DocumentTest
+export const mandatoryTest_6_1_12: DocumentTest
+export const mandatoryTest_6_1_13: DocumentTest
+export const mandatoryTest_6_1_14: DocumentTest
+export const mandatoryTest_6_1_15: DocumentTest
+export const mandatoryTest_6_1_16: DocumentTest
+export const mandatoryTest_6_1_17: DocumentTest
+export const mandatoryTest_6_1_18: DocumentTest
+export const mandatoryTest_6_1_19: DocumentTest
+export const mandatoryTest_6_1_20: DocumentTest
+export const mandatoryTest_6_1_21: DocumentTest
+export const mandatoryTest_6_1_22: DocumentTest
+export const mandatoryTest_6_1_23: DocumentTest
+export const mandatoryTest_6_1_24: DocumentTest
+export const mandatoryTest_6_1_25: DocumentTest
+export const mandatoryTest_6_1_26: DocumentTest
+export const mandatoryTest_6_1_27_1: DocumentTest
+export const mandatoryTest_6_1_27_2: DocumentTest
+export const mandatoryTest_6_1_27_3: DocumentTest
+export const mandatoryTest_6_1_27_4: DocumentTest
+export const mandatoryTest_6_1_27_5: DocumentTest
+export const mandatoryTest_6_1_27_6: DocumentTest
+export const mandatoryTest_6_1_27_7: DocumentTest
+export const mandatoryTest_6_1_27_8: DocumentTest
+export const mandatoryTest_6_1_27_9: DocumentTest
+export const mandatoryTest_6_1_27_10: DocumentTest
+export const mandatoryTest_6_1_27_11: DocumentTest
+export const mandatoryTest_6_1_28: DocumentTest
+export const mandatoryTest_6_1_29: DocumentTest
+export const mandatoryTest_6_1_30: DocumentTest
+export const mandatoryTest_6_1_31: DocumentTest
+export const mandatoryTest_6_1_32: DocumentTest
+export const mandatoryTest_6_1_33: DocumentTest
+```
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/optionalTests.js`
+
+```typescript
+export const optionalTest_6_2_1: DocumentTest
+export const optionalTest_6_2_2: DocumentTest
+export const optionalTest_6_2_3: DocumentTest
+export const optionalTest_6_2_4: DocumentTest
+export const optionalTest_6_2_5: DocumentTest
+export const optionalTest_6_2_6: DocumentTest
+export const optionalTest_6_2_7: DocumentTest
+export const optionalTest_6_2_8: DocumentTest
+export const optionalTest_6_2_9: DocumentTest
+export const optionalTest_6_2_10: DocumentTest
+export const optionalTest_6_2_11: DocumentTest
+export const optionalTest_6_2_12: DocumentTest
+export const optionalTest_6_2_13: DocumentTest
+export const optionalTest_6_2_14: DocumentTest
+export const optionalTest_6_2_15: DocumentTest
+export const optionalTest_6_2_16: DocumentTest
+export const optionalTest_6_2_17: DocumentTest
+export const optionalTest_6_2_18: DocumentTest
+export const optionalTest_6_2_19: DocumentTest
+export const optionalTest_6_2_20: DocumentTest
+```
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/informativeTests.js`
+
+```typescript
+export const informativeTest_6_3_1: DocumentTest
+export const informativeTest_6_3_2: DocumentTest
+export const informativeTest_6_3_3: DocumentTest
+export const informativeTest_6_3_4: DocumentTest
+export const informativeTest_6_3_5: DocumentTest
+export const informativeTest_6_3_6: DocumentTest
+export const informativeTest_6_3_7: DocumentTest
+export const informativeTest_6_3_8: DocumentTest
+export const informativeTest_6_3_9: DocumentTest
+export const informativeTest_6_3_10: DocumentTest
+export const informativeTest_6_3_11: DocumentTest
+```
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/basic.js`
+
+This module exports the strict schema test and all mandatory tests except `6.1.8`.
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/extended.js`
+
+This module exports all tests included in `basic.js` and all optional tests.
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+#### Module `csaf_2_1/full.js`
+
+This module exports all tests included in `extended.js` and all informative tests.
+
+[(back to top)](#bsi-csaf-validator-lib)
+
+### Module `validate.js`
 
 This function validates the given document against the given tests.
 
-#### Module `validateStrict.js`
+### Module `validateStrict.js`
 
-This function validates the given document against the given tests. It throws 
+This function validates the given document against the given tests. It throws
 an error if an unknown test function was passed. See [Strict Mode](#strict-mode)
 for more details.
 
 [(back to top)](#bsi-csaf-validator-lib)
 
-#### Module `strip.js`
+### Module `strip.js`
 
 This function strips empty nodes and nodes with errors. The `strict` option (default `true`) throws an error if an unknown test function was passed. See [Strict Mode](#strict-mode) for more details.
 
@@ -316,7 +455,7 @@ export default StripFn
 
 [(back to top)](#bsi-csaf-validator-lib)
 
-#### Module `cwe.js`
+### Module `cwe.js`
 
 ```typescript
 export const weaknesses: Array<{ id: string; name: string }>

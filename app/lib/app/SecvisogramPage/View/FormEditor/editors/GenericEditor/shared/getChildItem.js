@@ -43,5 +43,5 @@ export default function useChildItem() {
       : null
   }
 
-  return {getChildItem}
+  return { getChildItem }
 }

@@ -2,6 +2,9 @@
   "name": "app",
   "private": true,
   "type": "module",
+  "imports": {
+    "#*.js": "./*.js"
+  },
   "license": "MIT",
   "author": "eXXcellent solutions GmbH",
   "description": "Secvisogram is a web application tool for creating and editing security advisories in the CSAF 2.0 JSON format.",
