@@ -304,7 +304,7 @@ export default async function informativeTest_6_3_8(
         `${prefix}${branchIndex}/product/name`,
         branch.product?.name
       )
-      checkBranches(
+      await checkBranches(
         `${prefix}${branchIndex}/branches/`,
         Array.isArray(branch.branches) ? branch.branches : []
       )

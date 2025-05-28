@@ -1,6 +1,7 @@
 # BSI Secvisogram CSAF 2.0 / 2.1 Web Editor
 
 <!-- TOC depthfrom:2 depthto:3 -->
+
 - [About The Project](#about-the-project)
 - [Getting started](#getting-started)
   - [Deploying to Production](#deploying-to-production)
@@ -11,11 +12,13 @@
   - [JSON Editor](#json-editor)
   - [Preview HTML view](#preview-html-view)
   - [CSAF Document JSON view](#csaf-document-json-view)
+  - [Templates](#templates)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
   - [Developer Guide, Architecture and Technical Design](#developer-guide-architecture-and-technical-design)
   - [Custom Preview Templates](#custom-preview-templates)
   - [Security Considerations](#security-considerations)
+
 <!-- /TOC -->
 
 ## About The Project
@@ -194,6 +197,10 @@ This view does not include any editing functionality. It **always displays the v
 You can use this view and the embedded _Export CSAF_ button to always quickly extract the standard-valid subset of your current CSAF document.
 
 [(back to top)](#bsi-secvisogram-csaf-20-web-editor)
+
+### Templates
+
+Secvisogram provides some very basic templates. You can use your own templates by saving them as JSON files on your filesystem and load using the "Upload from filesystem" in the "Create new document" dialog of the editor.
 
 ## Documentation
 

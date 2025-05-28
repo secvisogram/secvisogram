@@ -1,24 +1,22 @@
 import React from 'react'
-import Attribute from './shared/Attribute.js'
-import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
+import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
+import Attribute from './shared/Attribute.js'
 
 /**
- * @param {Pick<React.HTMLProps<HTMLInputElement>, 'type'> &{
- *  label: string
- *  description: string
- *  placeholder?: string
- *  pattern?: string
- *  minLength: number
- *  readOnly?: boolean
- *  required?: boolean
- *  instancePath: string[]
- *  value: unknown
- *  property: import('../../../shared/types').Property
- *  disabled: boolean
- *  fillFunction?: () => void
- *  fillDefaultFunction?: () => void
- * }} props
+ * @typedef {object} Props
+ * @property {string} [placeholder]
+ * @property {string} [pattern]
+ * @property {number} minLength
+ * @property {boolean} [readOnly]
+ * @property {boolean} [required]
+ * @property {unknown} value
+ */
+
+/** @typedef {import('react').ComponentProps<typeof Attribute>} AttributeProps */
+
+/**
+ * @param {Pick<React.HTMLProps<HTMLInputElement>, 'type'> & Props & AttributeProps} props
  */
 export default function TextAttribute({
   type = 'text',

@@ -87,6 +87,7 @@ export default function CVSSV2Attribute({
           property={property}
           disabled={disabled}
           required={true}
+          maxErrorWidth={400}
         />
         <CvssScore score={value?.baseScore} severity={undefined}></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.baseInputs')}>
