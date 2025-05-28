@@ -107,7 +107,7 @@
     "yesCreate": "Yes, create new document",
     "noResume": "No, resume editing",
     "saveInvalidTitle": "Validation",
-    "saveInvalidDescription": "Open validation issues: Your document is not yet CSAF 2.0 compliant!",
+    "saveInvalidDescription": "Open validation issues: Your document is not yet compliant to the selected CSAF version!",
     "saveInvalidCancel": "Resume editing (Recommended)",
     "saveInvalidConfirm": "Save invalid document",
     "theDocumentIsValid": "The document is valid!",
