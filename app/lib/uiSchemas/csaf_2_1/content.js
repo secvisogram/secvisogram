@@ -27,11 +27,11 @@ export default {
             description: 'v2_1.SchemaDescription',
           },
           relevanceLevels: {
-            csaf_base: 'mandatory',
-            csaf_security_incident_response: 'mandatory',
-            csaf_informational_advisory: 'mandatory',
-            csaf_security_advisory: 'mandatory',
-            csaf_vex: 'mandatory',
+            csaf_base: 'optional',
+            csaf_security_incident_response: 'optional',
+            csaf_informational_advisory: 'optional',
+            csaf_security_advisory: 'optional',
+            csaf_vex: 'optional',
           },
         },
         enum: [
