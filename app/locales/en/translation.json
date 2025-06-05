@@ -986,6 +986,8 @@
     "baseInputs": "base inputs",
     "temporalInputs": "temporal inputs",
     "environmentalInputs": "environmental inputs",
+    "environmentalInputsBase": "environmental inputs (modified base metrics)",
+    "environmentalInputsSecurity": "environmental inputs (security requirements)",
     "threatInputs": "threat inputs",
     "supplementalInputs": "supplemental inputs",
     "selectValuesToGenerateScore": "Select values for all metrics (individually or via the vector) to generate a score"

@@ -4,7 +4,7 @@ import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import {
   Cvss4JsonWrapper,
   flatMetrics,
-  metricGroupsFormMetricTypeId,
+  metricGroupsFormMetricType,
 } from './CVSS4Attribute/cvss4.js'
 import TextAttribute from './TextAttribute.js'
 import Collapsible from './shared/Collapsible.js'
@@ -50,27 +50,27 @@ export default function CVSSV4Attribute({
     [outerDocumentEditor, updateDoc, instancePath, doc, cvss40]
   )
 
-  /** @type {(metricTypeId: string) => any} */
-  function dropdownGroupsFor(metricTypeId) {
-    return metricGroupsFormMetricTypeId(metricTypeId).map((group) => (
-      <Fragment key={metricTypeId}>
-        {cvssDropdownGroup(metricTypeId, group)}
+  /** @type {(metricType: string) => any} */
+  function dropdownGroupsFor(metricType) {
+    return metricGroupsFormMetricType(metricType).map((group) => (
+      <Fragment key={metricType}>
+        {cvssDropdownGroup(metricType, group)}
       </Fragment>
     ))
   }
 
   /**
-   * @param {string} metricTypeId
+   * @param {string} metricType
    * @param {string} groupName
    */
-  function cvssDropdownGroup(metricTypeId, groupName) {
+  function cvssDropdownGroup(metricType, groupName) {
     return (
       <div>
         {groupName}
         {flatMetrics
           .filter(
             (metric) =>
-              metric.metricTypeId === metricTypeId &&
+              metric.metricType === metricType &&
               metric.metricGroup === groupName
           )
           .map((metric) => (
@@ -119,13 +119,13 @@ export default function CVSSV4Attribute({
           severity={value?.baseSeverity}
         ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.baseInputs')}>
-          {dropdownGroupsFor('BASE')}
+          {dropdownGroupsFor('Base Metrics')}
         </Collapsible>
         <Collapsible
           startCollapsed={true}
           title={t('cvssEditor.supplementalInputs')}
         >
-          {dropdownGroupsFor('SUPPLEMENTAL')}
+          {dropdownGroupsFor('Supplemental Metrics')}
         </Collapsible>
 
         <CvssScore
@@ -134,9 +134,16 @@ export default function CVSSV4Attribute({
         ></CvssScore>
         <Collapsible
           startCollapsed={true}
-          title={t('cvssEditor.environmentalInputs')}
+          title={t('cvssEditor.environmentalInputsBase')}
         >
-          {dropdownGroupsFor('ENVIRONMENTAL')}
+          {dropdownGroupsFor('Environmental (Modified Base Metrics)')}
+        </Collapsible>
+
+        <Collapsible
+          startCollapsed={true}
+          title={t('cvssEditor.environmentalInputsSecurity')}
+        >
+          {dropdownGroupsFor('Environmental (Security Requirements)')}
         </Collapsible>
 
         <CvssScore
@@ -144,7 +151,7 @@ export default function CVSSV4Attribute({
           severity={value?.threatScore}
         ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.threatInputs')}>
-          {dropdownGroupsFor('THREAT')}
+          {dropdownGroupsFor('Threat Metrics')}
         </Collapsible>
       </div>
     </DocumentEditorContext.Provider>

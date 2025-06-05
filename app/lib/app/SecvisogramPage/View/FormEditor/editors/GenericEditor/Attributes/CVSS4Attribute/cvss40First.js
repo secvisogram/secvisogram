@@ -3,11 +3,6 @@
 
 // Copyright FIRST, Red Hat, and contributors
 // SPDX-License-Identifier: BSD-2-Clause
-// @ts-nocheck
-// source https://github.com/RedHatProductSecurity/cvss-v4-calculator/blob/main/cvss40.js
-
-// Copyright FIRST, Red Hat, and contributors
-// SPDX-License-Identifier: BSD-2-Clause
 
 /**
  * Rounds a number to a specified number of decimal places using the "Round Half Up" method.

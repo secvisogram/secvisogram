@@ -737,7 +737,7 @@ export const flatMetrics = [
     metricType: 'Environmental (Modified Base Metrics)',
     metricTypeId: 'ENVIRONMENTAL',
     metricGroup: 'Subsequent System Impact Metrics',
-    jsonName: 'integrityRequirement',
+    jsonName: 'modifiedSubIntegrityImpact',
     metric: 'Integrity (MSI)',
     metricShort: 'MSI',
     options: [
@@ -773,7 +773,7 @@ export const flatMetrics = [
     metricType: 'Environmental (Modified Base Metrics)',
     metricTypeId: 'ENVIRONMENTAL',
     metricGroup: 'Subsequent System Impact Metrics',
-    jsonName: 'modifiedVulnAvailabilityImpact',
+    jsonName: 'modifiedSubAvailabilityImpact',
     metric: 'Availability (MSA)',
     metricShort: 'MSA',
     options: [
@@ -931,9 +931,8 @@ export const flatMetrics = [
   },
 ]
 
-/**
- * @type {{[key: string]: {scoreJsonName: string, severityJsonName: string}}}
- */
+/** @typedef {keyof cvss4Scores} MetricType */
+
 const cvss4Scores = {
   BASE: {
     scoreJsonName: 'baseScore',
@@ -949,64 +948,36 @@ const cvss4Scores = {
   },
 }
 
+/**
+ * @typedef {object} Metric
+ * @property {string} metricShort
+ * @property {Map<string, string>} optionsByValue
+ * @property {Map<string, string>} optionsByKey
+ */
+
 const name2Metric = calculateName2MetricMap()
 
 function calculateName2MetricMap() {
+  /** @type {Map<string, Metric>} */
   const name2Metric = new Map()
   flatMetrics.forEach((metric) => {
     name2Metric.set(metric.jsonName, {
       metricShort: metric.metricShort,
-      optionsByValue: convertOptionsArrayToObjectByValue(metric.options),
-      optionsByKey: convertOptionsArrayToObjectByKey(metric.options),
+      optionsByValue: new Map(
+        metric.options.map((option) => [option.optionValue, option.optionKey])
+      ),
+      optionsByKey: new Map(
+        metric.options.map((option) => [option.optionKey, option.optionValue])
+      ),
     })
   })
   return name2Metric
 }
 
 /**
- * @param {{optionName: string, optionValue: string, optionKey: string}[]} optionsArray
- * @return {any}
- */
-export function convertOptionsArrayToObjectByValue(optionsArray) {
-  /** @type {any} */
-  const result = {}
-  optionsArray.forEach((option) => {
-    result[option.optionValue] = option.optionKey
-  })
-  return result
-}
-
-/**
- * @param {string} metricTypeId
- * @return {string[]}
- */
-export function metricGroupsFormMetricTypeId(metricTypeId) {
-  /** @type {any} */
-  const metricGroups = flatMetrics
-    .filter((metric) => metric.metricTypeId === metricTypeId)
-    .map((metric) => metric.metricGroup)
-
-  return [...new Set(metricGroups)]
-}
-
-/**
- * @param {{optionName: string, optionValue: string, optionKey: string}[]} optionsArray
- * @return {any}
- */
-function convertOptionsArrayToObjectByKey(optionsArray) {
-  /** @type {any} */
-  const result = {}
-  optionsArray.forEach((option) => {
-    result[option.optionKey] = option.optionValue
-  })
-  return result
-}
-
-/**
  * calculate the score and severity for the given metricTypeId
  * @param {CVSS40} cvss40
- * @param {string} metricTypeId
- * @return {{score: number, severity: string, metricTypeId: string, scoreJsonName: string, severityJsonName: string }}
+ * @param {MetricType} metricTypeId
  */
 function calculateScoreObject(cvss40, metricTypeId) {
   const calculator = new CVSS40(cvss40.vector.raw)
@@ -1022,8 +993,10 @@ function calculateScoreObject(cvss40, metricTypeId) {
   const score = cvss4Scores[metricTypeId]
   return {
     score: calculator.calculateScore(),
-    severity: calculator.calculateSeverityRating(calculator.calculateScore()),
-    metricTypeId: metricTypeId,
+    severity: calculator
+      .calculateSeverityRating(calculator.calculateScore())
+      .toUpperCase(),
+    metricTypeId,
     scoreJsonName: score.scoreJsonName,
     severityJsonName: score.severityJsonName,
   }
@@ -1041,14 +1014,29 @@ export function calculateCvss4_0_Score(vectorString) {
   ]
 }
 
+/**
+ * @param {string} metricType
+ * @return {string[]}
+ */
+export function metricGroupsFormMetricType(metricType) {
+  /** @type {any} */
+  const metricGroups = flatMetrics
+    .filter((metric) => metric.metricType === metricType)
+    .map((metric) => metric.metricGroup)
+
+  return [...new Set(metricGroups)]
+}
+
 export class Cvss4JsonWrapper {
+  #data
+
   /**
    * @param {{ [key: string]: string | number }} data
    */
   constructor(data) {
     /** @private */
-    this._data = data
-    this._data['version'] = '4.0'
+    this.#data = data
+    this.#data['version'] = '4.0'
   }
 
   /**
@@ -1056,9 +1044,9 @@ export class Cvss4JsonWrapper {
    * @param {string} value
    */
   set(property, value) {
-    this._data[property] = value
-    const calculation = this._createCvssCalculationValuesFromDate()
-    this._data.vectorString = calculation.vector.raw
+    this.#data[property] = value
+    const calculation = this.#createCvssCalculationValuesFromData()
+    this.#data.vectorString = calculation.vector.raw
     return this
   }
 
@@ -1066,45 +1054,46 @@ export class Cvss4JsonWrapper {
    * @param {string} property
    */
   remove(property) {
-    delete this._data[property]
+    delete this.#data[property]
     return this
   }
 
   /**
    * calculate the scores and the severity for base, environmental und threat  and set them in _data
-   * @private
    */
-  _calculateScores() {
+  #calculateScores() {
     // set values from json data
-    const calculation = this._createCvssCalculationValuesFromDate()
+    const calculation = this.#createCvssCalculationValuesFromData()
 
-    for (const key of Object.keys(cvss4Scores)) {
+    for (const key of /** @type {MetricType[]} */ (Object.keys(cvss4Scores))) {
       const score = calculateScoreObject(calculation, key)
-      this._data[score.scoreJsonName] = score.score
-      this._data[score.severityJsonName] = score.severity
+      this.#data[score.scoreJsonName] = score.score
+      this.#data[score.severityJsonName] = score.severity
     }
   }
 
   /**
    * create a CVSS40 object form the existing _data
    * @returns {CVSS40}
-   * @private
    */
-  _createCvssCalculationValuesFromDate() {
+  #createCvssCalculationValuesFromData() {
     const calculation = new CVSS40('CVSS:4.0')
-    for (const [key, value] of Object.entries(this._data)) {
+    for (const [key, value] of Object.entries(this.#data)) {
       const metric = name2Metric.get(key)
       if (metric && value) {
-        const metricOptionValue = metric.optionsByValue[value]
-        calculation.vector.updateMetric(metric.metricShort, metricOptionValue)
+        const metricOptionValue = metric.optionsByValue.get(String(value))
+        calculation.vector.updateMetric(
+          metric.metricShort,
+          metricOptionValue ?? ''
+        )
       }
     }
     return calculation
   }
 
   get data() {
-    this._calculateScores()
-    return this._data
+    this.#calculateScores()
+    return this.#data
   }
 
   /**
@@ -1113,18 +1102,21 @@ export class Cvss4JsonWrapper {
    */
   updateFromVectorString(vectorString) {
     try {
-      this._data.vectorString = vectorString
+      this.#data.vectorString = vectorString
       const calculator = new CVSS40(vectorString)
       flatMetrics.forEach((metric) => {
-        const optionsKey = calculator.vector.getEffectiveMetricValue(
-          metric.metricShort
+        const metrics = /** @type {Record<string,string | undefined>}*/ (
+          calculator.vector.metrics
         )
+        let optionsKey = metrics[metric.metricShort]
+        optionsKey = optionsKey ? optionsKey : metric.initialOption
         const metricOptions = name2Metric.get(metric.jsonName)
-        this._data[metric.jsonName] = metricOptions.optionsByKey[optionsKey]
+        this.#data[metric.jsonName] =
+          metricOptions?.optionsByKey.get(optionsKey) ?? ''
       })
     } catch (error) {
       flatMetrics.forEach((metric) => {
-        this._data[metric.jsonName] = ''
+        this.#data[metric.jsonName] = ''
       })
     }
   }
