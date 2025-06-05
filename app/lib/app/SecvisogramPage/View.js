@@ -733,10 +733,12 @@ function View({
         groupIds: () => onCollectGroupIds(formValues.doc),
       },
       errors,
+      uiSchemaVersion,
     }),
     [
       formValues.doc,
       errors,
+      uiSchemaVersion,
       onUpdateDoc,
       onReplaceDoc,
       onCollectProductIds,

@@ -3111,6 +3111,24 @@ export default {
     },
     uiType: 'OBJECT_CWE',
   },
+  '$.vulnerabilities.cwes[]': {
+    userDocumentation: {
+      specification: 'docs/user/vulnerabilities/vulnerability/cwes-spec.en.md',
+      usage: 'docs/user/vulnerabilities/vulnerability/cwes-usage.en.md',
+    },
+    relevanceLevels: {
+      csaf_base: 'want_to_have',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'excluded',
+      csaf_security_advisory: 'best_practice',
+      csaf_vex: 'want_to_have',
+    },
+    i18n: {
+      title: 'VulnerabilitiesItemsCwesTitle',
+      description: 'VulnerabilitiesItemsCwesDescription',
+    },
+    uiType: 'OBJECT_CWE',
+  },
   '$.vulnerabilities.cwes.id': {
     userDocumentation: {
       specification:
