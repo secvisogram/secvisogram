@@ -7204,7 +7204,7 @@ export default {
                             'v2_1.VulnerabilitiesItemsScoresItemsDescription',
                         },
                         itemName: {
-                          itemNameTranslationKey: 'arrays.scoresItemName',
+                          itemNameTranslationKey: 'arrays.metricItemName',
                         },
                         relevanceLevels: {
                           csaf_base: 'nice_to_know',
@@ -8107,6 +8107,7 @@ export default {
                                       title: 'v2_1.CvssV4Title',
                                       description: 'v2_1.CvssV4Description',
                                     },
+                                    uiType: 'OBJECT_CVSS_4',
                                   },
                                   type: 'OBJECT',
                                   metaInfo: { propertyList: [] },
