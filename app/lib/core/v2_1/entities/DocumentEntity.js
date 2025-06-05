@@ -210,9 +210,20 @@ export default class DocumentEntity {
     const groupIds = this.collectGroupIds({ document: templateDoc })
 
     if (templateDoc.document) {
-      templateDoc.document.max_base_score = retrieveMaxBaseScore(
+      const maxBaseScoreV3 = retrieveMaxBaseScoreCvss3(
         templateDoc.vulnerabilities
       )
+      templateDoc.document.max_base_score_v3 = maxBaseScoreV3.toString()
+      const maxBaseScoreV4 = retrieveMaxBaseScoreCvss4(
+        templateDoc.vulnerabilities
+      )
+      templateDoc.document.max_base_score_v4 = maxBaseScoreV4.toString()
+      templateDoc.document.max_base_score = maxBaseScoreV4
+        ? maxBaseScoreV4.toString()
+        : maxBaseScoreV3.toString()
+      templateDoc.document.max_base_score_version = maxBaseScoreV4
+        ? '4.0'
+        : '3.1'
       addDocumentNotesPreviewAttributes(templateDoc.document)
     }
 
@@ -536,11 +547,11 @@ const collectGroupRefsInThreats = (instancePath, vulnerability, entries) => {
 }
 
 /**
- * Retrieve the maximum baseScore of all scores
+ * Retrieve the maximum baseScore of all CVSS 3  scores
  *
  * @param {{metrics: {content: {cvss_v3: {baseScore: string}}}[]}[]} vulnerabilities
  */
-const retrieveMaxBaseScore = (vulnerabilities) => {
+const retrieveMaxBaseScoreCvss3 = (vulnerabilities) => {
   let maxBaseScore = 0
   if (vulnerabilities) {
     for (let i = 0; i < vulnerabilities.length; ++i) {
@@ -557,9 +568,33 @@ const retrieveMaxBaseScore = (vulnerabilities) => {
       }
     }
   }
-  return maxBaseScore.toString()
+  return maxBaseScore
 }
 
+/**
+ * Retrieve the maximum baseScore of all CVSS 4 scores
+ *
+ * @param {{metrics: {content: {cvss_v4: {baseScore: string}}}[]}[]} vulnerabilities
+ */
+const retrieveMaxBaseScoreCvss4 = (vulnerabilities) => {
+  let maxBaseScore = 0
+  if (vulnerabilities) {
+    for (let i = 0; i < vulnerabilities.length; ++i) {
+      const vulnerability = vulnerabilities[i]
+      const metrics = vulnerability.metrics
+      if (metrics) {
+        for (let i = 0; i < metrics.length; ++i) {
+          const metric = metrics[i]
+          const baseScore = Number(metric?.content.cvss_v4?.baseScore) ?? 0
+          if (maxBaseScore < baseScore) {
+            maxBaseScore = baseScore
+          }
+        }
+      }
+    }
+  }
+  return maxBaseScore
+}
 /**
  * Categorize all document notes by category
  *
