@@ -163,8 +163,16 @@ const SecvisogramPage = () => {
               const parsedDoc = JSON.parse(
                 /** @type {string | undefined} */ (e.target?.result) ?? ''
               )
+
+              /** @type {import('../uiSchemas.js').UiSchemaVersion} */
+              let csaf_version = 'v2.0'
+              if (parsedDoc?.document?.csaf_version === '2.1') {
+                csaf_version = 'v2.1'
+              }
+
               setState((state) => ({
                 ...state,
+                uiSchemaVersion: csaf_version,
                 isLoading: false,
               }))
               setDoc(parsedDoc)

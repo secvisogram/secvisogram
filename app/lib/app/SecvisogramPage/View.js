@@ -196,6 +196,11 @@ function View({
     () => t('alert.backendNotAvailableTryAgain'),
     []
   )
+  const csafVersionNotSetInDocument = React.useMemo(
+    () => t('alert.csafVersionNotSetInDocument'),
+    []
+  )
+
   React.useEffect(() => {
     if (applicationError instanceof BackendUnavailableError) {
       setToast({
@@ -369,11 +374,24 @@ function View({
                       })
                       break
                     case 'FILESYSTEM':
-                      onOpen(params.file)
+                      onOpen(params.file).then((parsedDoc) => {
+                        if (!parsedDoc?.document?.csaf_version) {
+                          setToast({
+                            message: csafVersionNotSetInDocument,
+                          })
+                        }
+                      })
                       break
                     case 'URL':
                       externalJsonToFile(params.url)
                         .then(onOpen)
+                        .then((parsedDoc) => {
+                          if (!parsedDoc?.document?.csaf_version) {
+                            setToast({
+                              message: csafVersionNotSetInDocument,
+                            })
+                          }
+                        })
                         .catch((err) =>
                           handleError({
                             message:

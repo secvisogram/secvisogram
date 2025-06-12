@@ -45,7 +45,7 @@ export interface Props {
     legacyVersion: string
   }): Promise<void>
   onDownload(doc: {}): void
-  onOpen(file: File): Promise<void | {}>
+  onOpen(file: File): Promise<void | { document: { csaf_version: string } }>
   onChangeTab(
     tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS',
     document: {}
