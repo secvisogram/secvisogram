@@ -113,6 +113,7 @@
     "theDocumentIsValid": "The document is valid!",
     "theDocumentIsInvalid": "The document is invalid!",
     "backendNotAvailableTryAgain": "Backend not available, please try again later",
+    "csafVersionNotSetInDocument": "Field csaf_version not set in document. Use default version 2.0 in editor",
     "pleaseConfirm": "Please confirm"
   },
   "error": {
