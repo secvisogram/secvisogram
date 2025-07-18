@@ -4,7 +4,7 @@ import Attribute from './shared/Attribute.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import { isEmpty } from 'lodash/fp.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
-import {Autocomplete} from '@mui/material'
+import { Autocomplete } from '@mui/material'
 import { TextField } from '@mui/material'
 
 /**
@@ -100,17 +100,23 @@ function CwecId({
     /** @type string */ (value)
   )
 
-  const handleChange = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ newValue) => {
+  const handleChange = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ newValue
+  ) => {
     setInputValue(newValue)
   }
 
-  const handleSelect = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ id) => {
+  const handleSelect = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ id
+  ) => {
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     onChange({ id: id, name: name })
   }
 
   const displayIdAndName = (/** @type string */ id) => {
-    if(!id) return ""
+    if (!id) return ''
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     return `${id}, ${name}`
   }
@@ -134,21 +140,30 @@ function CwecId({
             disablePortal
             disableClearable
             forcePopupIcon={false}
-            options={cwec.weaknesses.map(cwe => cwe.id)}
+            options={cwec.weaknesses.map((cwe) => cwe.id)}
             renderOption={(props, option) => (
               <li {...props} key={option}>
                 {displayIdAndName(option)}
               </li>
             )}
             noOptionsText={'No results found'}
-            renderInput={(params) => <TextField {...params} label="" placeholder="^CWE-[1-9]\d{0,5}$" size="small"/>}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label=""
+                placeholder="^CWE-[1-9]\d{0,5}$"
+                size="small"
+              />
+            )}
             onInputChange={(event, newInputValue) => {
               handleChange(event, newInputValue)
             }}
             onChange={(event, id) => {
-             handleSelect(event, id)
+              handleSelect(event, id)
             }}
-            isOptionEqualToValue={(option, value) => option === value || value===""}
+            isOptionEqualToValue={(option, value) =>
+              option === value || value === ''
+            }
           />
         </div>
       </div>
@@ -180,17 +195,23 @@ function CwecName({
     /** @type string */ (value)
   )
 
-  const handleChange = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ newValue) => {
+  const handleChange = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ newValue
+  ) => {
     setInputValue(newValue)
   }
 
-  const handleSelect = (/** @type {React.SyntheticEvent<Element, Event>} */ event, /** @type string */ name) => {
+  const handleSelect = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ name
+  ) => {
     const id = cwec.weaknesses.find((w) => w.name === name)?.id
     onChange({ id: id, name: name })
   }
 
   const displayIdAndName = (/** @type string */ name) => {
-    if(!name) return ""
+    if (!name) return ''
     const id = cwec.weaknesses.find((w) => w.name === name)?.id
     return `${id}, ${name}`
   }
@@ -209,27 +230,36 @@ function CwecName({
     >
       <div className="max-w-md flex">
         <div className="w-full">
-            <Autocomplete
-              value={inputValue}
-              disablePortal
-              disableClearable
-              forcePopupIcon={false}
-              options={cwec.weaknesses.map(cwe => cwe.name)}
-              renderOption={(props, option) => (
-                <li {...props} key={option}>
-                  {displayIdAndName(option)}
-                </li>
-              )}
-              noOptionsText={'No results found'}
-              renderInput={(params) => <TextField {...params} label="" placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..." size="small"/>}
-              onInputChange={(event, newInputValue) => {
-                handleChange(event, newInputValue)
-              }}
-              onChange={(event, name) => {
-                handleSelect(event, name)
-              }}
-              isOptionEqualToValue={(option, value) => option === value || value===""}
-            />
+          <Autocomplete
+            value={inputValue}
+            disablePortal
+            disableClearable
+            forcePopupIcon={false}
+            options={cwec.weaknesses.map((cwe) => cwe.name)}
+            renderOption={(props, option) => (
+              <li {...props} key={option}>
+                {displayIdAndName(option)}
+              </li>
+            )}
+            noOptionsText={'No results found'}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label=""
+                placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..."
+                size="small"
+              />
+            )}
+            onInputChange={(event, newInputValue) => {
+              handleChange(event, newInputValue)
+            }}
+            onChange={(event, name) => {
+              handleSelect(event, name)
+            }}
+            isOptionEqualToValue={(option, value) =>
+              option === value || value === ''
+            }
+          />
         </div>
       </div>
     </Attribute>
