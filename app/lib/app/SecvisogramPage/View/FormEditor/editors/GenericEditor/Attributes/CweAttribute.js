@@ -136,9 +136,11 @@ function CwecId({
       <div className="max-w-md flex">
         <div className="w-full">
           <Autocomplete
+            className="autocomplete"
             value={inputValue}
             disablePortal
             disableClearable
+            autoHighlight
             forcePopupIcon={false}
             options={cwec.weaknesses.map((cwe) => cwe.id)}
             renderOption={(props, option) => (
@@ -231,9 +233,11 @@ function CwecName({
       <div className="max-w-md flex">
         <div className="w-full">
           <Autocomplete
+            className="autocomplete"
             value={inputValue}
             disablePortal
             disableClearable
+            autoHighlight
             forcePopupIcon={false}
             options={cwec.weaknesses.map((cwe) => cwe.name)}
             renderOption={(props, option) => (

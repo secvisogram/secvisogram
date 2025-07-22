@@ -70,9 +70,11 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
       <div className="max-w-md flex">
         <div className="w-full">
           <Autocomplete
+            className="autocomplete"
             value={value}
             disablePortal
             disableClearable
+            autoHighlight
             forcePopupIcon={false}
             options={entries.map((entry) => entry.id)}
             renderOption={(props, option) => (
