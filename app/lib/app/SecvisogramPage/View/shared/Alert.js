@@ -5,7 +5,7 @@ import { DialogContent } from '@mui/material'
 import { DialogContentText } from '@mui/material'
 import { DialogTitle } from '@mui/material'
 import { t } from 'i18next'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 /**
  * @param {{
@@ -72,11 +72,15 @@ const Alert = ({
     setOpen(false)
   }
 
-  const defaultButtonRef = useCallback((inputElement) => {
-    if (inputElement) {
-      inputElement.focus()
+  /** @type {React.MutableRefObject<HTMLButtonElement | null>} */
+  const defaultButtonRef = useRef(null)
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        defaultButtonRef.current?.focus()
+      }, 100)
     }
-  }, [])
+  }, [open])
 
   return (
     <React.Fragment>
@@ -85,13 +89,7 @@ const Alert = ({
         maxWidth={false}
         disableRestoreFocus
         open={open}
-        onClose={(event, reason) => {
-          console.log(event, reason)
-          if (reason === 'backdropClick') {
-            console.log('here')
-            handleClose()
-          }
-        }}
+        onClose={handleClose}
       >
         <DialogTitle>{label}</DialogTitle>
         <DialogContent data-testid="alert">
