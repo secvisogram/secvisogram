@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Attribute from './shared/Attribute.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
@@ -33,7 +33,7 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
     }
   }
 
-  const loadEntries = () => {
+  const handleFocus = () => {
     if (onCollectIds) {
       onCollectIds().then((entries) => {
         if (entries) {
@@ -61,10 +61,6 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
     setValue(/** @type string */ (props.value))
   }, [props.value])
 
-  useEffect(() => {
-    loadEntries()
-  }, [])
-
   return (
     <Attribute disabled={disabled} {...props}>
       <div className="max-w-md flex">
@@ -84,7 +80,13 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
             )}
             noOptionsText={'No results found'}
             renderInput={(params) => (
-              <TextField {...params} label="" placeholder="" size="small" />
+              <TextField
+                {...params}
+                label=""
+                placeholder=""
+                size="small"
+                onFocus={handleFocus}
+              />
             )}
             onInputChange={(event, newInputValue) => {
               handleChange(event, newInputValue)
