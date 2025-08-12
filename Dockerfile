@@ -1,5 +1,5 @@
 # 1. Builder image
-FROM node:18-alpine AS compile-image
+FROM node:22-alpine AS compile-image
 
  # install git
 RUN apk update; \

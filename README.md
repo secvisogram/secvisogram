@@ -84,33 +84,32 @@ Please refer to [`DEVELOPMENT.md`](DEVELOPMENT.md) for a detailed description on
 
 ### Running local with validator service
 
-First [start csaf validator service in docker](https://github.com/secvisogram/csaf-validator-service?tab=readme-ov-file#docker)
+1. [start csaf validator service in docker](https://github.com/secvisogram/csaf-validator-service?tab=readme-ov-file#docker)
 
-Then Build Secvisogram docker image
+2. Build Secvisogram docker image
 
 ```sh
 docker build -t csaf/secvisogram .
 ```
+3. Start container
 
-Start container
-
-Start the container at port 8080. Mount the configuration as docker volumen from a local directory.
+  - Start the container at port 8080. Mount the configuration as docker volumen from a local directory.
 The example configuration in 'docker/appspecific' set the URL of the validator service to 'http://localhost:8082'
 
-Example for Windows powershell:
+- Example for Windows powershell:
 
 ```powershell
 docker run -it --rm  -p 8080:80 -v ${PWD}/docker/appspecific:/usr/share/nginx/html/.well-known/appspecific:ro --name csaf-secvisogram csaf/secvisogram
 ```
 
-Example for Unix shell:
+- Example for Unix shell:
 
 ```sh
 docker run -it --rm  -p 8080:80 -v "$(pwd)/docker/appspecific:/usr/share/nginx/html/.well-known/appspecific:ro" --name bsi-secvisogram bsi/secvisogram
 ```
 
-Secvisogram starts on http://localhost:8080
-In Secvisogram call validation in validator service with hotkey CTRL + ALT + V
+4.  Secvisogram starts on http://localhost:8080
+- In Secvisogram, the validation by the validator service can be executed with hotkey CTRL + ALT + V.
 
 
 ### Configure keybindings
