@@ -1,11 +1,11 @@
-import {
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogLabel,
-  AlertDialogOverlay,
-} from '@reach/alert-dialog'
+import { Button } from '@mui/material'
+import { Dialog } from '@mui/material'
+import { DialogActions } from '@mui/material'
+import { DialogContent } from '@mui/material'
+import { DialogContentText } from '@mui/material'
+import { DialogTitle } from '@mui/material'
 import { t } from 'i18next'
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 /**
  * @param {{
@@ -66,44 +66,55 @@ const Alert = ({
   onCancel,
   onConfirm,
 }) => {
-  const cancelRef = /** @type {React.RefObject<HTMLButtonElement>} */ (
-    React.useRef()
-  )
+  const [open] = React.useState(true)
+
+  /** @type {React.MutableRefObject<HTMLButtonElement | null>} */
+  const defaultButtonRef = useRef(null)
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        defaultButtonRef.current?.focus()
+      }, 100)
+    }
+  }, [open])
 
   return (
-    <>
-      <AlertDialogOverlay
-        onDismiss={onCancel}
-        leastDestructiveRef={cancelRef}
-        className="z-10"
+    <React.Fragment>
+      <Dialog
+        className="alert-dialog"
+        maxWidth={false}
+        disableRestoreFocus
+        open={open}
+        onClose={onCancel}
       >
-        <AlertDialogContent data-testid="alert" className="rounded shadow-xl">
-          <AlertDialogLabel className="text-xl mb-3">{label}</AlertDialogLabel>
-          <AlertDialogDescription className="mb-3">
+        <DialogTitle>{label}</DialogTitle>
+        <DialogContent data-testid="alert">
+          <DialogContentText
+            className="alert-dialog-description"
+            id="alert-dialog-description"
+          >
             {description}
-          </AlertDialogDescription>
-          <div className="alert-buttons flex justify-end items-center">
-            <button
-              data-testid="alert-confirm_button"
-              type="button"
-              className="py-1 px-3 rounded shadow border border-red-500 bg-red-500 hover:text-red-500 text-white hover:bg-white"
-              onClick={onConfirm}
-            >
-              {confirmLabel}
-            </button>
-            <button
-              data-testid="alert-refute_button"
-              type="button"
-              className="ml-4 py-1 px-3 rounded shadow border border-gray-500 bg-gray-500 text-white hover:text-gray-500 hover:bg-white"
-              ref={cancelRef}
-              onClick={onCancel}
-            >
-              {cancelLabel}
-            </button>
-          </div>
-        </AlertDialogContent>
-      </AlertDialogOverlay>
-    </>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className="alert-buttons">
+          <Button
+            data-testid="alert-confirm_button"
+            className="confirm-button"
+            onClick={onConfirm}
+          >
+            {confirmLabel}
+          </Button>
+          <Button
+            data-testid="alert-refute_button"
+            className="refuse-button"
+            onClick={onCancel}
+            ref={defaultButtonRef}
+          >
+            {cancelLabel}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
   )
 }
 
