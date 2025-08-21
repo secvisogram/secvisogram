@@ -40,6 +40,10 @@ textarea:invalid {
   @apply bg-blue-400;
 }
 
+.autocomplete .MuiOutlinedInput-root:has(input:invalid) {
+  border: solid 1px red;
+}
+
 /* Loading Indicator */
 .lds-spinner {
   color: official;
@@ -209,4 +213,66 @@ textarea:invalid {
 
 .treeview > ul > li:after {
   content: unset;
+}
+
+/*
+styles for Alert.js dialog
+*/
+.alert-dialog .MuiDialog-paper {
+  position: fixed !important;
+  top: 100px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+
+  border-radius: 4px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.alert-dialog {
+  z-index: 10 !important;
+  align-items: flex-start !important;
+}
+
+.alert-dialog-description {
+  white-space: nowrap !important;
+}
+
+.alert-buttons {
+  background-color: white;
+  padding-right: 24px !important;
+  padding-bottom: 24px !important;
+}
+
+.confirm-button {
+  padding: 4px 12px !important;
+  border-radius: 4px !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid #ef4444 !important;
+  background-color: #ef4444 !important;
+  color: white !important;
+
+  &:hover {
+    color: #ef4444 !important;
+    background-color: white !important;
+    border-color: #ef4444 !important;
+  }
+}
+
+.refuse-button {
+  margin-left: 16px !important;
+  padding: 4px 12px !important;
+  border-radius: 4px !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid #6b7280 !important;
+  background-color: #6b7280 !important;
+  color: white !important;
+
+  &:hover {
+    color: #6b7280 !important;
+    background-color: white !important;
+    border-color: #6b7280 !important;
+  }
 }

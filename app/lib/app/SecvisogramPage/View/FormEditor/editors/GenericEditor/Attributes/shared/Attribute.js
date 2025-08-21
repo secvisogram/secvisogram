@@ -21,7 +21,7 @@ import AttributeErrors from './AttributeErrors.js'
  * @param {string} props.label
  * @param {string} props.description
  * @param {string[]} props.instancePath
- * @param {React.ReactNode | ((params: {}) => React.ReactNode)} [props.children]
+ * @param {React.ReactNode} [props.children]
  * @param {import('../../../../shared/types').Property} props.property
  * @param {boolean} props.disabled
  * @param {() => void} [props.fillFunction]
