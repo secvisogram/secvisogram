@@ -1,6 +1,6 @@
 export default {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/csaf_json_schema.json',
+  $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
+  $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json',
   title: 'Common Security Advisory Framework',
   description:
     'Representation of security advisory information as a JSON document.',
@@ -65,6 +65,7 @@ export default {
             },
           },
         },
+        additionalProperties: false,
       },
     },
     branches_t: {
@@ -126,6 +127,7 @@ export default {
             $ref: '#/$defs/full_product_name_t',
           },
         },
+        additionalProperties: false,
       },
     },
     full_product_name_t: {
@@ -220,6 +222,7 @@ export default {
                           ],
                         },
                       },
+                      additionalProperties: false,
                     },
                   },
                   filename: {
@@ -231,19 +234,19 @@ export default {
                     examples: ['WINWORD.EXE', 'msotadddin.dll', 'sudoers.so'],
                   },
                 },
+                additionalProperties: false,
               },
             },
             model_numbers: {
               title: 'List of models',
-              description:
-                'Contains a list of full or abbreviated (partial) model numbers.',
+              description: 'Contains a list of model numbers.',
               type: 'array',
               minItems: 1,
               uniqueItems: true,
               items: {
                 title: 'Model number',
                 description:
-                  'Contains a full or abbreviated (partial) model number of the component to identify.',
+                  'Contains a model number of the component to identify - possibly with placeholders.',
                 type: 'string',
                 minLength: 1,
               },
@@ -279,15 +282,14 @@ export default {
             },
             serial_numbers: {
               title: 'List of serial numbers',
-              description:
-                'Contains a list of full or abbreviated (partial) serial numbers.',
+              description: 'Contains a list of serial numbers.',
               type: 'array',
               minItems: 1,
               uniqueItems: true,
               items: {
                 title: 'Serial number',
                 description:
-                  'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                  'Contains a serial number of the component to identify - possibly with placeholders.',
                 type: 'string',
                 minLength: 1,
               },
@@ -333,11 +335,14 @@ export default {
                     format: 'uri',
                   },
                 },
+                additionalProperties: false,
               },
             },
           },
+          additionalProperties: false,
         },
       },
+      additionalProperties: false,
     },
     lang_t: {
       title: 'Language type',
@@ -387,6 +392,12 @@ export default {
               'summary',
             ],
           },
+          group_ids: {
+            $ref: '#/$defs/product_groups_t',
+          },
+          product_ids: {
+            $ref: '#/$defs/products_t',
+          },
           text: {
             title: 'Note content',
             description:
@@ -408,6 +419,7 @@ export default {
             ],
           },
         },
+        additionalProperties: false,
       },
     },
     product_group_id_t: {
@@ -481,6 +493,7 @@ export default {
             format: 'uri',
           },
         },
+        additionalProperties: false,
       },
     },
     version_t: {
@@ -500,9 +513,7 @@ export default {
       description:
         'Contains the URL of the CSAF JSON schema which the document promises to be valid for.',
       type: 'string',
-      enum: [
-        'https://docs.oasis-open.org/csaf/csaf/v2.1/csaf_json_schema.json',
-      ],
+      enum: ['https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json'],
       format: 'uri',
     },
     document: {
@@ -547,6 +558,7 @@ export default {
               examples: ['Critical', 'Important', 'Moderate'],
             },
           },
+          additionalProperties: false,
         },
         category: {
           title: 'Document category',
@@ -570,7 +582,7 @@ export default {
           enum: ['2.1'],
         },
         distribution: {
-          title: 'Rules for sharing document',
+          title: 'Rules for document sharing',
           description:
             'Describe any constraints on how this document might be shared.',
           type: 'object',
@@ -607,6 +619,7 @@ export default {
                   ],
                 },
               },
+              additionalProperties: false,
             },
             text: {
               title: 'Textual description',
@@ -647,14 +660,29 @@ export default {
                   ],
                 },
               },
+              additionalProperties: false,
             },
           },
+          additionalProperties: false,
         },
         lang: {
           title: 'Document language',
           description:
             'Identifies the language used by this document, corresponding to IETF BCP 47 / RFC 5646.',
           $ref: '#/$defs/lang_t',
+        },
+        license_expression: {
+          title: 'License expression',
+          description:
+            'Contains the SPDX license expression for the CSAF document.',
+          type: 'string',
+          minLength: 1,
+          examples: [
+            'CC-BY-4.0',
+            'LicenseRef-www.example.org-Example-CSAF-License-3.0+',
+            'LicenseRef-scancode-public-domain',
+            'MIT OR any-OSI',
+          ],
         },
         notes: {
           title: 'Document notes',
@@ -716,6 +744,7 @@ export default {
               examples: ['https://csaf.io', 'https://www.example.com'],
             },
           },
+          additionalProperties: false,
         },
         references: {
           title: 'Document references',
@@ -815,8 +844,10 @@ export default {
                       examples: ['0.6.0', '1.0.0-beta+exp.sha.a1c44f85', '2'],
                     },
                   },
+                  additionalProperties: false,
                 },
               },
+              additionalProperties: false,
             },
             id: {
               title: 'Unique identifier for the document',
@@ -876,6 +907,7 @@ export default {
                     examples: ['Initial version.'],
                   },
                 },
+                additionalProperties: false,
               },
             },
             status: {
@@ -888,8 +920,10 @@ export default {
               $ref: '#/$defs/version_t',
             },
           },
+          additionalProperties: false,
         },
       },
+      additionalProperties: false,
     },
     product_tree: {
       title: 'Product tree',
@@ -948,6 +982,7 @@ export default {
                 ],
               },
             },
+            additionalProperties: false,
           },
         },
         relationships: {
@@ -996,9 +1031,11 @@ export default {
                 $ref: '#/$defs/product_id_t',
               },
             },
+            additionalProperties: false,
           },
         },
       },
+      additionalProperties: false,
     },
     vulnerabilities: {
       title: 'Vulnerabilities',
@@ -1051,6 +1088,7 @@ export default {
                   description:
                     'Holds the full name of the weakness as given in the CWE specification.',
                   type: 'string',
+                  pattern: '^[^\\s\\-_\\.](.*[^\\s\\-_\\.])?$',
                   minLength: 1,
                   examples: [
                     'Cross-Site Request Forgery (CSRF)',
@@ -1063,11 +1101,11 @@ export default {
                   description:
                     'Holds the version string of the CWE specification this weakness was extracted from.',
                   type: 'string',
-                  minLength: 1,
                   pattern: '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
                   examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
                 },
               },
+              additionalProperties: false,
             },
           },
           disclosure_date: {
@@ -1083,6 +1121,45 @@ export default {
               'Holds the date and time the vulnerability was originally discovered.',
             type: 'string',
             format: 'date-time',
+          },
+          first_known_exploitation_dates: {
+            title: 'List of first known exploitation dates',
+            description:
+              'Contains a list of dates of first known exploitations.',
+            type: 'array',
+            minItems: 1,
+            uniqueItems: true,
+            items: {
+              title: 'First known exploitation date',
+              description:
+                'Contains information on when this vulnerability was first known to be exploited in the wild in the products specified.',
+              type: 'object',
+              minProperties: 3,
+              required: ['date', 'exploitation_date'],
+              properties: {
+                date: {
+                  title: 'Date of the information',
+                  description:
+                    'Contains the date when the information was last updated.',
+                  type: 'string',
+                  format: 'date-time',
+                },
+                exploitation_date: {
+                  title: 'Date of the exploitation',
+                  description:
+                    'Contains the date when the exploitation happened.',
+                  type: 'string',
+                  format: 'date-time',
+                },
+                group_ids: {
+                  $ref: '#/$defs/product_groups_t',
+                },
+                product_ids: {
+                  $ref: '#/$defs/products_t',
+                },
+              },
+              additionalProperties: false,
+            },
           },
           flags: {
             title: 'List of flags',
@@ -1123,6 +1200,7 @@ export default {
                   $ref: '#/$defs/products_t',
                 },
               },
+              additionalProperties: false,
             },
           },
           ids: {
@@ -1156,6 +1234,7 @@ export default {
                   examples: ['CSCso66472', 'oasis-tcs/csaf#210'],
                 },
               },
+              additionalProperties: false,
             },
           },
           involvements: {
@@ -1171,12 +1250,22 @@ export default {
               type: 'object',
               required: ['party', 'status'],
               properties: {
+                contact: {
+                  title: 'Party contact information',
+                  description:
+                    'Contains the contact information of the party that was used in this state.',
+                  type: 'string',
+                  minLength: 1,
+                },
                 date: {
                   title: 'Date of involvement',
                   description:
                     'Holds the date and time of the involvement entry.',
                   type: 'string',
                   format: 'date-time',
+                },
+                group_ids: {
+                  $ref: '#/$defs/product_groups_t',
                 },
                 party: {
                   title: 'Party category',
@@ -1189,6 +1278,9 @@ export default {
                     'user',
                     'vendor',
                   ],
+                },
+                product_ids: {
+                  $ref: '#/$defs/products_t',
                 },
                 status: {
                   title: 'Party status',
@@ -1211,6 +1303,7 @@ export default {
                   minLength: 1,
                 },
               },
+              additionalProperties: false,
             },
           },
           metrics: {
@@ -1235,9 +1328,11 @@ export default {
                   minProperties: 1,
                   properties: {
                     cvss_v2: {
+                      title: 'CVSS v2',
                       $ref: 'https://www.first.org/cvss/cvss-v2.0.json',
                     },
                     cvss_v3: {
+                      title: 'CVSS v3',
                       oneOf: [
                         {
                           $ref: 'https://www.first.org/cvss/cvss-v3.0.json',
@@ -1248,12 +1343,52 @@ export default {
                       ],
                     },
                     cvss_v4: {
-                      $ref: 'https://www.first.org/cvss/cvss-v4.0.json',
+                      title: 'CVSS v4',
+                      $ref: 'https://www.first.org/cvss/cvss-v4.0.1.json',
                     },
-                    ssvc_v1: {
-                      $ref: 'https://certcc.github.io/SSVC/data/schema/v1/Decision_Point_Value_Selection-1-0-1.schema.json',
+                    epss: {
+                      title: 'EPSS',
+                      description: 'Contains the EPSS data.',
+                      type: 'object',
+                      required: ['percentile', 'probability', 'timestamp'],
+                      properties: {
+                        percentile: {
+                          title: 'Percentile',
+                          description:
+                            'Contains the rank ordering of probabilities from highest to lowest.',
+                          type: 'string',
+                          pattern: '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                        },
+                        probability: {
+                          title: 'Probability',
+                          description:
+                            'Contains the likelihood that any exploitation activity for this Vulnerability is being observed in the 30 days following the given timestamp.',
+                          type: 'string',
+                          pattern: '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                        },
+                        timestamp: {
+                          title: 'EPSS timestamp',
+                          description:
+                            'Holds the date and time the EPSS value was recorded.',
+                          type: 'string',
+                          format: 'date-time',
+                        },
+                      },
+                      additionalProperties: false,
+                    },
+                    qualitative_severity_rating: {
+                      title: 'Qualitative Severity Rating',
+                      description:
+                        'Contains an assessment of the severity of the vulnerability regarding the products on a qualitative scale.',
+                      type: 'string',
+                      enum: ['critical', 'high', 'low', 'medium', 'none'],
+                    },
+                    ssvc_v2: {
+                      title: 'SSVC v2',
+                      $ref: 'https://certcc.github.io/SSVC/data/schema/v2/Decision_Point_Value_Selection-2-0-0.schema.json',
                     },
                   },
+                  additionalProperties: false,
                 },
                 products: {
                   $ref: '#/$defs/products_t',
@@ -1266,6 +1401,7 @@ export default {
                   format: 'uri',
                 },
               },
+              additionalProperties: false,
             },
           },
           notes: {
@@ -1328,7 +1464,14 @@ export default {
                   'It is not known yet whether these versions are or are not affected by the vulnerability. However, it is still under investigation - the result will be provided in a later release of the document.',
                 $ref: '#/$defs/products_t',
               },
+              unknown: {
+                title: 'Unknown',
+                description:
+                  'It is not known whether these versions are or are not affected by the vulnerability. There is also no investigation and therefore the status might never be determined.',
+                $ref: '#/$defs/products_t',
+              },
             },
+            additionalProperties: false,
           },
           references: {
             title: 'Vulnerability references',
@@ -1399,7 +1542,7 @@ export default {
                 restart_required: {
                   title: 'Restart required by remediation',
                   description:
-                    'Provides information on category of restart is required by this remediation to become effective.',
+                    'Provides information on the category of restart required by this remediation to become effective.',
                   type: 'object',
                   required: ['category'],
                   properties: {
@@ -1428,6 +1571,7 @@ export default {
                       minLength: 1,
                     },
                   },
+                  additionalProperties: false,
                 },
                 url: {
                   title: 'URL to the remediation',
@@ -1437,6 +1581,7 @@ export default {
                   format: 'uri',
                 },
               },
+              additionalProperties: false,
             },
           },
           threats: {
@@ -1480,6 +1625,7 @@ export default {
                   $ref: '#/$defs/products_t',
                 },
               },
+              additionalProperties: false,
             },
           },
           title: {
@@ -1490,7 +1636,9 @@ export default {
             minLength: 1,
           },
         },
+        additionalProperties: false,
       },
     },
   },
+  additionalProperties: false,
 }

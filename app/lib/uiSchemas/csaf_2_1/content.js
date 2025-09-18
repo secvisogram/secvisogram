@@ -34,9 +34,7 @@ export default {
             csaf_vex: 'mandatory',
           },
         },
-        enum: [
-          'https://docs.oasis-open.org/csaf/csaf/v2.1/csaf_json_schema.json',
-        ],
+        enum: ['https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json'],
         metaInfo: {},
         type: 'STRING',
       },
@@ -493,7 +491,7 @@ export default {
             {
               key: 'distribution',
               fullName: ['document', 'distribution'],
-              title: 'Rules for sharing document',
+              title: 'Rules for document sharing',
               description:
                 'Describe any constraints on how this document might be shared.',
               metaData: {
@@ -807,6 +805,23 @@ export default {
               type: 'STRING',
             },
             {
+              key: 'license_expression',
+              fullName: ['document', 'license_expression'],
+              title: 'License expression',
+              description:
+                'Contains the SPDX license expression for the CSAF document.',
+              metaData: {},
+              minLength: 1,
+              examples: [
+                'CC-BY-4.0',
+                'LicenseRef-www.example.org-Example-CSAF-License-3.0+',
+                'LicenseRef-scancode-public-domain',
+                'MIT OR any-OSI',
+              ],
+              metaInfo: {},
+              type: 'STRING',
+            },
+            {
               key: 'notes',
               fullName: ['document', 'notes'],
               title: 'Document notes',
@@ -931,6 +946,54 @@ export default {
                         ],
                         metaInfo: {},
                         type: 'STRING',
+                      },
+                      {
+                        key: 'group_ids',
+                        fullName: ['document', 'notes', 'group_ids'],
+                        title: 'List of product_group_ids',
+                        description:
+                          'Specifies a list of product_group_ids to give context to the parent item.',
+                        type: 'ARRAY',
+                        metaInfo: {
+                          arrayType: {
+                            key: '',
+                            fullName: ['document', 'notes', 'group_ids'],
+                            title: 'Reference token for product group instance',
+                            description:
+                              'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
+                            metaData: {},
+                            minLength: 1,
+                            examples: [
+                              'CSAFGID-0001',
+                              'CSAFGID-0002',
+                              'CSAFGID-0020',
+                            ],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                        },
+                      },
+                      {
+                        key: 'product_ids',
+                        fullName: ['document', 'notes', 'product_ids'],
+                        title: 'List of product_ids',
+                        description:
+                          'Specifies a list of product_ids to give context to the parent item.',
+                        type: 'ARRAY',
+                        metaInfo: {
+                          arrayType: {
+                            key: '',
+                            fullName: ['document', 'notes', 'product_ids'],
+                            title: 'Reference token for product instance',
+                            description:
+                              'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                            metaData: {},
+                            minLength: 1,
+                            examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                        },
                       },
                       {
                         key: 'text',
@@ -2788,7 +2851,7 @@ export default {
                                     ],
                                     title: 'List of models',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) model numbers.',
+                                      'Contains a list of model numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -2825,7 +2888,7 @@ export default {
                                         ],
                                         title: 'Model number',
                                         description:
-                                          'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                          'Contains a model number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -3036,7 +3099,7 @@ export default {
                                     ],
                                     title: 'List of serial numbers',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) serial numbers.',
+                                      'Contains a list of serial numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -3073,7 +3136,7 @@ export default {
                                         ],
                                         title: 'Serial number',
                                         description:
-                                          'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                          'Contains a serial number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -3891,8 +3954,7 @@ export default {
                                 'model_numbers',
                               ],
                               title: 'List of models',
-                              description:
-                                'Contains a list of full or abbreviated (partial) model numbers.',
+                              description: 'Contains a list of model numbers.',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -3927,7 +3989,7 @@ export default {
                                   ],
                                   title: 'Model number',
                                   description:
-                                    'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                    'Contains a model number of the component to identify - possibly with placeholders.',
                                   metaData: {
                                     userDocumentation: {
                                       specification:
@@ -4127,8 +4189,7 @@ export default {
                                 'serial_numbers',
                               ],
                               title: 'List of serial numbers',
-                              description:
-                                'Contains a list of full or abbreviated (partial) serial numbers.',
+                              description: 'Contains a list of serial numbers.',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -4163,7 +4224,7 @@ export default {
                                   ],
                                   title: 'Serial number',
                                   description:
-                                    'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                    'Contains a serial number of the component to identify - possibly with placeholders.',
                                   metaData: {
                                     userDocumentation: {
                                       specification:
@@ -5274,7 +5335,7 @@ export default {
                                     ],
                                     title: 'List of models',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) model numbers.',
+                                      'Contains a list of model numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -5311,7 +5372,7 @@ export default {
                                         ],
                                         title: 'Model number',
                                         description:
-                                          'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                          'Contains a model number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -5522,7 +5583,7 @@ export default {
                                     ],
                                     title: 'List of serial numbers',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) serial numbers.',
+                                      'Contains a list of serial numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -5559,7 +5620,7 @@ export default {
                                         ],
                                         title: 'Serial number',
                                         description:
-                                          'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                          'Contains a serial number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -6427,6 +6488,7 @@ export default {
                               "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
                               "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
                             ],
+                            pattern: '^[^\\s\\-_\\.](.*[^\\s\\-_\\.])?$',
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -6457,7 +6519,6 @@ export default {
                                   'v2_1.VulnerabilitiesItemsCwesVersionDescription',
                               },
                             },
-                            minLength: 1,
                             examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
                             pattern:
                               '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
@@ -6528,6 +6589,128 @@ export default {
                   },
                   metaInfo: {},
                   type: 'STRING',
+                },
+                {
+                  key: 'first_known_exploitation_dates',
+                  fullName: [
+                    'vulnerabilities',
+                    'first_known_exploitation_dates',
+                  ],
+                  title: 'List of first known exploitation dates',
+                  description:
+                    'Contains a list of dates of first known exploitations.',
+                  type: 'ARRAY',
+                  metaInfo: {
+                    arrayType: {
+                      key: '',
+                      fullName: [
+                        'vulnerabilities',
+                        'first_known_exploitation_dates',
+                      ],
+                      title: 'First known exploitation date',
+                      description:
+                        'Contains information on when this vulnerability was first known to be exploited in the wild in the products specified.',
+                      metaData: {},
+                      type: 'OBJECT',
+                      metaInfo: {
+                        propertyList: [
+                          {
+                            key: 'date',
+                            fullName: [
+                              'vulnerabilities',
+                              'first_known_exploitation_dates',
+                              'date',
+                            ],
+                            title: 'Date of the information',
+                            description:
+                              'Contains the date when the information was last updated.',
+                            metaData: { uiType: 'STRING_DATETIME' },
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
+                            key: 'exploitation_date',
+                            fullName: [
+                              'vulnerabilities',
+                              'first_known_exploitation_dates',
+                              'exploitation_date',
+                            ],
+                            title: 'Date of the exploitation',
+                            description:
+                              'Contains the date when the exploitation happened.',
+                            metaData: { uiType: 'STRING_DATETIME' },
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
+                            key: 'group_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'first_known_exploitation_dates',
+                              'group_ids',
+                            ],
+                            title: 'List of product_group_ids',
+                            description:
+                              'Specifies a list of product_group_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'first_known_exploitation_dates',
+                                  'group_ids',
+                                ],
+                                title:
+                                  'Reference token for product group instance',
+                                description:
+                                  'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: [
+                                  'CSAFGID-0001',
+                                  'CSAFGID-0002',
+                                  'CSAFGID-0020',
+                                ],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
+                          {
+                            key: 'product_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'first_known_exploitation_dates',
+                              'product_ids',
+                            ],
+                            title: 'List of product_ids',
+                            description:
+                              'Specifies a list of product_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'first_known_exploitation_dates',
+                                  'product_ids',
+                                ],
+                                title: 'Reference token for product instance',
+                                description:
+                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  },
                 },
                 {
                   key: 'flags',
@@ -6998,6 +7181,21 @@ export default {
                       metaInfo: {
                         propertyList: [
                           {
+                            key: 'contact',
+                            fullName: [
+                              'vulnerabilities',
+                              'involvements',
+                              'contact',
+                            ],
+                            title: 'Party contact information',
+                            description:
+                              'Contains the contact information of the party that was used in this state.',
+                            metaData: {},
+                            minLength: 1,
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
                             key: 'date',
                             fullName: [
                               'vulnerabilities',
@@ -7031,6 +7229,41 @@ export default {
                             },
                             metaInfo: {},
                             type: 'STRING',
+                          },
+                          {
+                            key: 'group_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'involvements',
+                              'group_ids',
+                            ],
+                            title: 'List of product_group_ids',
+                            description:
+                              'Specifies a list of product_group_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'involvements',
+                                  'group_ids',
+                                ],
+                                title:
+                                  'Reference token for product group instance',
+                                description:
+                                  'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: [
+                                  'CSAFGID-0001',
+                                  'CSAFGID-0002',
+                                  'CSAFGID-0020',
+                                ],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
                           },
                           {
                             key: 'party',
@@ -7073,6 +7306,36 @@ export default {
                             ],
                             metaInfo: {},
                             type: 'STRING',
+                          },
+                          {
+                            key: 'product_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'involvements',
+                              'product_ids',
+                            ],
+                            title: 'List of product_ids',
+                            description:
+                              'Specifies a list of product_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'involvements',
+                                  'product_ids',
+                                ],
+                                title: 'Reference token for product instance',
+                                description:
+                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
                           },
                           {
                             key: 'status',
@@ -7255,8 +7518,7 @@ export default {
                                     'content',
                                     'cvss_v2',
                                   ],
-                                  title:
-                                    'JSON Schema for Common Vulnerability Scoring System version 2.0',
+                                  title: 'CVSS v2',
                                   metaData: {
                                     title: 'CVSS v2',
                                     description:
@@ -8050,6 +8312,7 @@ export default {
                                     'content',
                                     'cvss_v3',
                                   ],
+                                  title: 'CVSS v3',
                                   metaData: {
                                     title: 'CVSS v3',
                                     description:
@@ -8085,6 +8348,7 @@ export default {
                                     'content',
                                     'cvss_v4',
                                   ],
+                                  title: 'CVSS v4',
                                   metaData: {
                                     title: 'CVSS v3',
                                     description:
@@ -8112,36 +8376,104 @@ export default {
                                   metaInfo: { propertyList: [] },
                                 },
                                 {
-                                  key: 'ssvc_v1',
+                                  key: 'epss',
                                   fullName: [
                                     'vulnerabilities',
                                     'metrics',
                                     'content',
-                                    'ssvc_v1',
+                                    'epss',
                                   ],
-                                  metaData: {
-                                    title: 'SSVC V1',
-                                    description:
-                                      'JSON Schema for Stakeholder-Specific Vulnerability Categorization version 1.0',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/ssvc_v1-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/ssvc_v1-usage.en.md',
-                                    },
-                                    relevanceLevels: {
-                                      csaf_base: 'best_practice',
-                                      csaf_security_incident_response:
-                                        'best_practice',
-                                      csaf_informational_advisory: 'excluded',
-                                      csaf_security_advisory: 'best_practice',
-                                      csaf_vex: 'best_practice',
-                                    },
-                                    i18n: {
-                                      title: 'v2_1.SsvcV1Title',
-                                      description: 'v2_1.SsvcV1Description',
-                                    },
+                                  title: 'EPSS',
+                                  description: 'Contains the EPSS data.',
+                                  type: 'OBJECT',
+                                  metaInfo: {
+                                    propertyList: [
+                                      {
+                                        key: 'percentile',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'percentile',
+                                        ],
+                                        title: 'Percentile',
+                                        description:
+                                          'Contains the rank ordering of probabilities from highest to lowest.',
+                                        metaData: {},
+                                        pattern:
+                                          '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'probability',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'probability',
+                                        ],
+                                        title: 'Probability',
+                                        description:
+                                          'Contains the likelihood that any exploitation activity for this Vulnerability is being observed in the 30 days following the given timestamp.',
+                                        metaData: {},
+                                        pattern:
+                                          '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'timestamp',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'timestamp',
+                                        ],
+                                        title: 'EPSS timestamp',
+                                        description:
+                                          'Holds the date and time the EPSS value was recorded.',
+                                        metaData: { uiType: 'STRING_DATETIME' },
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                    ],
                                   },
+                                },
+                                {
+                                  key: 'qualitative_severity_rating',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'qualitative_severity_rating',
+                                  ],
+                                  title: 'Qualitative Severity Rating',
+                                  description:
+                                    'Contains an assessment of the severity of the vulnerability regarding the products on a qualitative scale.',
+                                  metaData: { uiType: 'STRING_ENUM' },
+                                  enum: [
+                                    'critical',
+                                    'high',
+                                    'low',
+                                    'medium',
+                                    'none',
+                                  ],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'ssvc_v2',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'ssvc_v2',
+                                  ],
+                                  title: 'SSVC v2',
                                   type: 'OBJECT',
                                   metaInfo: { propertyList: [] },
                                 },
@@ -8389,6 +8721,67 @@ export default {
                             ],
                             metaInfo: {},
                             type: 'STRING',
+                          },
+                          {
+                            key: 'group_ids',
+                            fullName: ['vulnerabilities', 'notes', 'group_ids'],
+                            title: 'List of product_group_ids',
+                            description:
+                              'Specifies a list of product_group_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'notes',
+                                  'group_ids',
+                                ],
+                                title:
+                                  'Reference token for product group instance',
+                                description:
+                                  'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: [
+                                  'CSAFGID-0001',
+                                  'CSAFGID-0002',
+                                  'CSAFGID-0020',
+                                ],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
+                          {
+                            key: 'product_ids',
+                            fullName: [
+                              'vulnerabilities',
+                              'notes',
+                              'product_ids',
+                            ],
+                            title: 'List of product_ids',
+                            description:
+                              'Specifies a list of product_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'notes',
+                                  'product_ids',
+                                ],
+                                title: 'Reference token for product instance',
+                                description:
+                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
                           },
                           {
                             key: 'text',
@@ -9073,6 +9466,36 @@ export default {
                           },
                         },
                       },
+                      {
+                        key: 'unknown',
+                        fullName: [
+                          'vulnerabilities',
+                          'product_status',
+                          'unknown',
+                        ],
+                        title: 'Unknown',
+                        description:
+                          'It is not known whether these versions are or are not affected by the vulnerability. There is also no investigation and therefore the status might never be determined.',
+                        type: 'ARRAY',
+                        metaInfo: {
+                          arrayType: {
+                            key: '',
+                            fullName: [
+                              'vulnerabilities',
+                              'product_status',
+                              'unknown',
+                            ],
+                            title: 'Reference token for product instance',
+                            description:
+                              'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                            metaData: {},
+                            minLength: 1,
+                            examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                        },
+                      },
                     ],
                   },
                 },
@@ -9650,7 +10073,7 @@ export default {
                             ],
                             title: 'Restart required by remediation',
                             description:
-                              'Provides information on category of restart is required by this remediation to become effective.',
+                              'Provides information on the category of restart required by this remediation to become effective.',
                             metaData: {
                               userDocumentation: {
                                 specification:

@@ -90,7 +90,7 @@ function convertSchema(subschema, defs, path) {
     strPath ===
       'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.cvss_v4' ||
     strPath ===
-      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v1'
+      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v2'
   ) {
     return {
       ...commonUiSchemaFields,
@@ -146,8 +146,8 @@ function convertSchema(subschema, defs, path) {
       )
     } else {
       const refName = subschema.$ref
-        .replace(new RegExp('\\#/\\$defs/'), '')
-        .replace(new RegExp('\\#/definitions/'), '')
+        .replace(new RegExp('#/\\$defs/'), '')
+        .replace(new RegExp('#/definitions/'), '')
       const ref = defs[refName]
       if (!ref) {
         throw new Error(
