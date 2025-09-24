@@ -528,7 +528,7 @@ export default /** @type {const} */ ({
       name: 'Improper Validation of Unsafe Equivalence in Input',
     },
     { id: 'CWE-129', name: 'Improper Validation of Array Index' },
-    { id: 'CWE-1290', name: 'Incorrect Decoding of Security Identifiers ' },
+    { id: 'CWE-1290', name: 'Incorrect Decoding of Security Identifiers' },
     {
       id: 'CWE-1291',
       name: 'Public Key Re-Use for Signing both Debug and Production Code',
@@ -1014,7 +1014,7 @@ export default /** @type {const} */ ({
     { id: 'CWE-28', name: "Path Traversal: '..\\filedir'" },
     {
       id: 'CWE-280',
-      name: 'Improper Handling of Insufficient Permissions or Privileges ',
+      name: 'Improper Handling of Insufficient Permissions or Privileges',
     },
     { id: 'CWE-281', name: 'Improper Preservation of Permissions' },
     { id: 'CWE-282', name: 'Improper Ownership Management' },
@@ -1615,7 +1615,7 @@ export default /** @type {const} */ ({
       id: 'CWE-6',
       name: 'J2EE Misconfiguration: Insufficient Session-ID Length',
     },
-    { id: 'CWE-600', name: 'Uncaught Exception in Servlet ' },
+    { id: 'CWE-600', name: 'Uncaught Exception in Servlet' },
     {
       id: 'CWE-601',
       name: "URL Redirection to Untrusted Site ('Open Redirect')",

@@ -8,12 +8,14 @@ yargs(process.argv.slice(2))
   .command(
     'generate-html-template2.0',
     '',
-    (/** @type {import('yargs').Argv} */ command) =>
-      command
-        .option('csaf20Schema', { alias: 'csaf', type: 'string' })
-        .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
-        .demandOption(['csaf20Schema', 'cvss31Schema']),
-    generateHTMLTemplate
+    /** @type {any} */ (
+      (/** @type {import('yargs').Argv} */ command) =>
+        command
+          .option('csaf20Schema', { alias: 'csaf', type: 'string' })
+          .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
+          .demandOption(['csaf20Schema', 'cvss31Schema'])
+    ),
+    /** @type {any} */ (generateHTMLTemplate)
   )
   .command(
     'generate-icann-list',
@@ -32,13 +34,15 @@ yargs(process.argv.slice(2))
   .command(
     'generate-preview-templating-table',
     '',
-    (/** @type {import('yargs').Argv} */ command) =>
-      command
-        .option('csaf20Schema', { alias: 'csaf', type: 'string' })
-        .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
-        .option('cvss20Schema', { alias: 'cvss-2', type: 'string' })
-        .demandOption(['csaf20Schema', 'cvss31Schema', 'cvss20Schema']),
-    generatePreviewTemplatingTable
+    /** @type {any} */ (
+      (/** @type {import('yargs').Argv} */ command) =>
+        command
+          .option('csaf20Schema', { alias: 'csaf', type: 'string' })
+          .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
+          .option('cvss20Schema', { alias: 'cvss-2', type: 'string' })
+          .demandOption(['csaf20Schema', 'cvss31Schema', 'cvss20Schema'])
+    ),
+    /** @type {any} */ (generatePreviewTemplatingTable)
   )
   .demandCommand(1)
   .help()

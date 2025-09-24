@@ -112,6 +112,11 @@ function collectProductIdRefs({ document }) {
         vulnerability,
         entries
       )
+      collectProductRefsInFlags(
+        `/vulnerabilities/${i}/flags`,
+        vulnerability,
+        entries
+      )
     }
   }
 
@@ -252,6 +257,32 @@ const collectProductRefsInRemediations = (
     for (let i = 0; i < remediations.length; ++i) {
       const remediation = remediations[i]
       const productIds = remediation.product_ids
+      if (productIds) {
+        for (let j = 0; j < productIds.length; ++j) {
+          const productId = productIds[j]
+          if (productId) {
+            entries.push({
+              id: productId,
+              instancePath: `${instancePath}/${i}/product_ids/${j}`,
+            })
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * @param {string} instancePath
+ * @param {{flags: any}} vulnerability
+ * @param {*} entries
+ */
+const collectProductRefsInFlags = (instancePath, vulnerability, entries) => {
+  const flags = vulnerability.flags
+  if (flags) {
+    for (let i = 0; i < flags.length; ++i) {
+      const flag = flags[i]
+      const productIds = flag.product_ids
       if (productIds) {
         for (let j = 0; j < productIds.length; ++j) {
           const productId = productIds[j]

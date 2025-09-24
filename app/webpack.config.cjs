@@ -10,11 +10,7 @@ const path = require('path')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   entry: {
-    style: [
-      './lib/style.css',
-      '@reach/combobox/styles.css',
-      '@reach/dialog/styles.css',
-    ],
+    style: ['./lib/style.css'],
     app: ['./lib/app.js'],
   },
   module: {
@@ -89,9 +85,9 @@ module.exports = {
         directory: path.join(__dirname, 'public/.well-known/appspecific'),
       },
     ],
-    proxy: {
-      '/api': 'http://localhost:4180',
-      '/oauth2': 'http://localhost:4180',
-    },
+    proxy: [
+      { context: ['/api'], target: 'http://localhost:4180' },
+      { context: ['/oauth2'], target: 'http://localhost:4180' },
+    ],
   },
 }

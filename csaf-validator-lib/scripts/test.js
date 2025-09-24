@@ -3,7 +3,7 @@
 import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
 
-spawn('mocha', ['tests', ...process.argv.slice(2)], {
+spawn('mocha', ['tests', 'tests/csaf_2_1', ...process.argv.slice(2)], {
   stdio: 'inherit',
   shell: true,
   env: {

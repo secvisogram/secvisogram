@@ -12,11 +12,24 @@ permissions:
 jobs:
   report:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+
+        #
+        # The test report is published for every supported nodejs version. But the
+        # coverage information is reported for the latest nodejs version only. When
+        # changing this array here make sure to update the latest version below
+        # (next comment).
+        #
+
+        node-version: [20.x, 22.x]
+
     steps:
     - name: Download workflow artifact
       uses: actions/download-artifact@v4
       with:
-        name: test-results
+        name: test-results-${{ matrix.node-version }}
         run-id: ${{ github.event.workflow_run.id }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Set pr number env
@@ -27,11 +40,18 @@ jobs:
       uses: phoenix-actions/test-reporting@v15
       id: test-report
       with:
-        artifact: test-results
-        name: Mocha Tests
+        artifact: test-results-${{ matrix.node-version }}
+        name: Mocha Tests (node v${{ matrix.node-version }})
         path: test-results.json
         reporter: mocha-json
     - name: c8 coverage report
+
+      #
+      # The coverage report is generated for the latest node version only.
+      # Make sure, to update this when changing the matrix above.
+      #
+
+      if: ${{ matrix.node-version == '22.x' }}
       uses: Nef10/lcov-reporter-action@v0.4.0
       with:
         pr-number: ${{ env.PR_NUMBER }}

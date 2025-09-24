@@ -1,32 +1,8 @@
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxPopover,
-} from '@reach/combobox'
-import { matchSorter } from 'match-sorter'
+import { Autocomplete, TextField } from '@mui/material'
 import React from 'react'
-import useDebounce from '../../../../shared/useDebounce.js'
-import Attribute from './shared/Attribute.js'
-import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
-
-/**
- * @param {string} term
- * @param {[{id: string, name: string}]} entries
- * @returns {any[] | null}
- */
-function useMatch(term, entries) {
-  const throttledTerm = useDebounce(term, 100)
-  return React.useMemo(() => {
-    return throttledTerm.trim() === ''
-      ? null
-      : matchSorter(entries, throttledTerm, {
-          keys: [(item) => `${item.id} - ${item.name}`],
-        })
-  }, [throttledTerm, entries])
-}
+import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
+import Attribute from './shared/Attribute.js'
 
 /**
  * @param {{
@@ -40,26 +16,17 @@ function useMatch(term, entries) {
  *  disabled: boolean
  * }} props
  */
-export default function IdAttribute({
-  placeholder,
-  onCollectIds,
-  disabled,
-  ...props
-}) {
+export default function IdAttribute({ onCollectIds, disabled, ...props }) {
   const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
 
   const [value, setValue] = React.useState(/** @type string */ (props.value))
-  const [term, setTerm] = React.useState(/** @type string */ (props.value))
   const [entries, setEntries] = React.useState(new Array())
 
-  const results = useMatch(
-    term,
-    /** @type {[{id: string, name: string}]} */ (entries)
-  )
-
   /** @param {string} id  */
-  const handleSelect = (id) => {
-    setTerm('')
+  const handleSelect = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ id
+  ) => {
     updateDoc(props.instancePath, id)
     if (!id) {
       replaceDoc(pruneEmpty(doc))
@@ -76,54 +43,61 @@ export default function IdAttribute({
     }
   }
 
+  const displayIdAndName = (/** @type string */ id) => {
+    if (!id) return ''
+    const name = entries.find((w) => w.id === id)?.name
+    return `${id} - ${name}`
+  }
+
   /** @param {React.ChangeEvent<HTMLInputElement>} event  */
-  const handleChange = (event) => {
-    setValue(event.target.value)
-    setTerm(event.target.value)
+  const handleChange = (
+    /** @type {React.SyntheticEvent<Element, Event>} */ event,
+    /** @type string */ newValue
+  ) => {
+    setValue(newValue)
   }
 
   React.useEffect(() => {
     setValue(/** @type string */ (props.value))
-    setTerm('')
   }, [props.value])
 
   return (
     <Attribute disabled={disabled} {...props}>
       <div className="max-w-md flex">
         <div className="w-full">
-          <Combobox className="w-full" onSelect={handleSelect}>
-            <ComboboxInput
-              value={value}
-              className="border border-gray-400 py-1 px-2 w-full shadow-inner rounded"
-              placeholder={placeholder}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              disabled={disabled}
-              onKeyDown={(e) =>
-                e.key === 'Enter' &&
-                results &&
-                results?.length > 0 &&
-                handleSelect(results?.[0].id)
-              }
-            />
-            {results && (
-              <ComboboxPopover className="shadow-popup">
-                {results.length > 0 ? (
-                  <ComboboxList>
-                    {results.slice(0, 10).map((result, index) => (
-                      <ComboboxOption key={index} value={result.id}>
-                        {`${result.id} - ${result.name}`}
-                      </ComboboxOption>
-                    ))}
-                  </ComboboxList>
-                ) : (
-                  <span style={{ display: 'block', margin: 8 }}>
-                    No results found
-                  </span>
-                )}
-              </ComboboxPopover>
+          <Autocomplete
+            className="autocomplete"
+            value={value}
+            disablePortal
+            disableClearable
+            autoHighlight
+            forcePopupIcon={false}
+            options={entries.map((entry) => entry.id)}
+            renderOption={(props, option) => (
+              <li {...props} key={option}>
+                {displayIdAndName(option)}
+              </li>
             )}
-          </Combobox>
+            noOptionsText={'No results found'}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label=""
+                placeholder=""
+                size="small"
+                onFocus={handleFocus}
+              />
+            )}
+            onInputChange={(event, newInputValue) => {
+              handleChange(event, newInputValue)
+            }}
+            onChange={(event, id) => {
+              handleSelect(event, id)
+            }}
+            isOptionEqualToValue={(option, value) =>
+              option === value || value === ''
+            }
+          />
         </div>
       </div>
     </Attribute>

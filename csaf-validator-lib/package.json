@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "pretest": "tsc -b .",
-    "test": "node scripts/test.js",
+    "test": "prettier --check . && node scripts/test.js",
     "pretest-report": "tsc -b .",
-    "test-report": "node scripts/test.js --reporter json > test-results.json",
+    "test-report": "prettier --check . && node scripts/test.js --reporter json > test-results.json",
     "test-coverage": "c8 node scripts/test.js",
     "test-coverage-lcov": "c8 --reporter lcovonly node scripts/test.js"
   },
@@ -23,13 +23,14 @@
     "@js-joda/core": "^5.6.1",
     "@js-joda/timezone": "^2.18.2",
     "ajv": "^8.11.2",
-    "ajv-formats": "^2.1.1",
+    "ajv-formats": "^3.0.1",
     "bcp47": "^1.1.2",
     "cvss2js": "^1.1.0",
     "json-pointer": "^0.6.1",
     "lodash": "^4.17.21",
     "packageurl-js": "^2.0.1",
     "semver": "^7.5.4",
+    "temporal-polyfill": "^0.3.0",
     "undici": "^5.27.0"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
     "@types/json-pointer": "^1.0.31",
     "@types/lodash": "^4.14.195",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.16.16",
+    "@types/node": "^24.1.0",
     "@types/prettier": "^2.7.3",
     "@types/semver": "^7.5.0",
     "@types/xml2js": "^0.4.11",
@@ -45,8 +46,8 @@
     "chai": "^4.3.7",
     "mocha": "^11.1.0",
     "prettier": "^2.8.1",
-    "typescript": "^4.9.4",
+    "typescript": "^5.7.3",
     "xml2js": "^0.5.0"
   },
-  "version": "2.0.0"
+  "version": "2.0.10"
 }

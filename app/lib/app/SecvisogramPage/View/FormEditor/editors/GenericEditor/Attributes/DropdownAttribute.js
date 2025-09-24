@@ -1,9 +1,9 @@
-import { TextField } from '@material-ui/core'
-import { Autocomplete } from '@material-ui/lab'
+import { Autocomplete } from '@mui/material'
+import { TextField } from '@mui/material'
 import React from 'react'
+import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import Attribute from './shared/Attribute.js'
-import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
 
 /**
  * @param {{
@@ -60,7 +60,23 @@ export default function DropdownAttribute({
               }
             }}
             renderInput={(params) => (
-              <TextField {...params} margin="dense" variant="outlined" />
+              <TextField
+                {...params}
+                className="font-sans"
+                margin="dense"
+                variant="outlined"
+                sx={{
+                  '.MuiInputBase-root': {
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                    paddingLeft: 0,
+                  },
+
+                  '.MuiInputBase-input.MuiAutocomplete-input': {
+                    paddingLeft: '8px',
+                  },
+                }}
+              />
             )}
           />
         </div>

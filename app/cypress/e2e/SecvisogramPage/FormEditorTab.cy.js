@@ -549,8 +549,20 @@ describe('SecvisogramPage / FormEditor Tab', function () {
 
     // check if branch full product name is filled with a generated name
     cy.get(
-      '[data-testid="menu_entry-/product_tree/branches-add_item_button"]'
-    ).click({ force: true })
+      '[data-testid="menu_entry-/product_tree/branches-hover_menu_button"]'
+    ).should('be.visible')
+    cy.get('[data-testid="menu_entry-/product_tree/branches-add_item_button"]')
+      .as('addBranchButton')
+      .parent()
+      .then((el) => {
+        el.get(0).style.display = 'flex'
+      })
+    cy.get('@addBranchButton').click()
+    cy.get('@addBranchButton')
+      .parent()
+      .then((el) => {
+        el.get(0).style.display = ''
+      })
     cy.get('[data-testid="product_tree/branches/0-fieldButton"]').click()
     cy.get('[data-testid="attribute-product_tree-branches-0-name"] input')
       .clear()
@@ -890,9 +902,18 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get('#csafVersionSelect').select('v2.0')
 
       // create new vulnerability and select CWE section
-      cy.get(
-        '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
-      ).click({ force: true })
+      cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')
+        .as('addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = 'flex'
+        })
+      cy.get('@addVulnerabilityButton').click()
+      cy.get('@addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = ''
+        })
       cy.get('[data-testid="menu_entry-/vulnerabilities/0/cwe"]').click()
 
       // enter letter c and press enter
@@ -900,7 +921,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
         .clear()
         .type('C')
       // wait for popup to show
-      cy.get('.shadow-popup')
+      cy.get('.autocomplete')
       // press enter
       cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').type(
         '{enter}'
@@ -921,9 +942,18 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get('#csafVersionSelect').select('v2.0')
 
       // create new vulnerability and select CWE section
-      cy.get(
-        '[data-testid="menu_entry-/vulnerabilities-add_item_button"]'
-      ).click({ force: true })
+      cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')
+        .as('addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = 'flex'
+        })
+      cy.get('@addVulnerabilityButton').click()
+      cy.get('@addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = ''
+        })
       cy.get('[data-testid="menu_entry-/vulnerabilities/0/cwe"]').click()
 
       // enter letter c
@@ -931,7 +961,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
         .clear()
         .type('C')
       // wait for popup to show
-      cy.get('.shadow-popup')
+      cy.get('.autocomplete')
       // press enter
       cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input').type(
         '{enter}'
@@ -952,7 +982,18 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       // add product
       cy.get(
         '[data-testid="menu_entry-/product_tree/branches-add_item_button"]'
-      ).click({ force: true })
+      )
+        .as('addBranchButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = 'flex'
+        })
+      cy.get('@addBranchButton').click()
+      cy.get('@addBranchButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = ''
+        })
       cy.get('[data-testid="attribute-product_tree-branches-0-category"] input')
         .clear()
         .type('architecture')
@@ -991,7 +1032,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
         .clear()
         .type('C')
       // wait for popup to show
-      cy.get('.shadow-popup')
+      cy.get('.autocomplete')
       // press enter
       cy.get(
         '[data-testid="attribute-vulnerabilities-0-product_status-known_affected-0"] input'

@@ -60,6 +60,11 @@ function collectGroupIdRefs({ document }) {
         vulnerability,
         entries
       )
+      collectGroupRefsInFlags(
+        `/vulnerabilities/${i}/flags`,
+        vulnerability,
+        entries
+      )
     }
   }
 
@@ -107,6 +112,32 @@ const collectGroupRefsInThreats = (instancePath, vulnerability, entries) => {
     for (let i = 0; i < threats.length; ++i) {
       const threat = threats[i]
       const groupIds = threat.group_ids
+      if (groupIds) {
+        for (let j = 0; j < groupIds.length; ++j) {
+          const groupId = groupIds[j]
+          if (groupId) {
+            entries.push({
+              id: groupId,
+              instancePath: `${instancePath}/${i}/group_ids/${j}`,
+            })
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * @param {string} instancePath
+ * @param {{flags: any}} vulnerability
+ * @param {*} entries
+ */
+const collectGroupRefsInFlags = (instancePath, vulnerability, entries) => {
+  const flags = vulnerability.flags
+  if (flags) {
+    for (let i = 0; i < flags.length; ++i) {
+      const flag = flags[i]
+      const groupIds = flag.group_ids
       if (groupIds) {
         for (let j = 0; j < groupIds.length; ++j) {
           const groupId = groupIds[j]

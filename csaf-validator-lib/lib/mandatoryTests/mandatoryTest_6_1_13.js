@@ -16,13 +16,16 @@ export default function mandatoryTest_6_1_13(doc) {
         /** @type {any} */ fullProductName,
         /** @type {number} */ fullProductNameIndex
       ) => {
-        checkProductIdentificationHelperPURL(fullProductName, (errorMessage) => {
-          isValid = false
-          errors.push({
-            instancePath: `/product_tree/full_product_names/${fullProductNameIndex}/product_identification_helper/purl`,
-            message: `invalid purl: ${errorMessage}`,
-          })
-        })
+        checkProductIdentificationHelperPURL(
+          fullProductName,
+          (errorMessage) => {
+            isValid = false
+            errors.push({
+              instancePath: `/product_tree/full_product_names/${fullProductNameIndex}/product_identification_helper/purl`,
+              message: `invalid purl: ${errorMessage}`,
+            })
+          }
+        )
       }
     )
   }
@@ -48,17 +51,20 @@ export default function mandatoryTest_6_1_13(doc) {
   }
 
   if (doc.product_tree) {
-    checkBranchesForInvalidPURLs(doc.product_tree, ({ branchIndexes, errorMessage }) => {
-      isValid = false
-      const branchPathPart = branchIndexes.reduce(
-        (str, index) => `${str}/branches/${index}`,
-        '/product_tree'
-      )
-      errors.push({
-        instancePath: `${branchPathPart}/product/product_identification_helper/purl`,
-        message: `invalid purl: ${errorMessage}`,
-      })
-    })
+    checkBranchesForInvalidPURLs(
+      doc.product_tree,
+      ({ branchIndexes, errorMessage }) => {
+        isValid = false
+        const branchPathPart = branchIndexes.reduce(
+          (str, index) => `${str}/branches/${index}`,
+          '/product_tree'
+        )
+        errors.push({
+          instancePath: `${branchPathPart}/product/product_identification_helper/purl`,
+          message: `invalid purl: ${errorMessage}`,
+        })
+      }
+    )
   }
 
   return { errors, isValid }
@@ -100,6 +106,6 @@ const checkProductIdentificationHelperPURL = (productALike, onError) => {
     PackageURL.fromString(productALike?.product_identification_helper?.purl)
   } catch (e) {
     const errorObject = /** @type {{message: string}} */ (e)
-    onError(errorObject?.message ?? "Unknown purl error")
+    onError(errorObject?.message ?? 'Unknown purl error')
   }
 }

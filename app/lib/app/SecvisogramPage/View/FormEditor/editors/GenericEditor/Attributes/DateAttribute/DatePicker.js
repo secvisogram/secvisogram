@@ -5,7 +5,6 @@ const DatePicker = (
    * @type {Omit<React.HTMLProps<HTMLInputElement>, 'value' | 'onChange'> & {
    *   value: string | null
    *   onChange(str: string | null): void
-   *   onBlur(): void
    * }}
    */
   { onChange, onBlur, value, ...props }

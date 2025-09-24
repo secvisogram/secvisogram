@@ -27,7 +27,7 @@ export const compareZonedDateTimes = (a, b) => {
     } else {
       return -1
     }
-  } catch(e) {
+  } catch (e) {
     return 0
   }
 }
