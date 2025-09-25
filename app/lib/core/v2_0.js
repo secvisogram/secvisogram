@@ -32,24 +32,24 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
  * to be tested independently.
  */
 
+/** @typedef {import('./typedValidationError.js').TypedValidationError} TypedValidationError */
+
 /**
  * Validates the document and returns errors that possibly occur.
  *
  * @param {object} params
  * @param {{}} params.document
- * @returns {Promise<{
- *   isValid: boolean;
- *   errors: {
- *     message?: string | undefined;
- *     instancePath: string;
- *   }[];
- * }>}
  */
 export async function validate({ document }) {
   const res = await libValidate(INSTANT_TESTS, document)
   return {
     isValid: res.isValid,
-    errors: res.tests.flatMap((t) => t.errors),
+    /** @type {TypedValidationError[]} */
+    errors: res.tests.flatMap((t) =>
+      t.errors.map(
+        (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e })
+      )
+    ),
   }
 }
 

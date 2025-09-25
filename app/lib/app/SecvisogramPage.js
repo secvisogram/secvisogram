@@ -13,10 +13,6 @@ import downloadFile from './shared/download.js'
 import sitemap from './shared/sitemap.js'
 
 /**
- * @typedef {import('./SecvisogramPage/shared/types').ValidationError} ValidationError
- */
-
-/**
  * Holds the application-state and provides memoized callbacks for the view
  * to communicate with the core.
  */
@@ -47,7 +43,8 @@ const SecvisogramPage = () => {
      *   onCancel(): void
      * } | null}
      */ (null),
-    errors: /** @type {ValidationError[]} */ ([]),
+    errors:
+      /** @type {import('#lib/core/typedValidationError.js').TypedValidationError[]} */ ([]),
     stripResult: /**
      * @type {{
      *    strippedPaths: Array<{ instancePath: string; message: string; error: boolean }>
@@ -185,7 +182,7 @@ const SecvisogramPage = () => {
             setState((state) => ({
               ...state,
               isLoading: false,
-              errors: /** @type {ValidationError[]} */ (result.errors),
+              errors: result.errors,
             }))
             pushState(null, '', sitemap.home.href([['tab', tab]]))
           })
@@ -198,7 +195,7 @@ const SecvisogramPage = () => {
             .then((result) => {
               setState((state) => ({
                 ...state,
-                errors: /** @type {ValidationError[]} */ (result.errors),
+                errors: result.errors,
               }))
             })
             .catch(handleError)

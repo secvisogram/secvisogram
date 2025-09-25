@@ -292,8 +292,8 @@ describe('SecvisogramPage / FormEditor Tab', function () {
 
     cy.get(`[data-testid="document-tracking-infoButton"]`).click()
 
-    // there should be 6 error cards under /document/tracking for the default minimal document
-    cy.get(`[data-testid="error-cards"] div`).should('have.length', 6)
+    // there should be 6 error cards (1 warning) under /document/tracking for the default minimal document
+    cy.get(`[data-testid="error-cards"] div`).should('have.length', 7)
 
     cy.get(`[data-testid="menu_entry-/document/tracking"]`).click()
     cy.get('[data-testid="attribute-document-tracking-version"] input')
