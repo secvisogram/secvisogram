@@ -50,7 +50,7 @@ export default defineConfig({
         async log(message) {
           console.log(message)
           return null
-        }
+        },
       })
       return config
     },
