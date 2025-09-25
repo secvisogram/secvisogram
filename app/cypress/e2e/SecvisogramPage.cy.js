@@ -2,9 +2,9 @@
 
 import CVSSVector from '../../lib/app/SecvisogramPage/View/FormEditor/editors/GenericEditor/Attributes/CVSS3Attribute/CVSSVector.js'
 import ViewReducer from '../../lib/app/SecvisogramPage/View/Reducer.js'
+import { canCreateDocuments } from '../../lib/app/shared/permissions.js'
 import docMax from '../../lib/core/v2_1/doc-max.json'
 import docMin from '../../lib/core/v2_1/doc-min.json'
-import { canCreateDocuments } from '../../lib/app/shared/permissions.js'
 import { getLoginEnabledConfig } from '../fixtures/appConfigData.js'
 import {
   getAdvisories,
@@ -221,6 +221,7 @@ describe('SecvisogramPage', () => {
 
       cy.visit('?tab=EDITOR')
 
+      cy.window().its('IS_MODIFIED').should('be.false')
       cy.get('[data-testid="new_document_button"]').click()
 
       cy.get(`[data-testid="new_document-url_button"]`).click()

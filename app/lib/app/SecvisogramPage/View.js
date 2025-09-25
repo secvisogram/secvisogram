@@ -554,6 +554,13 @@ function View({
    * (e.g. browser refresh).
    */
   React.useEffect(() => {
+    //
+    // Enable the cypress test to wait the settling of the document
+    //
+    /** @type {any} */
+    const win = window
+    win.IS_MODIFIED = originalValues !== formValues
+
     /**
      * @param {BeforeUnloadEvent} e
      */
