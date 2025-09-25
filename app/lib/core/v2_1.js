@@ -1,12 +1,16 @@
 import { compose, set } from 'lodash/fp.js'
 import * as basic from '../../../csaf-validator-lib/csaf_2_1/basic.js'
+import * as recommendedTests from '../../../csaf-validator-lib/csaf_2_1/recommendedTests.js'
 import libStrip from '../../../csaf-validator-lib/strip.js'
 import libValidate from '../../../csaf-validator-lib/validate.js'
 import doc_max from './v2_1/doc-max.json'
 import doc_min from './v2_1/doc-min.json'
 import { DocumentEntity } from './v2_1/entities.js'
 
-const INSTANT_TESTS = Object.values(basic)
+const INSTANT_TESTS =
+  /** @type {import('../../../csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
+    Object.values(basic)
+  ).concat(Object.values(recommendedTests))
 
 const secvisogramName = 'Secvisogram'
 
@@ -32,24 +36,36 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
  * to be tested independently.
  */
 
+/** @typedef {import('./typedValidationError.js').TypedValidationError} TypedValidationError */
+
 /**
  * Validates the document and returns errors that possibly occur.
  *
  * @param {object} params
  * @param {{}} params.document
- * @returns {Promise<{
- *   isValid: boolean;
- *   errors: {
- *     message?: string | undefined;
- *     instancePath: string;
- *   }[];
- * }>}
  */
 export async function validate({ document }) {
   const res = await libValidate(INSTANT_TESTS, document)
   return {
     isValid: res.isValid,
-    errors: res.tests.flatMap((t) => t.errors),
+    /** @type {TypedValidationError[]} */
+    errors: res.tests.flatMap((t) =>
+      t.errors
+        .map(
+          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e })
+        )
+        .concat(
+          t.warnings.map(
+            (e) =>
+              /** @type {TypedValidationError} */ ({ type: 'warning', ...e })
+          )
+        )
+        .concat(
+          t.infos.map(
+            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e })
+          )
+        )
+    ),
   }
 }
 
