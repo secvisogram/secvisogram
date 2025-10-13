@@ -147,7 +147,7 @@ function View({
     )
   )
   React.useEffect(() => {
-    setErrors(props.errors.map((e) => ({ ...e, type: 'error' })))
+    setErrors(props.errors)
   }, [props.errors])
 
   const [alert, setAlert] = React.useState(
