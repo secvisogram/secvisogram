@@ -58,7 +58,11 @@ export default function Reducer(state, action) {
           ...state.formValues,
           doc: setGeneratorFields(
             action.instancePath
-              ? set(parse(action.instancePath), action.update, state.formValues.doc ?? {})
+              ? set(
+                  parse(action.instancePath),
+                  action.update,
+                  state.formValues.doc ?? {}
+                )
               : action.update
           ),
         },

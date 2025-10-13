@@ -1,3 +1,4 @@
+import { coreRecord } from '#lib/core.js'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import createFileName from '../shared/createFileName.js'
@@ -8,17 +9,8 @@ import { backend, validationService } from './shared/api.js'
 import ApiRequest from './shared/ApiRequest.js'
 import AppErrorContext from './shared/context/AppErrorContext.js'
 import HistoryContext from './shared/context/HistoryContext.js'
-import createCore from './shared/Core.js'
 import downloadFile from './shared/download.js'
 import sitemap from './shared/sitemap.js'
-
-/**
- * @typedef {import('./SecvisogramPage/shared/types').ValidationError} ValidationError
- */
-
-const core = createCore()
-
-const doc = core.document.newDocMin()
 
 /**
  * Holds the application-state and provides memoized callbacks for the view
@@ -29,7 +21,15 @@ const SecvisogramPage = () => {
   const { t } = useTranslation()
   const searchParams = new URL(location.href).searchParams
   const [
-    { isLoading, isTabLocked, data, errors, alert, stripResult, previewResult },
+    {
+      isLoading,
+      isTabLocked,
+      errors,
+      alert,
+      stripResult,
+      previewResult,
+      uiSchemaVersion,
+    },
     setState,
   ] = React.useState({
     isLoading: false,
@@ -43,7 +43,8 @@ const SecvisogramPage = () => {
      *   onCancel(): void
      * } | null}
      */ (null),
-    errors: /** @type {ValidationError[]} */ ([]),
+    errors:
+      /** @type {import('#lib/core/typedValidationError.js').TypedValidationError[]} */ ([]),
     stripResult: /**
      * @type {{
      *    strippedPaths: Array<{ instancePath: string; message: string; error: boolean }>
@@ -55,14 +56,17 @@ const SecvisogramPage = () => {
      *    doc: {}
      * } | null}
      */ (null),
-    data: {
-      doc,
-    },
     activeTab: /** @type {React.ComponentProps<typeof View>['activeTab']} */ (
       'EDITOR'
     ),
     isTabLocked: false,
+    /** @type {import('../uiSchemas.js').UiSchemaVersion} */
+    uiSchemaVersion: 'v2.1',
   })
+  const core = coreRecord[uiSchemaVersion]
+  const [doc, setDoc] = React.useState(core.newDocMin())
+  const data = React.useMemo(() => ({ doc }), [doc])
+
   const { handleError } = React.useContext(AppErrorContext)
 
   const alertSaveInvalidTranslationStrings = useMemo(() => {
@@ -76,6 +80,7 @@ const SecvisogramPage = () => {
 
   return (
     <View
+      uiSchemaVersion={uiSchemaVersion}
       activeTab={
         searchParams.get('tab') === 'DOCUMENTS'
           ? 'DOCUMENTS'
@@ -97,7 +102,7 @@ const SecvisogramPage = () => {
       data={data}
       alert={alert}
       DocumentsTab={DocumentsTab}
-      generatorEngineData={core.document.getGeneratorEngineData()}
+      generatorEngineData={core.getGeneratorEngineData()}
       onLoadAdvisory={loadAdvisory}
       onUpdateAdvisory={({
         advisoryId,
@@ -121,7 +126,7 @@ const SecvisogramPage = () => {
         setState((state) => ({ ...state, isTabLocked: false }))
       }, [])}
       onDownload={(doc) => {
-        core.document
+        core
           .validate({ document: doc })
           .then(({ isValid }) => {
             const fileName = createFileName(doc, isValid, 'json')
@@ -158,11 +163,8 @@ const SecvisogramPage = () => {
               setState((state) => ({
                 ...state,
                 isLoading: false,
-                data: {
-                  ...state.data,
-                  doc: parsedDoc,
-                },
               }))
+              setDoc(parsedDoc)
               resolve(parsedDoc)
             } catch (err) {
               reject(err)
@@ -174,13 +176,13 @@ const SecvisogramPage = () => {
       onChangeTab={(tab, document) => {
         if (isTabLocked) return
         setState((state) => ({ ...state, isLoading: true }))
-        core.document
+        core
           .validate({ document })
           .then((result) => {
             setState((state) => ({
               ...state,
               isLoading: false,
-              errors: /** @type {ValidationError[]} */ (result.errors),
+              errors: result.errors,
             }))
             pushState(null, '', sitemap.home.href([['tab', tab]]))
           })
@@ -188,52 +190,52 @@ const SecvisogramPage = () => {
       }}
       onValidate={React.useCallback(
         (doc) => {
-          core.document
+          core
             .validate({ document: doc })
             .then((result) => {
               setState((state) => ({
                 ...state,
-                errors: /** @type {ValidationError[]} */ (result.errors),
+                errors: result.errors,
               }))
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onCollectProductIds={React.useCallback(
         async (document) => {
           try {
-            const ids = await core.document.collectProductIds({ document })
+            const ids = await core.collectProductIds({ document })
             return ids
           } catch (/** @type {any} */ error) {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError, core]
       )}
       onCollectGroupIds={React.useCallback(
         async (document) => {
           try {
-            const ids = await core.document.collectGroupIds({ document })
+            const ids = await core.collectGroupIds({ document })
             return ids
           } catch (/** @type {any} */ error) {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError, core]
       )}
       onGetDocMin={async () => {
-        return core.document.newDocMin()
+        return core.newDocMin()
       }}
       onGetDocMax={async () => {
-        return core.document.newDocMax()
+        return core.newDocMax()
       }}
       onCreateAdvisory={({ csaf, summary, legacyVersion }) => {
         return backend.createAdvisory({ csaf, summary, legacyVersion })
       }}
       onStrip={React.useCallback(
         (document) => {
-          core.document
+          core
             .strip({ document })
             .then(({ document: doc, strippedPaths }) => {
               setState((state) => ({
@@ -246,11 +248,11 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onPreview={React.useCallback(
         (document) => {
-          core.document
+          core
             .preview({ document })
             .then(({ document: doc }) => {
               setState((state) => ({
@@ -262,15 +264,15 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, core]
       )}
       onPrepareDocumentForTemplate={React.useCallback(
-        (document) => core.document.preview({ document }),
-        []
+        (document) => core.preview({ document }),
+        [core]
       )}
       onExportCSAF={React.useCallback(
         (document) => {
-          core.document
+          core
             .validate({ document: document })
             .then(({ isValid }) => {
               const fileName = createFileName(document, isValid, 'json')
@@ -280,7 +282,7 @@ const SecvisogramPage = () => {
                   alert: {
                     ...alertSaveInvalidTranslationStrings,
                     onConfirm() {
-                      core.document
+                      core
                         .strip({ document })
                         .then(({ document: doc }) => {
                           setState({ ...state, alert: null })
@@ -294,7 +296,7 @@ const SecvisogramPage = () => {
                   },
                 }))
               } else {
-                core.document
+                core
                   .strip({ document })
                   .then(({ document: doc }) => {
                     downloadFile(JSON.stringify(doc, null, 2), fileName)
@@ -304,11 +306,11 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, alertSaveInvalidTranslationStrings]
+        [handleError, alertSaveInvalidTranslationStrings, core]
       )}
       onExportHTML={React.useCallback(
         (html, doc) => {
-          core.document.validate({ document: doc }).then(({ isValid }) => {
+          core.validate({ document: doc }).then(({ isValid }) => {
             const fileName = createFileName(doc, isValid, 'html')
             if (!isValid) {
               setState((state) => ({
@@ -329,7 +331,7 @@ const SecvisogramPage = () => {
             }
           })
         },
-        [alertSaveInvalidTranslationStrings]
+        [alertSaveInvalidTranslationStrings, core]
       )}
       onServiceValidate={({ validatorUrl, csaf }) => {
         return validationService
@@ -357,6 +359,9 @@ const SecvisogramPage = () => {
           .then((templateContentRes) => templateContentRes.json())
       }}
       onGetBackendInfo={backend.getAboutInfo}
+      onSetUiVersion={(uiSchemaVersion) => {
+        setState((state) => ({ ...state, uiSchemaVersion }))
+      }}
     />
   )
 }

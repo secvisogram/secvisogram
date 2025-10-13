@@ -1,3 +1,4 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { t } from 'i18next'
@@ -15,13 +16,12 @@ import isPropertyRelevant from './shared/isPropertyRelevant.js'
 import AboutDialog from './View/AboutDialog.js'
 import CsafTab from './View/CsafTab.js'
 import ExportDocumentDialog from './View/ExportDocumentDialog.js'
-import schema from './View/FormEditor/schema.js'
 import RelevanceLevelContext from './View/FormEditor/shared/context/RelevanceLevelContext.js'
 import {
   useUniqueGroupId,
   useUniqueProductId,
 } from './View/FormEditor/shared/fillFieldFunctions.js'
-import FormEditor from './View/FormEditorTab.js'
+import { FormEditorTab as FormEditor } from './View/FormEditorTab.js'
 import JsonEditorTab from './View/JsonEditorTab.js'
 import LoadingIndicator from './View/LoadingIndicator.js'
 import NewDocumentDialog from './View/NewDocumentDialog.js'
@@ -41,6 +41,7 @@ import VersionSummaryDialog from './View/VersionSummaryDialog.js'
  * @param {import('./View/types.js').Props} props
  */
 function View({
+  uiSchemaVersion,
   activeTab,
   isTabLocked,
   data,
@@ -71,6 +72,7 @@ function View({
   onGetTemplates,
   onGetTemplateContent,
   onGetBackendInfo,
+  onSetUiVersion,
   ...props
 }) {
   const appConfig = React.useContext(AppConfigContext)
@@ -145,7 +147,7 @@ function View({
     )
   )
   React.useEffect(() => {
-    setErrors(props.errors.map((e) => ({ ...e, type: 'error' })))
+    setErrors(props.errors)
   }, [props.errors])
 
   const [alert, setAlert] = React.useState(
@@ -451,16 +453,17 @@ function View({
 
   const openExportDialogPreselected = (
     /** @type {'CSAFJSON'
-    | 'CSAFJSONSTRIPPED'
-    | 'HTMLDOCUMENT'
-    | 'PDFDOCUMENT'
-    | 'MARKDOWN'} */ preselected
+     | 'CSAFJSONSTRIPPED'
+     | 'HTMLDOCUMENT'
+     | 'PDFDOCUMENT'
+     | 'MARKDOWN'} */ preselected
   ) => {
     setNewExportDocumentDialog(
       <ExportDocumentDialog
         defaultSource={preselected}
         originalValues={originalValues}
         advisoryState={advisoryState}
+        uiSchemaVersion={uiSchemaVersion}
         formValues={formValues}
         documentIsValid={!errors.length}
         onPrepareDocumentForTemplate={onPrepareDocumentForTemplate}
@@ -551,6 +554,13 @@ function View({
    * (e.g. browser refresh).
    */
   React.useEffect(() => {
+    //
+    // Enable the cypress test to wait the settling of the document
+    //
+    /** @type {any} */
+    const win = window
+    win.IS_MODIFIED = originalValues !== formValues
+
     /**
      * @param {BeforeUnloadEvent} e
      */
@@ -730,10 +740,12 @@ function View({
         groupIds: () => onCollectGroupIds(formValues.doc),
       },
       errors,
+      uiSchemaVersion,
     }),
     [
       formValues.doc,
       errors,
+      uiSchemaVersion,
       onUpdateDoc,
       onReplaceDoc,
       onCollectProductIds,
@@ -775,7 +787,7 @@ function View({
     relevanceLevels[2]
   )
   const setSelectedRelevanceLevel = (/** @type {string} */ level) => {
-    selectClosestRelevantPath(level)
+    selectClosestRelevantPath(level, uiSchemaVersion)
     _setSelectedRelevanceLevel(level)
   }
 
@@ -847,6 +859,32 @@ function View({
                     >
                       {t('menu.about')}
                     </button>
+                    <div className="h-auto flex items-center px-4 gap-2">
+                      <label
+                        htmlFor="csafVersionSelect"
+                        className="whitespace-nowrap text-gray-300 text-sm"
+                      >
+                        CSAF Version:
+                      </label>
+                      <select
+                        id="csafVersionSelect"
+                        className="border border-gray-400 py-2 px-2 w-full shadow-inner rounded text-black bg-white"
+                        value={uiSchemaVersion}
+                        onChange={(e) => {
+                          onSetUiVersion(
+                            /** @type {import('#lib/uiSchemas.js').UiSchemaVersion} */ (
+                              e.target.value
+                            )
+                          )
+                        }}
+                      >
+                        {Object.keys(uiSchemas).map((uiVersion) => (
+                          <option key={uiVersion} value={uiVersion}>
+                            {uiVersion}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   {advisoryState?.type === 'ADVISORY' && (
                     <div className="text-gray-400 p-4">
@@ -1097,13 +1135,14 @@ function View({
                   key={activeTab}
                 >
                   {activeTab === 'EDITOR' ? (
-                    <FormEditor />
+                    <FormEditor schemaVersion={uiSchemaVersion} />
                   ) : activeTab === 'SOURCE' ? (
                     <JsonEditorTab
                       originalValues={originalValues}
                       formValues={formValues}
                       validationErrors={errors}
                       sortButtonRef={sortButtonRef}
+                      uiSchemaVersion={uiSchemaVersion}
                       onChange={onReplaceDoc}
                       onLockTab={onLockTab}
                       onUnlockTab={onUnlockTab}
@@ -1112,6 +1151,7 @@ function View({
                     <PreviewTab
                       previewResult={previewResult}
                       onPreview={onPreviewCallback}
+                      schemaVersion={uiSchemaVersion}
                     />
                   ) : activeTab === 'CSAF-JSON' ? (
                     <CsafTab
@@ -1136,7 +1176,7 @@ function View({
                   ) : null}
                 </div>
                 {activeTab === 'EDITOR' || activeTab === 'SOURCE' ? (
-                  <SideBar />
+                  <SideBar uiSchemaVersion={uiSchemaVersion} />
                 ) : null}
               </div>
             </Hotkeys>
@@ -1192,10 +1232,12 @@ function View({
    * path based on the given level and selects it.
    *
    * @param {string} level
+   * @param {import('../../uiSchemas.js').UiSchemaVersion} uiSchemaVersion
    */
-  function selectClosestRelevantPath(level) {
+  function selectClosestRelevantPath(level, uiSchemaVersion) {
     const documentCategory = formValues.doc.document.category
     const path = selectedPath
+    const { content: schema } = uiSchemas[uiSchemaVersion]
 
     let property =
       /** @type {import('./shared/types.js').Property | undefined} */ (schema)

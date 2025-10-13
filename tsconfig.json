@@ -1,5 +1,4 @@
 {
   "files": [],
-  "references": [{ "path": "app" }, { "path": "bin" }],
+  "references": [{ "path": "app" }, { "path": "bin" }]
 }
-
