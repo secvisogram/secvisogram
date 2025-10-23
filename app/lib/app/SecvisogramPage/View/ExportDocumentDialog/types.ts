@@ -1,3 +1,4 @@
+import { UiSchemaVersion } from '#lib/uiSchemas.js'
 import { AdvisoryState } from '../../shared/types'
 
 export interface Props {
@@ -5,6 +6,7 @@ export interface Props {
   originalValues: { doc: {} }
   documentIsValid: boolean
   advisoryState: AdvisoryState | null
+  uiSchemaVersion: UiSchemaVersion
   defaultSource?:
     | 'CSAFJSON'
     | 'CSAFJSONSTRIPPED'

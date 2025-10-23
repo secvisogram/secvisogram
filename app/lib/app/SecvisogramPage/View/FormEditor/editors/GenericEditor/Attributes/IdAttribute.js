@@ -1,8 +1,8 @@
-import React from 'react'
-import Attribute from './shared/Attribute.js'
-import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
-import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
 import { Autocomplete, TextField } from '@mui/material'
+import React from 'react'
+import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
+import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
+import Attribute from './shared/Attribute.js'
 
 /**
  * @param {{

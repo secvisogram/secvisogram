@@ -1,5 +1,5 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
 import { getObjectMenuPaths } from '../../../lib/app/SecvisogramPage/View/FormEditor/editors/GenericEditor/ObjectEditor.js'
-import schema from '../../../lib/app/SecvisogramPage/View/FormEditor/schema.js'
 import { getLoginEnabledConfig } from '../../fixtures/appConfigData.js'
 import {
   canChangeDocument,
@@ -168,8 +168,8 @@ describe('SecvisogramPage / FormEditor Tab', function () {
     it('can calculate the menu structure for the top level sidebar', function () {
       expect(
         getObjectMenuPaths(
-          /** @type {import('../../../lib/app/SecvisogramPage/View/FormEditor/schema.js').Property} */ (
-            schema
+          /** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */ (
+            uiSchemas['v2.0'].content
           )
         )
       ).to.deep.equal([
@@ -265,6 +265,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
     cy.visit('?tab=EDITOR')
     cy.wait('@wellKnownAppConfig')
 
+    cy.get('#csafVersionSelect').select('v2.0')
     cy.get(`[data-testid="menu_entry-/vulnerabilities-add_item_button"]`).click(
       { force: true }
     )
@@ -291,8 +292,8 @@ describe('SecvisogramPage / FormEditor Tab', function () {
 
     cy.get(`[data-testid="document-tracking-infoButton"]`).click()
 
-    // there should be 6 error cards under /document/tracking for the default minimal document
-    cy.get(`[data-testid="error-cards"] div`).should('have.length', 6)
+    // there should be 6 error cards (1 warning) under /document/tracking for the default minimal document
+    cy.get(`[data-testid="error-cards"] div`).should('have.length', 7)
 
     cy.get(`[data-testid="menu_entry-/document/tracking"]`).click()
     cy.get('[data-testid="attribute-document-tracking-version"] input')
@@ -898,6 +899,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
   describe('selects first suggestion in combobox when pressing enter', function () {
     it('CWEAttribute Id', function () {
       cy.visit('?tab=EDITOR')
+      cy.get('#csafVersionSelect').select('v2.0')
 
       // create new vulnerability and select CWE section
       cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')
@@ -937,6 +939,7 @@ describe('SecvisogramPage / FormEditor Tab', function () {
 
     it('CWEAttribute Name', function () {
       cy.visit('?tab=EDITOR')
+      cy.get('#csafVersionSelect').select('v2.0')
 
       // create new vulnerability and select CWE section
       cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')

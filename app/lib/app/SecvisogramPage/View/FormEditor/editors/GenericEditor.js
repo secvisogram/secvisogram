@@ -14,6 +14,7 @@ import {
   useUniqueProductId,
 } from '../shared/fillFieldFunctions.js'
 import ArrayEditor from './GenericEditor/ArrayEditor.js'
+import CSAF21CweAttribute from './GenericEditor/Attributes/csaf_2_1/CweAttribute.js'
 import CVSSV2Attribute from './GenericEditor/Attributes/CVSS2Attribute.js'
 import CVSSV3Attribute from './GenericEditor/Attributes/CVSS3Attribute.js'
 import CweAttribute from './GenericEditor/Attributes/CweAttribute.js'
@@ -60,7 +61,9 @@ export default function Editor({
   const { loginAvailable } = React.useContext(AppConfigContext)
   const userInfo = React.useContext(UserInfoContext)
 
-  const { doc, updateDoc, collectIds } = React.useContext(DocumentEditorContext)
+  const { doc, updateDoc, collectIds, uiSchemaVersion } = React.useContext(
+    DocumentEditorContext
+  )
   const { uniqueProductId } = useUniqueProductId()
 
   const { handleError } = React.useContext(AppErrorContext)
@@ -146,7 +149,13 @@ export default function Editor({
     )
   } else if (property.type === 'OBJECT') {
     if (uiType === 'OBJECT_CWE') {
-      return (
+      return uiSchemaVersion === 'v2.1' ? (
+        <CSAF21CweAttribute
+          property={property}
+          instancePath={instancePath}
+          disabled={disabled}
+        />
+      ) : (
         <CweAttribute
           property={property}
           instancePath={instancePath}
