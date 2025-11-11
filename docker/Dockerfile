@@ -7,7 +7,7 @@ ARG BASE_IMAGE=nginx:1.29-alpine
 FROM ${BUILD_IMAGE} AS build
 ARG VERSION=main
 WORKDIR /usr/src
-RUN apk add git; \
+RUN apk add --no-cache git; \
     git clone --branch=${VERSION} https://github.com/secvisogram/secvisogram.git; \
     cd secvisogram; \
     npm ci; \
@@ -20,3 +20,4 @@ RUN apk add git; \
 FROM ${BASE_IMAGE}
 COPY --from=build /usr/src/secvisogram/app/dist /usr/share/nginx/html
 EXPOSE 80
+USER nginx
