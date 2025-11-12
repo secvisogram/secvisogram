@@ -11,6 +11,7 @@ elif [ "$BRANCH" == "main" ]; then
   echo "Building main branch version"
   docker build --build-arg VERSION=main -t secvisogram:latest -f Dockerfile ..
 else
-  echo "Building development branch version: $BRANCH"
-  docker build --build-arg VERSION=$BRANCH -t secvisogram:$BRANCH -f Dockerfile ..
+  export DOCKER_TAG=$(echo $BRANCH | sed s@/@-@g)
+  echo "Building development branch version: $BRANCH" with TAG $DOCKER_TAG
+  docker build --build-arg VERSION=$BRANCH -t secvisogram:$DOCKER_TAG -f Dockerfile ..
 fi
