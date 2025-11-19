@@ -6,6 +6,7 @@ import validate from '../../../../csaf-validator-lib/validate.js'
 import doc_max from './Core/doc-max.json'
 import doc_min from './Core/doc-min.json'
 import { DocumentEntity } from './Core/entities.js'
+import sortObjectKeys from './sortObjectKeys.js'
 
 const INSTANT_TESTS =
   /** @type {import('../../../../csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
@@ -25,6 +26,7 @@ const secvisogramVersion =
 
 const setGeneratorFields = (/** @type {Date} */ date) =>
   compose(
+    (d) => sortObjectKeys(new Intl.Collator(), d),
     set('document.tracking.generator.engine.name', secvisogramName),
     set('document.tracking.generator.engine.version', secvisogramVersion),
     set('document.tracking.generator.date', date.toISOString())

@@ -127,6 +127,8 @@ describe('SecvisogramPage', () => {
         'have.value',
         sampleUploadDocument.document.title
       )
+      cy.get('[data-testid="sideBar-ERRORS-button"]').click()
+      cy.get('[data-testid*=error_card-]').should('have.length', 7)
     })
 
     it(`in source editor`, function () {

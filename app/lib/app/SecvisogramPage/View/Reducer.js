@@ -1,5 +1,6 @@
 import { parse } from 'json-pointer'
 import { compose, set } from 'lodash/fp.js'
+import sortObjectKeys from '../../shared/sortObjectKeys.js'
 
 /** @typedef {unknown} Doc */
 
@@ -41,7 +42,8 @@ export default function Reducer(state, action) {
         },
       }
     case 'CHANGE_FORM_DOC': {
-      const setGeneratorFields = compose(
+      const processDocAfterUpdate = compose(
+        (d) => sortObjectKeys(new Intl.Collator(), d),
         set(
           'document.tracking.generator.engine.name',
           action.generatorEngineData.name
@@ -56,9 +58,13 @@ export default function Reducer(state, action) {
         ...state,
         formValues: {
           ...state.formValues,
-          doc: setGeneratorFields(
+          doc: processDocAfterUpdate(
             action.instancePath
-              ? set(parse(action.instancePath), action.update, state.formValues.doc ?? {})
+              ? set(
+                  parse(action.instancePath),
+                  action.update,
+                  state.formValues.doc ?? {}
+                )
               : action.update
           ),
         },
