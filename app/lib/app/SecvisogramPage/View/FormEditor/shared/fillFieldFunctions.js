@@ -192,15 +192,13 @@ const getCurrentDateRounded = function () {
  * function to extract current release date from revision history
  *
  * @param {Record<string, any>} doc
- * @return string|undefined
- */
+ * @return {{date: string, number: string, summary?: string}|undefined} */
 const getCurrentReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
-  return revisionHistory
-    ?.map((x) => x.date)
-    .sort()
-    .reverse()?.[0]
+  return revisionHistory?.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  )[0]
 }
 
 /**
