@@ -938,6 +938,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
       ).toHaveValue('')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
+      ).toHaveValue('')
 
       // generate button should do nothing without revision history entries
       await page.getByTestId(
@@ -952,6 +957,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
         page
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
+      ).toHaveValue('')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
       ).toHaveValue('')
 
       // create new revision history item
@@ -971,6 +981,10 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
         .getByTestId('attribute-document-tracking-revision_history-0-date')
         .locator('input[type="time"]')
         .fill('13:41')
+      await page
+        .getByTestId('attribute-document-tracking-revision_history-0-number')
+        .locator('input')
+        .fill('1')
 
       // current release should still be empty
       await page.getByTestId('document/tracking-fieldButton').click()
@@ -983,6 +997,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
         page
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
+      ).toHaveValue('')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
       ).toHaveValue('')
 
       // generate button should enter correct date and time
@@ -999,6 +1018,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
       ).toHaveValue('13:41')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
+      ).toHaveValue('1')
 
       // just regenerating should be still the same
       await page
@@ -1014,6 +1038,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
       ).toHaveValue('13:41')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
+      ).toHaveValue('1')
     })
 
     test('fill initial release date', async ({ page }) => {
@@ -1084,6 +1113,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
         page
           .getByTestId('attribute-document-tracking-initial_release_date')
           .locator('input[type="time"]'),
+      ).toHaveValue('')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
       ).toHaveValue('')
 
       // generate button should enter correct date and time
@@ -1231,6 +1265,11 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
           .getByTestId('attribute-document-tracking-current_release_date')
           .locator('input[type="time"]'),
       ).toHaveValue('13:15')
+      await expect(
+        page
+          .getByTestId('attribute-document-tracking-version')
+          .locator('input'),
+      ).toHaveValue('1.5.0')
     })
   })
 
