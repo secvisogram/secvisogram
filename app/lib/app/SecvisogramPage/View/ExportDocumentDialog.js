@@ -300,7 +300,10 @@ export default /**
                         ) {
                           return
                         }
-                        const html = HTMLTemplate({ document: doc })
+                        const markdownParsedDoc = parseMarkdown(doc)
+                        const html = HTMLTemplate({
+                          document: markdownParsedDoc,
+                        })
                         const iframeWindow = iframeRef.current.contentWindow
                         iframeRef.current.contentDocument.open()
                         iframeRef.current.contentDocument.write(html)
