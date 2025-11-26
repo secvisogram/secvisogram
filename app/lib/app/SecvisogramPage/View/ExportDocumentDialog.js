@@ -4,6 +4,7 @@ import createFileName from '../../../shared/createFileName.js'
 import * as api from '../../shared/api.js'
 import AppErrorContext from '../../shared/context/AppErrorContext.js'
 import HTMLTemplate from './shared/HTMLTemplate.js'
+import { parseMarkdown } from './PreviewTab/markdownParser.js'
 
 export default /**
  * @param {import('./ExportDocumentDialog/types.js').Props} props
@@ -282,7 +283,10 @@ export default /**
                   case 'HTMLDOCUMENT':
                     onPrepareDocumentForTemplate(formValues.doc)
                       .then(({ document: doc }) => {
-                        const html = HTMLTemplate({ document: doc })
+                        const markdownParsedDoc = parseMarkdown(doc)
+                        const html = HTMLTemplate({
+                          document: markdownParsedDoc,
+                        })
                         onExportHTML(html, formValues.doc)
                       })
                       .catch(handleError)
