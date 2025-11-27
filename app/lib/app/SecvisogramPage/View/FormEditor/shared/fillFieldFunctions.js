@@ -116,7 +116,7 @@ function useUniqueGroupId() {
  * @param {string[]} instancePath
  * @return {string}
  */
-const getBranchName = function(doc, instancePath) {
+const getBranchName = function (doc, instancePath) {
   /** @type {string[]} */
   let acc = []
 
@@ -140,7 +140,7 @@ const getBranchName = function(doc, instancePath) {
  * @param {() => Promise<void | { id: string; name: string; }[]>} collectProductIds
  * @return {Promise<string | undefined>}
  */
-const getRelationshipName = async function(
+const getRelationshipName = async function (
   doc,
   instancePath,
   collectProductIds
@@ -181,7 +181,7 @@ const getRelationshipName = async function(
  *
  * @return string|undefined
  */
-const getCurrentDateRounded = function() {
+const getCurrentDateRounded = function () {
   const p = 60 * 60 * 1000 // milliseconds in an hour
   const roundedDate = new Date(Math.ceil(new Date().getTime() / p) * p)
   return roundedDate.toISOString()
@@ -191,15 +191,13 @@ const getCurrentDateRounded = function() {
  * function to extract current release date from revision history
  *
  * @param {Record<string, any>} doc
- * @return string|undefined
- */
-const getCurrentReleaseDate = function(doc) {
+ * @return {{date: string, number: string, summary?: string}|undefined} */
+const getCurrentReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
-  return revisionHistory
-    ?.map((x) => x.date)
-    .sort()
-    .reverse()?.[0]
+  return revisionHistory?.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )[0]
 }
 
 /**
@@ -208,7 +206,7 @@ const getCurrentReleaseDate = function(doc) {
  * @param {Record<string, any>} doc
  * @return string|undefined
  */
-const getInitialReleaseDate = function(doc) {
+const getInitialReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
   return revisionHistory?.filter(
