@@ -2,7 +2,7 @@ import React from 'react'
 import Attribute from './shared/Attribute.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
-import { Autocomplete, TextField } from '@mui/material'
+import { Autocomplete, TextField, createFilterOptions } from '@mui/material'
 
 /**
  * @param {{
@@ -22,11 +22,12 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
   const [value, setValue] = React.useState(/** @type string */ (props.value))
   const [entries, setEntries] = React.useState(new Array())
 
-  /** @param {string} id  */
+  /** @param {{id: string, name: string} | null} entry  */
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ id
+    /** @type {{id: string, name: string} | null} */ entry
   ) => {
+    const id = entry?.id || ''
     updateDoc(props.instancePath, id)
     if (!id) {
       replaceDoc(pruneEmpty(doc))
@@ -49,6 +50,11 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
     return `${id} - ${name}`
   }
 
+  // Custom filter function to search by both ID and name
+  const filterOptions = createFilterOptions({
+    stringify: (option) => `${option.id} ${option.name || ''}`,
+  })
+
   /** @param {React.ChangeEvent<HTMLInputElement>} event  */
   const handleChange = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
@@ -67,15 +73,17 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
         <div className="w-full">
           <Autocomplete
             className="autocomplete"
-            value={value}
+            value={entries.find((entry) => entry.id === value) || null}
             disablePortal
             disableClearable
             autoHighlight
             forcePopupIcon={false}
-            options={entries.map((entry) => entry.id)}
+            options={entries}
+            filterOptions={filterOptions}
+            getOptionLabel={(option) => option?.id || ''}
             renderOption={(props, option) => (
-              <li {...props} key={option}>
-                {displayIdAndName(option)}
+              <li {...props} key={option.id}>
+                {displayIdAndName(option.id)}
               </li>
             )}
             noOptionsText={'No results found'}
@@ -91,11 +99,11 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
             onInputChange={(event, newInputValue) => {
               handleChange(event, newInputValue)
             }}
-            onChange={(event, id) => {
-              handleSelect(event, id)
+            onChange={(event, entry) => {
+              handleSelect(event, entry)
             }}
             isOptionEqualToValue={(option, value) =>
-              option === value || value === ''
+              option?.id === value?.id || (!option && !value)
             }
           />
         </div>
