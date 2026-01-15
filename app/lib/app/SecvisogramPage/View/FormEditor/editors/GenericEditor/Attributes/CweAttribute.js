@@ -95,17 +95,6 @@ function CwecId({
   property,
   disabled,
 }) {
-  const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value)
-  )
-
-  const handleChange = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue
-  ) => {
-    setInputValue(newValue)
-  }
-
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
     /** @type string */ id
@@ -113,16 +102,11 @@ function CwecId({
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     onChange({ id: id, name: name })
   }
-
   const displayIdAndName = (/** @type string */ id) => {
     if (!id) return ''
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     return `${id}, ${name}`
   }
-
-  React.useEffect(() => {
-    setInputValue(/** @type string */ (value))
-  }, [value])
 
   return (
     <Attribute
@@ -136,11 +120,10 @@ function CwecId({
         <div className="w-full">
           <Autocomplete
             className="autocomplete"
-            value={inputValue}
+            value={typeof value === 'string' ? value : ''}
             disablePortal
             disableClearable
             autoHighlight
-            freeSolo
             forcePopupIcon={false}
             options={cwec.weaknesses.map((cwe) => cwe.id)}
             renderOption={(props, option) => (
@@ -161,12 +144,12 @@ function CwecId({
                 }}
               />
             )}
-            onInputChange={(event, newInputValue) => {
-              handleChange(event, newInputValue)
-            }}
             onChange={(event, id) => {
               handleSelect(event, id)
             }}
+            isOptionEqualToValue={(option, value) =>
+              option === value || value === ''
+            }
           />
         </div>
       </div>
@@ -194,17 +177,6 @@ function CwecName({
   property,
   disabled,
 }) {
-  const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value)
-  )
-
-  const handleChange = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue
-  ) => {
-    setInputValue(newValue)
-  }
-
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
     /** @type string */ name
@@ -219,10 +191,6 @@ function CwecName({
     return `${id}, ${name}`
   }
 
-  React.useEffect(() => {
-    setInputValue(/** @type string */ (value))
-  }, [value])
-
   return (
     <Attribute
       label={label}
@@ -235,7 +203,7 @@ function CwecName({
         <div className="w-full">
           <Autocomplete
             className="autocomplete"
-            value={inputValue}
+            value={typeof value === 'string' ? value : ''}
             disablePortal
             disableClearable
             autoHighlight
@@ -255,9 +223,6 @@ function CwecName({
                 size="small"
               />
             )}
-            onInputChange={(event, newInputValue) => {
-              handleChange(event, newInputValue)
-            }}
             onChange={(event, name) => {
               handleSelect(event, name)
             }}
