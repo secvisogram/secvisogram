@@ -16,7 +16,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import '@cypress/code-coverage/support.js'
+import '@cypress/code-coverage/support'
 import '../../vendor/first/cvsscalc30.js'
 import '../../vendor/first/cvsscalc31.js'
 import './commands.js'
