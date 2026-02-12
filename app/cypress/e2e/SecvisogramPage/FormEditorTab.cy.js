@@ -677,6 +677,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
       ).should('be.empty')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
+      ).should('be.empty')
 
       // generate button should do nothing without revision history entries
       cy.get(
@@ -687,6 +690,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('be.empty')
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
+      ).should('be.empty')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
       ).should('be.empty')
 
       // create new revision history item
@@ -702,6 +708,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="attribute-document-tracking-revision_history-0-date"] input[type="time"]'
       ).type('13:41')
+      cy.get(
+        '[data-testid="attribute-document-tracking-revision_history-0-number"] input'
+      ).type('1')
 
       // current release should still be empty
       cy.get('[data-testid="document/tracking-fieldButton"]').click()
@@ -710,6 +719,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('be.empty')
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
+      ).should('be.empty')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
       ).should('be.empty')
 
       // generate button should enter correct date and time
@@ -722,6 +734,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
       ).should('have.value', '13:41')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
+      ).should('have.value', '1')
 
       // just regenerating should be still the same
       cy.get(
@@ -733,6 +748,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
       ).should('have.value', '13:41')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
+      ).should('have.value', '1')
     })
 
     it('fill initial release date', function () {
@@ -784,6 +802,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('be.empty')
       cy.get(
         '[data-testid="attribute-document-tracking-initial_release_date"] input[type="time"]'
+      ).should('be.empty')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
       ).should('be.empty')
 
       // generate button should enter correct date and time
@@ -892,6 +913,9 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       cy.get(
         '[data-testid="attribute-document-tracking-current_release_date"] input[type="time"]'
       ).should('have.value', '13:15')
+      cy.get(
+        '[data-testid="attribute-document-tracking-version"] input'
+      ).should('have.value', '1.5.0')
     })
   })
 

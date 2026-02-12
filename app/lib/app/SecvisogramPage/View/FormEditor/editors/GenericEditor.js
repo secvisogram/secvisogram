@@ -125,7 +125,14 @@ export default function Editor({
       : property.key === 'date'
       ? () => updateDoc(instancePath, getCurrentDateRounded())
       : property.key === 'current_release_date'
-      ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
+      ? () => {
+          const currentReleaseDate = getCurrentReleaseDate(doc)
+          updateDoc(instancePath, currentReleaseDate?.date)
+          const versionInstancePath = instancePath
+            .slice(0, -1)
+            .concat('version')
+          updateDoc(versionInstancePath, currentReleaseDate?.number)
+        }
       : property.key === 'initial_release_date'
       ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
       : undefined
