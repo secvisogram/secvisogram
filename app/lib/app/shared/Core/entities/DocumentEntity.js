@@ -1,4 +1,3 @@
-/* eslint-disable react/no-is-mounted */
 import { cloneDeep } from 'lodash'
 
 /**
@@ -549,7 +548,7 @@ const retrieveMaxBaseScore = (vulnerabilities) => {
     if (scores) {
       for (let i = 0; i < scores.length; ++i) {
         const score = scores[i]
-        const baseScore = Number(score.cvss_v3?.baseScore) ?? 0
+        const baseScore = Number(score.cvss_v3?.baseScore)
         if (maxBaseScore < baseScore) {
           maxBaseScore = baseScore
         }

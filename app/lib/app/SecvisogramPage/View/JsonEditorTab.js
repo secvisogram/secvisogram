@@ -5,9 +5,9 @@ import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
 import sortObjectKeys from '../../shared/sortObjectKeys.js'
 import editorSchema from './JsonEditorTab/editorSchema.js'
+import SelectedPathContext from './shared/context/SelectedPathContext.js'
 import SideBarContext from './shared/context/SideBarContext.js'
 import useDebounce from './shared/useDebounce.js'
-import SelectedPathContext from './shared/context/SelectedPathContext.js'
 
 /**
  * @param {{
@@ -133,7 +133,7 @@ export default function JsonEditorTab({
       let result
       try {
         result = jsonMap.parse(debouncedValue)
-      } catch (e) {
+      } catch (_e) {
         return
       }
 
@@ -170,7 +170,7 @@ export default function JsonEditorTab({
         let result
         try {
           result = jsonMap.parse(editor.getModel()?.getValue() || '')
-        } catch (/** @type {any} */ e) {
+        } catch (_e) {
           return
         }
 
@@ -211,7 +211,7 @@ export default function JsonEditorTab({
         let docMap
         try {
           docMap = jsonMap.parse(ed.getModel().getValue())
-        } catch (/** @type {any} */ e) {
+        } catch (_e) {
           return
         }
 

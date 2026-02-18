@@ -112,10 +112,10 @@ const SecvisogramPage = () => {
       }}
       onLockTab={React.useCallback(() => {
         setState((state) => ({ ...state, isTabLocked: true }))
-      }, [])}
+      }, [setState])}
       onUnlockTab={React.useCallback(() => {
         setState((state) => ({ ...state, isTabLocked: false }))
-      }, [])}
+      }, [setState])}
       onDownload={(doc) => {
         core.document
           .validate({ document: doc })
@@ -194,7 +194,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, setState]
       )}
       onCollectProductIds={React.useCallback(
         async (document) => {
@@ -242,7 +242,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, setState]
       )}
       onPreview={React.useCallback(
         (document) => {
@@ -258,7 +258,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError]
+        [handleError, setState]
       )}
       onPrepareDocumentForTemplate={React.useCallback(
         (document) => core.document.preview({ document }),
@@ -300,7 +300,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, alertSaveInvalidTranslationStrings]
+        [handleError, alertSaveInvalidTranslationStrings, setState]
       )}
       onExportHTML={React.useCallback(
         (html, doc) => {
@@ -325,7 +325,7 @@ const SecvisogramPage = () => {
             }
           })
         },
-        [alertSaveInvalidTranslationStrings]
+        [alertSaveInvalidTranslationStrings, setState]
       )}
       onServiceValidate={({ validatorUrl, csaf }) => {
         return validationService

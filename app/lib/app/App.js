@@ -53,6 +53,7 @@ export default function App({ secvisogramPage }) {
         )
         .catch(applicationError.handleError)
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUserInfo(null)
     }
   }, [

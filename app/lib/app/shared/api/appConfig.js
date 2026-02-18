@@ -9,7 +9,7 @@ export async function getAppConfig() {
       .setContentType('application/json')
       .send()
     return await response.json()
-  } catch (error) {
+  } catch (_error) {
     console.info(t('error.couldNotGetConfig'))
     return {
       loginAvailable: false,

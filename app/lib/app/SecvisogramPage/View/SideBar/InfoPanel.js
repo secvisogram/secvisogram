@@ -25,6 +25,7 @@ export default function InfoPanel({ selectedPath }) {
 
   useEffect(() => {
     if (!selectedPath.length) {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect */
       setMdText('')
     }
 
