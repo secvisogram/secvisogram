@@ -330,13 +330,13 @@ export default class CVSSVector {
               const mapping = vectorStringMapping.find((m) => m[1] === key)
               if (!mapping) return null
               const valueMapping = Object.entries(mapping[2]).find(
-                (m) => m[1] === value
+                (m) => m[1] === value,
               )
               if (!valueMapping) return null
               return [mapping[0], valueMapping[0]]
             })
             .filter(/** @returns {e is [string, string]} */ (e) => Boolean(e))
-        : Object.entries(this._data).map((e) => [e[0], ''])
+        : Object.entries(this._data).map((e) => [e[0], '']),
     )
     return new CVSSVector({
       ...this._data,

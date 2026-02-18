@@ -151,7 +151,7 @@ export default React.forwardRef(
         ) : null}
       </dialog>
     )
-  }
+  },
 )
 
 /**

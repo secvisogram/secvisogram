@@ -26,7 +26,7 @@ module.exports = function generatePreviewTemplatingTable(args) {
     schema,
     instancePath = [],
     depth = 1,
-    overwriteDescription = ''
+    overwriteDescription = '',
   ) {
     const path = instancePath.length ? instancePath.join('.') : '.'
     if (depth > 10) return [{ path, schema, depth }]
@@ -35,7 +35,7 @@ module.exports = function generatePreviewTemplatingTable(args) {
         return [
           { path, schema, depth },
           ...Object.entries(schema.properties || {}).flatMap(([key, value]) =>
-            generateSchemaPaths(value, instancePath.concat([key]), depth + 1)
+            generateSchemaPaths(value, instancePath.concat([key]), depth + 1),
           ),
         ]
       case 'array':
@@ -59,7 +59,7 @@ module.exports = function generatePreviewTemplatingTable(args) {
         if (
           schema.oneOf?.find(
             (/** @type {any} */ s) =>
-              s.$ref === 'https://www.first.org/cvss/cvss-v3.1.json'
+              s.$ref === 'https://www.first.org/cvss/cvss-v3.1.json',
           )
         ) {
           return generateSchemaPaths(cvss3Schema, instancePath, depth)
@@ -122,6 +122,6 @@ module.exports = function generatePreviewTemplatingTable(args) {
   console.log(
     `| Attribute                                                          | Description                                                                                                                                                                                                                                                                                                                                                                             | Example value                                                                                                                                                                                           |\n` +
       `| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n` +
-      `${generateTable(generateSchemaPaths(rootSchema, []))}`
+      `${generateTable(generateSchemaPaths(rootSchema, []))}`,
   )
 }

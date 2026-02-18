@@ -8,7 +8,7 @@ import { t } from 'i18next'
 export default function downloadFile(
   content,
   fileName,
-  type = 'application/json'
+  type = 'application/json',
 ) {
   try {
     const string = btoa(unescape(encodeURIComponent(content)))

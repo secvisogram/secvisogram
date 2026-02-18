@@ -53,7 +53,7 @@ const counters = {}
 
 function useUniqueId(
   /** @type {string} */ prefix,
-  /** @type {string} */ idKey
+  /** @type {string} */ idKey,
 ) {
   const { doc } = useContext(DocumentEditorContext)
   const [scanTrigger, setScanTrigger] = useState(false)
@@ -144,7 +144,7 @@ const getBranchName = function (doc, instancePath) {
 const getRelationshipName = async function (
   doc,
   instancePath,
-  collectProductIds
+  collectProductIds,
 ) {
   const relationship = instancePath.slice(0, 3).reduce((value, pathSegment) => {
     return (value ?? {})[pathSegment]
@@ -164,13 +164,13 @@ const getRelationshipName = async function (
 
           return `${productReferenceName} ${category.replaceAll(
             '_',
-            ' '
+            ' ',
           )} ${relatesToProductReferenceName}`
         }
       })
     } else {
       throw Error(
-        'Could not find values in relationship to generate name from.'
+        'Could not find values in relationship to generate name from.',
       )
     }
   }
@@ -213,7 +213,7 @@ const getInitialReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
   return revisionHistory?.filter(
-    (x) => x.number === '1' || x.number === '1.0.0'
+    (x) => x.number === '1' || x.number === '1.0.0',
   )?.[0]?.date
 }
 

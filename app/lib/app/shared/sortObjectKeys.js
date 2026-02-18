@@ -9,6 +9,6 @@ export default function sortObjectKeys(collator, obj) {
   return Object.fromEntries(
     Object.entries(obj)
       .sort((a, z) => collator.compare(a[0], z[0]))
-      .map(([key, obj]) => [key, sortObjectKeys(collator, obj)])
+      .map(([key, obj]) => [key, sortObjectKeys(collator, obj)]),
   )
 }

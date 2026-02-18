@@ -40,23 +40,23 @@ This field specifies the correct input component for the given json path.
 
 Available uiTypes:
 
-| uiType                                | type of input values                                                                                                                             |
-| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| STRING_DATETIME                       | datetime values                                                                                                                                  |
-| STRING_URI                            | strings matching the URI pattern                                                                                                                 |
-| STRING_ENUM                           | strings with predefined values to select from<br/> the values are defined in the schema file                                                     |
-| STRING_WITH_OPTIONS                   | strings with predefined values to select from, still allowing other user input<br/> the values can be added via the `options` property, see below |
-| STRING_MULTI_LINE                     | strings that are potentially larger                                                                                                              |
-| STRING_GENERATE_PRODUCT_ID            | strings with the option to generate a unique product id as value via button                                                                      |
-| STRING_PRODUCT_ID                     | strings referencing a product ID<br/> allows selecting from matching product IDs in the frontend                                                 |
-| WITH_GENERATED_GROUP_ID               | objects with a unique `group_id` prefilled                                                                                                       |
-| STRING_GROUP_ID                       | strings referencing a group ID<br/> allows selecting from matching group IDs in the frontend                                                     |
-| STRING_BRANCH_FULL_PRODUCT_NAME       | string with the option to generate a name from the corresponding branch<br/> specific to `/product_tree(/branches)+/product/name`           |
+| uiType                                | type of input values                                                                                                                                |
+| :------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| STRING_DATETIME                       | datetime values                                                                                                                                     |
+| STRING_URI                            | strings matching the URI pattern                                                                                                                    |
+| STRING_ENUM                           | strings with predefined values to select from<br/> the values are defined in the schema file                                                        |
+| STRING_WITH_OPTIONS                   | strings with predefined values to select from, still allowing other user input<br/> the values can be added via the `options` property, see below   |
+| STRING_MULTI_LINE                     | strings that are potentially larger                                                                                                                 |
+| STRING_GENERATE_PRODUCT_ID            | strings with the option to generate a unique product id as value via button                                                                         |
+| STRING_PRODUCT_ID                     | strings referencing a product ID<br/> allows selecting from matching product IDs in the frontend                                                    |
+| WITH_GENERATED_GROUP_ID               | objects with a unique `group_id` prefilled                                                                                                          |
+| STRING_GROUP_ID                       | strings referencing a group ID<br/> allows selecting from matching group IDs in the frontend                                                        |
+| STRING_BRANCH_FULL_PRODUCT_NAME       | string with the option to generate a name from the corresponding branch<br/> specific to `/product_tree(/branches)+/product/name`                   |
 | STRING_RELATIONSHIP_FULL_PRODUCT_NAME | string with the option to generate a name from the corresponding relationship<br/> specific to `/product_tree/relationships/full_product_name/name` |
-| OBJECT_CWE                            | special type for CWE objects ensuring that ID and name match                                                                                     |
-| OBJECT_CVSS_2                         | special CVSS v2 object                                                                                                                           |
-| OBJECT_CVSS_3                         | special CVSS v3.0 / v3.1 object                                                                                                                  |
-| ARRAY_REVISION_HISTORY                | special type of array, disabling some input values when the revision history is managed in the backend                                           |
+| OBJECT_CWE                            | special type for CWE objects ensuring that ID and name match                                                                                        |
+| OBJECT_CVSS_2                         | special CVSS v2 object                                                                                                                              |
+| OBJECT_CVSS_3                         | special CVSS v3.0 / v3.1 object                                                                                                                     |
+| ARRAY_REVISION_HISTORY                | special type of array, disabling some input values when the revision history is managed in the backend                                              |
 
 The `importUiMetaData.js` script can detect `STRING_DATETIME`, `STRING_URI`
 and `STRING_ENUM` on its own. All other uiTypes must be provided in the

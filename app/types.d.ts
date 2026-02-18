@@ -40,7 +40,7 @@ declare module 'json-source-map' {
   export function parse(
     source: string,
     _reviver?: any,
-    options?: ParseOptions
+    options?: ParseOptions,
   ): ParseResult
 
   export interface StringifyOptions {
@@ -56,6 +56,6 @@ declare module 'json-source-map' {
   export function stringify(
     data: any,
     _replacer?: any,
-    options?: string | number | StringifyOptions
+    options?: string | number | StringifyOptions,
   ): StringifyResult
 }

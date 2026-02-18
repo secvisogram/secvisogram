@@ -36,8 +36,8 @@ export default /**
     advisoryState?.type === 'NEW_ADVISORY'
       ? t('exportModal.unsavedFileExportOnlyLocal')
       : formValues !== originalValues
-      ? t('exportModal.unsavedChangesSelectExportLocation')
-      : ''
+        ? t('exportModal.unsavedChangesSelectExportLocation')
+        : ''
   const isSelectorVisible =
     advisoryState?.type === 'ADVISORY' && formValues !== originalValues
 
@@ -47,14 +47,14 @@ export default /**
     | 'HTMLDOCUMENT'
     | 'PDFDOCUMENT'
     | 'MARKDOWN'} */
-    (defaultSource)
+    (defaultSource),
   )
   const [isLocal, setIsLocal] = React.useState(
     advisoryState?.type === 'NEW_ADVISORY'
       ? true
       : formValues !== originalValues
-      ? true
-      : false
+        ? true
+        : false,
   )
 
   const exportButtonProps = {
@@ -344,10 +344,10 @@ export default /**
                   source === 'CSAFJSON'
                     ? 'JSON'
                     : source === 'HTMLDOCUMENT'
-                    ? 'HTML'
-                    : source === 'MARKDOWN'
-                    ? 'Markdown'
-                    : 'PDF'
+                      ? 'HTML'
+                      : source === 'MARKDOWN'
+                        ? 'Markdown'
+                        : 'PDF',
                 )}
                 download={createFileName(
                   advisoryState.advisory.csaf,
@@ -355,10 +355,10 @@ export default /**
                   source === 'CSAFJSON'
                     ? 'json'
                     : source === 'HTMLDOCUMENT'
-                    ? 'html'
-                    : source === 'MARKDOWN'
-                    ? 'md'
-                    : 'pdf'
+                      ? 'html'
+                      : source === 'MARKDOWN'
+                        ? 'md'
+                        : 'pdf',
                 )}
                 onClick={() => {
                   ref.current?.close()

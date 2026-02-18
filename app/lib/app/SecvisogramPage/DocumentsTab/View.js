@@ -23,7 +23,7 @@ export default function DocumentsTabView({
   const { handleError } = React.useContext(AppErrorContext)
 
   const [alert, setAlert] = React.useState(
-    /** @type {React.ComponentProps<typeof Alert> | null} */ (null)
+    /** @type {React.ComponentProps<typeof Alert> | null} */ (null),
   )
   const [data, setData] = React.useState(defaultData)
   const [isLoading, setLoading] = React.useState(!defaultData)
@@ -32,7 +32,7 @@ export default function DocumentsTabView({
     React.useState(
       /** @type {React.ComponentProps<typeof EditWorkflowStateDialog> | null} */ (
         null
-      )
+      ),
     )
   /** @type {React.MutableRefObject<any>} */
   const editWorkflowStateDialogRef = React.useRef()

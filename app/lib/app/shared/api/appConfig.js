@@ -4,7 +4,7 @@ import ApiRequest from '../ApiRequest.js'
 export async function getAppConfig() {
   try {
     const response = await new ApiRequest(
-      new Request('.well-known/appspecific/de.bsi.secvisogram.json')
+      new Request('.well-known/appspecific/de.bsi.secvisogram.json'),
     )
       .setContentType('application/json')
       .send()

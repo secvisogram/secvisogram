@@ -42,7 +42,7 @@ export default function DropdownAttribute({
             onChange={(_, newValue) => {
               updateDoc(
                 props.instancePath,
-                /** @type {string} */ (newValue ?? '')
+                /** @type {string} */ (newValue ?? ''),
               )
             }}
             inputValue={/** @type {string} */ (inputValue)}
@@ -53,7 +53,7 @@ export default function DropdownAttribute({
               if (!isEnum)
                 updateDoc(
                   props.instancePath,
-                  /** @type {string} */ (inputValue)
+                  /** @type {string} */ (inputValue),
                 )
               if (!inputValue) {
                 replaceDoc(pruneEmpty(doc))

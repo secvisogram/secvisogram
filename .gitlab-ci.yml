@@ -28,7 +28,6 @@ default:
     - npm ci
     - apt-get update && apt-get install -q -y git
 
-
 build:
   stage: build
   script:

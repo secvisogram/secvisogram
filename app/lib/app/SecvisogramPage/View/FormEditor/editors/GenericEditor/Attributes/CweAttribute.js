@@ -23,7 +23,7 @@ function getChildPathAndValue(instancePath, doc, childKey) {
 
 const getChildProps = (
   /** @type import('../../../shared/types').Property */ property,
-  /** @type string */ childKey
+  /** @type string */ childKey,
 ) => property.metaInfo.propertyList?.find((p) => p.key === childKey)
 
 /**
@@ -96,19 +96,19 @@ function CwecId({
   disabled,
 }) {
   const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value)
+    /** @type string */ (value),
   )
 
   const handleChange = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue
+    /** @type string */ newValue,
   ) => {
     setInputValue(newValue)
   }
 
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ id
+    /** @type string */ id,
   ) => {
     const name = cwec.weaknesses.find((w) => w.id === id)?.name
     onChange({ id: id, name: name })
@@ -195,19 +195,19 @@ function CwecName({
   disabled,
 }) {
   const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value)
+    /** @type string */ (value),
   )
 
   const handleChange = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue
+    /** @type string */ newValue,
   ) => {
     setInputValue(newValue)
   }
 
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ name
+    /** @type string */ name,
   ) => {
     const id = cwec.weaknesses.find((w) => w.name === name)?.id
     onChange({ id: id, name: name })

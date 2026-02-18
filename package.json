@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cd app && npm run dev",
     "build": "cd app && npm run build",
-    "test": "tsc -b . && cd app && npm test",
+    "test": "tsc -b . && prettier --check . && cd app && npm test",
     "postinstall": "npm run install:app && npm run install:bin && npm run install:csaf-validator-lib",
     "install:app": "cd app && npm ci",
     "install:bin": "cd bin && npm ci",
@@ -28,7 +28,7 @@
   "author": "eXXcellent solutions GmbH",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^2.8.8",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   }
 }
