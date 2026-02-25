@@ -24,7 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.6",
     "@mui/lab": "^5.0.0-alpha.177",
-    "@mui/material": "^5.18.0",
+    "@mui/material": "^7.3.8",
     "@mui/styles": "^5.18.0",
     "ajv": "^8.18.0",
     "ajv-formats": "^2.1.1",
