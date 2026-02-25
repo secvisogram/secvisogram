@@ -1,0 +1,6 @@
+# This file is only added for registering the directory with git
+# The directory is required to mark the corresponding field as object for sorting in the merged documentation.
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
