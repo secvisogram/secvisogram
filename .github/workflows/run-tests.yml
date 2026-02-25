@@ -3,6 +3,9 @@ on:
   pull_request:
     branches:
       - '**'
+  push:
+    branches:
+      - main
 permissions:
   contents: read
   actions: read
@@ -24,7 +27,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run test-report
+        env:
+          NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
       - run: npm run test-coverage-lcov
+        env:
+          NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
       - name: Save PR number
         env:
           PR_NUMBER: ${{ github.event.number }}
