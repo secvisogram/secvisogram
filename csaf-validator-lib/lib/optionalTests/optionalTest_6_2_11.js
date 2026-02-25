@@ -1,4 +1,5 @@
 import Ajv from 'ajv/dist/jtd.js'
+import { isCanonicalUrl } from '../shared/urlHelper.js'
 
 const ajv = new Ajv()
 
@@ -26,16 +27,7 @@ const inputSchema = /** @type {const} */ ({
   },
 })
 
-const referenceSchema = /** @type {const} */ ({
-  additionalProperties: true,
-  properties: {
-    category: { type: 'string' },
-    url: { type: 'string' },
-  },
-})
-
 const validate = ajv.compile(inputSchema)
-const validateReference = ajv.compile(referenceSchema)
 
 /**
  * @param {any} doc
@@ -58,15 +50,8 @@ export default function optionalTest_6_2_11(doc) {
     return ctx
   }
 
-  const hasCanonicalURL = doc.document.references.some(
-    (r) =>
-      validateReference(r) &&
-      r.category === 'self' &&
-      r.url.startsWith('https://') &&
-      r.url.endsWith(
-        doc.document.tracking.id.toLowerCase().replace(/[^+\-a-z0-9]+/g, '_') +
-          '.json'
-      )
+  const hasCanonicalURL = doc.document.references.some((reference) =>
+    isCanonicalUrl(reference, doc.document.tracking.id)
   )
 
   if (!hasCanonicalURL) {

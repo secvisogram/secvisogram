@@ -98,9 +98,6 @@ describe('oasis', function () {
                           : `should not have warnings, but had ${result.warnings?.length}`
                       ).to.equal(type === 'failures')
                     } else if (group === 'informative') {
-                      if (result.infos?.length && type === 'valid') {
-                        console.log(testId, result.infos)
-                      }
                       expect(
                         Boolean(result.infos?.length),
                         type === 'failures'
