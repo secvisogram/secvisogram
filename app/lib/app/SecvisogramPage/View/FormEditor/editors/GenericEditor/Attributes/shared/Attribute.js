@@ -43,7 +43,7 @@ export default function Attribute({
 }) {
   const { errors, doc } = React.useContext(DocumentEditorContext)
   const { selectedRelevanceLevel, relevanceLevels } = React.useContext(
-    RelevanceLevelContext
+    RelevanceLevelContext,
   )
 
   const { setSideBarIsOpen, setSideBarSelectedPath } =
@@ -52,11 +52,11 @@ export default function Attribute({
   const jsonInstancePath = compile(instancePath)
 
   const localValidationErrors = errors.filter(
-    (e) => e.instancePath === jsonInstancePath
+    (e) => e.instancePath === jsonInstancePath,
   )
   const attributeName = React.useMemo(
     () => instancePath.slice().pop() ?? '',
-    [instancePath]
+    [instancePath],
   )
 
   let showAttribute = true

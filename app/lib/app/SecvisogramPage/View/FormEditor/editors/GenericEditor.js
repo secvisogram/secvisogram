@@ -36,12 +36,12 @@ export function getErrorTextColor(errors) {
   return errorTypes.includes('error')
     ? 'text-red-600'
     : errorTypes.includes('warning')
-    ? 'text-yellow-600'
-    : errorTypes.includes('info')
-    ? 'text-blue-600'
-    : errors.length
-    ? 'text-red-600' // fall back to red if there are errors but their type is not known
-    : 'text-green-600'
+      ? 'text-yellow-600'
+      : errorTypes.includes('info')
+        ? 'text-blue-600'
+        : errors.length
+          ? 'text-red-600' // fall back to red if there are errors but their type is not known
+          : 'text-green-600'
 }
 
 /**
@@ -69,7 +69,7 @@ export default function Editor({
   const enableLast = uiType === 'ARRAY_REVISION_HISTORY'
   const attributeName = React.useMemo(
     () => instancePath.slice().pop() ?? '',
-    [instancePath]
+    [instancePath],
   )
   /** @type {boolean} */ let disabled
   if (
@@ -112,23 +112,27 @@ export default function Editor({
     uiType === 'STRING_GENERATE_PRODUCT_ID'
       ? () => updateDoc(instancePath, uniqueProductId())
       : uiType === 'STRING_BRANCH_FULL_PRODUCT_NAME'
-      ? () => {
-          // update the field but remove the field itself from the instancePath otherwise the old value will be appended
-          updateDoc(instancePath, getBranchName(doc, instancePath.slice(0, -1)))
-        }
-      : uiType === 'STRING_RELATIONSHIP_FULL_PRODUCT_NAME'
-      ? () =>
-          getRelationshipName(doc, instancePath, collectIds['productIds']).then(
-            (r) => updateDoc(instancePath, r),
-            handleError
-          )
-      : property.key === 'date'
-      ? () => updateDoc(instancePath, getCurrentDateRounded())
-      : property.key === 'current_release_date'
-      ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
-      : property.key === 'initial_release_date'
-      ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
-      : undefined
+        ? () => {
+            // update the field but remove the field itself from the instancePath otherwise the old value will be appended
+            updateDoc(
+              instancePath,
+              getBranchName(doc, instancePath.slice(0, -1)),
+            )
+          }
+        : uiType === 'STRING_RELATIONSHIP_FULL_PRODUCT_NAME'
+          ? () =>
+              getRelationshipName(
+                doc,
+                instancePath,
+                collectIds['productIds'],
+              ).then((r) => updateDoc(instancePath, r), handleError)
+          : property.key === 'date'
+            ? () => updateDoc(instancePath, getCurrentDateRounded())
+            : property.key === 'current_release_date'
+              ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
+              : property.key === 'initial_release_date'
+                ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
+                : undefined
 
   const fillDefaultFunction = () => {
     if (property.default) updateDoc(instancePath, property.default)

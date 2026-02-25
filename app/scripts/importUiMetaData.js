@@ -11,16 +11,16 @@ import metaData from './importUiMetaData/metaData.js'
 const schema = JSON.parse(
   await readFile(
     new URL('importUiMetaData/csaf_json_schema.json', import.meta.url),
-    'utf-8'
-  )
+    'utf-8',
+  ),
 )
 
 /** @type {CVSS2JSONSchema} */
 const cvss2Schema = JSON.parse(
   await readFile(
     new URL('importUiMetaData/cvss-v2.0.json', import.meta.url),
-    'utf-8'
-  )
+    'utf-8',
+  ),
 )
 
 const defs = /** @type {import('./importUiMetaData/types').Defs} */ (
@@ -63,7 +63,7 @@ function convertSchema(subschema, defs, path) {
     metaData:
       metaData &&
       Object.fromEntries(
-        Object.entries(metaData).filter(([key]) => key !== 'propertyOrder')
+        Object.entries(metaData).filter(([key]) => key !== 'propertyOrder'),
       ),
   }
 
@@ -89,8 +89,8 @@ function convertSchema(subschema, defs, path) {
   ) {
     const properties = Object.fromEntries(
       Object.entries(subschema.items.properties).filter(
-        ([key]) => key !== 'branches'
-      )
+        ([key]) => key !== 'branches',
+      ),
     )
     const arrayType =
       /** @type {import('./importUiMetaData/types').ObjectUiSchema} */ (
@@ -123,14 +123,14 @@ function convertSchema(subschema, defs, path) {
         /** @type {import('./importUiMetaData/types').Defs} */ (
           cvss2Schema.$defs
         ),
-        path
+        path,
       )
     } else {
       const refName = subschema.$ref.replace(new RegExp('\\#/\\$defs/'), '')
       const ref = defs[refName]
       if (!ref) {
         throw new Error(
-          'Ref with name `' + refName + '` not found (`' + strPath + '`)'
+          'Ref with name `' + refName + '` not found (`' + strPath + '`)',
         )
       }
       resolvedSchema = convertSchema(ref, defs, path)
@@ -201,10 +201,10 @@ function convertSchema(subschema, defs, path) {
           subschema.format === 'date-time'
             ? 'STRING_DATETIME'
             : subschema.format === 'uri'
-            ? 'STRING_URI'
-            : subschema.enum !== undefined
-            ? 'STRING_ENUM'
-            : undefined,
+              ? 'STRING_URI'
+              : subschema.enum !== undefined
+                ? 'STRING_ENUM'
+                : undefined,
         ...commonUiSchemaFields.metaData,
       },
       type: 'STRING',
@@ -225,8 +225,8 @@ function convertSchema(subschema, defs, path) {
 const outputFile = fileURLToPath(
   new URL(
     '../lib/app/SecvisogramPage/View/FormEditor/schema.js',
-    import.meta.url
-  )
+    import.meta.url,
+  ),
 )
 const prettierString = prettier.format(
   "/** @typedef {import('./shared/types').Property} Property */\n" +
@@ -234,12 +234,12 @@ const prettierString = prettier.format(
       convertSchema(
         /** @type {import('./importUiMetaData/types').Schema} */ (schema),
         defs,
-        []
-      )
+        [],
+      ),
     )})`,
   {
     ...(await prettier.resolveConfig(outputFile)),
     filepath: outputFile,
-  }
+  },
 )
 await writeFile(outputFile, prettierString, 'utf8')

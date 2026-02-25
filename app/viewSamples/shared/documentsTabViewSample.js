@@ -8,7 +8,7 @@ const defaultData = {
       deletable: true,
       allowedStateChanges: ['Review', 'Draft'],
       canCreateVersion: false,
-      currentReleaseDate: "2022-09-22T22:00:00.000Z"
+      currentReleaseDate: '2022-09-22T22:00:00.000Z',
     },
   ],
 }
@@ -17,7 +17,7 @@ const props = {
   defaultData: defaultData,
   onGetData: async () => defaultData,
   async onDeleteAdvisory() {},
-  onChangeWorkflowState: async () => (new Promise(() => {})),
+  onChangeWorkflowState: async () => new Promise(() => {}),
   async onCreateNewVersion() {},
 }
 

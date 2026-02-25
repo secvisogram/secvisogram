@@ -5,9 +5,9 @@ import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
 import sortObjectKeys from '../../shared/sortObjectKeys.js'
 import editorSchema from './JsonEditorTab/editorSchema.js'
+import SelectedPathContext from './shared/context/SelectedPathContext.js'
 import SideBarContext from './shared/context/SideBarContext.js'
 import useDebounce from './shared/useDebounce.js'
-import SelectedPathContext from './shared/context/SelectedPathContext.js'
 
 /**
  * @param {{
@@ -35,15 +35,15 @@ export default function JsonEditorTab({
   const [editor, setEditor] = React.useState(
     /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
       null
-    )
+    ),
   )
   const [monaco, setMonaco] = React.useState(
-    /** @type {import ("react-monaco-editor").monaco | null} */ (null)
+    /** @type {import ("react-monaco-editor").monaco | null} */ (null),
   )
 
   const stringifiedDoc = React.useMemo(
     () => JSON.stringify(doc, null, 2),
-    [doc]
+    [doc],
   )
 
   const initialMountRef = React.useRef(true)
@@ -61,11 +61,11 @@ export default function JsonEditorTab({
           JSON.stringify(
             sortObjectKeys(
               new Intl.Collator(),
-              JSON.parse(editor.getModel()?.getValue() ?? '{}')
+              JSON.parse(editor.getModel()?.getValue() ?? '{}'),
             ),
             null,
-            2
-          )
+            2,
+          ),
         )
     }
 
@@ -133,7 +133,7 @@ export default function JsonEditorTab({
       let result
       try {
         result = jsonMap.parse(debouncedValue)
-      } catch (e) {
+      } catch (_e) {
         return
       }
 
@@ -153,8 +153,8 @@ export default function JsonEditorTab({
             error.type === 'error'
               ? monaco.MarkerSeverity.Error
               : error.type === 'warning'
-              ? monaco.MarkerSeverity.Warning
-              : monaco.MarkerSeverity.Info,
+                ? monaco.MarkerSeverity.Warning
+                : monaco.MarkerSeverity.Info,
         }))
 
       const model = editor.getModel()
@@ -170,7 +170,7 @@ export default function JsonEditorTab({
         let result
         try {
           result = jsonMap.parse(editor.getModel()?.getValue() || '')
-        } catch (/** @type {any} */ e) {
+        } catch (_e) {
           return
         }
 
@@ -185,19 +185,19 @@ export default function JsonEditorTab({
         }
       }
     },
-    [editor]
+    [editor],
   )
 
   const { selectedPath } = React.useContext(SelectedPathContext)
 
   React.useEffect(
     () => setCursor('/' + selectedPath.join('/')),
-    [setCursor, selectedPath]
+    [setCursor, selectedPath],
   )
 
   const editorDidMount = (
     /** @type {any } */ editor,
-    /** @type {any} */ monaco
+    /** @type {any} */ monaco,
   ) => {
     editor.addAction({
       id: 'set-sidebar-context',
@@ -211,7 +211,7 @@ export default function JsonEditorTab({
         let docMap
         try {
           docMap = jsonMap.parse(ed.getModel().getValue())
-        } catch (/** @type {any} */ e) {
+        } catch (_e) {
           return
         }
 
@@ -306,10 +306,10 @@ export default function JsonEditorTab({
                         error.type === 'warning'
                           ? ' validation_error-warning text-yellow-600'
                           : error.type === 'error'
-                          ? ' validation_error-error'
-                          : error.type === 'info'
-                          ? ' validation_error-info text-blue-500'
-                          : ''
+                            ? ' validation_error-error'
+                            : error.type === 'info'
+                              ? ' validation_error-info text-blue-500'
+                              : ''
                       } underline`}
                       onClick={() => {
                         setCursor(error.instancePath)

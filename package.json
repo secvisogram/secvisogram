@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "cd app && npm run dev",
     "build": "cd app && npm run build",
-    "test": "tsc -b . && cd app && npm test",
+    "test": "tsc -b . && prettier --check . && cd app && npm test",
     "postinstall": "npm run install:app && npm run install:bin && npm run install:csaf-validator-lib",
     "install:app": "cd app && npm ci",
     "install:bin": "cd bin && npm ci",
     "install:csaf-validator-lib": "cd csaf-validator-lib && npm ci",
     "generate-html-template": "node bin/cli.js generate-html-template --csaf app/lib/shared/Core/csaf_2.0.json --cvss-3.1 app/lib/shared/Core/cvss-v3.1.json > app/lib/SecvisogramPage/View/shared/HTMLTemplate/Template.html"
+  },
+  "config": {
+    "port": 8080
   },
   "repository": {
     "type": "git",
@@ -25,7 +28,7 @@
   "author": "eXXcellent solutions GmbH",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^2.8.8",
-    "typescript": "^5.8.2"
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
   }
 }

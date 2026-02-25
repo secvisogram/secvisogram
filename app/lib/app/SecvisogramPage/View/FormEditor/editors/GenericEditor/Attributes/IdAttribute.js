@@ -25,7 +25,7 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
   /** @param {string} id  */
   const handleSelect = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ id
+    /** @type string */ id,
   ) => {
     updateDoc(props.instancePath, id)
     if (!id) {
@@ -52,7 +52,7 @@ export default function IdAttribute({ onCollectIds, disabled, ...props }) {
   /** @param {React.ChangeEvent<HTMLInputElement>} event  */
   const handleChange = (
     /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue
+    /** @type string */ newValue,
   ) => {
     setValue(newValue)
   }

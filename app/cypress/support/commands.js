@@ -26,5 +26,5 @@
 
 Cypress.on(
   'uncaught:exception',
-  (err) => !err.message.includes('ResizeObserver loop')
-);
+  (err) => !err.message.includes('ResizeObserver loop'),
+)

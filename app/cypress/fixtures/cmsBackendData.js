@@ -76,7 +76,7 @@ export function getAdvisories() {
  */
 export function getAdvisory({ advisoryId }) {
   const advisory = testsSample.advisories.find(
-    (a) => a.advisoryId === advisoryId
+    (a) => a.advisoryId === advisoryId,
   )
   if (!advisory) throw new Error('Advisory not found')
   return advisory

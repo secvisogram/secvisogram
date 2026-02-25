@@ -46,13 +46,13 @@ export default function Reducer(state, action) {
         (d) => sortObjectKeys(new Intl.Collator(), d),
         set(
           'document.tracking.generator.engine.name',
-          action.generatorEngineData.name
+          action.generatorEngineData.name,
         ),
         set(
           'document.tracking.generator.engine.version',
-          action.generatorEngineData.version
+          action.generatorEngineData.version,
         ),
-        set('document.tracking.generator.date', action.timestamp.toISOString())
+        set('document.tracking.generator.date', action.timestamp.toISOString()),
       )
       return {
         ...state,
@@ -63,9 +63,9 @@ export default function Reducer(state, action) {
               ? set(
                   parse(action.instancePath),
                   action.update,
-                  state.formValues.doc ?? {}
+                  state.formValues.doc ?? {},
                 )
-              : action.update
+              : action.update,
           ),
         },
       }

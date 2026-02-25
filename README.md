@@ -36,12 +36,12 @@ Secvisogram aims to make it easier for vendors and other security advisory issui
 
 ## Getting started
 
-Assure that you have **Node 20 (LTS) and npm 9 or newer** installed.
+Assure that you have **Node 24 (LTS) and npm 11 or newer** installed.
 [Nodesource](https://github.com/nodesource/distributions/blob/master/README.md) provides binary distributions for various Linux distributions.
 
       $ node --version ; npm --version
-      v20.9.0
-      9.9.2
+      v24.13.1
+      11.8.0
 
 Check out the repository and navigate to the working directory.
 
@@ -88,13 +88,13 @@ Please refer to [`DEVELOPMENT.md`](DEVELOPMENT.md) for a detailed description on
 
 2. Build Secvisogram docker image
 
-    ```sh
-    docker build -t csaf/secvisogram .
-    ```
-3. Start container
+   ```sh
+   docker build -t csaf/secvisogram .
+   ```
 
+3. Start container
    - Start the container at port 8080. Mount the configuration as docker volume from a local directory.
-The example configuration in 'docker/appspecific' set the URL of the validator service to 'http://localhost:8082'
+     The example configuration in 'docker/appspecific' set the URL of the validator service to 'http://localhost:8082'
 
    - Example for Windows powershell:
 
@@ -108,9 +108,8 @@ The example configuration in 'docker/appspecific' set the URL of the validator s
      docker run -it --rm  -p 8080:80 -v "$(pwd)/docker/appspecific:/usr/share/nginx/html/.well-known/appspecific:ro" --name bsi-secvisogram bsi/secvisogram
      ```
 
-4.  Secvisogram starts on http://localhost:8080
+4. Secvisogram starts on http://localhost:8080
 5. In Secvisogram, the validation by the validator service can be executed with hotkey CTRL + ALT + V.
-
 
 ### Configure keybindings
 
