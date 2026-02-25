@@ -13,10 +13,10 @@ describe('SecvisogramPage / DocumentsTab', function () {
   beforeEach(function () {
     cy.intercept(
       '/.well-known/appspecific/de.bsi.secvisogram.json',
-      getLoginEnabledConfig()
+      getLoginEnabledConfig(),
     ).as('wellKnownAppConfig')
     cy.intercept('/api/v1/advisories', getGetAdvisoriesResponse()).as(
-      'apiGetAdvisories'
+      'apiGetAdvisories',
     )
   })
 
@@ -24,7 +24,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
     for (const user of getUsers()) {
       it(`user: ${user.preferredUsername}`, function () {
         cy.intercept(getLoginEnabledConfig().userInfoUrl, getUserInfo(user)).as(
-          'apiGetUserInfo'
+          'apiGetUserInfo',
         )
 
         cy.visit('?tab=DOCUMENTS')
@@ -33,10 +33,10 @@ describe('SecvisogramPage / DocumentsTab', function () {
         cy.wait('@apiGetUserInfo')
         for (const advisory of getAdvisories()) {
           cy.get(
-            `[data-testid="advisory-${advisory.advisoryId}-list_entry"]`
+            `[data-testid="advisory-${advisory.advisoryId}-list_entry"]`,
           ).should('exist')
           cy.get(
-            `[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state"]`
+            `[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state"]`,
           ).should('have.text', advisory.workflowState)
         }
       })
@@ -51,11 +51,11 @@ describe('SecvisogramPage / DocumentsTab', function () {
         }, canDelete: ${canDeleteDocument(user.user)}`, function () {
           cy.intercept(
             getLoginEnabledConfig().userInfoUrl,
-            getUserInfo(user)
+            getUserInfo(user),
           ).as('apiGetUserInfo')
           cy.intercept(
             '/api/v1/advisories',
-            getGetAdvisoriesResponse(user.user)
+            getGetAdvisoriesResponse(user.user),
           ).as('apiGetAdvisories')
           const advisoryDetail = getGetAdvisoryDetailResponse({
             advisoryId: advisory.advisoryId,
@@ -66,11 +66,11 @@ describe('SecvisogramPage / DocumentsTab', function () {
               method: 'DELETE',
               url: `/api/v1/advisories/${advisory.advisoryId}?revision=${advisoryDetail.revision}`,
             },
-            { statusCode: 204 }
+            { statusCode: 204 },
           ).as('apiDeleteAdvisory')
           cy.intercept(
             `/api/v1/advisories/${advisory.advisoryId}`,
-            advisoryDetail
+            advisoryDetail,
           ).as('apiGetAdvisoryDetail')
 
           cy.visit('?tab=DOCUMENTS')
@@ -82,17 +82,17 @@ describe('SecvisogramPage / DocumentsTab', function () {
           cy.intercept(
             '/api/v1/advisories',
             getGetAdvisoriesResponse().filter(
-              (a) => a.advisoryId !== advisory.advisoryId
-            )
+              (a) => a.advisoryId !== advisory.advisoryId,
+            ),
           ).as('apiGetAdvisories')
 
           if (!canDeleteDocument(user.user)) {
             cy.get(
-              `[data-testid="advisory-${advisory.advisoryId}-list_entry-delete_button"]`
+              `[data-testid="advisory-${advisory.advisoryId}-list_entry-delete_button"]`,
             ).should('not.exist')
           } else {
             cy.get(
-              `[data-testid="advisory-${advisory.advisoryId}-list_entry-delete_button"]`
+              `[data-testid="advisory-${advisory.advisoryId}-list_entry-delete_button"]`,
             ).click()
             cy.get('[data-testid="alert-confirm_button"]').click()
             cy.wait([
@@ -102,7 +102,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
             ])
             cy.get('[data-testid="loading_indicator"]').should('not.exist')
             cy.get(
-              `[data-testid="advisory-${advisory.advisoryId}-list_entry"]`
+              `[data-testid="advisory-${advisory.advisoryId}-list_entry"]`,
             ).should('not.exist')
           }
         })
@@ -116,14 +116,14 @@ describe('SecvisogramPage / DocumentsTab', function () {
         it(`user: ${user.preferredUsername}, advisoryId: ${advisory.advisoryId}`, function () {
           cy.intercept(
             getLoginEnabledConfig().userInfoUrl,
-            getUserInfo(user)
+            getUserInfo(user),
           ).as('apiGetUserInfo')
           const advisoryDetail = getGetAdvisoryDetailResponse({
             advisoryId: advisory.advisoryId,
           })
           cy.intercept(
             `/api/v1/advisories/${advisory.advisoryId}`,
-            advisoryDetail
+            advisoryDetail,
           ).as('apiGetAdvisoryDetail')
 
           cy.visit('?tab=DOCUMENTS')
@@ -132,7 +132,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
           cy.wait('@apiGetAdvisories')
 
           cy.get(
-            `[data-testid="advisory-${advisory.advisoryId}-list_entry-open_button"]`
+            `[data-testid="advisory-${advisory.advisoryId}-list_entry-open_button"]`,
           ).click()
           cy.wait('@apiGetAdvisoryDetail')
           cy.get('[data-testid="loading_indicator"]').should('not.exist')
@@ -140,11 +140,11 @@ describe('SecvisogramPage / DocumentsTab', function () {
           cy.get(`[data-testid="menu_entry-/document"]`).click()
           cy.get('[data-testid="attribute-document-title"] input').should(
             'have.value',
-            /** @type {any} */ (advisoryDetail.csaf).document.title
+            /** @type {any} */ (advisoryDetail.csaf).document.title,
           )
           cy.get('[data-testid="document_tracking_id"]').should(
             'have.text',
-            /** @type {any} */ (advisoryDetail.csaf).document.title
+            /** @type {any} */ (advisoryDetail.csaf).document.title,
           )
         })
       }
@@ -158,13 +158,13 @@ describe('SecvisogramPage / DocumentsTab', function () {
           it(`user: ${user.preferredUsername}, advisoryId: ${advisory.advisoryId}, workflowState: ${workflowState}`, function () {
             cy.intercept(
               getLoginEnabledConfig().userInfoUrl,
-              getUserInfo(user)
+              getUserInfo(user),
             ).as('apiGetUserInfo')
             cy.intercept(
               `/api/v1/advisories/${advisory.advisoryId}`,
               getGetAdvisoryDetailResponse({
                 advisoryId: advisory.advisoryId,
-              })
+              }),
             ).as('apiGetAdvisoryDetail')
 
             cy.visit('?tab=DOCUMENTS')
@@ -176,16 +176,16 @@ describe('SecvisogramPage / DocumentsTab', function () {
             const proposedTime = '2017-06-01T08:30'
             const apiChangeWorkflowStateURL = new URL(
               `/api/v1/advisories/${advisory.advisoryId}/workflowstate/${workflowState}`,
-              window.location.href
+              window.location.href,
             )
             apiChangeWorkflowStateURL.searchParams.set(
               'revision',
-              advisory.revision
+              advisory.revision,
             )
             if (workflowState === 'Published') {
               apiChangeWorkflowStateURL.searchParams.set(
                 'documentTrackingStatus',
-                documentTrackingStatus
+                documentTrackingStatus,
               )
             }
             if (
@@ -194,7 +194,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
             ) {
               apiChangeWorkflowStateURL.searchParams.set(
                 'proposedTime',
-                new Date(proposedTime).toISOString()
+                new Date(proposedTime).toISOString(),
               )
             }
             cy.setCookie('XSRF-TOKEN', 'test-Value-123')
@@ -202,23 +202,23 @@ describe('SecvisogramPage / DocumentsTab', function () {
               'PATCH',
               apiChangeWorkflowStateURL.pathname +
                 apiChangeWorkflowStateURL.search,
-              advisory.isValid ? {} : { statusCode: 422 }
+              advisory.isValid ? {} : { statusCode: 422 },
             ).as('apiChangeWorkflowState')
 
             cy.get(
-              `[data-testid="advisory-${advisory.advisoryId}-list_entry-edit_workflow_state_button"]`
+              `[data-testid="advisory-${advisory.advisoryId}-list_entry-edit_workflow_state_button"]`,
             ).click()
             cy.get(
-              `select[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state_select"]`
+              `select[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state_select"]`,
             ).select(workflowState)
             if (workflowState === 'Published') {
               for (const trackingStatus of ['Final', 'Interim']) {
                 cy.get(
-                  `select[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-tracking_status_select"] option[value="${trackingStatus}"]`
+                  `select[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-tracking_status_select"] option[value="${trackingStatus}"]`,
                 ).should('exist')
               }
               cy.get(
-                `select[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-tracking_status_select"]`
+                `select[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-tracking_status_select"]`,
               ).select(documentTrackingStatus)
             }
             if (
@@ -226,11 +226,11 @@ describe('SecvisogramPage / DocumentsTab', function () {
               workflowState === 'RfPublication'
             ) {
               cy.get(
-                `[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-proposed_time_input"]`
+                `[data-testid="advisory-${advisory.advisoryId}-edit_workflow_state_dialog-proposed_time_input"]`,
               ).type(proposedTime)
             }
             cy.get(
-              `select[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state_select"]`
+              `select[data-testid="advisory-${advisory.advisoryId}-list_entry-workflow_state_select"]`,
             )
               .closest('form')
               .submit()
@@ -238,7 +238,7 @@ describe('SecvisogramPage / DocumentsTab', function () {
             if (!advisory.isValid) {
               cy.get('[data-testid="error_toast_message"]').should(
                 'contain',
-                'document is not valid'
+                'document is not valid',
               )
             } else {
               cy.wait('@apiGetAdvisories')
@@ -255,22 +255,22 @@ describe('SecvisogramPage / DocumentsTab', function () {
         canCreateVersion({
           userName: user.user,
           workflowState: a.workflowState,
-        })
+        }),
       )) {
         it(`user: ${user.preferredUsername}, advisoryId: ${advisory.advisoryId}`, function () {
           cy.intercept(
             getLoginEnabledConfig().userInfoUrl,
-            getUserInfo(user)
+            getUserInfo(user),
           ).as('apiGetUserInfo')
           cy.intercept(
             '/api/v1/advisories',
-            getGetAdvisoriesResponse(user.user)
+            getGetAdvisoriesResponse(user.user),
           ).as('apiGetAdvisories')
           cy.intercept(
             `/api/v1/advisories/${advisory.advisoryId}`,
             getGetAdvisoryDetailResponse({
               advisoryId: advisory.advisoryId,
-            })
+            }),
           ).as('apiGetAdvisoryDetail')
 
           cy.visit('?tab=DOCUMENTS')
@@ -280,20 +280,20 @@ describe('SecvisogramPage / DocumentsTab', function () {
           cy.get('[data-testid="user_info"]').should('exist')
 
           cy.get(
-            `[data-testid="advisory-${advisory.advisoryId}-list_entry-edit_workflow_state_button"]`
+            `[data-testid="advisory-${advisory.advisoryId}-list_entry-edit_workflow_state_button"]`,
           ).should('not.exist')
 
           const createNewVersionURL = new URL(
             `/api/v1/advisories/${advisory.advisoryId}/createNewVersion`,
-            Cypress.config().baseUrl ?? undefined
+            Cypress.config().baseUrl ?? undefined,
           )
           createNewVersionURL.searchParams.set('revision', advisory.revision)
           cy.setCookie('XSRF-TOKEN', 'test-Value-123')
           cy.intercept('PATCH', createNewVersionURL.href, { body: '' }).as(
-            'apiCreateVersion'
+            'apiCreateVersion',
           )
           cy.get(
-            `[data-testid="advisory-${advisory.advisoryId}-list_entry-create_new_version_button"]`
+            `[data-testid="advisory-${advisory.advisoryId}-list_entry-create_new_version_button"]`,
           ).click()
           cy.wait('@apiGetAdvisoryDetail')
           cy.wait('@apiCreateVersion')

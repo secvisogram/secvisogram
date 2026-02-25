@@ -76,14 +76,14 @@ const SecvisogramPage = () => {
         searchParams.get('tab') === 'DOCUMENTS'
           ? 'DOCUMENTS'
           : searchParams.get('tab') === 'EDITOR'
-          ? 'EDITOR'
-          : searchParams.get('tab') === 'SOURCE'
-          ? 'SOURCE'
-          : searchParams.get('tab') === 'PREVIEW'
-          ? 'PREVIEW'
-          : searchParams.get('tab') === 'CSAF-JSON'
-          ? 'CSAF-JSON'
-          : 'EDITOR'
+            ? 'EDITOR'
+            : searchParams.get('tab') === 'SOURCE'
+              ? 'SOURCE'
+              : searchParams.get('tab') === 'PREVIEW'
+                ? 'PREVIEW'
+                : searchParams.get('tab') === 'CSAF-JSON'
+                  ? 'CSAF-JSON'
+                  : 'EDITOR'
       }
       isTabLocked={isTabLocked}
       isLoading={isLoading}
@@ -149,7 +149,7 @@ const SecvisogramPage = () => {
           fileReader.onload = (e) => {
             try {
               const parsedDoc = JSON.parse(
-                /** @type {string | undefined} */ (e.target?.result) ?? ''
+                /** @type {string | undefined} */ (e.target?.result) ?? '',
               )
               setState((state) => ({
                 ...state,
@@ -194,7 +194,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, setState]
+        [handleError, setState],
       )}
       onCollectProductIds={React.useCallback(
         async (document) => {
@@ -205,7 +205,7 @@ const SecvisogramPage = () => {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError],
       )}
       onCollectGroupIds={React.useCallback(
         async (document) => {
@@ -216,7 +216,7 @@ const SecvisogramPage = () => {
             return handleError(error)
           }
         },
-        [handleError]
+        [handleError],
       )}
       onGetDocMin={async () => {
         return core.document.newDocMin()
@@ -242,7 +242,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, setState]
+        [handleError, setState],
       )}
       onPreview={React.useCallback(
         (document) => {
@@ -258,11 +258,11 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, setState]
+        [handleError, setState],
       )}
       onPrepareDocumentForTemplate={React.useCallback(
         (document) => core.document.preview({ document }),
-        []
+        [],
       )}
       onExportCSAF={React.useCallback(
         (document) => {
@@ -300,7 +300,7 @@ const SecvisogramPage = () => {
             })
             .catch(handleError)
         },
-        [handleError, alertSaveInvalidTranslationStrings, setState]
+        [handleError, alertSaveInvalidTranslationStrings, setState],
       )}
       onExportHTML={React.useCallback(
         (html, doc) => {
@@ -325,7 +325,7 @@ const SecvisogramPage = () => {
             }
           })
         },
-        [alertSaveInvalidTranslationStrings, setState]
+        [alertSaveInvalidTranslationStrings, setState],
       )}
       onServiceValidate={({ validatorUrl, csaf }) => {
         return validationService
@@ -346,7 +346,7 @@ const SecvisogramPage = () => {
       }}
       onGetTemplateContent={({ templateId }) => {
         return new ApiRequest(
-          new Request(`/api/v1/advisories/templates/${templateId}`)
+          new Request(`/api/v1/advisories/templates/${templateId}`),
         )
           .setContentType('application/json')
           .send()

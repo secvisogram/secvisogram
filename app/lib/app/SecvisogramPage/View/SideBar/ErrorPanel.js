@@ -43,10 +43,10 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
             err.type === 'error'
               ? 'border-red-800 bg-red-600/75'
               : err.type === 'warning'
-              ? 'border-yellow-800 bg-yellow-600/75'
-              : err.type === 'info'
-              ? 'border-blue-800 bg-blue-600/75'
-              : ''
+                ? 'border-yellow-800 bg-yellow-600/75'
+                : err.type === 'info'
+                  ? 'border-blue-800 bg-blue-600/75'
+                  : ''
           const highlight =
             selectedPathAsString === err.instancePath
               ? ' border-black border-2'

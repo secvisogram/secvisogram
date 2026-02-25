@@ -1314,7 +1314,7 @@ export default {
                 cvss_v2: {
                   $ref: new URL(
                     'vendor/first/cvss-v2.0.json',
-                    window.location.href
+                    window.location.href,
                   ).href,
                 },
                 cvss_v3: {
@@ -1322,13 +1322,13 @@ export default {
                     {
                       $ref: new URL(
                         'vendor/first/cvss-v3.0.json',
-                        window.location.href
+                        window.location.href,
                       ).href,
                     },
                     {
                       $ref: new URL(
                         'vendor/first/cvss-v3.1.json',
-                        window.location.href
+                        window.location.href,
                       ).href,
                     },
                   ],

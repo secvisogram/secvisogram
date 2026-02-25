@@ -43,7 +43,7 @@ const VersionSummaryDialog = React.forwardRef(
           id="submit_version-form"
           onSubmit={(e) => {
             const formData = new FormData(
-              /** @type {HTMLFormElement} */ (e.target)
+              /** @type {HTMLFormElement} */ (e.target),
             )
             const summary = /** @type {string} */ (formData.get('summary'))
             const legacyVersion = /** @type {string} */ (
@@ -96,7 +96,7 @@ const VersionSummaryDialog = React.forwardRef(
         </footer>
       </dialog>
     )
-  }
+  },
 )
 
 export default VersionSummaryDialog

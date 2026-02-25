@@ -120,22 +120,22 @@ export default class DocumentEntity {
         collectRefsInProductStatus(
           `/vulnerabilities/${i}/product_status`,
           vulnerability,
-          entries
+          entries,
         )
         collectProductRefsInRemediations(
           `/vulnerabilities/${i}/remediations`,
           vulnerability,
-          entries
+          entries,
         )
         collectRefsInScores(
           `/vulnerabilities/${i}/scores`,
           vulnerability,
-          entries
+          entries,
         )
         collectProductRefsInThreats(
           `/vulnerabilities/${i}/threats`,
           vulnerability,
-          entries
+          entries,
         )
       }
     }
@@ -185,12 +185,12 @@ export default class DocumentEntity {
         collectGroupRefsInRemediations(
           `/vulnerabilities/${i}/remediations`,
           vulnerability,
-          entries
+          entries,
         )
         collectGroupRefsInThreats(
           `/vulnerabilities/${i}/threats`,
           vulnerability,
-          entries
+          entries,
         )
       }
     }
@@ -210,7 +210,7 @@ export default class DocumentEntity {
 
     if (templateDoc.document) {
       templateDoc.document.max_base_score = retrieveMaxBaseScore(
-        templateDoc.vulnerabilities
+        templateDoc.vulnerabilities,
       )
       addDocumentNotesPreviewAttributes(templateDoc.document)
     }
@@ -226,7 +226,7 @@ export default class DocumentEntity {
         addProductStatusPreviewAttributes(
           vulnerability,
           productIds,
-          document.product_tree?.product_groups
+          document.product_tree?.product_groups,
         )
         addRemediationsPreviewAttributes(vulnerability, productIds, groupIds)
         addThreatsPreviewAttributes(vulnerability, productIds, groupIds)
@@ -237,7 +237,7 @@ export default class DocumentEntity {
     templateDoc.removeTrailingComma = () => {
       return function (
         /** @type {string} */ text,
-        /** @type {function} */ render
+        /** @type {function} */ render,
       ) {
         var textWithTrailingComma = /** @type {string} */ (render(text))
         const lastIndex = textWithTrailingComma.lastIndexOf(',')
@@ -250,7 +250,7 @@ export default class DocumentEntity {
     templateDoc.upperCase = () => {
       return function (
         /** @type {string} */ text,
-        /** @type {function} */ render
+        /** @type {function} */ render,
       ) {
         var renderedText = /** @type {string} */ (render(text))
         return renderedText.charAt(0).toUpperCase() + renderedText.slice(1)
@@ -260,7 +260,7 @@ export default class DocumentEntity {
     templateDoc.replaceUnderscores = () => {
       return function (
         /** @type {string} */ text,
-        /** @type {function} */ render
+        /** @type {function} */ render,
       ) {
         var renderedText = /** @type {string} */ (render(text))
         return renderedText.replaceAll('_', ' ')
@@ -270,7 +270,7 @@ export default class DocumentEntity {
     templateDoc.secureHref = () => {
       return function (
         /** @type {string} */ text,
-        /** @type {function} */ render
+        /** @type {function} */ render,
       ) {
         const href = render(text)
         let isValid = false
@@ -284,7 +284,7 @@ export default class DocumentEntity {
         validStarts.forEach((x) => (isValid = isValid || href.startsWith(x)))
         const isBase64 = (/** @type {string} */ value) =>
           /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(
-            value
+            value,
           )
         validMimeTypes.forEach((mimeType) => {
           const isValidDataHref =
@@ -324,7 +324,7 @@ const traverseBranches = (branches, entries, instancePath) => {
       traverseBranches(
         branch.branches,
         entries,
-        `${branchInstancePath}/branches`
+        `${branchInstancePath}/branches`,
       )
   }
 }
@@ -357,42 +357,42 @@ const collectRefsInProductStatus = (instancePath, vulnerability, entries) => {
   findRefsInProductStatus(
     vulnerability.product_status?.first_affected,
     `${instancePath}/first_affected`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.first_fixed,
     `${instancePath}/first_fixed`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.fixed,
     `${instancePath}/fixed`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.known_affected,
     `${instancePath}/known_affected`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.known_not_affected,
     `${instancePath}/known_not_affected`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.last_affected,
     `${instancePath}/last_affected`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.recommended,
     `${instancePath}/recommended`,
-    entries
+    entries,
   )
   findRefsInProductStatus(
     vulnerability.product_status?.under_investigation,
     `${instancePath}/under_investigation`,
-    entries
+    entries,
   )
 }
 
@@ -404,7 +404,7 @@ const collectRefsInProductStatus = (instancePath, vulnerability, entries) => {
 const collectProductRefsInRemediations = (
   instancePath,
   vulnerability,
-  entries
+  entries,
 ) => {
   const remediations = vulnerability.remediations
   if (remediations) {
@@ -486,7 +486,7 @@ const collectProductRefsInThreats = (instancePath, vulnerability, entries) => {
 const collectGroupRefsInRemediations = (
   instancePath,
   vulnerability,
-  entries
+  entries,
 ) => {
   const remediations = vulnerability.remediations
   if (remediations) {
@@ -672,54 +672,54 @@ const extendProductGroup = (productGroup, extProductIds) => {
 const addProductStatusPreviewAttributes = (
   vulnerability,
   productIds,
-  productGroups
+  productGroups,
 ) => {
   const extendedScoreIds = createExtendedScoreIds(
     vulnerability.scores,
-    productIds
+    productIds,
   )
   const productStatus = vulnerability.product_status
   if (productStatus) {
     productStatus.known_affected = extendProductStatus(
       productStatus.known_affected,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.first_affected = extendProductStatus(
       productStatus.first_affected,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.last_affected = extendProductStatus(
       productStatus.last_affected,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.known_not_affected = extendProductStatus(
       productStatus.known_not_affected,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     addFlags(productStatus.known_not_affected, vulnerability, productGroups)
     productStatus.recommended = extendProductStatus(
       productStatus.recommended,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.fixed = extendProductStatus(
       productStatus.fixed,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.first_fixed = extendProductStatus(
       productStatus.first_fixed,
       extendedScoreIds,
-      productIds
+      productIds,
     )
     productStatus.under_investigation = extendProductStatus(
       productStatus.under_investigation,
       extendedScoreIds,
-      productIds
+      productIds,
     )
   }
 }
@@ -774,7 +774,7 @@ const extendProductStatus = (refs, extendedScoreIds, productIds) => {
             id: ref,
             name:
               productIds.find((productId) => productId.id === ref)?.name ?? '',
-          }
+          },
         )
       }
     }
@@ -807,7 +807,7 @@ const addFlags = (extendedProductStatusList, vulnerability, productGroups) => {
       ?.filter(
         (f) =>
           f.product_ids?.includes(eps.id) ||
-          f.group_ids?.some((id) => groups?.includes(id))
+          f.group_ids?.some((id) => groups?.includes(id)),
       )
       .map((f) => f.label)
   })
@@ -823,7 +823,7 @@ const addFlags = (extendedProductStatusList, vulnerability, productGroups) => {
 const addRemediationsPreviewAttributes = (
   vulnerability,
   productIds,
-  groupIds
+  groupIds,
 ) => {
   const vendorFix = []
   const mitigation = []
@@ -915,7 +915,7 @@ const addThreatsPreviewAttributes = (vulnerability, productIds, groupIds) => {
 const extendRemediationOrThreat = (
   remediationOrThreat,
   extProductIds,
-  extGroupIds
+  extGroupIds,
 ) => {
   if (remediationOrThreat) {
     const extendedProductIds = []

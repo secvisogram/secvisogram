@@ -14,7 +14,7 @@ export default class ApiRequest {
     const headers = new Headers(this.request.headers)
     headers.set(
       'authorization',
-      `Basic ${btoa(`${credentials.username}:${credentials.password}`)}`
+      `Basic ${btoa(`${credentials.username}:${credentials.password}`)}`,
     )
     this.request = new Request(this.request, { headers })
     return this

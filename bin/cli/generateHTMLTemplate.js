@@ -31,8 +31,8 @@ module.exports = function generateHTMLTemplate(args) {
             generateSchemaPaths(
               value,
               instancePath.concat([key]),
-              headingLevel + 1
-            )
+              headingLevel + 1,
+            ),
           ),
         ]
       case 'array':
@@ -49,13 +49,13 @@ module.exports = function generateHTMLTemplate(args) {
           return generateSchemaPaths(
             jsonPtr.get(rootSchema, schema.$ref.slice(1)),
             instancePath,
-            headingLevel
+            headingLevel,
           )
         }
         if (
           schema.oneOf?.find(
             (/** @type {any} */ s) =>
-              s.$ref === 'https://www.first.org/cvss/cvss-v3.1.json'
+              s.$ref === 'https://www.first.org/cvss/cvss-v3.1.json',
           )
         ) {
           return generateSchemaPaths(cvss3Schema, instancePath, headingLevel)
@@ -116,6 +116,6 @@ module.exports = function generateHTMLTemplate(args) {
   <body>
     ${generateSchemaHTML(generateSchemaPaths(rootSchema, []))}
   </body>
-</html>`
+</html>`,
   )
 }

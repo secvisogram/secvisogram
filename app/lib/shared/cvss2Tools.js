@@ -42,8 +42,8 @@ export function vectorUpdateFromVectorString(vector) {
         Array.from(
           /** @type {Iterable<[String, { id: string; score: number }]>} */ (
             Object.entries(mapping[2])
-          )
-        ).map(([key, value]) => [value.id, key])
+          ),
+        ).map(([key, value]) => [value.id, key]),
       )
 
       const vectorKeyName = mapping[0]
@@ -55,7 +55,7 @@ export function vectorUpdateFromVectorString(vector) {
       /**
        * @returns {entry is [readonly CVSSField, string]}
        */
-      (entry) => Boolean(entry)
+      (entry) => Boolean(entry),
     )
 
   // Apply updates only if necessary to keep referential transparency
@@ -64,7 +64,7 @@ export function vectorUpdateFromVectorString(vector) {
       vector[entry[0]] !== entry[1]
         ? { ...vector, [entry[0]]: entry[1] }
         : vector,
-    vector
+    vector,
   )
 }
 
@@ -90,7 +90,7 @@ export function vectorGetVectorString(vector) {
       /**
        * @returns {entry is [CVSSVectorStringKey, string]}
        */
-      (entry) => entry[1] !== undefined
+      (entry) => entry[1] !== undefined,
     )
     .map((entry) => entry.join(':'))
   return vectorFields.join('/')

@@ -1,1 +1,6 @@
-/app/lib/SecvisogramPage/View/shared/HTMLTemplate/Template.html
+/app/lib/app/SecvisogramPage/View/shared/HTMLTemplate/Template.html
+/app/coverage
+build
+/csaf-validator-lib
+/data
+/docs/*

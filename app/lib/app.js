@@ -21,5 +21,5 @@ createRoot(root).render(
     <React.Suspense fallback={<LoadingIndicator label="" />}>
       <App secvisogramPage={<SecvisogramPage />} />
     </React.Suspense>
-  </ThemeProvider>
+  </ThemeProvider>,
 )
