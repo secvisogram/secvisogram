@@ -1041,4 +1041,118 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('have.value', 'CSAFPID-0001')
     })
   })
+
+  describe('reconciles typed CWE values on blur', function () {
+    const setupCweEditor = () => {
+      cy.visit('?tab=EDITOR')
+
+      cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')
+        .as('addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = 'flex'
+        })
+      cy.get('@addVulnerabilityButton').click()
+      cy.get('@addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = ''
+        })
+      cy.get('[data-testid="menu_entry-/vulnerabilities/0/cwe"]').click()
+    }
+
+    it('commits a valid typed CWE id on blur and keeps JSON in sync', function () {
+      const expectedId = 'CWE-79'
+
+      setupCweEditor()
+
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input')
+        .clear()
+        .type(expectedId)
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').blur()
+
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').should(
+        'have.value',
+        expectedId,
+      )
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
+        .invoke('val')
+        .should('not.be.empty')
+        .then((expectedName) => {
+          cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input')
+            .clear()
+            .type('CWE-0000')
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-id"] input',
+          ).blur()
+
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-id"] input',
+          ).should('have.value', expectedId)
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-name"] input',
+          ).should('have.value', expectedName)
+
+          cy.get('[data-testid="tab_button-SOURCE"]').click()
+          cy.window().should((/** @type {any} */ win) => {
+            expect(Boolean(win.MONACO_EDITOR)).to.be.true
+            const doc = JSON.parse(win.MONACO_EDITOR.getModel().getValue())
+            expect(doc.vulnerabilities?.[0]?.cwe?.id).to.equal(expectedId)
+            expect(doc.vulnerabilities?.[0]?.cwe?.name).to.equal(expectedName)
+          })
+        })
+    })
+
+    it('commits a valid typed CWE name on blur and reverts invalid typed name', function () {
+      const expectedId = 'CWE-79'
+
+      setupCweEditor()
+
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input')
+        .clear()
+        .type(expectedId)
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-id"] input').blur()
+
+      cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
+        .invoke('val')
+        .should('not.be.empty')
+        .then((expectedName) => {
+          cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
+            .clear()
+            .type(/** @type {string} */ (expectedName))
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-name"] input',
+          ).blur()
+
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-id"] input',
+          ).should('have.value', expectedId)
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-name"] input',
+          ).should('have.value', expectedName)
+
+          cy.get('[data-testid="attribute-vulnerabilities-0-cwe-name"] input')
+            .clear()
+            .type('This is not a CWE name')
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-name"] input',
+          ).blur()
+
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-id"] input',
+          ).should('have.value', expectedId)
+          cy.get(
+            '[data-testid="attribute-vulnerabilities-0-cwe-name"] input',
+          ).should('have.value', expectedName)
+
+          cy.get('[data-testid="tab_button-SOURCE"]').click()
+          cy.window().should((/** @type {any} */ win) => {
+            expect(Boolean(win.MONACO_EDITOR)).to.be.true
+            const doc = JSON.parse(win.MONACO_EDITOR.getModel().getValue())
+            expect(doc.vulnerabilities?.[0]?.cwe?.id).to.equal(expectedId)
+            expect(doc.vulnerabilities?.[0]?.cwe?.name).to.equal(expectedName)
+          })
+        })
+    })
+  })
 })

@@ -1,29 +1,39 @@
 import { Autocomplete, TextField } from '@mui/material'
-import { isEmpty } from 'lodash/fp.js'
+import { parse } from 'json-pointer'
+import { isEmpty, set } from 'lodash/fp.js'
 import React from 'react'
 import cwec from '../../../../../../../../../csaf-validator-lib/lib/shared/cwec.js'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
 import Attribute from './shared/Attribute.js'
 
+/** @type {Map<string, {id: string, name: string}>} */
+const cweById = new Map(
+  cwec.weaknesses.map((weakness) => [weakness.id, weakness]),
+)
+/** @type {Map<string, {id: string, name: string}>} */
+const cweByName = new Map(
+  cwec.weaknesses.map((weakness) => [weakness.name, weakness]),
+)
+
 /**
  * helper function getting path and value for a child
  * @param {string[]} instancePath
  * @param {Record<string, any> | null} doc
  * @param {string } childKey
+ * @returns {[string[], string]}
  */
 function getChildPathAndValue(instancePath, doc, childKey) {
   const path = instancePath.concat([childKey])
-  const value =
-    path.reduce((value, pathSegment) => {
-      return (value ?? {})[pathSegment]
-    }, doc) || ''
-  return [path, value]
+  const value = path.reduce((value, pathSegment) => {
+    return (value ?? {})[pathSegment]
+  }, doc)
+  return [path, typeof value === 'string' ? value : '']
 }
 
 const getChildProps = (
-  /** @type import('../../../shared/types').Property */ property,
-  /** @type string */ childKey,
+  /** @type {import('../../../shared/types').Property} */ property,
+  /** @type {string} */ childKey,
 ) => property.metaInfo.propertyList?.find((p) => p.key === childKey)
 
 /**
@@ -36,7 +46,7 @@ const getChildProps = (
  * }} props
  */
 export default function CweAttribute({ property, instancePath, disabled }) {
-  const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
+  const { doc, replaceDoc } = React.useContext(DocumentEditorContext)
 
   const idProperties = getChildProps(property, 'id')
   const nameProperties = getChildProps(property, 'name')
@@ -44,10 +54,14 @@ export default function CweAttribute({ property, instancePath, disabled }) {
   const [idPath, idValue] = getChildPathAndValue(instancePath, doc, 'id')
   const [namePath, nameValue] = getChildPathAndValue(instancePath, doc, 'name')
 
-  const onChange = (/** @type {{id: string, name: string}} */ newCwe) => {
-    updateDoc(instancePath, newCwe)
+  const onChange = (
+    /** @type {{ id: string, name: string } | {}} */ newCwe,
+  ) => {
+    const newDoc = set(parse('/' + instancePath.join('/')), newCwe, doc)
     if (isEmpty(newCwe)) {
-      replaceDoc(pruneEmpty(doc))
+      replaceDoc(pruneEmpty(newDoc))
+    } else {
+      replaceDoc(newDoc)
     }
   }
 
@@ -56,7 +70,7 @@ export default function CweAttribute({ property, instancePath, disabled }) {
       <CwecId
         label={idProperties?.title || ''}
         description={idProperties?.description || ''}
-        instancePath={/** @type string[] */ (idPath)}
+        instancePath={idPath}
         value={idValue}
         onChange={onChange}
         property={property}
@@ -65,7 +79,7 @@ export default function CweAttribute({ property, instancePath, disabled }) {
       <CwecName
         label={nameProperties?.title || ''}
         description={nameProperties?.description || ''}
-        instancePath={/** @type string[] */ (namePath)}
+        instancePath={namePath}
         value={nameValue}
         onChange={onChange}
         property={property}
@@ -96,32 +110,59 @@ function CwecId({
   disabled,
 }) {
   const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value),
+    /** @type {string} */ (value),
   )
 
   const handleChange = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue,
+    /** @type {React.SyntheticEvent<Element, Event>} */ _event,
+    /** @type {string} */ newValue,
   ) => {
     setInputValue(newValue)
   }
 
   const handleSelect = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ id,
+    /** @type {React.SyntheticEvent<Element, Event>} */ _event,
+    /** @type {string} */ id,
   ) => {
-    const name = cwec.weaknesses.find((w) => w.id === id)?.name
-    onChange({ id: id, name: name })
+    const weakness = cweById.get(id)
+    if (!weakness) {
+      // This case should not occur in practice since the dropdown only provides
+      // existing values.
+      onChange({})
+    } else {
+      onChange({ id: weakness.id, name: weakness.name })
+    }
   }
 
-  const displayIdAndName = (/** @type string */ id) => {
+  // On blur we either clear out the cwe if the user clears the input or update
+  // the cwe with a matching entry if the input matches one. Otherwise we reset
+  // the input value to the previous "correct" value.
+  const handleBlur = () => {
+    const typedId = inputValue.trim()
+
+    if (!typedId) {
+      onChange({})
+      return
+    }
+
+    const weakness = cweById.get(typedId)
+    if (!weakness) {
+      setInputValue(/** @type {string} */ (value))
+      return
+    }
+
+    setInputValue(weakness.id)
+    onChange({ id: weakness.id, name: weakness.name })
+  }
+
+  const displayIdAndName = (/** @type {string} */ id) => {
     if (!id) return ''
-    const name = cwec.weaknesses.find((w) => w.id === id)?.name
+    const name = cweById.get(id)?.name
     return `${id}, ${name}`
   }
 
   React.useEffect(() => {
-    setInputValue(/** @type string */ (value))
+    setInputValue(/** @type {string} */ (value))
   }, [value])
 
   return (
@@ -155,6 +196,7 @@ function CwecId({
                 label=""
                 placeholder="^CWE-[1-9]\d{0,5}$"
                 size="small"
+                onBlur={handleBlur}
                 inputProps={{
                   ...params.inputProps,
                   pattern: '^CWE-[1-9]\\d{0,5}$',
@@ -195,27 +237,54 @@ function CwecName({
   disabled,
 }) {
   const [inputValue, setInputValue] = React.useState(
-    /** @type string */ (value),
+    /** @type {string} */ (value),
   )
 
   const handleChange = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ newValue,
+    /** @type {React.SyntheticEvent<Element, Event>} */ _event,
+    /** @type {string} */ newValue,
   ) => {
     setInputValue(newValue)
   }
 
   const handleSelect = (
-    /** @type {React.SyntheticEvent<Element, Event>} */ event,
-    /** @type string */ name,
+    /** @type {React.SyntheticEvent<Element, Event>} */ _event,
+    /** @type {string} */ name,
   ) => {
-    const id = cwec.weaknesses.find((w) => w.name === name)?.id
-    onChange({ id: id, name: name })
+    const weakness = cweByName.get(name)
+    if (!weakness) {
+      // This case should not occur in practice since the dropdown only provides
+      // existing values.
+      onChange({})
+    } else {
+      onChange({ id: weakness.id, name: weakness.name })
+    }
+  }
+
+  // On blur we either clear out the cwe if the user clears the input or update
+  // the cwe with a matching entry if the input matches one. Otherwise we reset
+  // the input value to the previous "correct" value.
+  const handleBlur = () => {
+    const typedName = inputValue.trim()
+
+    if (!typedName) {
+      onChange({})
+      return
+    }
+
+    const weakness = cweByName.get(typedName)
+    if (!weakness) {
+      setInputValue(/** @type {string} */ (value))
+      return
+    }
+
+    setInputValue(weakness.name)
+    onChange({ id: weakness.id, name: weakness.name })
   }
 
   const displayIdAndName = (/** @type string */ name) => {
     if (!name) return ''
-    const id = cwec.weaknesses.find((w) => w.name === name)?.id
+    const id = cweByName.get(name)?.id
     return `${id}, ${name}`
   }
 
@@ -239,6 +308,7 @@ function CwecName({
             disablePortal
             disableClearable
             autoHighlight
+            freeSolo
             forcePopupIcon={false}
             options={cwec.weaknesses.map((cwe) => cwe.name)}
             renderOption={(props, option) => (
@@ -253,6 +323,7 @@ function CwecName({
                 label=""
                 placeholder="Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') ..."
                 size="small"
+                onBlur={handleBlur}
               />
             )}
             onInputChange={(event, newInputValue) => {
