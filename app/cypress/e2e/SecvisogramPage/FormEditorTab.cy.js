@@ -1041,4 +1041,71 @@ describe('SecvisogramPage / FormEditor Tab', function () {
       ).should('have.value', 'CSAFPID-0001')
     })
   })
+
+  describe('reconciles typed dropdown values on blur', function () {
+    const setupCvssEditor = () => {
+      cy.visit('?tab=EDITOR')
+
+      cy.get('[data-testid="menu_entry-/vulnerabilities-add_item_button"]')
+        .as('addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = 'flex'
+        })
+      cy.get('@addVulnerabilityButton').click()
+      cy.get('@addVulnerabilityButton')
+        .parent()
+        .then((el) => {
+          el.get(0).style.display = ''
+        })
+
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/scores-add_item_button"]',
+      ).click({ force: true })
+      cy.get(
+        '[data-testid="menu_entry-/vulnerabilities/0/scores/0/cvss_v3"]',
+      ).click()
+    }
+
+    it('keeps enum dropdown value and JSON consistent when typed value is invalid on blur', function () {
+      const expectedVersion = '3.1'
+
+      setupCvssEditor()
+
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      )
+        .clear()
+        .type(expectedVersion)
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      ).blur()
+
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      ).should('have.value', expectedVersion)
+
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      )
+        .clear()
+        .type('4.0')
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      ).blur()
+
+      cy.get(
+        '[data-testid="attribute-vulnerabilities-0-scores-0-cvss_v3-version"] input',
+      ).should('have.value', expectedVersion)
+
+      cy.get('[data-testid="tab_button-SOURCE"]').click()
+      cy.window().should((/** @type {any} */ win) => {
+        expect(Boolean(win.MONACO_EDITOR)).to.be.true
+        const doc = JSON.parse(win.MONACO_EDITOR.getModel().getValue())
+        expect(
+          doc.vulnerabilities?.[0]?.scores?.[0]?.cvss_v3?.version,
+        ).to.equal(expectedVersion)
+      })
+    })
+  })
 })

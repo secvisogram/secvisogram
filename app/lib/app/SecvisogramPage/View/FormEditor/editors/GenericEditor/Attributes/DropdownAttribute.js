@@ -1,5 +1,5 @@
-import { Autocomplete } from '@mui/material'
-import { TextField } from '@mui/material'
+import { updateDocHelper } from '#lib/updateDocHelper.js'
+import { Autocomplete, TextField } from '@mui/material'
 import React from 'react'
 import pruneEmpty from '../../../../../../shared/pruneEmpty.js'
 import DocumentEditorContext from '../../../../shared/DocumentEditorContext.js'
@@ -28,7 +28,13 @@ export default function DropdownAttribute({
   ...props
 }) {
   const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
-  const [inputValue, setInputValue] = React.useState(value)
+  const persistedValue = /** @type {string} */ (value ?? '')
+  const [inputValue, setInputValue] = React.useState(persistedValue)
+
+  React.useEffect(() => {
+    setInputValue(persistedValue)
+  }, [persistedValue])
+
   return (
     <Attribute disabled={disabled} {...props}>
       <div className="max-w-md flex">
@@ -45,18 +51,47 @@ export default function DropdownAttribute({
                 /** @type {string} */ (newValue ?? ''),
               )
             }}
-            inputValue={/** @type {string} */ (inputValue)}
+            inputValue={inputValue}
             onInputChange={(_, newInputValue) => {
               setInputValue(newInputValue ?? '')
             }}
             onBlur={() => {
-              if (!isEnum)
-                updateDoc(
-                  props.instancePath,
-                  /** @type {string} */ (inputValue),
-                )
-              if (!inputValue) {
-                replaceDoc(pruneEmpty(doc))
+              let committedValue = persistedValue
+              let newDoc = doc
+
+              if (isEnum) {
+                committedValue = inputValue
+
+                // If we're in enum mode and the value from the input matches an
+                // option exactly (which means it is an allowed input) and we
+                // don't have this value in the model yet we apply it to the
+                // model ...
+                if (options.includes(inputValue)) {
+                  if (inputValue !== persistedValue) {
+                    newDoc = updateDocHelper(
+                      newDoc,
+                      props.instancePath,
+                      inputValue,
+                    )
+                  }
+                } else {
+                  // ... Otherwise if this is a value that is not allowed by the
+                  // given options we reset the input to the previous value.
+                  setInputValue(persistedValue)
+                }
+              } else {
+                committedValue = inputValue
+
+                // In free form mode every input is allowed and we pass it
+                // straight through to the model.
+                newDoc = updateDocHelper(newDoc, props.instancePath, inputValue)
+              }
+
+              // There is this special that if a user inputs an empty string, we
+              // purge the input from the document and remove objects that
+              // became empty because of this. This keeps the document clean.
+              if (!committedValue) {
+                replaceDoc(pruneEmpty(newDoc))
               }
             }}
             renderInput={(params) => (
