@@ -12,7 +12,7 @@ export default function mandatoryTest_6_1_15(doc) {
   ) {
     isValid = false
     errors.push({
-      instancePath: '/document/publisher/category',
+      instancePath: '/document/source_lang',
       message: 'source language attribute is missing',
     })
   }

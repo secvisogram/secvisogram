@@ -321,6 +321,9 @@ The following tests are not yet implemented and therefore missing:
 - Mandatory Test 6.1.53
 - Mandatory Test 6.1.54
 - Mandatory Test 6.1.55
+- Mandatory Test 6.1.57
+- Mandatory Test 6.1.58
+- Mandatory Test 6.1.59
 
 **Recommended Tests**
 
@@ -342,6 +345,13 @@ The following tests are not yet implemented and therefore missing:
 - Recommended Test 6.2.44
 - Recommended Test 6.2.45
 - Recommended Test 6.2.46
+- Recommended Test 6.2.49
+- Recommended Test 6.2.50.1
+- Recommended Test 6.2.50.2
+- Recommended Test 6.2.50.3
+- Recommended Test 6.2.51
+- Recommended Test 6.2.52
+- Recommended Test 6.2.53
 
 **Informative Tests**
 
@@ -350,6 +360,12 @@ The following tests are not yet implemented and therefore missing:
 - Informative Test 6.2.15
 - Informative Test 6.2.16
 - Informative Test 6.2.17
+- Informative Test 6.2.19.1
+- Informative Test 6.2.19.2
+- Informative Test 6.2.19.3
+- Informative Test 6.2.19.4
+- Informative Test 6.2.19.5
+- Informative Test 6.2.20
 
 #### Module `csaf_2_1/schemaTests.js`
 
