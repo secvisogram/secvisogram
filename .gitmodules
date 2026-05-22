@@ -1,3 +1,0 @@
-[submodule "csaf-validator-lib/csaf"]
-	path = csaf-validator-lib/csaf
-	url = https://github.com/oasis-tcs/csaf.git

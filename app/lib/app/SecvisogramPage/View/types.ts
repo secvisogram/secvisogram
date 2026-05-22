@@ -1,4 +1,5 @@
 import React from 'react'
+import { UiSchemaVersion } from '../../../uiSchemas.js'
 import {
   Advisory,
   AdvisoryState,
@@ -8,6 +9,7 @@ import CsafTab from './CsafTab.js'
 import PreviewTab from './PreviewTab.js'
 
 export interface Props {
+  uiSchemaVersion: UiSchemaVersion
   isLoading: boolean
   isTabLocked: boolean
   errors: TypedValidationError[]
@@ -26,12 +28,13 @@ export interface Props {
   } | null
   stripResult: React.ComponentProps<typeof CsafTab>['stripResult']
   previewResult: React.ComponentProps<typeof PreviewTab>['previewResult']
+  pendingBeta21Doc: { document?: { csaf_version?: string } } | null
   DocumentsTab: React.ComponentType<{
     onOpenAdvisory(
       params: {
         advisoryId: string
       },
-      callback: () => void
+      callback: () => void,
     ): void
   }>
   generatorEngineData: {
@@ -50,7 +53,7 @@ export interface Props {
   onOpen(file: File): Promise<void | {}>
   onChangeTab(
     tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS',
-    document: {}
+    document: {},
   ): void
   onValidate(document: {}): void
   onServiceValidate(params: { validatorUrl: string; csaf: {} }): Promise<{
@@ -86,4 +89,7 @@ export interface Props {
   >
   onGetTemplateContent(params: { templateId: string }): Promise<{}>
   onGetBackendInfo(): Promise<{ version: string }>
+  onSetUiVersion(uiSchemaVersion: UiSchemaVersion): void
+  onConfirmBeta21Open(): void
+  onCancelBeta21Open(): void
 }

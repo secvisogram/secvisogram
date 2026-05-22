@@ -6,7 +6,7 @@ const parseLanguageTagExtensionList = require('./cli/parseLanguageTagExtensionLi
 
 yargs(process.argv.slice(2))
   .command(
-    'generate-html-template',
+    'generate-html-template2.0',
     '',
     /** @type {any} */ (
       (/** @type {import('yargs').Argv} */ command) =>
@@ -15,21 +15,21 @@ yargs(process.argv.slice(2))
           .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
           .demandOption(['csaf20Schema', 'cvss31Schema'])
     ),
-    /** @type {any} */ (generateHTMLTemplate)
+    /** @type {any} */ (generateHTMLTemplate),
   )
   .command(
     'generate-icann-list',
     '',
     (/** @type {import('yargs').Argv} */ command) =>
       command.option('registry', { type: 'string' }).demandOption('registry'),
-    generateICANNList
+    generateICANNList,
   )
   .command(
     'parse-language-tag-extension-list',
     '',
     (/** @type {import('yargs').Argv} */ command) =>
       command.option('registry', { type: 'string' }).demandOption('registry'),
-    parseLanguageTagExtensionList
+    parseLanguageTagExtensionList,
   )
   .command(
     'generate-preview-templating-table',
@@ -42,7 +42,7 @@ yargs(process.argv.slice(2))
           .option('cvss20Schema', { alias: 'cvss-2', type: 'string' })
           .demandOption(['csaf20Schema', 'cvss31Schema', 'cvss20Schema'])
     ),
-    /** @type {any} */ (generatePreviewTemplatingTable)
+    /** @type {any} */ (generatePreviewTemplatingTable),
   )
   .demandCommand(1)
   .help()

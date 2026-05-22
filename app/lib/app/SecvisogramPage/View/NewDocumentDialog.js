@@ -46,7 +46,7 @@ export default React.forwardRef(
               method="dialog"
               onSubmit={(e) => {
                 const formData = new FormData(
-                  /** @type {HTMLFormElement} */ (e.target)
+                  /** @type {HTMLFormElement} */ (e.target),
                 )
                 const templateId = /** @type {string} */ (
                   formData.get('templateId')
@@ -200,5 +200,5 @@ export default React.forwardRef(
         ) : null}
       </dialog>
     )
-  }
+  },
 )

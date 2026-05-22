@@ -2,15 +2,11 @@
 
 ## About
 
-The Secvisogram editor generates its UI based on the input from
-[schema.js](../../lib/app/SecvisogramPage/View/FormEditor/schema.js).
-This file contains information from two sources. The CSAF JSON Schema and
-additional properties from [metaData.js](metaData.js) like the order of
-elements, paths to documentation or i18n translation strings.
+The Secvisogram editor generates its UI based on the input from [uiSchemas.js](../../lib/uiSchemas.js). This file contains ui schemas for each csaf version support. A ui schema contains information from two sources. The CSAF JSON Schema and additional properties from a meta data file like the order of elements, paths to documentation or i18n translation strings.
 
-## Generating the schema file
+## Generating the ui schema files
 
-To merge the CSAF schema with metadata into the schema file required
+To merge the CSAF schemas with metadata into the schema module required
 for generating the UI, use the [importUiMetaData.js](../importUiMetaData.js)
 script.
 
@@ -18,9 +14,16 @@ script.
 $ node importUiMetaData.js
 ```
 
+## Meta data files
+
+For each csaf version exists one meta data file:
+
+- [CSAF 2.0](../../lib/uiSchemas/csaf_2_0/content.js)
+- [CSAF 2.1](../../lib/uiSchemas/csaf_2_1/content.js)
+
 ## Properties
 
-The following properties can be added in the metadata file.
+The following properties can be added in a metadata file.
 
 ### `addMenuItemsForChildObjects`
 
@@ -40,23 +43,23 @@ This field specifies the correct input component for the given json path.
 
 Available uiTypes:
 
-| uiType                                | type of input values                                                                                                                             |
-| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| STRING_DATETIME                       | datetime values                                                                                                                                  |
-| STRING_URI                            | strings matching the URI pattern                                                                                                                 |
-| STRING_ENUM                           | strings with predefined values to select from<br/> the values are defined in the schema file                                                     |
-| STRING_WITH_OPTIONS                   | strings with predefined values to select from, still allowing other user input<br/> the values can be added via the `options` property, see below |
-| STRING_MULTI_LINE                     | strings that are potentially larger                                                                                                              |
-| STRING_GENERATE_PRODUCT_ID            | strings with the option to generate a unique product id as value via button                                                                      |
-| STRING_PRODUCT_ID                     | strings referencing a product ID<br/> allows selecting from matching product IDs in the frontend                                                 |
-| WITH_GENERATED_GROUP_ID               | objects with a unique `group_id` prefilled                                                                                                       |
-| STRING_GROUP_ID                       | strings referencing a group ID<br/> allows selecting from matching group IDs in the frontend                                                     |
-| STRING_BRANCH_FULL_PRODUCT_NAME       | string with the option to generate a name from the corresponding branch<br/> specific to `/product_tree(/branches)+/product/name`           |
+| uiType                                | type of input values                                                                                                                                |
+| :------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| STRING_DATETIME                       | datetime values                                                                                                                                     |
+| STRING_URI                            | strings matching the URI pattern                                                                                                                    |
+| STRING_ENUM                           | strings with predefined values to select from<br/> the values are defined in the schema file                                                        |
+| STRING_WITH_OPTIONS                   | strings with predefined values to select from, still allowing other user input<br/> the values can be added via the `options` property, see below   |
+| STRING_MULTI_LINE                     | strings that are potentially larger                                                                                                                 |
+| STRING_GENERATE_PRODUCT_ID            | strings with the option to generate a unique product id as value via button                                                                         |
+| STRING_PRODUCT_ID                     | strings referencing a product ID<br/> allows selecting from matching product IDs in the frontend                                                    |
+| WITH_GENERATED_GROUP_ID               | objects with a unique `group_id` prefilled                                                                                                          |
+| STRING_GROUP_ID                       | strings referencing a group ID<br/> allows selecting from matching group IDs in the frontend                                                        |
+| STRING_BRANCH_FULL_PRODUCT_NAME       | string with the option to generate a name from the corresponding branch<br/> specific to `/product_tree(/branches)+/product/name`                   |
 | STRING_RELATIONSHIP_FULL_PRODUCT_NAME | string with the option to generate a name from the corresponding relationship<br/> specific to `/product_tree/relationships/full_product_name/name` |
-| OBJECT_CWE                            | special type for CWE objects ensuring that ID and name match                                                                                     |
-| OBJECT_CVSS_2                         | special CVSS v2 object                                                                                                                           |
-| OBJECT_CVSS_3                         | special CVSS v3.0 / v3.1 object                                                                                                                  |
-| ARRAY_REVISION_HISTORY                | special type of array, disabling some input values when the revision history is managed in the backend                                           |
+| OBJECT_CWE                            | special type for CWE objects ensuring that ID and name match                                                                                        |
+| OBJECT_CVSS_2                         | special CVSS v2 object                                                                                                                              |
+| OBJECT_CVSS_3                         | special CVSS v3.0 / v3.1 object                                                                                                                     |
+| ARRAY_REVISION_HISTORY                | special type of array, disabling some input values when the revision history is managed in the backend                                              |
 
 The `importUiMetaData.js` script can detect `STRING_DATETIME`, `STRING_URI`
 and `STRING_ENUM` on its own. All other uiTypes must be provided in the
@@ -105,6 +108,13 @@ This would result in the following order `field_c, field_a, field_b, field_d, fi
 
 The editor will use the translation string specified here to display the
 title and description.
+
+**Information**: The import script adds a namespace to the key to distinguish between the supported CSAF version:
+
+- `v2_0`
+- `v2_1`
+
+This means that `MyTranslationString` becomes `v2_0.MyTranslationString` if it is contained in csaf 2.0 meta data file.
 
 ```json
 "i18n": {

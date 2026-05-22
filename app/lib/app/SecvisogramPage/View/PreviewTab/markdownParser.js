@@ -53,7 +53,7 @@ const modifyNestedValues = (object, key, modifierFunction) => {
       set(
         object,
         keyParts[0],
-        elem.map((/** @type {any} */ v) => modifierFunction(v))
+        elem.map((/** @type {any} */ v) => modifierFunction(v)),
       )
     }
   } else {
@@ -81,7 +81,7 @@ export function parseMarkdown(doc) {
 
       // only return parsed value if markdown was used
       return x === parsedX.match(/^<p>(.*)<\/p>$/)?.[1] ? x : parsedX
-    })
+    }),
   )
 
   return doc

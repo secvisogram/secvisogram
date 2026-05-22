@@ -1629,7 +1629,7 @@ export default [
           ],
         },
       },
-    })
+    }),
   ),
 
   ...[minimalSecurityIncidentResponseDoc, minimalInformationalAdvisoryDoc].map(
@@ -1649,7 +1649,7 @@ export default [
           ],
         },
       },
-    })
+    }),
   ),
 
   {

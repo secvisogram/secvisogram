@@ -29,7 +29,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'filename' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('filename.json')
     })
@@ -38,7 +38,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'filename' } } },
         true,
-        'abcd'
+        'abcd',
       )
       expect(fileName).to.eq('filename.abcd')
     })
@@ -47,7 +47,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'FILENAME' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('filename.json')
     })
@@ -56,7 +56,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'file$name' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('file_name.json')
     })
@@ -65,7 +65,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'f?i l§e$n!a#m=e' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('f_i_l_e_n_a_m_e.json')
     })
@@ -74,7 +74,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'file#*$name' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('file_name.json')
     })
@@ -83,7 +83,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'file+name-123' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('file+name-123.json')
     })
@@ -92,7 +92,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'file$name_123' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('file_name_123.json')
     })
@@ -101,7 +101,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'filename_____123' } } },
         true,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('filename_123.json')
     })
@@ -110,7 +110,7 @@ describe('Unit Test Functions', function () {
       const fileName = createFileName(
         { document: { tracking: { id: 'FiLe$$$$$NaMe____1+2-3' } } },
         false,
-        'json'
+        'json',
       )
       expect(fileName).to.eq('file_name_1+2-3_invalid.json')
     })
@@ -219,11 +219,19 @@ describe('Unit Test Functions', function () {
   context('fillFieldFunctions.js', function () {
     context('getNextIdForPrefix', function () {
       it('should return next product id', function () {
-        const nextProductId = getNextIdForPrefix(PRODUCT_PREFIX, 'product_id', testDocuments.baseTestDocument)
+        const nextProductId = getNextIdForPrefix(
+          PRODUCT_PREFIX,
+          'product_id',
+          testDocuments.baseTestDocument,
+        )
         expect(nextProductId).to.eq(3)
       })
       it('should return next group id', function () {
-        const nextGroupId = getNextIdForPrefix(GROUP_PREFIX, 'group_id', testDocuments.productGroupsDocument)
+        const nextGroupId = getNextIdForPrefix(
+          GROUP_PREFIX,
+          'group_id',
+          testDocuments.productGroupsDocument,
+        )
         expect(nextGroupId).to.eq(2)
       })
     })
@@ -274,7 +282,7 @@ describe('Unit Test Functions', function () {
             'branches',
             '0',
             'product',
-          ])
+          ]),
         ).to.eq('X Y Z')
         expect(
           getBranchName(doc, [
@@ -284,7 +292,7 @@ describe('Unit Test Functions', function () {
             'branches',
             '0',
             'product',
-          ])
+          ]),
         ).to.eq('A B')
         expect(
           getBranchName(doc, [
@@ -296,7 +304,7 @@ describe('Unit Test Functions', function () {
             'branches',
             '0',
             'product',
-          ])
+          ]),
         ).to.eq('A O P')
       })
     })
@@ -328,7 +336,7 @@ describe('Unit Test Functions', function () {
           (await getRelationshipName(
             doc,
             ['product_tree', 'relationships', '0'],
-            getProducts
+            getProducts,
           )) || ''
       })
 

@@ -13,4 +13,6 @@ export default React.createContext({
     groupIds: () => Promise.resolve(undefined),
   },
   errors: /** @type import('../../shared/types').TypedValidationError[] */ ([]),
+  /** @type {import('#lib/uiSchemas.js').UiSchemaVersion} */
+  uiSchemaVersion: 'v2.1',
 })

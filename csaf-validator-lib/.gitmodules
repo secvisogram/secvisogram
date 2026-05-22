@@ -1,3 +1,0 @@
-[submodule "csaf"]
-	path = csaf
-	url = https://github.com/oasis-tcs/csaf.git

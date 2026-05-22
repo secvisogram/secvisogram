@@ -31,10 +31,10 @@ describe('SecvisogramPage / JsonEditorTab', function () {
     cy.get(`[data-testid="menu_entry-/document"]`).click()
     cy.get('[data-testid="attribute-document-title"] input').should(
       'have.value',
-      newDocumentTitle
+      newDocumentTitle,
     )
     cy.get('[data-testid="attribute-document-title"] input').type(
-      ' (FORM EDITOR)'
+      ' (FORM EDITOR)',
     )
 
     cy.get('[data-testid="tab_button-SOURCE"]').click()
@@ -64,7 +64,7 @@ describe('SecvisogramPage / JsonEditorTab', function () {
       expect(Boolean(editor)).to.be.true
       this.sortedEditorValue = sortObjectKeys(
         new Intl.Collator(),
-        JSON.parse(editor.getModel().getValue())
+        JSON.parse(editor.getModel().getValue()),
       )
     })
 
@@ -73,7 +73,7 @@ describe('SecvisogramPage / JsonEditorTab', function () {
     cy.window().should((/** @type {any} */ win) => {
       const editor = win.MONACO_EDITOR
       expect(editor.getModel().getValue()).to.equal(
-        JSON.stringify(this.sortedEditorValue, null, 2)
+        JSON.stringify(this.sortedEditorValue, null, 2),
       )
     })
   })

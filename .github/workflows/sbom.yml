@@ -1,4 +1,4 @@
-name: "SBOM generation"
+name: 'SBOM generation'
 
 on:
   release:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   spdx:
-    name: "SPDX SBOM generation"
+    name: 'SPDX SBOM generation'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
           artifact-name: sbom.secvisogram.spdx.json
 
   cyclonedx:
-    name: "CycloneDX SBOM generation"
+    name: 'CycloneDX SBOM generation'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

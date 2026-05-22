@@ -9,7 +9,7 @@ import CsrfApiRequest from '../CsrfApiRequest.js'
  */
 export async function createAdvisory({ csaf, summary, legacyVersion }) {
   const res = await new CsrfApiRequest(
-    new Request('/api/v1/advisories', { method: 'POST' })
+    new Request('/api/v1/advisories', { method: 'POST' }),
   )
     .setJsonRequestBody({ csaf, summary, legacyVersion })
     .send()
@@ -34,13 +34,13 @@ export async function updateAdvisory({
 }) {
   const apiURL = new URL(
     `/api/v1/advisories/${advisoryId}`,
-    window.location.href
+    window.location.href,
   )
   apiURL.searchParams.set('revision', revision)
   await new CsrfApiRequest(
     new Request(apiURL.toString(), {
       method: 'PATCH',
-    })
+    }),
   )
     .setJsonRequestBody({ csaf, summary, legacyVersion })
     .send()
@@ -53,7 +53,7 @@ export async function updateAdvisory({
 export async function getAdvisoryDetail({ advisoryId }) {
   return (
     await new CsrfApiRequest(
-      new Request(`/api/v1/advisories/${advisoryId}`)
+      new Request(`/api/v1/advisories/${advisoryId}`),
     ).send()
   ).json()
 }
@@ -76,25 +76,25 @@ export async function changeWorkflowState({
   const newWorkflowState = workflowState
   const changeWorkflowStateURL = new URL(
     `/api/v1/advisories/${advisoryId}/workflowstate/${newWorkflowState}`,
-    window.location.href
+    window.location.href,
   )
   changeWorkflowStateURL.searchParams.set('revision', revision)
   if (typeof documentTrackingStatus === 'string') {
     changeWorkflowStateURL.searchParams.set(
       'documentTrackingStatus',
-      documentTrackingStatus
+      documentTrackingStatus,
     )
   }
   if (proposedTime !== null) {
     changeWorkflowStateURL.searchParams.set(
       'proposedTime',
-      proposedTime.toISOString()
+      proposedTime.toISOString(),
     )
   }
   return new CsrfApiRequest(
     new Request(changeWorkflowStateURL.toString(), {
       method: 'PATCH',
-    })
+    }),
   ).send()
 }
 
@@ -106,13 +106,13 @@ export async function changeWorkflowState({
 export async function createNewVersion({ advisoryId, revision }) {
   const createNewVersionAPIURL = new URL(
     `/api/v1/advisories/${advisoryId}/createNewVersion`,
-    window.location.href
+    window.location.href,
   )
   createNewVersionAPIURL.searchParams.set('revision', revision)
   await new CsrfApiRequest(
     new Request(createNewVersionAPIURL.href, {
       method: 'PATCH',
-    })
+    }),
   ).send()
 }
 
@@ -130,7 +130,7 @@ export async function getTemplates() {
  */
 export async function getTemplateContent({ templateId }) {
   return new CsrfApiRequest(
-    new Request(`/api/v1/advisories/templates/${templateId}`)
+    new Request(`/api/v1/advisories/templates/${templateId}`),
   )
     .setContentType('application/json')
     .send()
@@ -145,11 +145,11 @@ export async function getTemplateContent({ templateId }) {
 export async function deleteAdvisory({ advisoryId, revision }) {
   const deleteURL = new URL(
     `/api/v1/advisories/${advisoryId}`,
-    window.location.href
+    window.location.href,
   )
   deleteURL.searchParams.set('revision', revision)
   await new CsrfApiRequest(
-    new Request(deleteURL.toString(), { method: 'DELETE' })
+    new Request(deleteURL.toString(), { method: 'DELETE' }),
   ).send()
 }
 

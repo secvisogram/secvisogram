@@ -14,12 +14,13 @@ import {
   useUniqueProductId,
 } from '../shared/fillFieldFunctions.js'
 import ArrayEditor from './GenericEditor/ArrayEditor.js'
+import CSAF21CweAttribute from './GenericEditor/Attributes/csaf_2_1/CweAttribute.js'
 import CVSSV2Attribute from './GenericEditor/Attributes/CVSS2Attribute.js'
 import CVSSV3Attribute from './GenericEditor/Attributes/CVSS3Attribute.js'
 import CweAttribute from './GenericEditor/Attributes/CweAttribute.js'
 import DateAttribute from './GenericEditor/Attributes/DateAttribute.js'
 import DropdownAttribute from './GenericEditor/Attributes/DropdownAttribute.js'
-import IdAttribute from './GenericEditor/Attributes/IdAttribute.js'
+import IdAttribute from './GenericEditor/Attributes/IdAttribute/IdAttribute.js'
 import Attribute from './GenericEditor/Attributes/shared/Attribute.js'
 import TextAreaAttribute from './GenericEditor/Attributes/TextAreaAttribute.js'
 import TextAttribute from './GenericEditor/Attributes/TextAttribute.js'
@@ -36,12 +37,12 @@ export function getErrorTextColor(errors) {
   return errorTypes.includes('error')
     ? 'text-red-600'
     : errorTypes.includes('warning')
-    ? 'text-yellow-600'
-    : errorTypes.includes('info')
-    ? 'text-blue-600'
-    : errors.length
-    ? 'text-red-600' // fall back to red if there are errors but their type is not known
-    : 'text-green-600'
+      ? 'text-yellow-600'
+      : errorTypes.includes('info')
+        ? 'text-blue-600'
+        : errors.length
+          ? 'text-red-600' // fall back to red if there are errors but their type is not known
+          : 'text-green-600'
 }
 
 /**
@@ -60,7 +61,9 @@ export default function Editor({
   const { loginAvailable } = React.useContext(AppConfigContext)
   const userInfo = React.useContext(UserInfoContext)
 
-  const { doc, updateDoc, collectIds } = React.useContext(DocumentEditorContext)
+  const { doc, updateDoc, collectIds, uiSchemaVersion } = React.useContext(
+    DocumentEditorContext,
+  )
   const { uniqueProductId } = useUniqueProductId()
 
   const { handleError } = React.useContext(AppErrorContext)
@@ -69,7 +72,7 @@ export default function Editor({
   const enableLast = uiType === 'ARRAY_REVISION_HISTORY'
   const attributeName = React.useMemo(
     () => instancePath.slice().pop() ?? '',
-    [instancePath]
+    [instancePath],
   )
   /** @type {boolean} */ let disabled
   if (
@@ -112,23 +115,27 @@ export default function Editor({
     uiType === 'STRING_GENERATE_PRODUCT_ID'
       ? () => updateDoc(instancePath, uniqueProductId())
       : uiType === 'STRING_BRANCH_FULL_PRODUCT_NAME'
-      ? () => {
-          // update the field but remove the field itself from the instancePath otherwise the old value will be appended
-          updateDoc(instancePath, getBranchName(doc, instancePath.slice(0, -1)))
-        }
-      : uiType === 'STRING_RELATIONSHIP_FULL_PRODUCT_NAME'
-      ? () =>
-          getRelationshipName(doc, instancePath, collectIds['productIds']).then(
-            (r) => updateDoc(instancePath, r),
-            handleError
-          )
-      : property.key === 'date'
-      ? () => updateDoc(instancePath, getCurrentDateRounded())
-      : property.key === 'current_release_date'
-      ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
-      : property.key === 'initial_release_date'
-      ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
-      : undefined
+        ? () => {
+            // update the field but remove the field itself from the instancePath otherwise the old value will be appended
+            updateDoc(
+              instancePath,
+              getBranchName(doc, instancePath.slice(0, -1)),
+            )
+          }
+        : uiType === 'STRING_RELATIONSHIP_FULL_PRODUCT_NAME'
+          ? () =>
+              getRelationshipName(
+                doc,
+                instancePath,
+                collectIds['productIds'],
+              ).then((r) => updateDoc(instancePath, r), handleError)
+          : property.key === 'date'
+            ? () => updateDoc(instancePath, getCurrentDateRounded())
+            : property.key === 'current_release_date'
+              ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
+              : property.key === 'initial_release_date'
+                ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
+                : undefined
 
   const fillDefaultFunction = () => {
     if (property.default) updateDoc(instancePath, property.default)
@@ -146,7 +153,13 @@ export default function Editor({
     )
   } else if (property.type === 'OBJECT') {
     if (uiType === 'OBJECT_CWE') {
-      return (
+      return uiSchemaVersion === 'v2.1' ? (
+        <CSAF21CweAttribute
+          property={property}
+          instancePath={instancePath}
+          disabled={disabled}
+        />
+      ) : (
         <CweAttribute
           property={property}
           instancePath={instancePath}
@@ -200,7 +213,7 @@ export default function Editor({
           label={label}
           description={description}
           options={/** @type {string[]} */ (property.enum || [])}
-          isEnum={false}
+          isEnum={true}
           instancePath={instancePath}
           value={value || ''}
           property={property}

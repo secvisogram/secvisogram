@@ -35,7 +35,7 @@ export default function App({ secvisogramPage }) {
       handleError(error) {
         setApplicationError((state) => ({ ...state, applicationError: error }))
       },
-    })
+    }),
   )
 
   useEffect(() => {
@@ -49,10 +49,11 @@ export default function App({ secvisogramPage }) {
           (error) => {
             if (401 !== error.status) throw error
             setUserInfo(null)
-          }
+          },
         )
         .catch(applicationError.handleError)
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUserInfo(null)
     }
   }, [

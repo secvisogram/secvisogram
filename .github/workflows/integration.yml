@@ -16,7 +16,7 @@ jobs:
           submodules: 'recursive'
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - run: npm ci
       - run: cd app && npx eslint --max-warnings 0
       - run: npm run-script build
@@ -28,7 +28,7 @@ jobs:
           submodules: 'recursive'
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - run: npm ci
       - run: sudo apt-get install xvfb
       - run: npm run dev &

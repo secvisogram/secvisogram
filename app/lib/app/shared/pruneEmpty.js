@@ -17,7 +17,7 @@ export default function pruneEmpty(obj) {
         .map(([key, value]) => [key, pruneEmpty(value)])
         .filter(([, v]) => {
           return typeof v === 'number' || !isEmpty(v)
-        })
+        }),
     ),
   }
 }

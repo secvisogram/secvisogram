@@ -8,7 +8,7 @@ import ApiRequest from '../ApiRequest.js'
  */
 export async function validateCSAF(validatorUrl, { csaf }) {
   const validateResponse = await new ApiRequest(
-    new Request(validatorUrl + '/api/v1/validate', { method: 'POST' })
+    new Request(validatorUrl + '/api/v1/validate', { method: 'POST' }),
   )
     .setJsonRequestBody({
       tests: [

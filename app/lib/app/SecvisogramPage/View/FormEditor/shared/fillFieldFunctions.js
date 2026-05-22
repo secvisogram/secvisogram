@@ -38,7 +38,7 @@ const getNextIdForPrefix = (prefix, idKey, doc) => {
     .map((id) => {
       try {
         return parseInt(id)
-      } catch (e) {
+      } catch (_e) {
         return undefined
       }
     })
@@ -53,7 +53,7 @@ const counters = {}
 
 function useUniqueId(
   /** @type {string} */ prefix,
-  /** @type {string} */ idKey
+  /** @type {string} */ idKey,
 ) {
   const { doc } = useContext(DocumentEditorContext)
   const [scanTrigger, setScanTrigger] = useState(false)
@@ -72,6 +72,7 @@ function useUniqueId(
   useEffect(() => {
     if (scanTrigger) {
       scanDoc()
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setScanTrigger(false)
     }
   }, [doc]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -116,7 +117,7 @@ function useUniqueGroupId() {
  * @param {string[]} instancePath
  * @return {string}
  */
-const getBranchName = function(doc, instancePath) {
+const getBranchName = function (doc, instancePath) {
   /** @type {string[]} */
   let acc = []
 
@@ -140,10 +141,10 @@ const getBranchName = function(doc, instancePath) {
  * @param {() => Promise<void | { id: string; name: string; }[]>} collectProductIds
  * @return {Promise<string | undefined>}
  */
-const getRelationshipName = async function(
+const getRelationshipName = async function (
   doc,
   instancePath,
-  collectProductIds
+  collectProductIds,
 ) {
   const relationship = instancePath.slice(0, 3).reduce((value, pathSegment) => {
     return (value ?? {})[pathSegment]
@@ -163,13 +164,13 @@ const getRelationshipName = async function(
 
           return `${productReferenceName} ${category.replaceAll(
             '_',
-            ' '
+            ' ',
           )} ${relatesToProductReferenceName}`
         }
       })
     } else {
       throw Error(
-        'Could not find values in relationship to generate name from.'
+        'Could not find values in relationship to generate name from.',
       )
     }
   }
@@ -181,7 +182,7 @@ const getRelationshipName = async function(
  *
  * @return string|undefined
  */
-const getCurrentDateRounded = function() {
+const getCurrentDateRounded = function () {
   const p = 60 * 60 * 1000 // milliseconds in an hour
   const roundedDate = new Date(Math.ceil(new Date().getTime() / p) * p)
   return roundedDate.toISOString()
@@ -193,7 +194,7 @@ const getCurrentDateRounded = function() {
  * @param {Record<string, any>} doc
  * @return string|undefined
  */
-const getCurrentReleaseDate = function(doc) {
+const getCurrentReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
   return revisionHistory
@@ -208,21 +209,21 @@ const getCurrentReleaseDate = function(doc) {
  * @param {Record<string, any>} doc
  * @return string|undefined
  */
-const getInitialReleaseDate = function(doc) {
+const getInitialReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
   return revisionHistory?.filter(
-    (x) => x.number === '1' || x.number === '1.0.0'
+    (x) => x.number === '1' || x.number === '1.0.0',
   )?.[0]?.date
 }
 
 export {
-  getNextIdForPrefix,
-  useUniqueProductId,
-  useUniqueGroupId,
   getBranchName,
-  getRelationshipName,
   getCurrentDateRounded,
   getCurrentReleaseDate,
   getInitialReleaseDate,
+  getNextIdForPrefix,
+  getRelationshipName,
+  useUniqueGroupId,
+  useUniqueProductId,
 }

@@ -7,7 +7,7 @@ const DatePicker = (
    *   onChange(str: string | null): void
    * }}
    */
-  { onChange, onBlur, value, ...props }
+  { onChange, onBlur, value, ...props },
 ) => {
   const [dateString, timeString] = React.useMemo(() => {
     if (!value) return ['', '']
@@ -32,9 +32,9 @@ const DatePicker = (
           onChange(
             e.target.value
               ? new Date(
-                  `${e.target.value}T${timeString || '12:00'}`
+                  `${e.target.value}T${timeString || '12:00'}`,
                 ).toISOString()
-              : ''
+              : '',
           )
         }}
         onBlur={onBlur}
@@ -49,8 +49,8 @@ const DatePicker = (
             new Date(
               `${dateString || formatDate(new Date())}T${
                 e.target.value || '00:00'
-              }`
-            ).toISOString()
+              }`,
+            ).toISOString(),
           )
         }}
         onBlur={onBlur}

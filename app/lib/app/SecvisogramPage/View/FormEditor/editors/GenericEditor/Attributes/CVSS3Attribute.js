@@ -23,12 +23,12 @@ export default function CVSSV3Attribute({
   disabled,
 }) {
   const { doc, updateDoc, ...outerDocumentEditor } = React.useContext(
-    DocumentEditorContext
+    DocumentEditorContext,
   )
 
   const cvssVector = React.useMemo(
     () => new CVSSVector(/** @type {{}} */ (value) || {}),
-    [value]
+    [value],
   )
   const canBeUpgraded = cvssVector.canBeUpgraded
 
@@ -44,13 +44,13 @@ export default function CVSSV3Attribute({
           field === 'vectorString' && typeof updatedValue === 'string'
             ? cvssVector.updateFromVectorString(updatedValue).data
             : field
-            ? cvssVector.set(field, /** @type string */ (updatedValue)).data
-            : {}
+              ? cvssVector.set(field, /** @type string */ (updatedValue)).data
+              : {}
 
         updateDoc(instancePath, updatedVector)
       },
     }),
-    [outerDocumentEditor, updateDoc, instancePath, doc, cvssVector]
+    [outerDocumentEditor, updateDoc, instancePath, doc, cvssVector],
   )
 
   /** @type {(childName: string, options: string[], disableClearable?: boolean) => any} */
@@ -63,7 +63,7 @@ export default function CVSSV3Attribute({
       options,
       property,
       disabled,
-      disableClearable
+      disableClearable,
     )
   }
 
@@ -133,7 +133,7 @@ export default function CVSSV3Attribute({
               'HIGH',
               'NOT_DEFINED',
             ],
-            false
+            false,
           )}
           {dropdownFor(
             'remediationLevel',
@@ -144,12 +144,12 @@ export default function CVSSV3Attribute({
               'UNAVAILABLE',
               'NOT_DEFINED',
             ],
-            false
+            false,
           )}
           {dropdownFor(
             'reportConfidence',
             ['UNKNOWN', 'REASONABLE', 'CONFIRMED', 'NOT_DEFINED'],
-            false
+            false,
           )}
         </Collapsible>
 
@@ -164,57 +164,57 @@ export default function CVSSV3Attribute({
           {dropdownFor(
             'confidentialityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'integrityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'availabilityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedAttackVector',
             ['NETWORK', 'ADJACENT_NETWORK', 'LOCAL', 'PHYSICAL', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedAttackComplexity',
             ['HIGH', 'LOW', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedPrivilegesRequired',
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedUserInteraction',
             ['NONE', 'REQUIRED', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedScope',
             ['UNCHANGED', 'CHANGED', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedConfidentialityImpact',
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedIntegrityImpact',
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'modifiedAvailabilityImpact',
             ['NONE', 'LOW', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
         </Collapsible>
       </div>

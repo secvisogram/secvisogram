@@ -7,7 +7,7 @@ export interface Props {
     params:
       | { source: 'TEMPLATE'; templateId: string }
       | { source: 'FILESYSTEM'; file: File }
-      | { source: 'URL'; url: string }
+      | { source: 'URL'; url: string },
   ): void
   onClose(): void
 }

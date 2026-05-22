@@ -29,7 +29,7 @@ export default function CVSSV2Attribute({
   disabled,
 }) {
   const { doc, updateDoc, ...outerDocumentEditor } = React.useContext(
-    DocumentEditorContext
+    DocumentEditorContext,
   )
 
   /** @type {React.ContextType<typeof DocumentEditorContext>} */
@@ -41,7 +41,7 @@ export default function CVSSV2Attribute({
         const field = updatedInstancePath.at(-1)
         let updatedVector = set(
           updatedInstancePath.slice(instancePath.length),
-          updatedValue
+          updatedValue,
         )(value)
         updatedVector.version = '2.0'
 
@@ -56,7 +56,7 @@ export default function CVSSV2Attribute({
         updateDoc(instancePath, updatedVector)
       },
     }),
-    [outerDocumentEditor, updateDoc, instancePath, value, doc]
+    [outerDocumentEditor, updateDoc, instancePath, value, doc],
   )
 
   /** @type {(childName: string, options: string[], disableClearable?: boolean) => any} */
@@ -69,7 +69,7 @@ export default function CVSSV2Attribute({
       options,
       property,
       disabled,
-      disableClearable
+      disableClearable,
     )
   }
 
@@ -148,27 +148,27 @@ export default function CVSSV2Attribute({
           {dropdownFor(
             'collateralDamagePotential',
             ['NONE', 'LOW', 'LOW_MEDIUM', 'MEDIUM_HIGH', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'targetDistribution',
             ['NONE', 'LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'confidentialityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'integrityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
           {dropdownFor(
             'availabilityRequirement',
             ['LOW', 'MEDIUM', 'HIGH', 'NOT_DEFINED'],
-            false
+            false,
           )}
         </Collapsible>
       </div>

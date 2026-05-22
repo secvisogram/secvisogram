@@ -1,3 +1,4 @@
+import { uiSchemas } from '#lib/uiSchemas.js'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { t } from 'i18next'
@@ -13,15 +14,15 @@ import { canCreateDocuments } from '../shared/permissions.js'
 import pruneEmpty from '../shared/pruneEmpty.js'
 import isPropertyRelevant from './shared/isPropertyRelevant.js'
 import AboutDialog from './View/AboutDialog.js'
+import BetaVersionConfirmationDialog from './View/BetaVersionConfirmationDialog.js'
 import CsafTab from './View/CsafTab.js'
 import ExportDocumentDialog from './View/ExportDocumentDialog.js'
-import schema from './View/FormEditor/schema.js'
 import RelevanceLevelContext from './View/FormEditor/shared/context/RelevanceLevelContext.js'
 import {
   useUniqueGroupId,
   useUniqueProductId,
 } from './View/FormEditor/shared/fillFieldFunctions.js'
-import FormEditor from './View/FormEditorTab.js'
+import { FormEditorTab as FormEditor } from './View/FormEditorTab.js'
 import JsonEditorTab from './View/JsonEditorTab.js'
 import LoadingIndicator from './View/LoadingIndicator.js'
 import NewDocumentDialog from './View/NewDocumentDialog.js'
@@ -41,6 +42,7 @@ import VersionSummaryDialog from './View/VersionSummaryDialog.js'
  * @param {import('./View/types.js').Props} props
  */
 function View({
+  uiSchemaVersion,
   activeTab,
   isTabLocked,
   data,
@@ -71,6 +73,10 @@ function View({
   onGetTemplates,
   onGetTemplateContent,
   onGetBackendInfo,
+  onSetUiVersion,
+  pendingBeta21Doc,
+  onConfirmBeta21Open,
+  onCancelBeta21Open,
   ...props
 }) {
   const appConfig = React.useContext(AppConfigContext)
@@ -80,10 +86,10 @@ function View({
   const sortButtonRef = React.useRef(null)
 
   const [newDocumentDialog, setNewDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null)
+    /** @type {JSX.Element | null} */ (null),
   )
   const newDocumentDialogRef = React.useRef(
-    /** @type {HTMLDialogElement | null} */ (null)
+    /** @type {HTMLDialogElement | null} */ (null),
   )
   const { resetProductIdCounter } = useUniqueProductId()
   const { resetGroupIdCounter } = useUniqueGroupId()
@@ -96,14 +102,14 @@ function View({
   }, [newDocumentDialog])
 
   const [newExportDocumentDialog, setNewExportDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null)
+    /** @type {JSX.Element | null} */ (null),
   )
 
   const [versionSummaryDialog, setVersionSummaryDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null)
+    /** @type {JSX.Element | null} */ (null),
   )
   const versionSummaryDialogRef = React.useRef(
-    /** @type {HTMLDialogElement | null} */ (null)
+    /** @type {HTMLDialogElement | null} */ (null),
   )
   React.useEffect(() => {
     if (versionSummaryDialog) {
@@ -113,8 +119,38 @@ function View({
   }, [versionSummaryDialog])
 
   const [aboutDialog, setAboutDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null)
+    /** @type {JSX.Element | null} */ (null),
   )
+
+  const [betaVersionDialog, setBetaVersionDialog] = React.useState(
+    /** @type {JSX.Element | null} */ (null),
+  )
+  const betaVersionDialogRef = React.useRef(
+    /** @type {HTMLDialogElement | null} */ (null),
+  )
+  React.useEffect(() => {
+    if (betaVersionDialog) {
+      betaVersionDialogRef.current?.showModal()
+    }
+  }, [betaVersionDialog])
+
+  React.useEffect(() => {
+    if (!pendingBeta21Doc) return
+    setBetaVersionDialog(
+      <BetaVersionConfirmationDialog
+        ref={betaVersionDialogRef}
+        context="file-open"
+        onConfirm={() => {
+          onConfirmBeta21Open()
+          setBetaVersionDialog(null)
+        }}
+        onClose={() => {
+          onCancelBeta21Open()
+          setBetaVersionDialog(null)
+        }}
+      />,
+    )
+  }, [pendingBeta21Doc, onConfirmBeta21Open, onCancelBeta21Open])
 
   const [advisoryState, setAdvisoryState] = React.useState(
     /** @type {import('./shared/types.js').AdvisoryState | null} */ (
@@ -122,18 +158,20 @@ function View({
         type: 'NEW_ADVISORY',
         csaf: /** @type {{}} */ (data?.doc),
       }
-    )
+    ),
   )
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAdvisoryState((state) =>
       data
         ? { type: 'NEW_ADVISORY', csaf: /** @type {{}} */ (data.doc) }
-        : state
+        : state,
     )
   }, [data])
 
   const [isLoading, setLoading] = React.useState(props.isLoading)
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(props.isLoading)
   }, [props.isLoading])
 
@@ -142,18 +180,20 @@ function View({
   const [errors, setErrors] = React.useState(
     /** @type {Array<import('./shared/types').TypedValidationError>} */ (
       props.errors.map((e) => ({ ...e, type: 'error' }))
-    )
+    ),
   )
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setErrors(props.errors)
   }, [props.errors])
 
   const [alert, setAlert] = React.useState(
     /** @type {JSX.Element | null} */ (
       props.alert ? <Alert {...props.alert} /> : null
-    )
+    ),
   )
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAlert(props.alert ? <Alert {...props.alert} /> : null)
   }, [props.alert])
 
@@ -167,10 +207,10 @@ function View({
         advisoryState?.type === 'NEW_ADVISORY'
           ? advisoryState.csaf
           : advisoryState?.type === 'ADVISORY'
-          ? advisoryState.advisory.csaf
-          : {},
+            ? advisoryState.advisory.csaf
+            : {},
     }),
-    [advisoryState]
+    [advisoryState],
   )
 
   /**
@@ -192,10 +232,11 @@ function View({
 
   const backendNotAvailableTryAgain = React.useMemo(
     () => t('alert.backendNotAvailableTryAgain'),
-    []
+    [],
   )
   React.useEffect(() => {
     if (applicationError instanceof BackendUnavailableError) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setToast({
         message: backendNotAvailableTryAgain,
       })
@@ -243,14 +284,14 @@ function View({
                     t.warnings.map((w) => ({
                       ...w,
                       type: 'warning',
-                    }))
+                    })),
                   )
                   .concat(
                     t.infos.map((i) => ({
                       ...i,
                       type: 'info',
-                    }))
-                  )
+                    })),
+                  ),
               )
             )
           setErrors(errors)
@@ -280,7 +321,7 @@ function View({
                     type: 'ADVISORY',
                     advisory,
                   })
-                })
+                }),
               )
               .catch(handleError)
               .finally(() => {
@@ -289,7 +330,7 @@ function View({
           }}
           prefilledData={{ summary: '', legacyVersion: '' }}
           onClose={() => setVersionSummaryDialog(null)}
-        />
+        />,
       )
     } else if (advisoryState?.type === 'ADVISORY') {
       setVersionSummaryDialog(
@@ -312,7 +353,7 @@ function View({
                     type: 'ADVISORY',
                     advisory,
                   })
-                })
+                }),
               )
               .catch(handleError)
               .finally(() => {
@@ -321,7 +362,7 @@ function View({
           }}
           prefilledData={getSummaryAndLegacyVersion()}
           onClose={() => setVersionSummaryDialog(null)}
-        />
+        />,
       )
     }
   }
@@ -378,16 +419,16 @@ function View({
                               err.name == 'SyntaxError'
                                 ? t('error.invalidJSON')
                                 : t('error.failedToLoadFromURL'),
-                          })
+                          }),
                         )
                       break
                   }
                 })
               }}
               onClose={() => setNewDocumentDialog(null)}
-            />
+            />,
           )
-        })
+        }),
       )
     } else {
       setLoading(true)
@@ -428,14 +469,14 @@ function View({
                               err.name == 'SyntaxError'
                                 ? t('error.invalidJSON')
                                 : t('error.failedToLoadFromURL'),
-                          })
+                          }),
                         )
                       break
                   }
                 })
               }}
               onClose={() => setNewDocumentDialog(null)}
-            />
+            />,
           )
         })
         .catch(handleError)
@@ -454,13 +495,14 @@ function View({
     | 'CSAFJSONSTRIPPED'
     | 'HTMLDOCUMENT'
     | 'PDFDOCUMENT'
-    | 'MARKDOWN'} */ preselected
+    | 'MARKDOWN'} */ preselected,
   ) => {
     setNewExportDocumentDialog(
       <ExportDocumentDialog
         defaultSource={preselected}
         originalValues={originalValues}
         advisoryState={advisoryState}
+        uiSchemaVersion={uiSchemaVersion}
         formValues={formValues}
         documentIsValid={!errors.length}
         onPrepareDocumentForTemplate={onPrepareDocumentForTemplate}
@@ -470,7 +512,7 @@ function View({
         onClose={() => {
           setNewExportDocumentDialog(null)
         }}
-      />
+      />,
     )
   }
 
@@ -490,7 +532,7 @@ function View({
         instancePath: '/' + instancePath.join('/'),
       })
     },
-    [generatorEngineData]
+    [generatorEngineData],
   )
 
   /**
@@ -502,7 +544,7 @@ function View({
     (/** @type {unknown} */ newSerializedDoc) => {
       dispatch({ type: 'RESET_FORM_DOC', doc: newSerializedDoc })
     },
-    []
+    [],
   )
 
   const onStripCallback = React.useCallback(() => {
@@ -532,7 +574,7 @@ function View({
             resetGroupIdCounter()
             callback()
           }}
-        />
+        />,
       )
     } else {
       callback()
@@ -551,6 +593,13 @@ function View({
    * (e.g. browser refresh).
    */
   React.useEffect(() => {
+    //
+    // Enable the cypress test to wait the settling of the document
+    //
+    /** @type {any} */
+    const win = window
+    win.IS_MODIFIED = originalValues !== formValues
+
     /**
      * @param {BeforeUnloadEvent} e
      */
@@ -582,8 +631,8 @@ function View({
           activeTab === tab
             ? 'bg-slate-900 text-white'
             : isTabLocked
-            ? 'text-gray-500'
-            : 'hover:bg-slate-800 hover:text-white text-gray-300',
+              ? 'text-gray-500'
+              : 'hover:bg-slate-800 hover:text-white text-gray-300',
         ].join(' '),
         onClick() {
           onReplaceDoc(pruneEmpty(formValues.doc))
@@ -591,7 +640,7 @@ function View({
         },
       }
     },
-    [activeTab, onReplaceDoc, onChangeTab, formValues.doc, isTabLocked]
+    [activeTab, onReplaceDoc, onChangeTab, formValues.doc, isTabLocked],
   )
 
   const getSummaryAndLegacyVersion = () => {
@@ -611,7 +660,7 @@ function View({
         const revisionHistoryCopy = [...tracking.revision_history]
         const latestRevisionHistoryItem = revisionHistoryCopy.sort(
           (/** @type {{date: string}} */ a, /** @type {{date: string}} */ z) =>
-            new Date(z.date).getTime() - new Date(a.date).getTime()
+            new Date(z.date).getTime() - new Date(a.date).getTime(),
         )[0]
         prefilledSummary = latestRevisionHistoryItem.summary
         prefilledLegacyVersion = latestRevisionHistoryItem.legacy_version
@@ -687,10 +736,10 @@ function View({
     if (errors.length) {
       const selectedPathAsString = '/' + selectedPath.join('/')
       const currentlySelectedErrorsIndex = errors.findIndex(
-        (e) => e.instancePath === '/' + selectedPath.join('/')
+        (e) => e.instancePath === '/' + selectedPath.join('/'),
       )
       const numErrorsForPath = errors.filter(
-        (e) => e.instancePath === selectedPathAsString
+        (e) => e.instancePath === selectedPathAsString,
       ).length
       let indexOfNextError = currentlySelectedErrorsIndex + numErrorsForPath
       if (
@@ -730,22 +779,24 @@ function View({
         groupIds: () => onCollectGroupIds(formValues.doc),
       },
       errors,
+      uiSchemaVersion,
     }),
     [
       formValues.doc,
       errors,
+      uiSchemaVersion,
       onUpdateDoc,
       onReplaceDoc,
       onCollectProductIds,
       onCollectGroupIds,
-    ]
+    ],
   )
 
   const [sideBarIsOpen, setSideBarIsOpen] = React.useState(
-    /** @type {boolean} */ false
+    /** @type {boolean} */ false,
   )
   const [sideBarSelectedPath, setSideBarSelectedPath] = React.useState(
-    /** @type {string[]} */ ([])
+    /** @type {string[]} */ ([]),
   )
   const [sideBarContent, setSideBarContent] = React.useState('ERRORS')
   const sideBarData = {
@@ -758,7 +809,7 @@ function View({
   }
 
   const [selectedPath, setSelectedPath] = React.useState(
-    /** @type {string[]} */ ([])
+    /** @type {string[]} */ ([]),
   )
 
   /** @type {string[]} */
@@ -772,10 +823,10 @@ function View({
   ]
 
   const [selectedRelevanceLevel, _setSelectedRelevanceLevel] = React.useState(
-    relevanceLevels[2]
+    relevanceLevels[2],
   )
   const setSelectedRelevanceLevel = (/** @type {string} */ level) => {
-    selectClosestRelevantPath(level)
+    selectClosestRelevantPath(level, uiSchemaVersion)
     _setSelectedRelevanceLevel(level)
   }
 
@@ -807,6 +858,7 @@ function View({
             {newExportDocumentDialog}
             {versionSummaryDialog}
             {aboutDialog}
+            {betaVersionDialog}
             <Hotkeys
               keyName={getAllKeybindings()}
               onKeyDown={keyDownHandler}
@@ -841,12 +893,61 @@ function View({
                               setAboutDialog(null)
                             }}
                             backendVersion={backendVersion}
-                          />
+                          />,
                         )
                       }}
                     >
                       {t('menu.about')}
                     </button>
+                    <div className="h-auto flex items-center px-4 gap-2">
+                      <label
+                        htmlFor="csafVersionSelect"
+                        className="whitespace-nowrap text-gray-300 text-sm"
+                      >
+                        CSAF Version:
+                      </label>
+                      <select
+                        id="csafVersionSelect"
+                        className="border border-gray-400 py-2 px-2 w-full shadow-inner rounded text-black bg-white"
+                        value={uiSchemaVersion}
+                        onChange={(e) => {
+                          const selectedVersion =
+                            /** @type {import('#lib/uiSchemas.js').UiSchemaVersion} */ (
+                              e.target.value
+                            )
+                          if (selectedVersion === 'v2.1') {
+                            // In case of 2.1 we open a confirmation dialog to
+                            // warn the user that the csaf 2.1 feature set is
+                            // not complete yet and therefore "beta" ...
+                            setBetaVersionDialog(
+                              <BetaVersionConfirmationDialog
+                                ref={betaVersionDialogRef}
+                                onConfirm={() => {
+                                  onSetUiVersion('v2.1')
+                                  setBetaVersionDialog(null)
+                                }}
+                                onClose={() => {
+                                  setBetaVersionDialog(null)
+                                }}
+                              />,
+                            )
+                            return
+                          } else {
+                            // ... otherwise we just switch to the requested
+                            // version.
+                            onSetUiVersion(selectedVersion)
+                          }
+                        }}
+                      >
+                        {Object.keys(uiSchemas).map((uiVersion) => (
+                          <option key={uiVersion} value={uiVersion}>
+                            {uiVersion === 'v2.1'
+                              ? `${uiVersion} (Beta)`
+                              : uiVersion}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   {advisoryState?.type === 'ADVISORY' && (
                     <div className="text-gray-400 p-4">
@@ -1028,7 +1129,7 @@ function View({
                                   'px-3 mx-1 h-full hover:bg-slate-700 hover:text-white' +
                                   (idx <=
                                   relevanceLevels.indexOf(
-                                    selectedRelevanceLevel
+                                    selectedRelevanceLevel,
                                   )
                                     ? ' bg-slate-800 hover:bg-slate-800'
                                     : '')
@@ -1074,7 +1175,7 @@ function View({
                           },
                         ].map(({ type, color }) => {
                           const count = errors.filter(
-                            (e) => e.type === type
+                            (e) => e.type === type,
                           ).length
 
                           return (
@@ -1097,13 +1198,14 @@ function View({
                   key={activeTab}
                 >
                   {activeTab === 'EDITOR' ? (
-                    <FormEditor />
+                    <FormEditor schemaVersion={uiSchemaVersion} />
                   ) : activeTab === 'SOURCE' ? (
                     <JsonEditorTab
                       originalValues={originalValues}
                       formValues={formValues}
                       validationErrors={errors}
                       sortButtonRef={sortButtonRef}
+                      uiSchemaVersion={uiSchemaVersion}
                       onChange={onReplaceDoc}
                       onLockTab={onLockTab}
                       onUnlockTab={onUnlockTab}
@@ -1112,6 +1214,7 @@ function View({
                     <PreviewTab
                       previewResult={previewResult}
                       onPreview={onPreviewCallback}
+                      schemaVersion={uiSchemaVersion}
                     />
                   ) : activeTab === 'CSAF-JSON' ? (
                     <CsafTab
@@ -1136,7 +1239,7 @@ function View({
                   ) : null}
                 </div>
                 {activeTab === 'EDITOR' || activeTab === 'SOURCE' ? (
-                  <SideBar />
+                  <SideBar uiSchemaVersion={uiSchemaVersion} />
                 ) : null}
               </div>
             </Hotkeys>
@@ -1192,10 +1295,12 @@ function View({
    * path based on the given level and selects it.
    *
    * @param {string} level
+   * @param {import('../../uiSchemas.js').UiSchemaVersion} uiSchemaVersion
    */
-  function selectClosestRelevantPath(level) {
+  function selectClosestRelevantPath(level, uiSchemaVersion) {
     const documentCategory = formValues.doc.document.category
     const path = selectedPath
+    const { content: schema } = uiSchemas[uiSchemaVersion]
 
     let property =
       /** @type {import('./shared/types.js').Property | undefined} */ (schema)

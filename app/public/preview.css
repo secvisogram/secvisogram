@@ -3,7 +3,7 @@ pre {
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  color: #1F2328;
+  color: #1f2328;
   background-color: #f6f8fa !important;
   border-radius: 6px;
 }
@@ -14,16 +14,16 @@ h3 code,
 h4 code,
 h5 code,
 h6 code {
-  padding: 0 .2em;
+  padding: 0 0.2em;
   font-size: inherit;
 }
 
 code {
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
-  background-color: rgba(175,184,193,0.2) !important;
+  background-color: rgba(175, 184, 193, 0.2) !important;
   border-radius: 6px;
 }
 
@@ -35,7 +35,7 @@ del code {
   text-decoration: inherit;
 }
 
-pre>code {
+pre > code {
   padding: 0;
   margin: 0;
   word-break: normal;

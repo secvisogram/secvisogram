@@ -1,1 +1,7 @@
-/app/lib/SecvisogramPage/View/shared/HTMLTemplate/Template.html
+/app/lib/app/SecvisogramPage/View/shared/HTMLTemplate/TemplateCsaf2_0.html
+/app/lib/app/SecvisogramPage/View/shared/HTMLTemplate/TemplateCsaf2_1.html
+/app/coverage
+/app/dist
+build
+/data
+/docs/*

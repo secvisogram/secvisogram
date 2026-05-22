@@ -16,7 +16,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import '@cypress/code-coverage/support.js'
+import '@cypress/code-coverage/support'
 import '../../vendor/first/cvsscalc30.js'
 import '../../vendor/first/cvsscalc31.js'
 import './commands.js'
@@ -27,3 +27,12 @@ import './commands.js'
 /** @type {any} */
 const win = window
 win.SECVISOGRAM_VERSION = 'test'
+
+beforeEach(() => {
+  cy.intercept('/api/v1/about', (req) => {
+    req.reply({ statusCode: 500 })
+  })
+  cy.intercept('/oauth2/userinfo', (req) => {
+    req.reply({ statusCode: 500 })
+  })
+})

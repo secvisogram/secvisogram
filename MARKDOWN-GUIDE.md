@@ -1,5 +1,7 @@
 # Markdown enabled fields
+
 Markdown syntax can be used in the following fields:
+
 ```
 /document/acknowledgments[]/summary
 /document/distribution/text
@@ -19,10 +21,13 @@ Markdown syntax can be used in the following fields:
 ```
 
 # Markdown Syntax
+
 This guide gives a quick overview over all markdown options that are available within Secvisogram.
 
 ## Headings
+
 To create a heading, up to six number signs (`#`) can be added before the heading text. The number of number signs (`#`) used determines the hierarchy level and the font size of the heading.
+
 ```
 # A first-level heading
 ## A second-level heading
@@ -30,45 +35,52 @@ To create a heading, up to six number signs (`#`) can be added before the headin
 ```
 
 ## Format Text
-| Style                         | Syntax               | Example                                  | Output                                 |
-|-------------------------------|----------------------|------------------------------------------|----------------------------------------|
-| Bold                          | `** **` or `__ __`   | `**Bold Text**`                          | **Bold Text**                          |
-| Italic                        | `* *` or `_ _`       | `_Italic Text_`                          | _Italic Text_                          |
-| strikethrough                 | `~~ ~~`              | `~~This was mistaken Text~~`             | ~~This was mistaken Text~~             |
-| Nested Bold and Italic        | `** **` and `_ _`    | `**This text is _extremely_ important**` | **This text is _extremely_ important** |
-| All Bold and Italic           | `*** ***`            | `***All this text is important***`       | ***All this text is important***       |
+
+| Style                  | Syntax             | Example                                  | Output                                 |
+| ---------------------- | ------------------ | ---------------------------------------- | -------------------------------------- |
+| Bold                   | `** **` or `__ __` | `**Bold Text**`                          | **Bold Text**                          |
+| Italic                 | `* *` or `_ _`     | `_Italic Text_`                          | _Italic Text_                          |
+| strikethrough          | `~~ ~~`            | `~~This was mistaken Text~~`             | ~~This was mistaken Text~~             |
+| Nested Bold and Italic | `** **` and `_ _`  | `**This text is _extremely_ important**` | **This text is _extremely_ important** |
+| All Bold and Italic    | `*** ***`          | `***All this text is important***`       | **_All this text is important_**       |
 
 ## Quoting Text
+
 Text can be quoted with the following symbol: `>`.
 
-*Example:*
+_Example:_
+
 ```
 not quoted text
 > quoted text
 ```
 
-*Output:*
+_Output:_
 
 not quoted text
+
 > quoted text
 
 quoted text will be indented and displayed in another font color.
 
 ## Quoting Code
+
 Code can be quoted within one line by using simple backticks. The text within the backticks will not be formatted.
 
-*Example:*
+_Example:_
+
 ```
 Use the command `ssh user@host` to establish a connection.
 ```
 
-*Output:*
+_Output:_
 
 Use the command `ssh user@host` to establish a connection.
 
 To format Code or text in its own paragraph, three backticks can be used.
 
-*Example:*
+_Example:_
+
 ````
 Example commands:
 ```
@@ -78,9 +90,10 @@ exit
 ```
 ````
 
-*Output:*
+_Output:_
 
 Example commands:
+
 ```
 ssh user@host
 cp /etc/secrets.txt ~
@@ -88,71 +101,87 @@ exit
 ```
 
 ## Links
+
 Inline links can be created by enclosing the text in square brackets `[ ]` and the URL in round brackets `( )`.
 
-*Example:*
+_Example:_
 
 `The document was created using the [Secvisogram](https://secvisogram.github.io/) software.`
 
-*Output:*
+_Output:_
 
 The document was created using the [Secvisogram](https://secvisogram.github.io/) software.
 
 ## Lists
+
 Unordered lists can be created by prefixing a line or lines of text with `-`, `*`, or `+`.
 
-*Example:*
+_Example:_
+
 ```markdown
 - George Washington
+
 * John Adams
-+ Thomas Jefferson
+
+- Thomas Jefferson
 ```
 
-*Output:*
+_Output:_
+
 - George Washington
+
 * John Adams
-+ Thomas Jefferson
+
+- Thomas Jefferson
 
 To create an ordered list, a number has to be prefixed to the line.
 
-*Example:*
+_Example:_
+
 ```markdown
 1. George Washington
 1. John Adams
 1. Thomas Jefferson
 ```
 
-*Output:*
+_Output:_
+
 1. George Washington
 1. John Adams
 1. Thomas Jefferson
 
 ### Nested Lists
+
 Nested lists can be created by indenting the nested elements below another element.
 
-*Example:*
+_Example:_
+
 ```markdown
 1. First list item
    - First nested list item
      - Second nested list item
 ```
 
-*Output:*
+_Output:_
+
 1. First list item
    - First nested list item
      - Second nested list item
 
 ## Check Lists
+
 To create a task list, prefix the list items with a dash and a space followed by `[ ]`. To mark a task as done, use `[x]`.
 
-*Example:*:
+_Example:_:
+
 ```markdown
 - [ ] Task 1
 - [x] Task 2
 - [ ] Task 3
 ```
 
-*Output:*
+_Output:_
+
 - [ ] Task 1
 - [x] Task 2
 - [ ] Task 3
@@ -161,4 +190,5 @@ If the description of a checkbox element starts with a bracket, the bracket has 
 `- [ ] \(Optional) Do something`
 
 ## Paragraphs
+
 To create a new paragraph, one line has to be left empty between the lines of text.

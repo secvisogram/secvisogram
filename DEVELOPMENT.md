@@ -96,6 +96,7 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 | HTML-Template | mustache       | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                                                 |
 | Testing       | electron-mocha | Mocha testing in Electron. See [electron-mocha](https://github.com/jprichardson/electron-mocha)                                                           |
 |               | mocha          | Mocha is a feature-rich JavaScript test framework. See [https://mochajs.org/](https://mochajs.org/)                                                       |
+|               | Storybook      | Storybook is a frontend workshop tool to develop ui components in isolation                                                                               |
 | Parsing       | xml2js         | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                                                |
 |               | json-pointer   | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                                  |
 | CLI           | yargs          | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                                         |
@@ -103,11 +104,12 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 
 ## Building Secvisogram
 
-| Command         | Purpose                                                             |
-| --------------- | ------------------------------------------------------------------- |
-| `npm run dev`   | Starts the development server                                       |
-| `npm test`      | Runs typecheck, the linter and the test suite                       |
-| `npm run build` | Builds the application as a static asset and places it into `dist/` |
+| Command             | Purpose                                                             |
+| ------------------- | ------------------------------------------------------------------- |
+| `npm run dev`       | Starts the development server                                       |
+| `npm test`          | Runs typecheck, the linter and the test suite                       |
+| `npm run build`     | Builds the application as a static asset and places it into `dist/` |
+| `npm run storybook` | Run the storybook                                                   |
 
 ## Building & Deploying Secvisogram into Production
 

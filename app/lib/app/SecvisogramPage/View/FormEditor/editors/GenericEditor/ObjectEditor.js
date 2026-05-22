@@ -35,7 +35,7 @@ export default function ObjectEditor({
     React.useContext(SelectedPathContext)
   const { doc, errors, updateDoc } = React.useContext(DocumentEditorContext)
   const { selectedRelevanceLevel, relevanceLevels } = React.useContext(
-    RelevanceLevelContext
+    RelevanceLevelContext,
   )
   const { getChildItem } = useChildItem()
 
@@ -43,10 +43,10 @@ export default function ObjectEditor({
   const userInfo = React.useContext(UserInfoContext)
 
   const fieldProperties = property.metaInfo.propertyList?.filter(
-    (p) => !['OBJECT', 'ARRAY'].includes(p.type)
+    (p) => !['OBJECT', 'ARRAY'].includes(p.type),
   )
   const complexProperties = property.metaInfo.propertyList?.filter((p) =>
-    ['OBJECT', 'ARRAY'].includes(p.type)
+    ['OBJECT', 'ARRAY'].includes(p.type),
   )
   const menuNodes = getObjectMenuNodes(property)
   const selectedSubPath = getObjectMenuPaths(property)
@@ -55,15 +55,15 @@ export default function ObjectEditor({
     .sort((a, z) => z.length - a.length)
     .find((menuPath) =>
       menuPath.every(
-        (seg, i) => seg === selectedPath.slice(instancePath.length)[i]
-      )
+        (seg, i) => seg === selectedPath.slice(instancePath.length)[i],
+      ),
     )
   const sideBarData = React.useContext(SideBarContext)
 
   const fieldsErrors = errors.filter(
     (e) =>
       e.instancePath.startsWith('/' + instancePath.join('/')) &&
-      e.instancePath.split('/').length === instancePath.length + 2
+      e.instancePath.split('/').length === instancePath.length + 2,
   )
 
   const value = instancePath.reduce((value, pathSegment) => {
@@ -138,7 +138,7 @@ export default function ObjectEditor({
             property: p,
             category,
             selectedRelevanceLevel,
-          })
+          }),
         ) ? (
           <li
             className={
@@ -177,8 +177,8 @@ export default function ObjectEditor({
           }
           const childErrors = errors.filter((e) =>
             e.instancePath.startsWith(
-              '/' + [...instancePath, ...menuItem.instancePath].join('/')
-            )
+              '/' + [...instancePath, ...menuItem.instancePath].join('/'),
+            ),
           )
           const isSelected =
             selectedSubPath &&
@@ -263,10 +263,10 @@ export default function ObjectEditor({
                               },
                               /** @type {Record<string, any> | null} */ (
                                 sanitizedValue
-                              )
+                              ),
                             )
                             const sanitizedMenuItemValue = Array.isArray(
-                              menuItemValue
+                              menuItemValue,
                             )
                               ? menuItemValue
                               : []
@@ -274,12 +274,12 @@ export default function ObjectEditor({
                               menuItem.property.metaInfo.arrayType?.type || ''
                             const newItem = getChildItem(
                               menuItem.property,
-                              childType
+                              childType,
                             )
                             if (newItem !== null) {
                               updateDoc(
                                 [...instancePath, ...menuItem.instancePath],
-                                sanitizedMenuItemValue.concat([newItem])
+                                sanitizedMenuItemValue.concat([newItem]),
                               )
                               setSelectedPath([
                                 ...instancePath,
@@ -348,7 +348,7 @@ export default function ObjectEditor({
 export function getObjectMenuPaths(property, instancePath = []) {
   const menuProperties =
     property.metaInfo.propertyList?.filter(
-      (p) => p.type === 'OBJECT' || p.type === 'ARRAY'
+      (p) => p.type === 'OBJECT' || p.type === 'ARRAY',
     ) ?? []
   return (
     menuProperties.flatMap((childProperty) => {
@@ -387,7 +387,7 @@ export function getObjectMenuPaths(property, instancePath = []) {
 function getObjectMenuNodes(property, instancePath = []) {
   const menuProperties =
     property.metaInfo.propertyList?.filter(
-      (p) => p.type === 'OBJECT' || p.type === 'ARRAY'
+      (p) => p.type === 'OBJECT' || p.type === 'ARRAY',
     ) ?? []
 
   return (

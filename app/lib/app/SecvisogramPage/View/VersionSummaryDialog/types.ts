@@ -3,8 +3,6 @@ export interface Props {
     summary: string
     legacyVersion: string
   }
-  onSubmit(
-    params: { summary: string; legacyVersion: string }
-  ): void
+  onSubmit(params: { summary: string; legacyVersion: string }): void
   onClose(): void
 }

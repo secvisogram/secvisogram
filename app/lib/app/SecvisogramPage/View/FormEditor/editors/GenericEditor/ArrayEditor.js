@@ -40,20 +40,20 @@ export default function ArrayEditor({ property, instancePath, enableLast }) {
     )
   const recursionProperty =
     property.metaInfo.arrayType?.metaInfo.propertyList?.find(
-      (p) => p.type === 'RECURSION'
+      (p) => p.type === 'RECURSION',
     )
   const menuStructure = getArrayMenuStructure(
     property,
     recursionProperty ?? null,
-    sanitizedValue
+    sanitizedValue,
   )
   const selectedSubPath = menuStructure
     .slice()
     .sort((a, z) => z.length - a.length)
     .find((menuPath) =>
       menuPath.every(
-        (seg, i) => seg === selectedPath.slice(instancePath.length)[i]
-      )
+        (seg, i) => seg === selectedPath.slice(instancePath.length)[i],
+      ),
     )
 
   const enable_last_rev_hist_item =
@@ -92,7 +92,7 @@ function getArrayMenuStructure(
   property,
   recursionProperty,
   value,
-  instancePath = []
+  instancePath = [],
 ) {
   return Array.isArray(value)
     ? value.flatMap((item, i) => {
@@ -104,7 +104,7 @@ function getArrayMenuStructure(
                 property,
                 recursionProperty,
                 item[recursionProperty.key],
-                [...itemInstancePath, recursionProperty.key]
+                [...itemInstancePath, recursionProperty.key],
               )
             : []),
         ]
@@ -128,7 +128,7 @@ function Menu({ instancePath, level = 1, ...props }) {
   const { setSideBarIsOpen, setSideBarSelectedPath } =
     React.useContext(SideBarContext)
   const { doc, errors, updateDoc, replaceDoc } = React.useContext(
-    DocumentEditorContext
+    DocumentEditorContext,
   )
   const { getChildItem } = useChildItem()
 
@@ -143,10 +143,10 @@ function Menu({ instancePath, level = 1, ...props }) {
   const sanitizedValue = Array.isArray(value) ? value : []
   const recursionProperty =
     property.metaInfo.arrayType?.metaInfo.propertyList?.find(
-      (p) => p.type === 'RECURSION'
+      (p) => p.type === 'RECURSION',
     )
   const isPartOfTheSelection = instancePath.every(
-    (pathSegment, i) => pathSegment === selectedPath[i]
+    (pathSegment, i) => pathSegment === selectedPath[i],
   )
   const selectedPathSegment = isPartOfTheSelection
     ? selectedPath.slice(instancePath.length).at(0)
@@ -174,7 +174,7 @@ function Menu({ instancePath, level = 1, ...props }) {
     <ul>
       {sanitizedValue.map((childValue, i) => {
         const indexErrors = errors.filter((e) =>
-          e.instancePath.startsWith('/' + [...instancePath, i].join('/'))
+          e.instancePath.startsWith('/' + [...instancePath, i].join('/')),
         )
         let itemName = `${t('arrays.defaultItemName')} ${i + 1}`
         const itemNameTranslationKey =
@@ -254,7 +254,7 @@ function Menu({ instancePath, level = 1, ...props }) {
                             : []
                           const value = getChildItem(
                             property,
-                            childProperty.type
+                            childProperty.type,
                           )
                           if (value !== null) {
                             updateDoc(
@@ -263,7 +263,7 @@ function Menu({ instancePath, level = 1, ...props }) {
                                 String(i),
                                 recursionProperty.key,
                               ],
-                              sanitizedChildValue.concat([value])
+                              sanitizedChildValue.concat([value]),
                             )
                             setSelectedPath([
                               ...instancePath,
@@ -289,17 +289,17 @@ function Menu({ instancePath, level = 1, ...props }) {
                           if (value !== null) {
                             const arrayWithoutItem = _.get(
                               doc,
-                              instancePath
+                              instancePath,
                             ).filter(
                               (
                                 /** @type {any} */ item,
-                                /** @type {number} */ index
-                              ) => index !== i
+                                /** @type {number} */ index,
+                              ) => index !== i,
                             )
                             replaceDoc(
                               pruneEmpty(
-                                set(instancePath, arrayWithoutItem, doc)
-                              )
+                                set(instancePath, arrayWithoutItem, doc),
+                              ),
                             )
                             setSelectedPath(instancePath)
                           }

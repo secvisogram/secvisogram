@@ -1,7 +1,6 @@
-/* eslint-disable react/no-is-mounted */
 import { t } from 'i18next'
-import ApiRequest from './ApiRequest.js'
 import { callAboutInfo } from './api/backend.js'
+import ApiRequest from './ApiRequest.js'
 import BackendUnavailableError from './BackendUnavailableError.js'
 
 export default class CsrfApiRequest extends ApiRequest {
