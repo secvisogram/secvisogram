@@ -5,7 +5,7 @@ import {
   createNewVersion,
   getAdvisoryDetail,
 } from '../shared/api/backend.js'
-import { deleteAdvisory, getData } from './DocumentsTab/service.js'
+import { deleteAdvisory, getData, getMoreData } from './DocumentsTab/service.js'
 import DocumentsTabView from './DocumentsTab/View.js'
 
 /** @typedef {React.ComponentProps<typeof DocumentsTabView>} ViewProps */
@@ -30,6 +30,7 @@ export default function DocumentsTab(props) {
     <DocumentsTabView
       {...props}
       onGetData={getData}
+      onGetMoreData={getMoreData}
       onDeleteAdvisory={deleteAdvisory}
       onChangeWorkflowState={async ({
         advisoryId,
