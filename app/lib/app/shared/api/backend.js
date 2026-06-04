@@ -153,8 +153,37 @@ export async function deleteAdvisory({ advisoryId, revision }) {
   ).send()
 }
 
-export async function getAdvisories() {
-  const res = await new CsrfApiRequest(new Request('/api/v1/advisories'))
+/**
+ * Fetches advisories from the CMS backend.
+ *
+ * Backward-compatible by design: called with no arguments (or
+ * without a `limit`) it preserves the legacy behaviour and resolves to the
+ * bare `AdvisoryDocumentInformation[]` array. When a `limit` is provided it
+ * opts into the paginated wire contract and resolves to the page envelope
+ * `{ advisories, bookmark, hasMore }`; pass the previous page's `bookmark`
+ * (opaque, echoed back verbatim) to fetch the next page.
+ *
+ * @param {object} [options]
+ * @param {number} [options.limit] Max visible rows per page (1–1000).
+ *   When omitted, the legacy bare-array response is returned.
+ * @param {string | null} [options.bookmark] Opaque cursor from the previous
+ *   page. Ignored unless `limit` is provided.
+ * @returns {Promise<
+ *   | Array<object>
+ *   | { advisories: Array<object>, bookmark: string | null, hasMore: boolean }
+ * >}
+ */
+export async function getAdvisories(options) {
+  let requestUrl = '/api/v1/advisories'
+  if (options && typeof options.limit === 'number') {
+    const apiURL = new URL('/api/v1/advisories', window.location.href)
+    apiURL.searchParams.set('limit', String(options.limit))
+    if (typeof options.bookmark === 'string') {
+      apiURL.searchParams.set('bookmark', options.bookmark)
+    }
+    requestUrl = apiURL.toString()
+  }
+  const res = await new CsrfApiRequest(new Request(requestUrl))
     .setContentType('application/json')
     .send()
   return await res.json()
