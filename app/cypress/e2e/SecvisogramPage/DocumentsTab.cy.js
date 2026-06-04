@@ -1,8 +1,10 @@
 import { getLoginEnabledConfig } from '../../fixtures/appConfigData.js'
 import {
+  asAdvisoriesPage,
   canCreateVersion,
   canDeleteDocument,
   getAdvisories,
+  getGetAdvisoriesPageResponse,
   getGetAdvisoriesResponse,
   getGetAdvisoryDetailResponse,
   getUserInfo,
@@ -15,9 +17,12 @@ describe('SecvisogramPage / DocumentsTab', function () {
       '/.well-known/appspecific/de.bsi.secvisogram.json',
       getLoginEnabledConfig(),
     ).as('wellKnownAppConfig')
-    cy.intercept('/api/v1/advisories', getGetAdvisoriesResponse()).as(
-      'apiGetAdvisories',
-    )
+    // The Documents tab requests the paginated endpoint:
+    // GET /api/v1/advisories?limit=50, answered with the page envelope.
+    cy.intercept(
+      { method: 'GET', pathname: '/api/v1/advisories', query: { limit: '*' } },
+      getGetAdvisoriesPageResponse(),
+    ).as('apiGetAdvisories')
   })
 
   describe('can fetch documents from the csaf cms backend', function () {
@@ -54,8 +59,12 @@ describe('SecvisogramPage / DocumentsTab', function () {
             getUserInfo(user),
           ).as('apiGetUserInfo')
           cy.intercept(
-            '/api/v1/advisories',
-            getGetAdvisoriesResponse(user.user),
+            {
+              method: 'GET',
+              pathname: '/api/v1/advisories',
+              query: { limit: '*' },
+            },
+            getGetAdvisoriesPageResponse(user.user),
           ).as('apiGetAdvisories')
           const advisoryDetail = getGetAdvisoryDetailResponse({
             advisoryId: advisory.advisoryId,
@@ -78,11 +87,19 @@ describe('SecvisogramPage / DocumentsTab', function () {
           cy.wait('@apiGetUserInfo')
           cy.wait('@apiGetAdvisories')
 
-          // Pretend to have the advisory removed
+          // Pretend to have the advisory removed. The post-delete refetch
+          // (onGetData) hits the paginated endpoint, so serve the filtered
+          // rows inside the page envelope.
           cy.intercept(
-            '/api/v1/advisories',
-            getGetAdvisoriesResponse().filter(
-              (a) => a.advisoryId !== advisory.advisoryId,
+            {
+              method: 'GET',
+              pathname: '/api/v1/advisories',
+              query: { limit: '*' },
+            },
+            asAdvisoriesPage(
+              getGetAdvisoriesResponse().filter(
+                (a) => a.advisoryId !== advisory.advisoryId,
+              ),
             ),
           ).as('apiGetAdvisories')
 
@@ -263,8 +280,12 @@ describe('SecvisogramPage / DocumentsTab', function () {
             getUserInfo(user),
           ).as('apiGetUserInfo')
           cy.intercept(
-            '/api/v1/advisories',
-            getGetAdvisoriesResponse(user.user),
+            {
+              method: 'GET',
+              pathname: '/api/v1/advisories',
+              query: { limit: '*' },
+            },
+            getGetAdvisoriesPageResponse(user.user),
           ).as('apiGetAdvisories')
           cy.intercept(
             `/api/v1/advisories/${advisory.advisoryId}`,
