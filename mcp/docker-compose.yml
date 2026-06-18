@@ -1,0 +1,49 @@
+services:
+  context7-mcp:
+    build:
+      context: ./context7-mcp
+      dockerfile: Dockerfile
+    container_name: context7-mcp
+    stdin_open: true
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3002
+      - CONTEXT7_API_KEY=${CONTEXT7_API_KEY}
+    ports:
+      - "127.0.0.1:3338:3002"
+    restart: unless-stopped
+
+  browser-mcp:
+    build:
+      context: ./browser-mcp
+      dockerfile: Dockerfile
+    container_name: browser-mcp
+    stdin_open: true
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3002
+      # Optional: Chromium host resolver rules for Docker networking
+      # Example: "MAP localhost keycloak" to route localhost to a Docker service
+      # Leave empty for local/non-Docker apps or when using network_mode=host
+      - CHROMIUM_HOST_RULES=${BROWSER_CHROMIUM_HOST_RULES:-}
+    ports:
+      - "127.0.0.1:3336:3002"
+    restart: unless-stopped
+    shm_size: '2gb'
+
+  # GitHub MCP Server - official GitHub integration
+  github-mcp:
+    image: ghcr.io/github/github-mcp-server
+    container_name: github-mcp
+    command: ["http", "--port", "8082"]
+    environment:
+      # Optional: restrict enabled toolsets (comma-separated)
+      # Available: repos,issues,pull_requests,actions,code_security,experiments
+      - GITHUB_TOOLSETS=${GITHUB_TOOLSETS:-repos,issues,pull_requests,actions}
+      # Optional: GitHub Enterprise Server or ghe.com host (leave empty for github.com)
+      - GITHUB_HOST=${GITHUB_HOST:-}
+      # Optional: enable read-only mode
+      - GITHUB_READ_ONLY=${GITHUB_READ_ONLY:-false}
+    ports:
+      - "127.0.0.1:3344:8082"
+    restart: unless-stopped

@@ -4,3 +4,5 @@
 # intellij
 /secvisogram.iml
 /.idea
+/mcp/.env
+/.claude/settings.local.json

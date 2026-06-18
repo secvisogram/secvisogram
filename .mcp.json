@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "http://localhost:3338/mcp"
+    },
+    "browser-mcp": {
+      "type": "http",
+      "url": "http://localhost:3336/mcp"
+    },
+    "github-mcp": {
+      "type": "http",
+      "url": "http://localhost:3344/",
+      "headers": {
+        "Authorization": "Bearer ${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest", "--no-usage-statistics"]
+    }
+  }
+}

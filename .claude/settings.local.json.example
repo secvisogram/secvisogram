@@ -1,0 +1,10 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://litellm.prod.ki-plattform.exxcellent.de/",
+    "ANTHROPIC_AUTH_TOKEN": "",
+    "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+  },
+  "permissions": {
+    "allow": [
+    ]
+  }}
