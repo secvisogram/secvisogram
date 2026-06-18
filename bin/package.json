@@ -1,5 +1,5 @@
 {
-  "name": "bin",
+  "name": "@secvisogram/secvisogram-bin",
   "description": "Various CLI tools for developing Secvisogram.",
   "main": "index.js",
   "scripts": {
