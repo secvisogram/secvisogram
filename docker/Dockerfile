@@ -1,5 +1,5 @@
 ARG BUILD_IMAGE=node:22-alpine
-ARG BASE_IMAGE=nginx:1.29-alpine
+ARG BASE_IMAGE=nginxinc/nginx-unprivileged:1.29-alpine
 
 # Build Stage 1
 # This build created a staging docker image
@@ -28,5 +28,7 @@ ARG REPO_URL=https://github.com/secvisogram/secvisogram.git
 LABEL org.opencontainers.image.authors="${MAINTAINER}"
 LABEL org.opencontainers.image.source="${REPO_URL}"
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-EXPOSE 80
-USER nginx
+# nginx-unprivileged runs as UID 101 and listens on 8080; cache, temp and
+# pid paths are relocated to writable locations, so no explicit USER or
+# permission fix-up is required here.
+EXPOSE 8080
