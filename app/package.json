@@ -37,6 +37,7 @@
     "@mui/material": "^5.18.0",
     "@mui/styles": "^5.18.0",
     "@secvisogram/csaf-validator-lib": "^2.0.23",
+    "@secvisogram/html-template": "*",
     "ajv": "^8.18.0",
     "ajv-formats": "^2.1.1",
     "bcp47": "^1.1.2",

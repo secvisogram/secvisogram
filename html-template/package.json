@@ -1,0 +1,33 @@
+{
+  "name": "@secvisogram/html-template",
+  "version": "1.0.0",
+  "description": "HTML/PDF template rendering for CSAF advisories",
+  "keywords": [
+    "CSAF",
+    "Common Security Advisory Framework",
+    "Secvisogram"
+  ],
+  "license": "MIT",
+  "author": "eXXcellent solutions GmbH",
+  "files": [
+    "index.js",
+    "lib/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "prepare": "tsc -b ."
+  },
+  "dependencies": {
+    "lodash": "^4.17.23",
+    "micromark": "^4.0.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "mustache": "^4.2.0"
+  }
+}

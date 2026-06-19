@@ -1,4 +1,9 @@
 {
   "files": [],
-  "references": [{ "path": "app" }, { "path": "bin" }]
+  "references": [
+    { "path": "app" },
+    { "path": "bin" },
+    { "path": "cli" },
+    { "path": "html-template" }
+  ]
 }

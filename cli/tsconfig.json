@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "esnext" /* Specify ECMAScript target version. */,
+    "module": "nodenext" /* ESM package. */,
+    "allowJs": true /* Allow javascript files to be compiled. */,
+    "checkJs": true /* Report errors in .js files. */,
+    "resolveJsonModule": true,
+    "outDir": "dist" /* Redirect output structure to the directory. */,
+    "composite": true /* Enable project compilation */,
+    "emitDeclarationOnly": true /* Do not emit outputs. */,
+    "types": ["node"],
+
+    /* Strict Type-Checking Options */
+    "strict": true /* Enable all strict type-checking options. */,
+
+    /* Module Resolution Options */
+    "esModuleInterop": true /* Enables interop for CJS default imports. */,
+
+    /* Advanced Options */
+    "skipLibCheck": true /* Skip type checking of declaration files. */,
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+  },
+  "references": [{ "path": "../html-template" }],
+  "include": ["**/*.js"],
+  "exclude": ["node_modules", "build"]
+}

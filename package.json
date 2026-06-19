@@ -30,6 +30,8 @@
   },
   "workspaces": [
     "app",
-    "bin"
+    "bin",
+    "cli",
+    "html-template"
   ]
 }
