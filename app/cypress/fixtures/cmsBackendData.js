@@ -65,6 +65,50 @@ export function getGetAdvisoriesResponse(userName) {
   }))
 }
 
+/**
+ * Wraps the bare advisory array in the paginated envelope.
+ *
+ * The Documents tab always sends `?limit=<n>` (default 50), so the backend
+ * always answers with the `AdvisoryDocumentInformationPage` envelope rather
+ * than a bare array. The Cypress fixture dataset fits on a single page, so
+ * `hasMore` is `false` and `bookmark` is `null`.
+ *
+ * @param {string} [userName]
+ * @param {number} [limit]
+ * @returns {{
+ *   advisories: ReturnType<typeof getGetAdvisoriesResponse>,
+ *   bookmark: null,
+ *   hasMore: false,
+ *   limit: number,
+ * }}
+ */
+export function getGetAdvisoriesPageResponse(userName, limit = 50) {
+  return {
+    advisories: getGetAdvisoriesResponse(userName),
+    bookmark: null,
+    hasMore: false,
+    limit,
+  }
+}
+
+/**
+ * Wraps an already-shaped bare advisory array in the single-page
+ * envelope. Use when a test needs to mutate the row set (e.g. simulate a
+ * deletion) before serving it as a page.
+ *
+ * @param {Array<object>} advisories
+ * @param {number} [limit]
+ * @returns {{
+ *   advisories: Array<object>,
+ *   bookmark: null,
+ *   hasMore: false,
+ *   limit: number,
+ * }}
+ */
+export function asAdvisoriesPage(advisories, limit = 50) {
+  return { advisories, bookmark: null, hasMore: false, limit }
+}
+
 export function getAdvisories() {
   return testsSample.advisories
 }

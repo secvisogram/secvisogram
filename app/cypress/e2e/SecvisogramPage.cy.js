@@ -9,7 +9,7 @@ import { getLoginEnabledConfig } from '../fixtures/appConfigData.js'
 import {
   getAdvisories,
   getCreateAdvisoryResponse,
-  getGetAdvisoriesResponse,
+  getGetAdvisoriesPageResponse,
   getGetAdvisoryDetailResponse,
   getGetTemplateContentResponse,
   getGetTemplatesResponse,
@@ -197,9 +197,14 @@ describe('SecvisogramPage', () => {
               getLoginEnabledConfig().userInfoUrl,
               getUserInfo(user),
             ).as('apiGetUserInfo')
-            cy.intercept('/api/v1/advisories', getGetAdvisoriesResponse()).as(
-              'apiGetAdvisories',
-            )
+            cy.intercept(
+              {
+                method: 'GET',
+                pathname: '/api/v1/advisories',
+                query: { limit: '*' },
+              },
+              getGetAdvisoriesPageResponse(),
+            ).as('apiGetAdvisories')
             const advisoryDetail = getGetAdvisoryDetailResponse({
               advisoryId,
             })
@@ -569,9 +574,14 @@ describe('SecvisogramPage', () => {
               getLoginEnabledConfig().userInfoUrl,
               getUserInfo(user),
             ).as('apiGetUserInfo')
-            cy.intercept('/api/v1/advisories', getGetAdvisoriesResponse()).as(
-              'apiGetAdvisories',
-            )
+            cy.intercept(
+              {
+                method: 'GET',
+                pathname: '/api/v1/advisories',
+                query: { limit: '*' },
+              },
+              getGetAdvisoriesPageResponse(),
+            ).as('apiGetAdvisories')
 
             const advisoryDetail = getGetAdvisoryDetailResponse({
               advisoryId: advisory.advisoryId,
