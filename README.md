@@ -8,6 +8,7 @@
   - [Configure keybindings](#configure-keybindings)
 - [How to use](#how-to-use)
   - [Basic concepts](#basic-concepts)
+  - [Direct Advisory Links](#direct-advisory-links)
   - [Form Editor](#form-editor)
   - [JSON Editor](#json-editor)
   - [Preview HTML view](#preview-html-view)
@@ -169,6 +170,12 @@ When running with the [CSAF CMS Server](https://github.com/secvisogram/csaf-cms-
 
 Some fields allow the usage of markdown to format text.
 Further information can be found in the [Markdown Guide](MARKDOWN-GUIDE.md)
+
+[(back to top)](#bsi-secvisogram-csaf-20-web-editor)
+
+### Direct Advisory Links
+
+When running with the [CSAF CMS Server](https://github.com/secvisogram/csaf-cms-backend), external systems (e.g. a CMS) can link straight to an advisory by opening Secvisogram with an `advisoryId` query parameter, e.g. `https://your-secvisogram-instance/?advisoryId=<id>`. Secvisogram loads the referenced advisory and then switches to the Form Editor tab. In standalone mode (no backend configured), the parameter is ignored and the Form Editor simply opens empty.
 
 [(back to top)](#bsi-secvisogram-csaf-20-web-editor)
 

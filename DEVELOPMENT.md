@@ -265,6 +265,8 @@ New attributes can be added by instantiating a suitable attribute component (e.g
 
 The various parts of the application are accessible using the tabs. The state indicating which tab is active is stored in the react-state in `app/lib/SecvisogramPage.js`. Navigation is only disabled if a parsing error occurs in `app/lib/SecvisogramPage/View/JsonEditorTab.js`.
 
+Opening the app with an `advisoryId` query parameter (e.g. `/?advisoryId=<id>`) is handled by the `useDirectAdvisoryLinkRedirect` hook (`app/lib/SecvisogramPage/useDirectAdvisoryLinkRedirect.js`), called once from `View.js`. It waits until the app config has loaded, then, if backend-connected, loads the advisory via `onLoadAdvisory`/`setAdvisoryState`; in standalone mode it does nothing. Either way, it finishes by replacing the URL with the normal `?tab=EDITOR` link via the history API, so the `advisoryId` param never lingers in the address bar.
+
 ### Validation
 
 The application uses two validation patterns: The fast HTML5 validation; and the validation according to the JSON schema, which kicks in either 300ms after editing the document or when changing the tab. The status of the validation is shown in the "Form Editor" tab, the "JSON Editor" tab and the "Preview" tab.

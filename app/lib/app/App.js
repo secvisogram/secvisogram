@@ -21,7 +21,11 @@ export default function App({ secvisogramPage }) {
 
   useEffect(() => {
     api.appConfig.getAppConfig().then((response) => {
-      const mergedConfig = { ...defaultAppConfig, ...response }
+      const mergedConfig = {
+        ...defaultAppConfig,
+        ...response,
+        configLoaded: true,
+      }
       setAppConfig(mergedConfig)
     })
   }, [defaultAppConfig])
