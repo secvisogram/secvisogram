@@ -137,6 +137,11 @@
     "anErrorOccurred": "anErrorOccurred:",
     "details": "Details"
   },
+  "documentsTab": {
+    "copyPermalink": "Copy permalink to clipboard",
+    "permalinkCopiedMessage": "Permalink was successfully copied!",
+    "failedToCopyPermalinkMessage": "Failed to copy permalink!"
+  },
   "csaf": {
     "v2_0": {
       "AcknowledgmentsItemsTitle": "Acknowledgment",

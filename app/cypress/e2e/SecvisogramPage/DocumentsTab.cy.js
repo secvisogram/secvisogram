@@ -1,3 +1,4 @@
+import translation from '../../../locales/en/translation.json'
 import { getLoginEnabledConfig } from '../../fixtures/appConfigData.js'
 import {
   canCreateVersion,
@@ -301,5 +302,66 @@ describe('SecvisogramPage / DocumentsTab', function () {
         })
       }
     }
+  })
+
+  describe('can copy a permalink to an advisory', function () {
+    const user = getUsers()[0]
+    const [advisory] = getAdvisories()
+
+    beforeEach(function () {
+      cy.intercept(getLoginEnabledConfig().userInfoUrl, getUserInfo(user)).as(
+        'apiGetUserInfo',
+      )
+
+      cy.visit('?tab=DOCUMENTS')
+      cy.wait('@wellKnownAppConfig')
+      cy.wait('@apiGetUserInfo')
+      cy.wait('@apiGetAdvisories')
+    })
+
+    it('copies the permalink to the clipboard and shows a success message', function () {
+      cy.window().then((win) => {
+        Object.defineProperty(win.navigator, 'clipboard', {
+          value: { writeText: cy.stub().as('writeText').resolves() },
+          configurable: true,
+        })
+      })
+
+      cy.get(`[data-testid="advisory-${advisory.advisoryId}-list_entry"]`)
+        .find(`[aria-label="${translation.documentsTab.copyPermalink}"]`)
+        .click()
+
+      const expectedUrl = new URL('/', Cypress.config().baseUrl ?? undefined)
+      expectedUrl.searchParams.set('advisoryId', advisory.advisoryId)
+      cy.get('@writeText').should('have.been.calledWith', expectedUrl.href)
+
+      cy.get('[data-testid="error_toast_message"]').should(
+        'have.text',
+        translation.documentsTab.permalinkCopiedMessage,
+      )
+    })
+
+    it('shows a failure message when the clipboard write fails', function () {
+      cy.window().then((win) => {
+        Object.defineProperty(win.navigator, 'clipboard', {
+          value: {
+            writeText: cy
+              .stub()
+              .as('writeText')
+              .rejects(new Error('clipboard write denied')),
+          },
+          configurable: true,
+        })
+      })
+
+      cy.get(`[data-testid="advisory-${advisory.advisoryId}-list_entry"]`)
+        .find(`[aria-label="${translation.documentsTab.copyPermalink}"]`)
+        .click()
+
+      cy.get('[data-testid="error_toast_message"]').should(
+        'have.text',
+        translation.documentsTab.failedToCopyPermalinkMessage,
+      )
+    })
   })
 })
