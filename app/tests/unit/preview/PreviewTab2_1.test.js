@@ -1,7 +1,7 @@
-import { expect } from 'chai'
-import HTMLTemplate2_1 from '../../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2_1.js'
-import DocumentEntityCsaf21 from '../../../../lib/core/v2_1/entities/DocumentEntity.js'
-import { testDocuments } from '../../../fixtures/vulnerabilityFlagsTests.js'
+import { describe, expect, it } from 'vitest'
+import HTMLTemplate2_1 from '../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2_1.js'
+import DocumentEntityCsaf21 from '../../../lib/core/v2_1/entities/DocumentEntity.js'
+import { testDocuments } from '../../fixtures/vulnerabilityFlagsTests.js'
 
 const testDocument = (
   /** @type {any} */ document,

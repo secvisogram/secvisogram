@@ -5,15 +5,7 @@ module.exports = {
         ['@babel/preset-env', { modules: false, targets: { esmodules: true } }],
         '@babel/preset-react',
       ],
-      plugins: ['istanbul'],
       compact: false,
-    },
-    test: {
-      presets: [
-        ['@babel/preset-env', { targets: { node: 'current' } }],
-        '@babel/preset-react',
-      ],
-      compact: true,
     },
     production: {
       presets: [
