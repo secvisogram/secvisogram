@@ -43,7 +43,7 @@ test:
   # The test uses mocha-electron which requires more OS dependencies
   # We reuse a cypress image for convenience:
   # https://github.com/cypress-io/cypress-docker-images/tree/master/base
-  image: cypress/base:14.15.0
+  image: cypress/base:24.18.0
   stage: test
   script:
     - npx tsc -v
