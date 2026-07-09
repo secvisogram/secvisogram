@@ -4,7 +4,7 @@ import { getLoginEnabledConfig } from '../../fixtures/appConfigData.js'
 import {
   canChangeDocument,
   getAdvisories,
-  getGetAdvisoriesResponse,
+  getGetAdvisoriesPageResponse,
   getGetAdvisoryDetailResponse,
   getUserInfo,
   getUsers,
@@ -31,9 +31,12 @@ describe('SecvisogramPage / FormEditor Tab', function () {
             getUserInfo(user),
           ).as('apiGetUserInfo')
           cy.intercept(
-            'GET',
-            '/api/v1/advisories',
-            getGetAdvisoriesResponse(),
+            {
+              method: 'GET',
+              pathname: '/api/v1/advisories',
+              query: { limit: '*' },
+            },
+            getGetAdvisoriesPageResponse(),
           ).as('apiGetAdvisories')
 
           const advisoryDetail = getGetAdvisoryDetailResponse({
