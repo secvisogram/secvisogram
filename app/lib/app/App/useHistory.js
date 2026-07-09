@@ -14,6 +14,16 @@ export default function useHistory() {
         }))
       }
     ),
+    replaceState: /** @type {History['replaceState']} */ (
+      (...args) => {
+        window.history.replaceState(...args)
+        setHistory((state) => ({
+          ...state,
+          state: window.history.state,
+          location: window.location,
+        }))
+      }
+    ),
   })
 
   React.useEffect(() => {

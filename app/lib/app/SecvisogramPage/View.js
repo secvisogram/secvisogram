@@ -13,6 +13,7 @@ import externalJsonToFile from '../shared/externalJsonToFile.js'
 import { canCreateDocuments } from '../shared/permissions.js'
 import pruneEmpty from '../shared/pruneEmpty.js'
 import isPropertyRelevant from './shared/isPropertyRelevant.js'
+import useDirectAdvisoryLinkRedirect from './useDirectAdvisoryLinkRedirect.js'
 import AboutDialog from './View/AboutDialog.js'
 import BetaVersionConfirmationDialog from './View/BetaVersionConfirmationDialog.js'
 import CsafTab from './View/CsafTab.js'
@@ -174,6 +175,15 @@ function View({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(props.isLoading)
   }, [props.isLoading])
+
+  // TEMPORARY FEATURE, see useDirectAdvisoryLinkRedirect.js for removal notes.
+  useDirectAdvisoryLinkRedirect({
+    appConfig,
+    onLoadAdvisory,
+    setLoading,
+    setAdvisoryState,
+    handleError,
+  })
 
   const [isSaving, setSaving] = React.useState(false)
 

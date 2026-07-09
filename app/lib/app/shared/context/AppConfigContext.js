@@ -9,6 +9,7 @@ import React from 'react'
  * @property {string} userInfoUrl
  * @property {string} validatorUrl
  * @property {KeyBindings} keyBindings
+ * @property {boolean} configLoaded
  */
 
 /**
@@ -41,6 +42,7 @@ const defaultValue = {
   logoutUrl: '',
   userInfoUrl: '',
   validatorUrl: '',
+  configLoaded: false,
   keyBindings: {
     keySave: 'ctrl+s',
     keyValidate: 'ctrl+alt+v',
