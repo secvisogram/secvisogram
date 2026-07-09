@@ -30,11 +30,5 @@ jobs:
         with:
           node-version: '24'
       - run: npm ci
-      - run: sudo apt-get install xvfb
-      - run: npm run dev &
-      - uses: ifaxity/wait-on-action@v1.1.0
-        with:
-          delay: 1
-          timeout: 30000
-          resource: tcp:localhost:8080
-      - run: xvfb-run --auto-servernum npm run-script test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run-script test
