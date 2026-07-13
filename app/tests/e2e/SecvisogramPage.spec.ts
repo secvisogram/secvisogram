@@ -44,10 +44,11 @@ test.describe('SecvisogramPage', () => {
       await page.locator('#csafVersionSelect').selectOption('v2.1')
       await expect(page.getByTestId('beta_version_dialog')).toBeVisible()
       await page.getByTestId('beta_version-cancel_button').click()
-      await expect(page.getByTestId('beta_version_dialog')).toBeHidden()
+      await expect(page.getByTestId('beta_version_dialog')).not.toBeAttached()
       await expect(page.locator('#csafVersionSelect')).toHaveValue('v2.0')
 
       await page.locator('#csafVersionSelect').selectOption('v2.1')
+      await expect(page.getByTestId('beta_version_dialog')).toBeVisible()
       await page.getByTestId('beta_version-confirm_button').click()
       await expect(page.getByTestId('beta_version_dialog')).toBeHidden()
       await expect(page.locator('#csafVersionSelect')).toHaveValue('v2.1')
