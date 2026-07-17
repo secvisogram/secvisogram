@@ -1,6 +1,4 @@
-/// <reference types="cypress" />
-
-import { expect } from 'chai'
+import { beforeAll, describe, expect, it } from 'vitest'
 import isPropertyRelevant from '../../lib/app/SecvisogramPage/shared/isPropertyRelevant.js'
 import {
   getBranchName,
@@ -14,7 +12,7 @@ import createFileName from '../../lib/shared/createFileName.js'
 import { testDocuments } from '../fixtures/vulnerabilityFlagsTests.js'
 
 describe('Unit Test Functions', function () {
-  context('createFileName.js', function () {
+  describe('createFileName.js', function () {
     it('should default to csaf_2_0', function () {
       const fileName = createFileName({}, true, 'json')
       expect(fileName).to.eq('csaf_2_0.json')
@@ -116,7 +114,7 @@ describe('Unit Test Functions', function () {
     })
   })
 
-  context('pruneEmpty.js', function () {
+  describe('pruneEmpty.js', function () {
     const testData = [
       [{}, {}],
       [{ a: 1 }, { a: 1 }],
@@ -138,7 +136,7 @@ describe('Unit Test Functions', function () {
     })
   })
 
-  context('isPropertyRelevant.js', function () {
+  describe('isPropertyRelevant.js', function () {
     const relevanceLevels = [
       'mandatory',
       'best_practice',
@@ -216,8 +214,8 @@ describe('Unit Test Functions', function () {
     })
   })
 
-  context('fillFieldFunctions.js', function () {
-    context('getNextIdForPrefix', function () {
+  describe('fillFieldFunctions.js', function () {
+    describe('getNextIdForPrefix', function () {
       it('should return next product id', function () {
         const nextProductId = getNextIdForPrefix(
           PRODUCT_PREFIX,
@@ -236,7 +234,7 @@ describe('Unit Test Functions', function () {
       })
     })
 
-    context('getBranchName', function () {
+    describe('getBranchName', function () {
       it('should get the branch name from parent items', function () {
         const doc = {
           product_tree: {
@@ -309,7 +307,7 @@ describe('Unit Test Functions', function () {
       })
     })
 
-    context('getRelationshipName', function () {
+    describe('getRelationshipName', function () {
       const doc = {
         product_tree: {
           relationships: [
@@ -331,7 +329,7 @@ describe('Unit Test Functions', function () {
 
       /** @type {string} */
       let result
-      before(async () => {
+      beforeAll(async () => {
         result =
           (await getRelationshipName(
             doc,

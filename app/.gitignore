@@ -5,9 +5,11 @@
 # local .well-known/appspecific config
 /public/.well-known/appspecific/de.bsi.secvisogram.json
 
-/cypress/downloads
 /coverage
 /.nyc_output
 
 *storybook.log
 storybook-static
+
+/playwright-report
+/test-results
