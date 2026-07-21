@@ -57,11 +57,6 @@ module.exports = {
       ? []
       : [
           new HTMLWebpackPlugin({
-            chunks: ['style'],
-            template: './lib/index.html',
-            filename: 'cypress/index.html',
-          }),
-          new HTMLWebpackPlugin({
             chunks: ['style', 'view-tests'],
             filename: 'view-tests.html',
           }),

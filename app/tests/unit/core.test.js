@@ -1,6 +1,4 @@
-/// <reference types="cypress" />
-
-import { expect } from 'chai'
+import { describe, expect, it } from 'vitest'
 import * as core from '../../lib/core/v2_0.js'
 import fixture from '../fixtures/coreFixture.js'
 import documentTests from '../fixtures/documentTests.js'

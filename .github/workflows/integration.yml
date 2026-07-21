@@ -11,10 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: 'recursive'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
       - run: npm ci
@@ -22,19 +22,15 @@ jobs:
       - run: npm run-script build
   test:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-noble
+      options: --user 1001
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: 'recursive'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
       - run: npm ci
-      - run: sudo apt-get install xvfb
-      - run: npm run dev &
-      - uses: ifaxity/wait-on-action@v1.1.0
-        with:
-          delay: 1
-          timeout: 30000
-          resource: tcp:localhost:8080
-      - run: xvfb-run --auto-servernum npm run-script test
+      - run: npm run-script test
