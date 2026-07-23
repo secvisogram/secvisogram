@@ -19,7 +19,7 @@ const metaDataMap = new Map(Object.entries(metaData))
 const outputFile = fileURLToPath(
   new URL('../../lib/uiSchemas/csaf_2_0/content.js', import.meta.url),
 )
-const prettierString = prettier.format(
+const prettierString = await prettier.format(
   `/** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */
 export default /** @type {const} */ (${JSON.stringify(
     convertSchema(
