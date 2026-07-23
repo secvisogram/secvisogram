@@ -1,5 +1,6 @@
 import { uiSchemas } from '#lib/uiSchemas.js'
-import { readFile, writeFile } from 'node:fs/promises'
+import { subJsonSchemas } from '#lib/uiSchemas/csaf_2_1.js'
+import { writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import prettier from 'prettier'
 
@@ -7,11 +8,6 @@ const { metaData, jsonSchema } = uiSchemas['v2.1']
 
 /** @typedef {import('./cvss-v2.0.json')} CVSS2JSONSchema */
 /** @typedef {import('./csaf_2_1/cvss-v4.0.json')} CVSS4JSONSchema */
-
-/** @type {CVSS2JSONSchema} */
-const cvss2Schema = JSON.parse(
-  await readFile(new URL('cvss-v2.0.json', import.meta.url), 'utf-8'),
-)
 
 const defs = /** @type {import('./csaf_2_1/types.js').Defs} */ (
   jsonSchema.$defs
@@ -22,7 +18,7 @@ const metaDataMap = new Map(Object.entries(metaData))
 const outputFile = fileURLToPath(
   new URL('../../lib/uiSchemas/csaf_2_1/content.js', import.meta.url),
 )
-const prettierString = prettier.format(
+const prettierString = await prettier.format(
   `/** @type {import('#lib/app/SecvisogramPage/shared/types.js').Property} */
 export default (${JSON.stringify(
     convertSchema(
@@ -90,7 +86,9 @@ function convertSchema(subschema, defs, path) {
     strPath ===
       'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.cvss_v4' ||
     strPath ===
-      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v1'
+      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v1' ||
+    strPath ===
+      'properties.vulnerabilities.items.properties.metrics.items.properties.content.properties.ssvc_v2'
   ) {
     return {
       ...commonUiSchemaFields,
@@ -138,10 +136,15 @@ function convertSchema(subschema, defs, path) {
   if ('$ref' in subschema) {
     /** @type {import('./csaf_2_1/types.js').UiSchema} */
     let resolvedSchema
-    if (subschema.$ref === 'https://www.first.org/cvss/cvss-v2.0.json') {
+    const knownSchema = subJsonSchemas.find((s) => s.ref === subschema.$ref)
+    if (knownSchema) {
       resolvedSchema = convertSchema(
-        /** @type {import('./csaf_2_1/types.js').Schema} */ (cvss2Schema),
-        /** @type {import('./csaf_2_1/types.js').Defs} */ (cvss2Schema.$defs),
+        /** @type {import('./csaf_2_1/types.js').Schema} */ (
+          knownSchema.content
+        ),
+        /** @type {import('./csaf_2_1/types.js').Defs} */ (
+          '$defs' in knownSchema.content ? knownSchema.content.$defs : {}
+        ),
         path,
       )
     } else {
@@ -164,7 +167,7 @@ function convertSchema(subschema, defs, path) {
   }
 
   if (subschema.type === 'object') {
-    let propertyList = Object.entries(subschema.properties)
+    let propertyList = Object.entries(subschema.properties ?? {})
     if (metaData && 'propertyOrder' in metaData) {
       const propertyOrder = metaData.propertyOrder
       propertyList = propertyList
@@ -239,6 +242,16 @@ function convertSchema(subschema, defs, path) {
       type: 'NUMBER',
     }
   }
+
+  if (subschema.type === 'boolean') {
+    return {
+      ...commonUiSchemaFields,
+      metaInfo: {},
+      type: 'BOOLEAN',
+    }
+  }
+
+  console.log(subschema)
 
   throw new Error('Unknown field encountered: ' + strPath)
 }
