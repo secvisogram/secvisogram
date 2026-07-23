@@ -35,7 +35,7 @@ export type AdvisoryState =
 export type Property = Readonly<{
   key: string
   title?: string
-  type: 'STRING' | 'ARRAY' | 'OBJECT' | 'RECURSION' | 'NUMBER'
+  type: 'STRING' | 'ARRAY' | 'OBJECT' | 'RECURSION' | 'NUMBER' | 'BOOLEAN'
   fullName: ReadonlyArray<string>
   description?: string
   mandatory?: boolean

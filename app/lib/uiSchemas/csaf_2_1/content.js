@@ -34,9 +34,7 @@ export default {
             csaf_vex: 'mandatory',
           },
         },
-        enum: [
-          'https://docs.oasis-open.org/csaf/csaf/v2.1/csaf_json_schema.json',
-        ],
+        enum: ['https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json'],
         metaInfo: {},
         type: 'STRING',
       },
@@ -334,7 +332,7 @@ export default {
               fullName: ['document', 'aggregate_severity'],
               title: 'Aggregate severity',
               description:
-                "Is a vehicle that is provided by the document producer to convey the urgency and criticality with which the one or more vulnerabilities reported should be addressed. It is a document-level metric and applied to the document as a whole — not any specific vulnerability. The range of values in this field is defined according to the document producer's policies and procedures.",
+                "Is a vehicle that is provided by the document producer to convey the urgency and criticality with which the one or more vulnerabilities reported should be addressed. It is a document-level metric and applied to the document as a whole â€” not any specific vulnerability. The range of values in this field is defined according to the document producer's policies and procedures.",
               metaData: {
                 userDocumentation: {
                   specification:
@@ -493,7 +491,7 @@ export default {
             {
               key: 'distribution',
               fullName: ['document', 'distribution'],
-              title: 'Rules for sharing document',
+              title: 'Rules for document sharing',
               description:
                 'Describe any constraints on how this document might be shared.',
               metaData: {
@@ -2226,6 +2224,151 @@ export default {
                 ],
               },
             },
+            {
+              key: 'x_extensions',
+              fullName: ['document', 'x_extensions'],
+              title: 'Document-level Extensions',
+              description:
+                'Contains a list of extensions valid at the document property level of the CSAF document and associated with this document metadata.',
+              metaData: {
+                relevanceLevels: {
+                  csaf_base: 'optional',
+                  csaf_security_incident_response: 'optional',
+                  csaf_informational_advisory: 'optional',
+                  csaf_security_advisory: 'optional',
+                  csaf_vex: 'optional',
+                },
+                i18n: {
+                  title: 'v2_1.DocumentXExtensionsTitle',
+                  description: 'v2_1.DocumentXExtensionsDescription',
+                },
+              },
+              type: 'ARRAY',
+              metaInfo: {
+                arrayType: {
+                  key: '',
+                  fullName: ['document', 'x_extensions'],
+                  title: 'CSAF Extension Content',
+                  description:
+                    'Representation of additional information extending a CSAF Document.',
+                  metaData: {
+                    i18n: {
+                      title: 'v2_1.ExtensionsItemsTitle',
+                      description: 'v2_1.ExtensionsItemsDescription',
+                    },
+                    relevanceLevels: {
+                      csaf_base: 'optional',
+                      csaf_security_incident_response: 'optional',
+                      csaf_informational_advisory: 'optional',
+                      csaf_security_advisory: 'optional',
+                      csaf_vex: 'optional',
+                    },
+                  },
+                  type: 'OBJECT',
+                  metaInfo: {
+                    propertyList: [
+                      {
+                        key: '$schema',
+                        fullName: ['document', 'x_extensions', '$schema'],
+                        title: 'CSAF Extension Schema',
+                        description:
+                          'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                        metaData: {
+                          uiType: 'STRING_URI',
+                          relevanceLevels: {
+                            csaf_base: 'mandatory',
+                            csaf_security_incident_response: 'mandatory',
+                            csaf_informational_advisory: 'mandatory',
+                            csaf_security_advisory: 'mandatory',
+                            csaf_vex: 'mandatory',
+                          },
+                          i18n: {
+                            title: 'v2_1.ExtensionsItemsSchemaTitle',
+                            description:
+                              'v2_1.ExtensionsItemsSchemaDescription',
+                          },
+                        },
+                        pattern:
+                          '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                        metaInfo: {},
+                        type: 'STRING',
+                      },
+                      {
+                        key: 'category',
+                        fullName: ['document', 'x_extensions', 'category'],
+                        title: 'Extension Category',
+                        description:
+                          'Holds the category of the extension content.',
+                        metaData: {
+                          uiType: 'STRING_ENUM',
+                          relevanceLevels: {
+                            csaf_base: 'mandatory',
+                            csaf_security_incident_response: 'mandatory',
+                            csaf_informational_advisory: 'mandatory',
+                            csaf_security_advisory: 'mandatory',
+                            csaf_vex: 'mandatory',
+                          },
+                          i18n: {
+                            title: 'v2_1.ExtensionsItemsCategoryTitle',
+                            description:
+                              'v2_1.ExtensionsItemsCategoryDescription',
+                          },
+                        },
+                        enum: ['critical', 'high_value', 'informational'],
+                        metaInfo: {},
+                        type: 'STRING',
+                      },
+                      {
+                        key: 'content',
+                        fullName: ['document', 'x_extensions', 'content'],
+                        title: 'Content',
+                        description:
+                          'Contains the additional information in its properties.',
+                        metaData: {
+                          relevanceLevels: {
+                            csaf_base: 'mandatory',
+                            csaf_security_incident_response: 'mandatory',
+                            csaf_informational_advisory: 'mandatory',
+                            csaf_security_advisory: 'mandatory',
+                            csaf_vex: 'mandatory',
+                          },
+                          i18n: {
+                            title: 'v2_1.ExtensionsItemsContentTitle',
+                            description:
+                              'v2_1.ExtensionsItemsContentDescription',
+                          },
+                        },
+                        type: 'OBJECT',
+                        metaInfo: { propertyList: [] },
+                      },
+                      {
+                        key: 'critical',
+                        fullName: ['document', 'x_extensions', 'critical'],
+                        title: 'Critical',
+                        description:
+                          'Determines whether using the extension would fail a mandatory test.',
+                        metaData: {
+                          relevanceLevels: {
+                            csaf_base: 'mandatory',
+                            csaf_security_incident_response: 'mandatory',
+                            csaf_informational_advisory: 'mandatory',
+                            csaf_security_advisory: 'mandatory',
+                            csaf_vex: 'mandatory',
+                          },
+                          i18n: {
+                            title: 'v2_1.ExtensionsItemsCriticalTitle',
+                            description:
+                              'v2_1.ExtensionsItemsCriticalDescription',
+                          },
+                        },
+                        metaInfo: {},
+                        type: 'BOOLEAN',
+                      },
+                    ],
+                  },
+                },
+              },
+            },
           ],
         },
       },
@@ -2365,7 +2508,6 @@ export default {
                           'architecture',
                           'host_name',
                           'language',
-                          'legacy',
                           'patch_level',
                           'platform',
                           'product_family',
@@ -2451,7 +2593,7 @@ export default {
                               ],
                               title: 'Textual description of the product',
                               description:
-                                'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                                'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                               metaData: {
                                 uiType: 'STRING_BRANCH_FULL_PRODUCT_NAME',
                                 userDocumentation: {
@@ -2807,6 +2949,8 @@ export default {
                                                           'sha384',
                                                           'sha512',
                                                         ],
+                                                        pattern:
+                                                          '^[0-9a-z][0-9a-z-]*$',
                                                         default: 'sha256',
                                                         metaInfo: {},
                                                         type: 'STRING',
@@ -2825,7 +2969,7 @@ export default {
                                                         title:
                                                           'Value of the cryptographic hash',
                                                         description:
-                                                          'Contains the cryptographic hash value in hexadecimal representation.',
+                                                          'Contains the cryptographic hash value in lowercase hexadecimal representation.',
                                                         metaData: {
                                                           userDocumentation: {
                                                             specification:
@@ -2859,7 +3003,7 @@ export default {
                                                           '9ea4c8200113d49d26505da0e02e2f49055dc078d1ad7a419b32e291c7afebbb84badfbd46dec42883bea0b2a1fa697c',
                                                         ],
                                                         pattern:
-                                                          '^[0-9a-fA-F]{32,}$',
+                                                          '^[0-9a-f]{32,}$',
                                                         metaInfo: {},
                                                         type: 'STRING',
                                                       },
@@ -2930,7 +3074,7 @@ export default {
                                     ],
                                     title: 'List of models',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) model numbers.',
+                                      'Contains a list of model numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -2967,7 +3111,7 @@ export default {
                                         ],
                                         title: 'Model number',
                                         description:
-                                          'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                          'Contains a model number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -3011,9 +3155,9 @@ export default {
                                       'product_identification_helper',
                                       'purls',
                                     ],
-                                    title: 'List of package URLs',
+                                    title: 'List of PURLs',
                                     description:
-                                      'Contains a list of package URLs (purl).',
+                                      'Contains a list of Package-URLs (PURL).',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -3048,9 +3192,9 @@ export default {
                                           'product_identification_helper',
                                           'purls',
                                         ],
-                                        title: 'package URL representation',
+                                        title: 'Package-URL representation',
                                         description:
-                                          'The package URL (purl) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
+                                          'The Package-URL (PURL) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
                                         metaData: {
                                           uiType: 'STRING_URI',
                                           userDocumentation: {
@@ -3078,7 +3222,7 @@ export default {
                                         },
                                         minLength: 7,
                                         pattern:
-                                          '^pkg:[A-Za-z\\.\\-\\+][A-Za-z0-9\\.\\-\\+]*\\/.+',
+                                          '^pkg:[a-z][a-z0-9\\.\\-]*\\/.+',
                                         metaInfo: {},
                                         type: 'STRING',
                                       },
@@ -3178,7 +3322,7 @@ export default {
                                     ],
                                     title: 'List of serial numbers',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) serial numbers.',
+                                      'Contains a list of serial numbers.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -3215,7 +3359,7 @@ export default {
                                         ],
                                         title: 'Serial number',
                                         description:
-                                          'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                          'Contains a serial number of the component to identify - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -3261,7 +3405,7 @@ export default {
                                     ],
                                     title: 'List of stock keeping units',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) stock keeping units.',
+                                      'Contains a list of stock keeping units.',
                                     metaData: {
                                       userDocumentation: {
                                         specification:
@@ -3298,7 +3442,7 @@ export default {
                                         ],
                                         title: 'Stock keeping unit',
                                         description:
-                                          'Contains a full or abbreviated (partial) stock keeping unit (SKU) which is used in the ordering process to identify the component.',
+                                          'Contains a stock keeping unit (SKU) which is used in the ordering process to identify the component - possibly with placeholders.',
                                         metaData: {
                                           userDocumentation: {
                                             specification:
@@ -3504,6 +3648,204 @@ export default {
                                 ],
                               },
                             },
+                            {
+                              key: 'x_extensions',
+                              fullName: [
+                                'product_tree',
+                                'branches',
+                                'product',
+                                'x_extensions',
+                              ],
+                              title: 'Product-level Extensions',
+                              description:
+                                'Contains a list of extensions valid at the full product name element level of the CSAF document and associated with this full product name element.',
+                              metaData: {
+                                relevanceLevels: {
+                                  csaf_base: 'optional',
+                                  csaf_security_incident_response: 'optional',
+                                  csaf_informational_advisory: 'optional',
+                                  csaf_security_advisory: 'optional',
+                                  csaf_vex: 'optional',
+                                },
+                                i18n: {
+                                  title: 'v2_1.FullProductNameXExtensionsTitle',
+                                  description:
+                                    'v2_1.FullProductNameXExtensionsDescription',
+                                },
+                              },
+                              type: 'ARRAY',
+                              metaInfo: {
+                                arrayType: {
+                                  key: '',
+                                  fullName: [
+                                    'product_tree',
+                                    'branches',
+                                    'product',
+                                    'x_extensions',
+                                  ],
+                                  title: 'CSAF Extension Content',
+                                  description:
+                                    'Representation of additional information extending a CSAF Document.',
+                                  metaData: {
+                                    i18n: {
+                                      title: 'v2_1.ExtensionsItemsTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsDescription',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'optional',
+                                      csaf_security_incident_response:
+                                        'optional',
+                                      csaf_informational_advisory: 'optional',
+                                      csaf_security_advisory: 'optional',
+                                      csaf_vex: 'optional',
+                                    },
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: {
+                                    propertyList: [
+                                      {
+                                        key: '$schema',
+                                        fullName: [
+                                          'product_tree',
+                                          'branches',
+                                          'product',
+                                          'x_extensions',
+                                          '$schema',
+                                        ],
+                                        title: 'CSAF Extension Schema',
+                                        description:
+                                          'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                                        metaData: {
+                                          uiType: 'STRING_URI',
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsSchemaTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsSchemaDescription',
+                                          },
+                                        },
+                                        pattern:
+                                          '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'category',
+                                        fullName: [
+                                          'product_tree',
+                                          'branches',
+                                          'product',
+                                          'x_extensions',
+                                          'category',
+                                        ],
+                                        title: 'Extension Category',
+                                        description:
+                                          'Holds the category of the extension content.',
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsCategoryTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsCategoryDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'critical',
+                                          'high_value',
+                                          'informational',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'content',
+                                        fullName: [
+                                          'product_tree',
+                                          'branches',
+                                          'product',
+                                          'x_extensions',
+                                          'content',
+                                        ],
+                                        title: 'Content',
+                                        description:
+                                          'Contains the additional information in its properties.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsContentTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsContentDescription',
+                                          },
+                                        },
+                                        type: 'OBJECT',
+                                        metaInfo: { propertyList: [] },
+                                      },
+                                      {
+                                        key: 'critical',
+                                        fullName: [
+                                          'product_tree',
+                                          'branches',
+                                          'product',
+                                          'x_extensions',
+                                          'critical',
+                                        ],
+                                        title: 'Critical',
+                                        description:
+                                          'Determines whether using the extension would fail a mandatory test.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsCriticalTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsCriticalDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'BOOLEAN',
+                                      },
+                                    ],
+                                  },
+                                },
+                              },
+                            },
                           ],
                         },
                       },
@@ -3580,7 +3922,7 @@ export default {
                         ],
                         title: 'Textual description of the product',
                         description:
-                          'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                          'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                         metaData: {
                           userDocumentation: {
                             specification:
@@ -3918,6 +4260,8 @@ export default {
                                                     'sha384',
                                                     'sha512',
                                                   ],
+                                                  pattern:
+                                                    '^[0-9a-z][0-9a-z-]*$',
                                                   default: 'sha256',
                                                   metaInfo: {},
                                                   type: 'STRING',
@@ -3935,7 +4279,7 @@ export default {
                                                   title:
                                                     'Value of the cryptographic hash',
                                                   description:
-                                                    'Contains the cryptographic hash value in hexadecimal representation.',
+                                                    'Contains the cryptographic hash value in lowercase hexadecimal representation.',
                                                   metaData: {
                                                     userDocumentation: {
                                                       specification:
@@ -3966,7 +4310,7 @@ export default {
                                                     '4775203615d9534a8bfca96a93dc8b461a489f69124a130d786b42204f3341cc',
                                                     '9ea4c8200113d49d26505da0e02e2f49055dc078d1ad7a419b32e291c7afebbb84badfbd46dec42883bea0b2a1fa697c',
                                                   ],
-                                                  pattern: '^[0-9a-fA-F]{32,}$',
+                                                  pattern: '^[0-9a-f]{32,}$',
                                                   metaInfo: {},
                                                   type: 'STRING',
                                                 },
@@ -4033,8 +4377,7 @@ export default {
                                 'model_numbers',
                               ],
                               title: 'List of models',
-                              description:
-                                'Contains a list of full or abbreviated (partial) model numbers.',
+                              description: 'Contains a list of model numbers.',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -4069,7 +4412,7 @@ export default {
                                   ],
                                   title: 'Model number',
                                   description:
-                                    'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                    'Contains a model number of the component to identify - possibly with placeholders.',
                                   metaData: {
                                     userDocumentation: {
                                       specification:
@@ -4111,9 +4454,9 @@ export default {
                                 'product_identification_helper',
                                 'purls',
                               ],
-                              title: 'List of package URLs',
+                              title: 'List of PURLs',
                               description:
-                                'Contains a list of package URLs (purl).',
+                                'Contains a list of Package-URLs (PURL).',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -4146,9 +4489,9 @@ export default {
                                     'product_identification_helper',
                                     'purls',
                                   ],
-                                  title: 'package URL representation',
+                                  title: 'Package-URL representation',
                                   description:
-                                    'The package URL (purl) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
+                                    'The Package-URL (PURL) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
                                   metaData: {
                                     uiType: 'STRING_URI',
                                     userDocumentation: {
@@ -4174,8 +4517,7 @@ export default {
                                     },
                                   },
                                   minLength: 7,
-                                  pattern:
-                                    '^pkg:[A-Za-z\\.\\-\\+][A-Za-z0-9\\.\\-\\+]*\\/.+',
+                                  pattern: '^pkg:[a-z][a-z0-9\\.\\-]*\\/.+',
                                   metaInfo: {},
                                   type: 'STRING',
                                 },
@@ -4269,8 +4611,7 @@ export default {
                                 'serial_numbers',
                               ],
                               title: 'List of serial numbers',
-                              description:
-                                'Contains a list of full or abbreviated (partial) serial numbers.',
+                              description: 'Contains a list of serial numbers.',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -4305,7 +4646,7 @@ export default {
                                   ],
                                   title: 'Serial number',
                                   description:
-                                    'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                    'Contains a serial number of the component to identify - possibly with placeholders.',
                                   metaData: {
                                     userDocumentation: {
                                       specification:
@@ -4349,7 +4690,7 @@ export default {
                               ],
                               title: 'List of stock keeping units',
                               description:
-                                'Contains a list of full or abbreviated (partial) stock keeping units.',
+                                'Contains a list of stock keeping units.',
                               metaData: {
                                 userDocumentation: {
                                   specification:
@@ -4384,7 +4725,7 @@ export default {
                                   ],
                                   title: 'Stock keeping unit',
                                   description:
-                                    'Contains a full or abbreviated (partial) stock keeping unit (SKU) which is used in the ordering process to identify the component.',
+                                    'Contains a stock keeping unit (SKU) which is used in the ordering process to identify the component - possibly with placeholders.',
                                   metaData: {
                                     userDocumentation: {
                                       specification:
@@ -4578,6 +4919,190 @@ export default {
                               },
                             },
                           ],
+                        },
+                      },
+                      {
+                        key: 'x_extensions',
+                        fullName: [
+                          'product_tree',
+                          'full_product_names',
+                          'x_extensions',
+                        ],
+                        title: 'Product-level Extensions',
+                        description:
+                          'Contains a list of extensions valid at the full product name element level of the CSAF document and associated with this full product name element.',
+                        metaData: {
+                          relevanceLevels: {
+                            csaf_base: 'optional',
+                            csaf_security_incident_response: 'optional',
+                            csaf_informational_advisory: 'optional',
+                            csaf_security_advisory: 'optional',
+                            csaf_vex: 'optional',
+                          },
+                          i18n: {
+                            title: 'v2_1.FullProductNameXExtensionsTitle',
+                            description:
+                              'v2_1.FullProductNameXExtensionsDescription',
+                          },
+                        },
+                        type: 'ARRAY',
+                        metaInfo: {
+                          arrayType: {
+                            key: '',
+                            fullName: [
+                              'product_tree',
+                              'full_product_names',
+                              'x_extensions',
+                            ],
+                            title: 'CSAF Extension Content',
+                            description:
+                              'Representation of additional information extending a CSAF Document.',
+                            metaData: {
+                              i18n: {
+                                title: 'v2_1.ExtensionsItemsTitle',
+                                description: 'v2_1.ExtensionsItemsDescription',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'optional',
+                                csaf_security_incident_response: 'optional',
+                                csaf_informational_advisory: 'optional',
+                                csaf_security_advisory: 'optional',
+                                csaf_vex: 'optional',
+                              },
+                            },
+                            type: 'OBJECT',
+                            metaInfo: {
+                              propertyList: [
+                                {
+                                  key: '$schema',
+                                  fullName: [
+                                    'product_tree',
+                                    'full_product_names',
+                                    'x_extensions',
+                                    '$schema',
+                                  ],
+                                  title: 'CSAF Extension Schema',
+                                  description:
+                                    'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                                  metaData: {
+                                    uiType: 'STRING_URI',
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title: 'v2_1.ExtensionsItemsSchemaTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsSchemaDescription',
+                                    },
+                                  },
+                                  pattern:
+                                    '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'category',
+                                  fullName: [
+                                    'product_tree',
+                                    'full_product_names',
+                                    'x_extensions',
+                                    'category',
+                                  ],
+                                  title: 'Extension Category',
+                                  description:
+                                    'Holds the category of the extension content.',
+                                  metaData: {
+                                    uiType: 'STRING_ENUM',
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'v2_1.ExtensionsItemsCategoryTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsCategoryDescription',
+                                    },
+                                  },
+                                  enum: [
+                                    'critical',
+                                    'high_value',
+                                    'informational',
+                                  ],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'content',
+                                  fullName: [
+                                    'product_tree',
+                                    'full_product_names',
+                                    'x_extensions',
+                                    'content',
+                                  ],
+                                  title: 'Content',
+                                  description:
+                                    'Contains the additional information in its properties.',
+                                  metaData: {
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title: 'v2_1.ExtensionsItemsContentTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsContentDescription',
+                                    },
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: { propertyList: [] },
+                                },
+                                {
+                                  key: 'critical',
+                                  fullName: [
+                                    'product_tree',
+                                    'full_product_names',
+                                    'x_extensions',
+                                    'critical',
+                                  ],
+                                  title: 'Critical',
+                                  description:
+                                    'Determines whether using the extension would fail a mandatory test.',
+                                  metaData: {
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'v2_1.ExtensionsItemsCriticalTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsCriticalDescription',
+                                    },
+                                  },
+                                  metaInfo: {},
+                                  type: 'BOOLEAN',
+                                },
+                              ],
+                            },
+                          },
                         },
                       },
                     ],
@@ -4797,78 +5322,59 @@ export default {
               },
             },
             {
-              key: 'relationships',
-              fullName: ['product_tree', 'relationships'],
-              title: 'List of relationships',
-              description: 'Contains a list of relationships.',
+              key: 'product_paths',
+              fullName: ['product_tree', 'product_paths'],
+              title: 'List of product paths',
+              description: 'Contains a list of product paths.',
               metaData: {
-                userDocumentation: {
-                  specification:
-                    'docs/user/product_tree/relationships-spec.en.md',
-                  usage: 'docs/user/product_tree/relationships-usage.en.md',
-                },
                 relevanceLevels: {
                   csaf_base: 'optional',
                   csaf_security_incident_response: 'optional',
                   csaf_informational_advisory: 'optional',
-                  csaf_security_advisory: 'want_to_have',
-                  csaf_vex: 'want_to_have',
+                  csaf_security_advisory: 'optional',
+                  csaf_vex: 'optional',
                 },
                 i18n: {
-                  title: 'v2_1.ProductTreeRelationshipsTitle',
-                  description: 'v2_1.ProductTreeRelationshipsDescription',
+                  title: 'v2_1.ProductTreeProductPathsTitle',
+                  description: 'v2_1.ProductTreeProductPathsDescription',
                 },
               },
               type: 'ARRAY',
               metaInfo: {
                 arrayType: {
                   key: '',
-                  fullName: ['product_tree', 'relationships'],
-                  title: 'Relationship',
+                  fullName: ['product_tree', 'product_paths'],
+                  title: 'Product path',
                   description:
-                    'Establishes a link between two existing full_product_name_t elements, allowing the document producer to define a combination of two products that form a new full_product_name entry.',
-                  addMenuItemsForChildObjects: true,
+                    'Establishes a path along existing full_product_name_t elements, allowing the document producer to define a path of multiple products that form a new full_product_name entry.',
                   metaData: {
-                    userDocumentation: {
-                      specification:
-                        'docs/user/product_tree/relationships/relationship-spec.en.md',
-                      usage:
-                        'docs/user/product_tree/relationships/relationship-usage.en.md',
-                    },
                     i18n: {
-                      title: 'v2_1.ProductTreeRelationshipsItemsTitle',
-                      description:
-                        'v2_1.ProductTreeRelationshipsItemsDescription',
+                      title: 'v2_1.ProductPathTitle',
+                      description: 'v2_1.ProductPathDescription',
                     },
-                    itemName: {
-                      itemNameTranslationKey: 'arrays.relationshipsItemName',
-                    },
-                    addMenuItemsForChildObjects: true,
                     relevanceLevels: {
                       csaf_base: 'optional',
                       csaf_security_incident_response: 'optional',
                       csaf_informational_advisory: 'optional',
-                      csaf_security_advisory: 'want_to_have',
-                      csaf_vex: 'want_to_have',
+                      csaf_security_advisory: 'optional',
+                      csaf_vex: 'optional',
                     },
                   },
                   type: 'OBJECT',
                   metaInfo: {
                     propertyList: [
                       {
-                        key: 'category',
-                        fullName: ['product_tree', 'relationships', 'category'],
-                        title: 'Relationship category',
+                        key: 'beginning_product_reference',
+                        fullName: [
+                          'product_tree',
+                          'product_paths',
+                          'beginning_product_reference',
+                        ],
+                        title: 'Beginning product reference',
                         description:
-                          'Defines the category of relationship for the referenced component.',
+                          'Holds a Product ID that refers to the Full Product Name element, which is the beginning node of the product path.',
                         metaData: {
-                          uiType: 'STRING_ENUM',
-                          userDocumentation: {
-                            specification:
-                              'docs/user/product_tree/relationships/relationship/category-spec.en.md',
-                            usage:
-                              'docs/user/product_tree/relationships/relationship/category-usage.en.md',
-                          },
+                          uiType: 'STRING_PRODUCT_ID',
                           relevanceLevels: {
                             csaf_base: 'mandatory',
                             csaf_security_incident_response: 'mandatory',
@@ -4878,18 +5384,13 @@ export default {
                           },
                           i18n: {
                             title:
-                              'v2_1.ProductTreeRelationshipsItemsCategoryTitle',
+                              'v2_1.ProductPathBeginningProductReferenceTitle',
                             description:
-                              'v2_1.ProductTreeRelationshipsItemsCategoryDescription',
+                              'v2_1.ProductPathBeginningProductReferenceDescription',
                           },
                         },
-                        enum: [
-                          'default_component_of',
-                          'external_component_of',
-                          'installed_on',
-                          'installed_with',
-                          'optional_component_of',
-                        ],
+                        minLength: 1,
+                        examples: ['CSAFPID-0004', 'CSAFPID-0008'],
                         metaInfo: {},
                         type: 'STRING',
                       },
@@ -4897,7 +5398,7 @@ export default {
                         key: 'full_product_name',
                         fullName: [
                           'product_tree',
-                          'relationships',
+                          'product_paths',
                           'full_product_name',
                         ],
                         title: 'Full product name',
@@ -4905,24 +5406,11 @@ export default {
                           'Specifies information about the product and assigns the product_id.',
                         addMenuItemsForChildObjects: true,
                         metaData: {
-                          userDocumentation: {
-                            specification:
-                              'docs/user/product_tree/relationships/relationship/full_product_name-spec.en.md',
-                            usage:
-                              'docs/user/product_tree/relationships/relationship/full_product_name-usage.en.md',
-                          },
-                          relevanceLevels: {
-                            csaf_base: 'mandatory',
-                            csaf_security_incident_response: 'mandatory',
-                            csaf_informational_advisory: 'mandatory',
-                            csaf_security_advisory: 'mandatory',
-                            csaf_vex: 'mandatory',
-                          },
+                          addMenuItemsForChildObjects: true,
                           i18n: {
                             title: 'v2_1.FullProductNameTitle',
                             description: 'v2_1.FullProductNameDescription',
                           },
-                          addMenuItemsForChildObjects: true,
                         },
                         type: 'OBJECT',
                         metaInfo: {
@@ -4931,21 +5419,14 @@ export default {
                               key: 'name',
                               fullName: [
                                 'product_tree',
-                                'relationships',
+                                'product_paths',
                                 'full_product_name',
                                 'name',
                               ],
                               title: 'Textual description of the product',
                               description:
-                                'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                                'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                               metaData: {
-                                uiType: 'STRING_RELATIONSHIP_FULL_PRODUCT_NAME',
-                                userDocumentation: {
-                                  specification:
-                                    'docs/user/types/full_product_name/name-spec.en.md',
-                                  usage:
-                                    'docs/user/types/full_product_name/name-usage.en.md',
-                                },
                                 relevanceLevels: {
                                   csaf_base: 'mandatory',
                                   csaf_security_incident_response: 'mandatory',
@@ -4971,7 +5452,7 @@ export default {
                               key: 'product_id',
                               fullName: [
                                 'product_tree',
-                                'relationships',
+                                'product_paths',
                                 'full_product_name',
                                 'product_id',
                               ],
@@ -4980,12 +5461,6 @@ export default {
                                 'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
                               metaData: {
                                 uiType: 'STRING_GENERATE_PRODUCT_ID',
-                                userDocumentation: {
-                                  specification:
-                                    'docs/user/types/full_product_name/product_id-spec.en.md',
-                                  usage:
-                                    'docs/user/types/full_product_name/product_id-usage.en.md',
-                                },
                                 relevanceLevels: {
                                   csaf_base: 'mandatory',
                                   csaf_security_incident_response: 'mandatory',
@@ -5007,7 +5482,7 @@ export default {
                               key: 'product_identification_helper',
                               fullName: [
                                 'product_tree',
-                                'relationships',
+                                'product_paths',
                                 'full_product_name',
                                 'product_identification_helper',
                               ],
@@ -5015,12 +5490,6 @@ export default {
                               description:
                                 'Provides at least one method which aids in identifying the product in an asset database.',
                               metaData: {
-                                userDocumentation: {
-                                  specification:
-                                    'docs/user/types/full_product_name/product_identification_helper-spec.en.md',
-                                  usage:
-                                    'docs/user/types/full_product_name/product_identification_helper-usage.en.md',
-                                },
                                 relevanceLevels: {
                                   csaf_base: 'want_to_have',
                                   csaf_security_incident_response:
@@ -5043,7 +5512,7 @@ export default {
                                     key: 'cpe',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'cpe',
@@ -5053,12 +5522,6 @@ export default {
                                     description:
                                       'The Common Platform Enumeration (CPE) attribute refers to a method for naming platforms external to this specification.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/cpe-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/cpe-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5085,7 +5548,7 @@ export default {
                                     key: 'hashes',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'hashes',
@@ -5094,12 +5557,6 @@ export default {
                                     description:
                                       'Contains a list of cryptographic hashes usable to identify files.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/hashes-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/hashes-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5122,7 +5579,7 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'hashes',
@@ -5131,12 +5588,6 @@ export default {
                                         description:
                                           'Contains all information to identify a file based on its cryptographic hash values.',
                                         metaData: {
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperHashesItemsTitle',
@@ -5165,7 +5616,7 @@ export default {
                                               key: 'file_hashes',
                                               fullName: [
                                                 'product_tree',
-                                                'relationships',
+                                                'product_paths',
                                                 'full_product_name',
                                                 'product_identification_helper',
                                                 'hashes',
@@ -5175,12 +5626,6 @@ export default {
                                               description:
                                                 'Contains a list of cryptographic hashes for this file.',
                                               metaData: {
-                                                userDocumentation: {
-                                                  specification:
-                                                    'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes-spec.en.md',
-                                                  usage:
-                                                    'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes-usage.en.md',
-                                                },
                                                 relevanceLevels: {
                                                   csaf_base: 'mandatory',
                                                   csaf_security_incident_response:
@@ -5204,7 +5649,7 @@ export default {
                                                   key: '',
                                                   fullName: [
                                                     'product_tree',
-                                                    'relationships',
+                                                    'product_paths',
                                                     'full_product_name',
                                                     'product_identification_helper',
                                                     'hashes',
@@ -5214,12 +5659,6 @@ export default {
                                                   description:
                                                     'Contains one hash value and algorithm of the file to be identified.',
                                                   metaData: {
-                                                    userDocumentation: {
-                                                      specification:
-                                                        'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash-spec.en.md',
-                                                      usage:
-                                                        'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash-usage.en.md',
-                                                    },
                                                     i18n: {
                                                       title:
                                                         'v2_1.FullProductNameProductIdentificationHelperHashesItemsFileHashesItemsTitle',
@@ -5248,7 +5687,7 @@ export default {
                                                         key: 'algorithm',
                                                         fullName: [
                                                           'product_tree',
-                                                          'relationships',
+                                                          'product_paths',
                                                           'full_product_name',
                                                           'product_identification_helper',
                                                           'hashes',
@@ -5260,12 +5699,6 @@ export default {
                                                         description:
                                                           'Contains the name of the cryptographic hash algorithm used to calculate the value.',
                                                         metaData: {
-                                                          userDocumentation: {
-                                                            specification:
-                                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash/algorithm-spec.en.md',
-                                                            usage:
-                                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash/algorithm-usage.en.md',
-                                                          },
                                                           relevanceLevels: {
                                                             csaf_base:
                                                               'mandatory',
@@ -5293,6 +5726,8 @@ export default {
                                                           'sha384',
                                                           'sha512',
                                                         ],
+                                                        pattern:
+                                                          '^[0-9a-z][0-9a-z-]*$',
                                                         default: 'sha256',
                                                         metaInfo: {},
                                                         type: 'STRING',
@@ -5301,7 +5736,7 @@ export default {
                                                         key: 'value',
                                                         fullName: [
                                                           'product_tree',
-                                                          'relationships',
+                                                          'product_paths',
                                                           'full_product_name',
                                                           'product_identification_helper',
                                                           'hashes',
@@ -5311,14 +5746,8 @@ export default {
                                                         title:
                                                           'Value of the cryptographic hash',
                                                         description:
-                                                          'Contains the cryptographic hash value in hexadecimal representation.',
+                                                          'Contains the cryptographic hash value in lowercase hexadecimal representation.',
                                                         metaData: {
-                                                          userDocumentation: {
-                                                            specification:
-                                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash/value-spec.en.md',
-                                                            usage:
-                                                              'docs/user/types/full_product_name/product_identification_helper/hashes/hash/file_hashes/file_hash/value-usage.en.md',
-                                                          },
                                                           relevanceLevels: {
                                                             csaf_base:
                                                               'mandatory',
@@ -5345,7 +5774,7 @@ export default {
                                                           '9ea4c8200113d49d26505da0e02e2f49055dc078d1ad7a419b32e291c7afebbb84badfbd46dec42883bea0b2a1fa697c',
                                                         ],
                                                         pattern:
-                                                          '^[0-9a-fA-F]{32,}$',
+                                                          '^[0-9a-f]{32,}$',
                                                         metaInfo: {},
                                                         type: 'STRING',
                                                       },
@@ -5358,7 +5787,7 @@ export default {
                                               key: 'filename',
                                               fullName: [
                                                 'product_tree',
-                                                'relationships',
+                                                'product_paths',
                                                 'full_product_name',
                                                 'product_identification_helper',
                                                 'hashes',
@@ -5368,12 +5797,6 @@ export default {
                                               description:
                                                 'Contains the name of the file which is identified by the hash values.',
                                               metaData: {
-                                                userDocumentation: {
-                                                  specification:
-                                                    'docs/user/types/full_product_name/product_identification_helper/hashes/hash/filename-spec.en.md',
-                                                  usage:
-                                                    'docs/user/types/full_product_name/product_identification_helper/hashes/hash/filename-usage.en.md',
-                                                },
                                                 relevanceLevels: {
                                                   csaf_base: 'mandatory',
                                                   csaf_security_incident_response:
@@ -5409,21 +5832,15 @@ export default {
                                     key: 'model_numbers',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'model_numbers',
                                     ],
                                     title: 'List of models',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) model numbers.',
+                                      'Contains a list of model numbers.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/model_numbers-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/model_numbers-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5446,21 +5863,15 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'model_numbers',
                                         ],
                                         title: 'Model number',
                                         description:
-                                          'Contains a full or abbreviated (partial) model number of the component to identify.',
+                                          'Contains a model number of the component to identify - possibly with placeholders.',
                                         metaData: {
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/model_numbers/model_number-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/model_numbers/model_number-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperModelNumbersItemsTitle',
@@ -5492,21 +5903,15 @@ export default {
                                     key: 'purls',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'purls',
                                     ],
-                                    title: 'List of package URLs',
+                                    title: 'List of PURLs',
                                     description:
-                                      'Contains a list of package URLs (purl).',
+                                      'Contains a list of Package-URLs (PURL).',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5529,22 +5934,16 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'purls',
                                         ],
-                                        title: 'package URL representation',
+                                        title: 'Package-URL representation',
                                         description:
-                                          'The package URL (purl) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
+                                          'The Package-URL (PURL) attribute refers to a method for reliably identifying and locating software packages external to this specification.',
                                         metaData: {
                                           uiType: 'STRING_URI',
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
-                                          },
                                           relevanceLevels: {
                                             csaf_base: 'nice_to_know',
                                             csaf_security_incident_response:
@@ -5564,7 +5963,7 @@ export default {
                                         },
                                         minLength: 7,
                                         pattern:
-                                          '^pkg:[A-Za-z\\.\\-\\+][A-Za-z0-9\\.\\-\\+]*\\/.+',
+                                          '^pkg:[a-z][a-z0-9\\.\\-]*\\/.+',
                                         metaInfo: {},
                                         type: 'STRING',
                                       },
@@ -5574,7 +5973,7 @@ export default {
                                     key: 'sbom_urls',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'sbom_urls',
@@ -5583,12 +5982,6 @@ export default {
                                     description:
                                       'Contains a list of URLs where SBOMs for this product can be retrieved.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/sbom_urls-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/sbom_urls-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5611,7 +6004,7 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'sbom_urls',
@@ -5621,12 +6014,6 @@ export default {
                                           'Contains a URL of one SBOM for this product.',
                                         metaData: {
                                           uiType: 'STRING_URI',
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/sbom_urls/sbom_url-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/sbom_urls/sbom_url-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperSbomUrlsItemsTitle',
@@ -5635,7 +6022,7 @@ export default {
                                           },
                                           itemName: {
                                             itemNameTranslationKey:
-                                              'arrays.sbomUrlsItemName',
+                                              'arrays.sbomItemName',
                                           },
                                           relevanceLevels: {
                                             csaf_base: 'nice_to_know',
@@ -5657,21 +6044,15 @@ export default {
                                     key: 'serial_numbers',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'serial_numbers',
                                     ],
                                     title: 'List of serial numbers',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) serial numbers.',
+                                      'Contains a list of serial numbers.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/serial_numbers-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/serial_numbers-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5694,21 +6075,15 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'serial_numbers',
                                         ],
                                         title: 'Serial number',
                                         description:
-                                          'Contains a full or abbreviated (partial) serial number of the component to identify.',
+                                          'Contains a serial number of the component to identify - possibly with placeholders.',
                                         metaData: {
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/serial_numbers/serial_number-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/serial_numbers/serial_number-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperSerialNumbersItemsTitle',
@@ -5740,21 +6115,15 @@ export default {
                                     key: 'skus',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'skus',
                                     ],
                                     title: 'List of stock keeping units',
                                     description:
-                                      'Contains a list of full or abbreviated (partial) stock keeping units.',
+                                      'Contains a list of stock keeping units.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/skus-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/skus-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5777,21 +6146,15 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'skus',
                                         ],
                                         title: 'Stock keeping unit',
                                         description:
-                                          'Contains a full or abbreviated (partial) stock keeping unit (SKU) which is used in the ordering process to identify the component.',
+                                          'Contains a stock keeping unit (SKU) which is used in the ordering process to identify the component - possibly with placeholders.',
                                         metaData: {
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/skus/sku-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/skus/sku-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperSkusItemsTitle',
@@ -5823,7 +6186,7 @@ export default {
                                     key: 'x_generic_uris',
                                     fullName: [
                                       'product_tree',
-                                      'relationships',
+                                      'product_paths',
                                       'full_product_name',
                                       'product_identification_helper',
                                       'x_generic_uris',
@@ -5832,12 +6195,6 @@ export default {
                                     description:
                                       'Contains a list of identifiers which are either vendor-specific or derived from a standard not yet supported.',
                                     metaData: {
-                                      userDocumentation: {
-                                        specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/x_generic_uris-spec.en.md',
-                                        usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/x_generic_uris-usage.en.md',
-                                      },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
                                         csaf_security_incident_response:
@@ -5860,7 +6217,7 @@ export default {
                                         key: '',
                                         fullName: [
                                           'product_tree',
-                                          'relationships',
+                                          'product_paths',
                                           'full_product_name',
                                           'product_identification_helper',
                                           'x_generic_uris',
@@ -5869,12 +6226,6 @@ export default {
                                         description:
                                           'Provides a generic extension point for any identifier which is either vendor-specific or derived from a standard not yet supported.',
                                         metaData: {
-                                          userDocumentation: {
-                                            specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri-spec.en.md',
-                                            usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri-usage.en.md',
-                                          },
                                           i18n: {
                                             title:
                                               'v2_1.FullProductNameProductIdentificationHelperXGenericUrisItemsTitle',
@@ -5903,7 +6254,7 @@ export default {
                                               key: 'namespace',
                                               fullName: [
                                                 'product_tree',
-                                                'relationships',
+                                                'product_paths',
                                                 'full_product_name',
                                                 'product_identification_helper',
                                                 'x_generic_uris',
@@ -5915,12 +6266,6 @@ export default {
                                                 'Refers to a URL which provides the name and knowledge about the specification used or is the namespace in which these values are valid.',
                                               metaData: {
                                                 uiType: 'STRING_URI',
-                                                userDocumentation: {
-                                                  specification:
-                                                    'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri/namespace-spec.en.md',
-                                                  usage:
-                                                    'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri/namespace-usage.en.md',
-                                                },
                                                 relevanceLevels: {
                                                   csaf_base: 'mandatory',
                                                   csaf_security_incident_response:
@@ -5945,7 +6290,7 @@ export default {
                                               key: 'uri',
                                               fullName: [
                                                 'product_tree',
-                                                'relationships',
+                                                'product_paths',
                                                 'full_product_name',
                                                 'product_identification_helper',
                                                 'x_generic_uris',
@@ -5956,12 +6301,6 @@ export default {
                                                 'Contains the identifier itself.',
                                               metaData: {
                                                 uiType: 'STRING_URI',
-                                                userDocumentation: {
-                                                  specification:
-                                                    'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri/uri-spec.en.md',
-                                                  usage:
-                                                    'docs/user/types/full_product_name/product_identification_helper/x_generic_uris/x_generic_uri/uri-usage.en.md',
-                                                },
                                                 relevanceLevels: {
                                                   csaf_base: 'mandatory',
                                                   csaf_security_incident_response:
@@ -5990,26 +6329,214 @@ export default {
                                 ],
                               },
                             },
+                            {
+                              key: 'x_extensions',
+                              fullName: [
+                                'product_tree',
+                                'product_paths',
+                                'full_product_name',
+                                'x_extensions',
+                              ],
+                              title: 'Product-level Extensions',
+                              description:
+                                'Contains a list of extensions valid at the full product name element level of the CSAF document and associated with this full product name element.',
+                              metaData: {
+                                relevanceLevels: {
+                                  csaf_base: 'optional',
+                                  csaf_security_incident_response: 'optional',
+                                  csaf_informational_advisory: 'optional',
+                                  csaf_security_advisory: 'optional',
+                                  csaf_vex: 'optional',
+                                },
+                                i18n: {
+                                  title: 'v2_1.FullProductNameXExtensionsTitle',
+                                  description:
+                                    'v2_1.FullProductNameXExtensionsDescription',
+                                },
+                              },
+                              type: 'ARRAY',
+                              metaInfo: {
+                                arrayType: {
+                                  key: '',
+                                  fullName: [
+                                    'product_tree',
+                                    'product_paths',
+                                    'full_product_name',
+                                    'x_extensions',
+                                  ],
+                                  title: 'CSAF Extension Content',
+                                  description:
+                                    'Representation of additional information extending a CSAF Document.',
+                                  metaData: {
+                                    i18n: {
+                                      title: 'v2_1.ExtensionsItemsTitle',
+                                      description:
+                                        'v2_1.ExtensionsItemsDescription',
+                                    },
+                                    relevanceLevels: {
+                                      csaf_base: 'optional',
+                                      csaf_security_incident_response:
+                                        'optional',
+                                      csaf_informational_advisory: 'optional',
+                                      csaf_security_advisory: 'optional',
+                                      csaf_vex: 'optional',
+                                    },
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: {
+                                    propertyList: [
+                                      {
+                                        key: '$schema',
+                                        fullName: [
+                                          'product_tree',
+                                          'product_paths',
+                                          'full_product_name',
+                                          'x_extensions',
+                                          '$schema',
+                                        ],
+                                        title: 'CSAF Extension Schema',
+                                        description:
+                                          'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                                        metaData: {
+                                          uiType: 'STRING_URI',
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsSchemaTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsSchemaDescription',
+                                          },
+                                        },
+                                        pattern:
+                                          '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'category',
+                                        fullName: [
+                                          'product_tree',
+                                          'product_paths',
+                                          'full_product_name',
+                                          'x_extensions',
+                                          'category',
+                                        ],
+                                        title: 'Extension Category',
+                                        description:
+                                          'Holds the category of the extension content.',
+                                        metaData: {
+                                          uiType: 'STRING_ENUM',
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsCategoryTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsCategoryDescription',
+                                          },
+                                        },
+                                        enum: [
+                                          'critical',
+                                          'high_value',
+                                          'informational',
+                                        ],
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'content',
+                                        fullName: [
+                                          'product_tree',
+                                          'product_paths',
+                                          'full_product_name',
+                                          'x_extensions',
+                                          'content',
+                                        ],
+                                        title: 'Content',
+                                        description:
+                                          'Contains the additional information in its properties.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsContentTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsContentDescription',
+                                          },
+                                        },
+                                        type: 'OBJECT',
+                                        metaInfo: { propertyList: [] },
+                                      },
+                                      {
+                                        key: 'critical',
+                                        fullName: [
+                                          'product_tree',
+                                          'product_paths',
+                                          'full_product_name',
+                                          'x_extensions',
+                                          'critical',
+                                        ],
+                                        title: 'Critical',
+                                        description:
+                                          'Determines whether using the extension would fail a mandatory test.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'mandatory',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title:
+                                              'v2_1.ExtensionsItemsCriticalTitle',
+                                            description:
+                                              'v2_1.ExtensionsItemsCriticalDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'BOOLEAN',
+                                      },
+                                    ],
+                                  },
+                                },
+                              },
+                            },
                           ],
                         },
                       },
                       {
-                        key: 'product_reference',
-                        fullName: [
-                          'product_tree',
-                          'relationships',
-                          'product_reference',
-                        ],
-                        title: 'Product reference',
+                        key: 'subpaths',
+                        fullName: ['product_tree', 'product_paths', 'subpaths'],
+                        title: 'List of product subpaths',
                         description:
-                          'Holds a Product ID that refers to the Full Product Name element, which is referenced as the first element of the relationship.',
+                          'Contains an ordered list of product subpaths, each one relating to the path defined by all previous elements up to the beginning node of the product path.',
                         metaData: {
-                          uiType: 'STRING_PRODUCT_ID',
-                          userDocumentation: {
-                            specification:
-                              'docs/user/product_tree/relationships/relationship/product_reference-spec.en.md',
-                            usage: 'docs/user/types/product_id-usage.en.md',
-                          },
                           relevanceLevels: {
                             csaf_base: 'mandatory',
                             csaf_security_incident_response: 'mandatory',
@@ -6018,52 +6545,112 @@ export default {
                             csaf_vex: 'mandatory',
                           },
                           i18n: {
-                            title:
-                              'v2_1.ProductTreeRelationshipsItemsProductReferenceTitle',
-                            description:
-                              'v2_1.ProductTreeRelationshipsItemsProductReferenceDescription',
+                            title: 'v2_1.ProductPathSubpathsTitle',
+                            description: 'v2_1.ProductPathSubpathsDescription',
                           },
                         },
-                        minLength: 1,
-                        examples: ['CSAFPID-0004', 'CSAFPID-0008'],
-                        metaInfo: {},
-                        type: 'STRING',
-                      },
-                      {
-                        key: 'relates_to_product_reference',
-                        fullName: [
-                          'product_tree',
-                          'relationships',
-                          'relates_to_product_reference',
-                        ],
-                        title: 'Relates to product reference',
-                        description:
-                          'Holds a Product ID that refers to the Full Product Name element, which is referenced as the second element of the relationship.',
-                        metaData: {
-                          uiType: 'STRING_PRODUCT_ID',
-                          userDocumentation: {
-                            specification:
-                              'docs/user/product_tree/relationships/relationship/relates_to_product_reference-spec.en.md',
-                            usage: 'docs/user/types/product_id-usage.en.md',
-                          },
-                          relevanceLevels: {
-                            csaf_base: 'mandatory',
-                            csaf_security_incident_response: 'mandatory',
-                            csaf_informational_advisory: 'mandatory',
-                            csaf_security_advisory: 'mandatory',
-                            csaf_vex: 'mandatory',
-                          },
-                          i18n: {
-                            title:
-                              'v2_1.ProductTreeRelationshipsItemsRelatesToProductReferenceTitle',
+                        type: 'ARRAY',
+                        metaInfo: {
+                          arrayType: {
+                            key: '',
+                            fullName: [
+                              'product_tree',
+                              'product_paths',
+                              'subpaths',
+                            ],
+                            title: 'Subpath',
                             description:
-                              'v2_1.ProductTreeRelationshipsItemsRelatesToProductReferenceDescription',
+                              'Contains the next node along the current path and its relationship to the previous node.',
+                            metaData: {
+                              i18n: {
+                                title: 'v2_1.SubpathTitle',
+                                description: 'v2_1.SubpathDescription',
+                              },
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                            },
+                            type: 'OBJECT',
+                            metaInfo: {
+                              propertyList: [
+                                {
+                                  key: 'category',
+                                  fullName: [
+                                    'product_tree',
+                                    'product_paths',
+                                    'subpaths',
+                                    'category',
+                                  ],
+                                  title: 'Relationship category',
+                                  description:
+                                    'Defines the category of relationship between the previous item and the referenced next product.',
+                                  metaData: {
+                                    uiType: 'STRING_ENUM',
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title: 'v2_1.SubpathCategoryTitle',
+                                      description:
+                                        'v2_1.SubpathCategoryDescription',
+                                    },
+                                  },
+                                  enum: [
+                                    'default_component_of',
+                                    'external_component_of',
+                                    'installed_on',
+                                    'installed_with',
+                                    'optional_component_of',
+                                  ],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'next_product_reference',
+                                  fullName: [
+                                    'product_tree',
+                                    'product_paths',
+                                    'subpaths',
+                                    'next_product_reference',
+                                  ],
+                                  title: 'Next product reference',
+                                  description:
+                                    'Holds a Product ID that refers to the Full Product Name element, which is referenced as the second element of the relationship.',
+                                  metaData: {
+                                    uiType: 'STRING_PRODUCT_ID',
+                                    relevanceLevels: {
+                                      csaf_base: 'mandatory',
+                                      csaf_security_incident_response:
+                                        'mandatory',
+                                      csaf_informational_advisory: 'mandatory',
+                                      csaf_security_advisory: 'mandatory',
+                                      csaf_vex: 'mandatory',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'v2_1.SubpathNextProductReferenceTitle',
+                                      description:
+                                        'v2_1.SubpathNextProductReferenceDescription',
+                                    },
+                                  },
+                                  minLength: 1,
+                                  examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                              ],
+                            },
                           },
                         },
-                        minLength: 1,
-                        examples: ['CSAFPID-0004', 'CSAFPID-0008'],
-                        metaInfo: {},
-                        type: 'STRING',
                       },
                     ],
                   },
@@ -6569,6 +7156,7 @@ export default {
                               "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
                               "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
                             ],
+                            pattern: '^[^\\s\\-_\\.](.*[^\\s\\-_\\.])?$',
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -6599,7 +7187,6 @@ export default {
                                   'v2_1.VulnerabilitiesItemsCwesVersionDescription',
                               },
                             },
-                            minLength: 1,
                             examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
                             pattern:
                               '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
@@ -6680,6 +7267,21 @@ export default {
                   title: 'List of first known exploitation dates',
                   description:
                     'Contains a list of dates of first known exploitations.',
+                  metaData: {
+                    relevanceLevels: {
+                      csaf_base: 'optional',
+                      csaf_security_incident_response: 'optional',
+                      csaf_informational_advisory: 'excluded',
+                      csaf_security_advisory: 'optional',
+                      csaf_vex: 'optional',
+                    },
+                    i18n: {
+                      title:
+                        'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesTitle',
+                      description:
+                        'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesDescription',
+                    },
+                  },
                   type: 'ARRAY',
                   metaInfo: {
                     arrayType: {
@@ -6691,7 +7293,21 @@ export default {
                       title: 'First known exploitation date',
                       description:
                         'Contains information on when this vulnerability was first known to be exploited in the wild in the products specified.',
-                      metaData: {},
+                      metaData: {
+                        i18n: {
+                          title:
+                            'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsTitle',
+                          description:
+                            'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsDescription',
+                        },
+                        relevanceLevels: {
+                          csaf_base: 'optional',
+                          csaf_security_incident_response: 'optional',
+                          csaf_informational_advisory: 'excluded',
+                          csaf_security_advisory: 'optional',
+                          csaf_vex: 'optional',
+                        },
+                      },
                       type: 'OBJECT',
                       metaInfo: {
                         propertyList: [
@@ -6705,7 +7321,22 @@ export default {
                             title: 'Date of the information',
                             description:
                               'Contains the date when the information was last updated.',
-                            metaData: { uiType: 'STRING_DATETIME' },
+                            metaData: {
+                              uiType: 'STRING_DATETIME',
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title:
+                                  'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsDateTitle',
+                                description:
+                                  'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsDateDescription',
+                              },
+                            },
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -6719,7 +7350,22 @@ export default {
                             title: 'Date of the exploitation',
                             description:
                               'Contains the date when the exploitation happened.',
-                            metaData: { uiType: 'STRING_DATETIME' },
+                            metaData: {
+                              uiType: 'STRING_DATETIME',
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title:
+                                  'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsExploitationDateTitle',
+                                description:
+                                  'v2_1.VulnerabilitiesItemsFirstKnownExploitationDatesItemsExploitationDateDescription',
+                              },
+                            },
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -7221,7 +7867,11 @@ export default {
                               },
                             },
                             minLength: 1,
-                            examples: ['Cisco Bug ID', 'GitHub Issue'],
+                            examples: [
+                              'Cisco Bug ID',
+                              'GitHub Issue',
+                              'https://github.com/oasis-tcs/csaf',
+                            ],
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -7253,7 +7903,11 @@ export default {
                               },
                             },
                             minLength: 1,
-                            examples: ['CSCso66472', 'oasis-tcs/csaf#210'],
+                            examples: [
+                              'CSCso66472',
+                              'oasis-tcs/csaf#210',
+                              '#1217',
+                            ],
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -7322,6 +7976,35 @@ export default {
                       type: 'OBJECT',
                       metaInfo: {
                         propertyList: [
+                          {
+                            key: 'contact',
+                            fullName: [
+                              'vulnerabilities',
+                              'involvements',
+                              'contact',
+                            ],
+                            title: 'Party contact information',
+                            description:
+                              'Contains the contact information of the party that was used in this state.',
+                            metaData: {
+                              relevanceLevels: {
+                                csaf_base: 'want_to_have',
+                                csaf_security_incident_response: 'want_to_have',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'best_practice',
+                                csaf_vex: 'best_practice',
+                              },
+                              i18n: {
+                                title:
+                                  'v2_1.VulnerabilitiesItemsInvolvementsItemsContactTitle',
+                                description:
+                                  'v2_1.VulnerabilitiesItemsInvolvementsItemsContactDescription',
+                              },
+                            },
+                            minLength: 1,
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
                           {
                             key: 'date',
                             fullName: [
@@ -7708,8 +8391,7 @@ export default {
                                     'content',
                                     'cvss_v2',
                                   ],
-                                  title:
-                                    'JSON Schema for Common Vulnerability Scoring System version 2.0',
+                                  title: 'CVSS v2',
                                   metaData: {
                                     title: 'CVSS v2',
                                     description:
@@ -8503,6 +9185,7 @@ export default {
                                     'content',
                                     'cvss_v3',
                                   ],
+                                  title: 'CVSS v3',
                                   metaData: {
                                     title: 'CVSS v3',
                                     description:
@@ -8538,6 +9221,7 @@ export default {
                                     'content',
                                     'cvss_v4',
                                   ],
+                                  title: 'CVSS v4',
                                   metaData: {
                                     title: 'CVSS v3',
                                     description:
@@ -8565,23 +9249,184 @@ export default {
                                   metaInfo: { propertyList: [] },
                                 },
                                 {
-                                  key: 'ssvc_v1',
+                                  key: 'epss',
                                   fullName: [
                                     'vulnerabilities',
                                     'metrics',
                                     'content',
-                                    'ssvc_v1',
+                                    'epss',
                                   ],
+                                  title: 'EPSS',
+                                  description: 'Contains the EPSS data.',
                                   metaData: {
-                                    title: 'SSVC V1',
-                                    description:
-                                      'JSON Schema for Stakeholder-Specific Vulnerability Categorization version 1.0',
-                                    userDocumentation: {
-                                      specification:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/ssvc_v1-spec.en.md',
-                                      usage:
-                                        'docs/user/vulnerabilities/vulnerability/scores/score/ssvc_v1-usage.en.md',
+                                    relevanceLevels: {
+                                      csaf_base: 'optional',
+                                      csaf_security_incident_response:
+                                        'optional',
+                                      csaf_informational_advisory: 'excluded',
+                                      csaf_security_advisory: 'optional',
+                                      csaf_vex: 'optional',
                                     },
+                                    i18n: {
+                                      title: 'v2_1.EpssTitle',
+                                      description: 'v2_1.EpssDescription',
+                                    },
+                                  },
+                                  type: 'OBJECT',
+                                  metaInfo: {
+                                    propertyList: [
+                                      {
+                                        key: 'percentile',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'percentile',
+                                        ],
+                                        title: 'Percentile',
+                                        description:
+                                          'Contains the rank ordering of probabilities from highest to lowest.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'v2_1.EpssPercentileTitle',
+                                            description:
+                                              'v2_1.EpssPercentileDescription',
+                                          },
+                                        },
+                                        pattern:
+                                          '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'probability',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'probability',
+                                        ],
+                                        title: 'Probability',
+                                        description:
+                                          'Contains the likelihood that any exploitation activity for this Vulnerability is being observed in the 30 days following the given timestamp.',
+                                        metaData: {
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'v2_1.EpssProbabilityTitle',
+                                            description:
+                                              'v2_1.EpssProbabilityDescription',
+                                          },
+                                        },
+                                        pattern:
+                                          '^(([0]\\.([0-9])+)|([1]\\.[0]+))$',
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                      {
+                                        key: 'timestamp',
+                                        fullName: [
+                                          'vulnerabilities',
+                                          'metrics',
+                                          'content',
+                                          'epss',
+                                          'timestamp',
+                                        ],
+                                        title: 'EPSS timestamp',
+                                        description:
+                                          'Holds the date and time the EPSS value was recorded.',
+                                        metaData: {
+                                          uiType: 'STRING_DATETIME',
+                                          relevanceLevels: {
+                                            csaf_base: 'mandatory',
+                                            csaf_security_incident_response:
+                                              'mandatory',
+                                            csaf_informational_advisory:
+                                              'excluded',
+                                            csaf_security_advisory: 'mandatory',
+                                            csaf_vex: 'mandatory',
+                                          },
+                                          i18n: {
+                                            title: 'v2_1.EpssTimestampTitle',
+                                            description:
+                                              'v2_1.EpssTimestampDescription',
+                                          },
+                                        },
+                                        metaInfo: {},
+                                        type: 'STRING',
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  key: 'qualitative_severity_rating',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'qualitative_severity_rating',
+                                  ],
+                                  title: 'Qualitative Severity Rating',
+                                  description:
+                                    'Contains an assessment of the severity of the vulnerability regarding the products on a qualitative scale.',
+                                  metaData: {
+                                    uiType: 'STRING_ENUM',
+                                    relevanceLevels: {
+                                      csaf_base: 'nice_to_know',
+                                      csaf_security_incident_response:
+                                        'nice_to_know',
+                                      csaf_informational_advisory: 'excluded',
+                                      csaf_security_advisory: 'nice_to_know',
+                                      csaf_vex: 'best_practice',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'v2_1.VulnerabilitiesItemsMetricsContentQualitativeSeverityRatingTitle',
+                                      description:
+                                        'v2_1.VulnerabilitiesItemsMetricsContentQualitativeSeverityRatingDescription',
+                                    },
+                                  },
+                                  enum: [
+                                    'critical',
+                                    'high',
+                                    'low',
+                                    'medium',
+                                    'none',
+                                  ],
+                                  metaInfo: {},
+                                  type: 'STRING',
+                                },
+                                {
+                                  key: 'ssvc_v2',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'ssvc_v2',
+                                  ],
+                                  title: 'SSVC v2',
+                                  metaData: {
+                                    title: 'SSVC v2',
+                                    description:
+                                      'JSON Schema for Stakeholder-Specific Vulnerability Categorization version 2.0',
                                     relevanceLevels: {
                                       csaf_base: 'best_practice',
                                       csaf_security_incident_response:
@@ -8591,12 +9436,217 @@ export default {
                                       csaf_vex: 'best_practice',
                                     },
                                     i18n: {
-                                      title: 'v2_1.SsvcV1Title',
-                                      description: 'v2_1.SsvcV1Description',
+                                      title: 'v2_1.SsvcV2Title',
+                                      description: 'v2_1.SsvcV2Description',
                                     },
                                   },
                                   type: 'OBJECT',
                                   metaInfo: { propertyList: [] },
+                                },
+                                {
+                                  key: 'x_extensions',
+                                  fullName: [
+                                    'vulnerabilities',
+                                    'metrics',
+                                    'content',
+                                    'x_extensions',
+                                  ],
+                                  title: 'Metrics-content-level Extensions',
+                                  description:
+                                    'Contains a list of extensions valid at the metrics-content-level of the CSAF document and associated with this metric element.',
+                                  metaData: {
+                                    relevanceLevels: {
+                                      csaf_base: 'optional',
+                                      csaf_security_incident_response:
+                                        'optional',
+                                      csaf_informational_advisory: 'optional',
+                                      csaf_security_advisory: 'optional',
+                                      csaf_vex: 'optional',
+                                    },
+                                    i18n: {
+                                      title:
+                                        'v2_1.VulnerabilitiesItemsMetricsContentXExtensionsTitle',
+                                      description:
+                                        'v2_1.VulnerabilitiesItemsMetricsContentXExtensionsDescription',
+                                    },
+                                  },
+                                  type: 'ARRAY',
+                                  metaInfo: {
+                                    arrayType: {
+                                      key: '',
+                                      fullName: [
+                                        'vulnerabilities',
+                                        'metrics',
+                                        'content',
+                                        'x_extensions',
+                                      ],
+                                      title: 'CSAF Extension Content',
+                                      description:
+                                        'Representation of additional information extending a CSAF Document.',
+                                      metaData: {
+                                        i18n: {
+                                          title: 'v2_1.ExtensionsItemsTitle',
+                                          description:
+                                            'v2_1.ExtensionsItemsDescription',
+                                        },
+                                        relevanceLevels: {
+                                          csaf_base: 'optional',
+                                          csaf_security_incident_response:
+                                            'optional',
+                                          csaf_informational_advisory:
+                                            'optional',
+                                          csaf_security_advisory: 'optional',
+                                          csaf_vex: 'optional',
+                                        },
+                                      },
+                                      type: 'OBJECT',
+                                      metaInfo: {
+                                        propertyList: [
+                                          {
+                                            key: '$schema',
+                                            fullName: [
+                                              'vulnerabilities',
+                                              'metrics',
+                                              'content',
+                                              'x_extensions',
+                                              '$schema',
+                                            ],
+                                            title: 'CSAF Extension Schema',
+                                            description:
+                                              'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                                            metaData: {
+                                              uiType: 'STRING_URI',
+                                              relevanceLevels: {
+                                                csaf_base: 'mandatory',
+                                                csaf_security_incident_response:
+                                                  'mandatory',
+                                                csaf_informational_advisory:
+                                                  'mandatory',
+                                                csaf_security_advisory:
+                                                  'mandatory',
+                                                csaf_vex: 'mandatory',
+                                              },
+                                              i18n: {
+                                                title:
+                                                  'v2_1.ExtensionsItemsSchemaTitle',
+                                                description:
+                                                  'v2_1.ExtensionsItemsSchemaDescription',
+                                              },
+                                            },
+                                            pattern:
+                                              '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                                            metaInfo: {},
+                                            type: 'STRING',
+                                          },
+                                          {
+                                            key: 'category',
+                                            fullName: [
+                                              'vulnerabilities',
+                                              'metrics',
+                                              'content',
+                                              'x_extensions',
+                                              'category',
+                                            ],
+                                            title: 'Extension Category',
+                                            description:
+                                              'Holds the category of the extension content.',
+                                            metaData: {
+                                              uiType: 'STRING_ENUM',
+                                              relevanceLevels: {
+                                                csaf_base: 'mandatory',
+                                                csaf_security_incident_response:
+                                                  'mandatory',
+                                                csaf_informational_advisory:
+                                                  'mandatory',
+                                                csaf_security_advisory:
+                                                  'mandatory',
+                                                csaf_vex: 'mandatory',
+                                              },
+                                              i18n: {
+                                                title:
+                                                  'v2_1.ExtensionsItemsCategoryTitle',
+                                                description:
+                                                  'v2_1.ExtensionsItemsCategoryDescription',
+                                              },
+                                            },
+                                            enum: [
+                                              'critical',
+                                              'high_value',
+                                              'informational',
+                                            ],
+                                            metaInfo: {},
+                                            type: 'STRING',
+                                          },
+                                          {
+                                            key: 'content',
+                                            fullName: [
+                                              'vulnerabilities',
+                                              'metrics',
+                                              'content',
+                                              'x_extensions',
+                                              'content',
+                                            ],
+                                            title: 'Content',
+                                            description:
+                                              'Contains the additional information in its properties.',
+                                            metaData: {
+                                              relevanceLevels: {
+                                                csaf_base: 'mandatory',
+                                                csaf_security_incident_response:
+                                                  'mandatory',
+                                                csaf_informational_advisory:
+                                                  'mandatory',
+                                                csaf_security_advisory:
+                                                  'mandatory',
+                                                csaf_vex: 'mandatory',
+                                              },
+                                              i18n: {
+                                                title:
+                                                  'v2_1.ExtensionsItemsContentTitle',
+                                                description:
+                                                  'v2_1.ExtensionsItemsContentDescription',
+                                              },
+                                            },
+                                            type: 'OBJECT',
+                                            metaInfo: { propertyList: [] },
+                                          },
+                                          {
+                                            key: 'critical',
+                                            fullName: [
+                                              'vulnerabilities',
+                                              'metrics',
+                                              'content',
+                                              'x_extensions',
+                                              'critical',
+                                            ],
+                                            title: 'Critical',
+                                            description:
+                                              'Determines whether using the extension would fail a mandatory test.',
+                                            metaData: {
+                                              relevanceLevels: {
+                                                csaf_base: 'mandatory',
+                                                csaf_security_incident_response:
+                                                  'mandatory',
+                                                csaf_informational_advisory:
+                                                  'mandatory',
+                                                csaf_security_advisory:
+                                                  'mandatory',
+                                                csaf_vex: 'mandatory',
+                                              },
+                                              i18n: {
+                                                title:
+                                                  'v2_1.ExtensionsItemsCriticalTitle',
+                                                description:
+                                                  'v2_1.ExtensionsItemsCriticalDescription',
+                                              },
+                                            },
+                                            metaInfo: {},
+                                            type: 'BOOLEAN',
+                                          },
+                                        ],
+                                      },
+                                    },
+                                  },
                                 },
                               ],
                             },
@@ -10300,7 +11350,7 @@ export default {
                             ],
                             title: 'Restart required by remediation',
                             description:
-                              'Provides information on category of restart is required by this remediation to become effective.',
+                              'Provides information on the category of restart required by this remediation to become effective.',
                             metaData: {
                               userDocumentation: {
                                 specification:
@@ -10798,6 +11848,308 @@ export default {
                   minLength: 1,
                   metaInfo: {},
                   type: 'STRING',
+                },
+                {
+                  key: 'x_extensions',
+                  fullName: ['vulnerabilities', 'x_extensions'],
+                  title: 'Vulnerability-level Extensions',
+                  description:
+                    'Contains a list of extensions valid at the vulnerability item level of the CSAF document and associated with this vulnerability element.',
+                  metaData: {
+                    relevanceLevels: {
+                      csaf_base: 'optional',
+                      csaf_security_incident_response: 'optional',
+                      csaf_informational_advisory: 'optional',
+                      csaf_security_advisory: 'optional',
+                      csaf_vex: 'optional',
+                    },
+                    i18n: {
+                      title: 'v2_1.VulnerabilitiesItemsXExtensionsTitle',
+                      description:
+                        'v2_1.VulnerabilitiesItemsXExtensionsDescription',
+                    },
+                  },
+                  type: 'ARRAY',
+                  metaInfo: {
+                    arrayType: {
+                      key: '',
+                      fullName: ['vulnerabilities', 'x_extensions'],
+                      title: 'CSAF Extension Content',
+                      description:
+                        'Representation of additional information extending a CSAF Document.',
+                      metaData: {
+                        i18n: {
+                          title: 'v2_1.ExtensionsItemsTitle',
+                          description: 'v2_1.ExtensionsItemsDescription',
+                        },
+                        relevanceLevels: {
+                          csaf_base: 'optional',
+                          csaf_security_incident_response: 'optional',
+                          csaf_informational_advisory: 'optional',
+                          csaf_security_advisory: 'optional',
+                          csaf_vex: 'optional',
+                        },
+                      },
+                      type: 'OBJECT',
+                      metaInfo: {
+                        propertyList: [
+                          {
+                            key: '$schema',
+                            fullName: [
+                              'vulnerabilities',
+                              'x_extensions',
+                              '$schema',
+                            ],
+                            title: 'CSAF Extension Schema',
+                            description:
+                              'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                            metaData: {
+                              uiType: 'STRING_URI',
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ExtensionsItemsSchemaTitle',
+                                description:
+                                  'v2_1.ExtensionsItemsSchemaDescription',
+                              },
+                            },
+                            pattern:
+                              '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
+                            key: 'category',
+                            fullName: [
+                              'vulnerabilities',
+                              'x_extensions',
+                              'category',
+                            ],
+                            title: 'Extension Category',
+                            description:
+                              'Holds the category of the extension content.',
+                            metaData: {
+                              uiType: 'STRING_ENUM',
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ExtensionsItemsCategoryTitle',
+                                description:
+                                  'v2_1.ExtensionsItemsCategoryDescription',
+                              },
+                            },
+                            enum: ['critical', 'high_value', 'informational'],
+                            metaInfo: {},
+                            type: 'STRING',
+                          },
+                          {
+                            key: 'content',
+                            fullName: [
+                              'vulnerabilities',
+                              'x_extensions',
+                              'content',
+                            ],
+                            title: 'Content',
+                            description:
+                              'Contains the additional information in its properties.',
+                            metaData: {
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ExtensionsItemsContentTitle',
+                                description:
+                                  'v2_1.ExtensionsItemsContentDescription',
+                              },
+                            },
+                            type: 'OBJECT',
+                            metaInfo: { propertyList: [] },
+                          },
+                          {
+                            key: 'critical',
+                            fullName: [
+                              'vulnerabilities',
+                              'x_extensions',
+                              'critical',
+                            ],
+                            title: 'Critical',
+                            description:
+                              'Determines whether using the extension would fail a mandatory test.',
+                            metaData: {
+                              relevanceLevels: {
+                                csaf_base: 'mandatory',
+                                csaf_security_incident_response: 'mandatory',
+                                csaf_informational_advisory: 'mandatory',
+                                csaf_security_advisory: 'mandatory',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ExtensionsItemsCriticalTitle',
+                                description:
+                                  'v2_1.ExtensionsItemsCriticalDescription',
+                              },
+                            },
+                            metaInfo: {},
+                            type: 'BOOLEAN',
+                          },
+                        ],
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
+        key: 'x_extensions',
+        fullName: ['x_extensions'],
+        title: 'Root-level Extensions',
+        description:
+          'Contains a list of extensions valid at the root-level of the CSAF document and associated with this CSAF document.',
+        metaData: {
+          relevanceLevels: {
+            csaf_base: 'optional',
+            csaf_security_incident_response: 'optional',
+            csaf_informational_advisory: 'optional',
+            csaf_security_advisory: 'optional',
+            csaf_vex: 'optional',
+          },
+          i18n: {
+            title: 'v2_1.RootXExtensionsTitle',
+            description: 'v2_1.RootXExtensionsDescription',
+          },
+        },
+        type: 'ARRAY',
+        metaInfo: {
+          arrayType: {
+            key: '',
+            fullName: ['x_extensions'],
+            title: 'CSAF Extension Content',
+            description:
+              'Representation of additional information extending a CSAF Document.',
+            metaData: {
+              i18n: {
+                title: 'v2_1.ExtensionsItemsTitle',
+                description: 'v2_1.ExtensionsItemsDescription',
+              },
+              relevanceLevels: {
+                csaf_base: 'optional',
+                csaf_security_incident_response: 'optional',
+                csaf_informational_advisory: 'optional',
+                csaf_security_advisory: 'optional',
+                csaf_vex: 'optional',
+              },
+            },
+            type: 'OBJECT',
+            metaInfo: {
+              propertyList: [
+                {
+                  key: '$schema',
+                  fullName: ['x_extensions', '$schema'],
+                  title: 'CSAF Extension Schema',
+                  description:
+                    'Contains the URL of the CSAF Extension JSON schema which the JSON object promises to be valid for.',
+                  metaData: {
+                    uiType: 'STRING_URI',
+                    relevanceLevels: {
+                      csaf_base: 'mandatory',
+                      csaf_security_incident_response: 'mandatory',
+                      csaf_informational_advisory: 'mandatory',
+                      csaf_security_advisory: 'mandatory',
+                      csaf_vex: 'mandatory',
+                    },
+                    i18n: {
+                      title: 'v2_1.ExtensionsItemsSchemaTitle',
+                      description: 'v2_1.ExtensionsItemsSchemaDescription',
+                    },
+                  },
+                  pattern:
+                    '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+                  metaInfo: {},
+                  type: 'STRING',
+                },
+                {
+                  key: 'category',
+                  fullName: ['x_extensions', 'category'],
+                  title: 'Extension Category',
+                  description: 'Holds the category of the extension content.',
+                  metaData: {
+                    uiType: 'STRING_ENUM',
+                    relevanceLevels: {
+                      csaf_base: 'mandatory',
+                      csaf_security_incident_response: 'mandatory',
+                      csaf_informational_advisory: 'mandatory',
+                      csaf_security_advisory: 'mandatory',
+                      csaf_vex: 'mandatory',
+                    },
+                    i18n: {
+                      title: 'v2_1.ExtensionsItemsCategoryTitle',
+                      description: 'v2_1.ExtensionsItemsCategoryDescription',
+                    },
+                  },
+                  enum: ['critical', 'high_value', 'informational'],
+                  metaInfo: {},
+                  type: 'STRING',
+                },
+                {
+                  key: 'content',
+                  fullName: ['x_extensions', 'content'],
+                  title: 'Content',
+                  description:
+                    'Contains the additional information in its properties.',
+                  metaData: {
+                    relevanceLevels: {
+                      csaf_base: 'mandatory',
+                      csaf_security_incident_response: 'mandatory',
+                      csaf_informational_advisory: 'mandatory',
+                      csaf_security_advisory: 'mandatory',
+                      csaf_vex: 'mandatory',
+                    },
+                    i18n: {
+                      title: 'v2_1.ExtensionsItemsContentTitle',
+                      description: 'v2_1.ExtensionsItemsContentDescription',
+                    },
+                  },
+                  type: 'OBJECT',
+                  metaInfo: { propertyList: [] },
+                },
+                {
+                  key: 'critical',
+                  fullName: ['x_extensions', 'critical'],
+                  title: 'Critical',
+                  description:
+                    'Determines whether using the extension would fail a mandatory test.',
+                  metaData: {
+                    relevanceLevels: {
+                      csaf_base: 'mandatory',
+                      csaf_security_incident_response: 'mandatory',
+                      csaf_informational_advisory: 'mandatory',
+                      csaf_security_advisory: 'mandatory',
+                      csaf_vex: 'mandatory',
+                    },
+                    i18n: {
+                      title: 'v2_1.ExtensionsItemsCriticalTitle',
+                      description: 'v2_1.ExtensionsItemsCriticalDescription',
+                    },
+                  },
+                  metaInfo: {},
+                  type: 'BOOLEAN',
                 },
               ],
             },
