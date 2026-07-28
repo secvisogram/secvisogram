@@ -8,7 +8,12 @@ import { isEmpty } from 'lodash/fp.js'
  * @type {({}) => {}}
  */
 export default function pruneEmpty(obj) {
-  if (typeof obj === 'string' || typeof obj === 'number' || obj === undefined)
+  if (
+    typeof obj === 'string' ||
+    typeof obj === 'number' ||
+    typeof obj === 'boolean' ||
+    obj === undefined
+  )
     return obj
   if (Array.isArray(obj)) return obj.map((item) => pruneEmpty(item))
   return {
@@ -16,7 +21,7 @@ export default function pruneEmpty(obj) {
       Object.entries(obj)
         .map(([key, value]) => [key, pruneEmpty(value)])
         .filter(([, v]) => {
-          return typeof v === 'number' || !isEmpty(v)
+          return typeof v === 'number' || typeof v === 'boolean' || !isEmpty(v)
         }),
     ),
   }
