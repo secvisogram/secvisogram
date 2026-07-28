@@ -123,6 +123,11 @@ describe('Unit Test Functions', function () {
       [{ a: {} }, {}],
       [{ a: { b: { c: {} } } }, {}],
       [{ a: { b: { c: { d: 123 } } } }, { a: { b: { c: { d: 123 } } } }],
+      // booleans must never be pruned, regardless of their value
+      [{ a: true }, { a: true }],
+      [{ a: false }, { a: false }],
+      [{ a: { b: false } }, { a: { b: false } }],
+      [{ a: [true, false] }, { a: [true, false] }],
       // special cases for arrays with elements identified as empty
       [{ a: [{}] }, { a: [{}] }],
       [{ a: [''] }, { a: [''] }],
