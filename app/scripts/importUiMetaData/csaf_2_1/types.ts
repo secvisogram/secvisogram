@@ -1,9 +1,5 @@
 export type Schema =
-  | ObjectSchema
-  | ArraySchema
-  | StringSchema
-  | NumberSchema
-  | Ref
+  ObjectSchema | ArraySchema | StringSchema | NumberSchema | Ref
 export type JSONSchema = Schema & { $defs?: Defs }
 
 export type Defs = Record<string, Schema | undefined>

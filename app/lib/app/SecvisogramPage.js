@@ -34,29 +34,32 @@ const SecvisogramPage = () => {
     setState,
   ] = React.useState({
     isLoading: false,
-    alert: /**
-     * @type {{
-     *   confirmLabel: string
-     *   cancelLabel: string
-     *   label: string
-     *   description: string
-     *   onConfirm(): void
-     *   onCancel(): void
-     * } | null}
-     */ (null),
+    alert:
+      /**
+       * @type {{
+       *   confirmLabel: string
+       *   cancelLabel: string
+       *   label: string
+       *   description: string
+       *   onConfirm(): void
+       *   onCancel(): void
+       * } | null}
+       */ (null),
     errors:
       /** @type {import('#lib/core/typedValidationError.js').TypedValidationError[]} */ ([]),
-    stripResult: /**
-     * @type {{
-     *    strippedPaths: Array<{ instancePath: string; message: string; error: boolean }>
-     *    doc: {}
-     * } | null}
-     */ (null),
-    previewResult: /**
-     * @type {{
-     *    doc: {}
-     * } | null}
-     */ (null),
+    stripResult:
+      /**
+       * @type {{
+       *    strippedPaths: Array<{ instancePath: string; message: string; error: boolean }>
+       *    doc: {}
+       * } | null}
+       */ (null),
+    previewResult:
+      /**
+       * @type {{
+       *    doc: {}
+       * } | null}
+       */ (null),
     activeTab: /** @type {React.ComponentProps<typeof View>['activeTab']} */ (
       'EDITOR'
     ),

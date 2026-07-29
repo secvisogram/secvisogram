@@ -282,32 +282,33 @@ export default class CVSSVector {
    * @private
    */
   calculateCVSSMetrics() {
-    const args = /**
-     * @type {[
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     *   string,
-     * ]}
-     */ (vectorStringMapping.map((e) => e[2][this._data[e[0]]]))
+    const args =
+      /**
+       * @type {[
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       *   string,
+       * ]}
+       */ (vectorStringMapping.map((e) => e[2][this._data[e[0]]]))
     if (this._data.version === '3.0')
       return CVSS.calculateCVSSFromMetrics(...args)
     return CVSS31.calculateCVSSFromMetrics(...args)
