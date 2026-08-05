@@ -1,0 +1,35 @@
+name: 'Publish CSAF Advisories'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'advisories/**.json'
+      - 'advisories/**.asc'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-csaf:
+    runs-on: ubuntu-24.04
+    name: Check, Sign & Publish CSAF documents
+
+    steps:
+      - name: Check, Sign and Publish CSAF advisories
+        uses: csaf-tools/csaf-action@v0.4.0
+        with:
+          publisher_name: "Secvisogram Team"
+          publisher_namespace: "https://github.com/secvisogram/csaf-files"
+          publisher_issuing_authority: " As a content provider, BSI is responsible under general law for its own content distributed for use. However, it remains your responsibility to carefully check usage and/or implementation of information provided with the content."
+          publisher_contact_details: "The Secvisogram Team can be reached via GitHub Issues at https://github.com/secvisogram/secvisogram/issues."
+          publisher_category: "vendor"
+          source_csaf_documents: advisories/
+          openpgp_secret_key: ${{ secrets.PGP_SIGNING_KEY }}
+          openpgp_public_key: ${{ secrets.PGP_PUBLIC_KEY }}
+          openpgp_passphrase: ${{ secrets.PGP_SIGNING_KEY_PASSPHRASE }}
+          openpgp_use_signatures: false
+          target_branch: gh-pages
+          generate_index_files: true
