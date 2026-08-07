@@ -106,7 +106,8 @@
   "sidebar": {
     "contextSpecificErrors": "Context specific Errors",
     "allErrors": "All errors:",
-    "collapseSidebar": "collapse Sidebar"
+    "collapseSidebar": "collapse Sidebar",
+    "noDocumentationAvailable": "No documentation available for this field."
   },
   "alert": {
     "createNewDocumentSure": "This will create a new CSAF document. All current content will be lost. Are you sure?",
