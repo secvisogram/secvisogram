@@ -1465,9 +1465,9 @@ export default {
   '$.product_tree.branches.product.product_identification_helper.purls': {
     userDocumentation: {
       specification:
-        'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
       usage:
-        'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
     },
     relevanceLevels: {
       csaf_base: 'nice_to_know',
@@ -1484,9 +1484,9 @@ export default {
   '$.product_tree.branches.product.product_identification_helper.purls[]': {
     userDocumentation: {
       specification:
-        'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
       usage:
-        'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
     },
     relevanceLevels: {
       csaf_base: 'nice_to_know',
@@ -1965,9 +1965,9 @@ export default {
   '$.product_tree.full_product_names.product_identification_helper.purls': {
     userDocumentation: {
       specification:
-        'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
       usage:
-        'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
     },
     relevanceLevels: {
       csaf_base: 'nice_to_know',
@@ -1984,9 +1984,9 @@ export default {
   '$.product_tree.full_product_names.product_identification_helper.purls[]': {
     userDocumentation: {
       specification:
-        'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
       usage:
-        'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+        'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
     },
     relevanceLevels: {
       csaf_base: 'nice_to_know',
