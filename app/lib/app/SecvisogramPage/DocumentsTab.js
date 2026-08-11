@@ -45,8 +45,10 @@ export default function DocumentsTab(props) {
           documentTrackingStatus,
           proposedTime,
         }).catch((err) => {
-          const message = messageForStatus(err.status)
-          throw new Error(message)
+          if (err.hasBackendMessage) {
+            throw err
+          }
+          throw new Error(messageForStatus(err.status))
         })
       }}
       onCreateNewVersion={async ({ advisoryId }) => {
