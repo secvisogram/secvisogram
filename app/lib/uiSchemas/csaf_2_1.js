@@ -1,17 +1,19 @@
-import content_schema from './csaf_2_1/content_schema.js'
-import csaf_meta from './csaf_2_1/csaf_meta.js'
-import cvss_v4_0_0 from './csaf_2_1/cvss-v4.0.0.js'
-import cvss_meta from './csaf_2_1/cvss_meta.js'
-import draft_07_schema from './csaf_2_1/draft-07-schema.js'
-import extension_content from './csaf_2_1/extension-content.js'
-import meta_format_assertion from './csaf_2_1/meta-format-assertion.js'
-import selectionList_2_0_0Schema from './csaf_2_1/SelectionList_2_0_0.schema.js'
+import {
+  csaf_meta,
+  cvss_meta,
+  cvss_v4_0_0,
+  draft_07_schema,
+  extension_content,
+  extension_metaschema,
+  meta_format_assertion,
+  selectionList_2_0_0Schema,
+} from './csaf_2_1/jsonSchema.js'
 import cvss_v2_0 from './cvss-v2.0.js'
 import cvss_v3_0 from './cvss-v3.0.js'
 import cvss_v3_1 from './cvss-v3.1.js'
 
 export { default as content } from './csaf_2_1/content.js'
-export { default as jsonSchema } from './csaf_2_1/jsonSchema.js'
+export { csaf as jsonSchema } from './csaf_2_1/jsonSchema.js'
 export { default as metaData } from './csaf_2_1/metaData.js'
 
 /**
@@ -24,11 +26,11 @@ export const subJsonSchemas = [
   { content: cvss_v3_1, ref: 'https://www.first.org/cvss/cvss-v3.1.json' },
   { content: cvss_meta, ref: 'https://www.first.org/cvss/meta.json' },
   {
-    content: content_schema,
+    content: extension_metaschema,
     ref: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-metaschema.json',
   },
   {
-    content: content_schema.$defs.content_schema_t,
+    content: extension_metaschema.$defs.content_schema_t,
     ref: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-metaschema.json#/$defs/content_schema_t',
   },
   {

@@ -1,4 +1,3 @@
-// https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-content.json from 06.05.2026
 export default {
   $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-content.json',
@@ -18,7 +17,7 @@ export default {
       title: 'Extension Category',
       description: 'Holds the category of the extension content.',
       type: 'string',
-      enum: ['critical', 'high_value', 'informational'],
+      enum: ['essential', 'significant', 'supplementary'],
     },
     content: {
       title: 'Content',

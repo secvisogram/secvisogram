@@ -332,7 +332,7 @@ export default {
               fullName: ['document', 'aggregate_severity'],
               title: 'Aggregate severity',
               description:
-                "Is a vehicle that is provided by the document producer to convey the urgency and criticality with which the one or more vulnerabilities reported should be addressed. It is a document-level metric and applied to the document as a whole â€” not any specific vulnerability. The range of values in this field is defined according to the document producer's policies and procedures.",
+                "Is a vehicle that is provided by the document producer to convey the urgency and criticality with which the one or more vulnerabilities reported should be addressed. It is a document-level metric and applied to the document as a whole — not any specific vulnerability. The range of values in this field is defined according to the document producer's policies and procedures.",
               metaData: {
                 userDocumentation: {
                   specification:
@@ -2314,7 +2314,7 @@ export default {
                               'v2_1.ExtensionsItemsCategoryDescription',
                           },
                         },
-                        enum: ['critical', 'high_value', 'informational'],
+                        enum: ['essential', 'significant', 'supplementary'],
                         metaInfo: {},
                         type: 'STRING',
                       },
@@ -2593,7 +2593,7 @@ export default {
                               ],
                               title: 'Textual description of the product',
                               description:
-                                'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                                'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                               metaData: {
                                 uiType: 'STRING_BRANCH_FULL_PRODUCT_NAME',
                                 userDocumentation: {
@@ -3161,9 +3161,9 @@ export default {
                                     metaData: {
                                       userDocumentation: {
                                         specification:
-                                          'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+                                          'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
                                         usage:
-                                          'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+                                          'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
                                       },
                                       relevanceLevels: {
                                         csaf_base: 'nice_to_know',
@@ -3199,9 +3199,9 @@ export default {
                                           uiType: 'STRING_URI',
                                           userDocumentation: {
                                             specification:
-                                              'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+                                              'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
                                             usage:
-                                              'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+                                              'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
                                           },
                                           relevanceLevels: {
                                             csaf_base: 'nice_to_know',
@@ -3770,9 +3770,9 @@ export default {
                                           },
                                         },
                                         enum: [
-                                          'critical',
-                                          'high_value',
-                                          'informational',
+                                          'essential',
+                                          'significant',
+                                          'supplementary',
                                         ],
                                         metaInfo: {},
                                         type: 'STRING',
@@ -3922,7 +3922,7 @@ export default {
                         ],
                         title: 'Textual description of the product',
                         description:
-                          'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                          'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                         metaData: {
                           userDocumentation: {
                             specification:
@@ -4460,9 +4460,9 @@ export default {
                               metaData: {
                                 userDocumentation: {
                                   specification:
-                                    'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+                                    'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
                                   usage:
-                                    'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+                                    'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
                                 },
                                 relevanceLevels: {
                                   csaf_base: 'nice_to_know',
@@ -4496,9 +4496,9 @@ export default {
                                     uiType: 'STRING_URI',
                                     userDocumentation: {
                                       specification:
-                                        'docs/user/types/full_product_name/product_identification_helper/purls-spec.en.md',
+                                        'docs/user/types/full_product_name/product_identification_helper/purl-spec.en.md',
                                       usage:
-                                        'docs/user/types/full_product_name/product_identification_helper/purls-usage.en.md',
+                                        'docs/user/types/full_product_name/product_identification_helper/purl-usage.en.md',
                                     },
                                     relevanceLevels: {
                                       csaf_base: 'nice_to_know',
@@ -5034,9 +5034,9 @@ export default {
                                     },
                                   },
                                   enum: [
-                                    'critical',
-                                    'high_value',
-                                    'informational',
+                                    'essential',
+                                    'significant',
+                                    'supplementary',
                                   ],
                                   metaInfo: {},
                                   type: 'STRING',
@@ -5425,7 +5425,7 @@ export default {
                               ],
                               title: 'Textual description of the product',
                               description:
-                                'The value should be the productâ€™s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
+                                'The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.',
                               metaData: {
                                 relevanceLevels: {
                                   csaf_base: 'mandatory',
@@ -6451,9 +6451,9 @@ export default {
                                           },
                                         },
                                         enum: [
-                                          'critical',
-                                          'high_value',
-                                          'informational',
+                                          'essential',
+                                          'significant',
+                                          'supplementary',
                                         ],
                                         metaInfo: {},
                                         type: 'STRING',
@@ -7839,6 +7839,63 @@ export default {
                       type: 'OBJECT',
                       metaInfo: {
                         propertyList: [
+                          {
+                            key: 'group_ids',
+                            fullName: ['vulnerabilities', 'ids', 'group_ids'],
+                            title: 'List of product_group_ids',
+                            description:
+                              'Specifies a list of product_group_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'ids',
+                                  'group_ids',
+                                ],
+                                title:
+                                  'Reference token for product group instance',
+                                description:
+                                  'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: [
+                                  'CSAFGID-0001',
+                                  'CSAFGID-0002',
+                                  'CSAFGID-0020',
+                                ],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
+                          {
+                            key: 'product_ids',
+                            fullName: ['vulnerabilities', 'ids', 'product_ids'],
+                            title: 'List of product_ids',
+                            description:
+                              'Specifies a list of product_ids to give context to the parent item.',
+                            type: 'ARRAY',
+                            metaInfo: {
+                              arrayType: {
+                                key: '',
+                                fullName: [
+                                  'vulnerabilities',
+                                  'ids',
+                                  'product_ids',
+                                ],
+                                title: 'Reference token for product instance',
+                                description:
+                                  'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
+                                metaData: {},
+                                minLength: 1,
+                                examples: ['CSAFPID-0004', 'CSAFPID-0008'],
+                                metaInfo: {},
+                                type: 'STRING',
+                              },
+                            },
+                          },
                           {
                             key: 'system_name',
                             fullName: ['vulnerabilities', 'ids', 'system_name'],
@@ -9570,9 +9627,9 @@ export default {
                                               },
                                             },
                                             enum: [
-                                              'critical',
-                                              'high_value',
-                                              'informational',
+                                              'essential',
+                                              'significant',
+                                              'supplementary',
                                             ],
                                             metaInfo: {},
                                             type: 'STRING',
@@ -11948,7 +12005,7 @@ export default {
                                   'v2_1.ExtensionsItemsCategoryDescription',
                               },
                             },
-                            enum: ['critical', 'high_value', 'informational'],
+                            enum: ['essential', 'significant', 'supplementary'],
                             metaInfo: {},
                             type: 'STRING',
                           },
@@ -12103,7 +12160,7 @@ export default {
                       description: 'v2_1.ExtensionsItemsCategoryDescription',
                     },
                   },
-                  enum: ['critical', 'high_value', 'informational'],
+                  enum: ['essential', 'significant', 'supplementary'],
                   metaInfo: {},
                   type: 'STRING',
                 },
