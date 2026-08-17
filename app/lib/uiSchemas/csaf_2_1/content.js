@@ -7845,6 +7845,19 @@ export default {
                             title: 'List of product_group_ids',
                             description:
                               'Specifies a list of product_group_ids to give context to the parent item.',
+                            metaData: {
+                              relevanceLevels: {
+                                csaf_base: 'optional',
+                                csaf_security_incident_response: 'nice_to_know',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'nice_to_know',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ProductGroupsTitle',
+                                description: 'v2_1.ProductGroupsDescription',
+                              },
+                            },
                             type: 'ARRAY',
                             metaInfo: {
                               arrayType: {
@@ -7858,7 +7871,26 @@ export default {
                                   'Reference token for product group instance',
                                 description:
                                   'Token required to identify a group of products so that it can be referred to from other parts in the document. There is no predefined or required format for the product_group_id as long as it uniquely identifies a group in the context of the current document.',
-                                metaData: {},
+                                metaData: {
+                                  uiType: 'STRING_GROUP_ID',
+                                  i18n: {
+                                    title: 'v2_1.ProductGroupIdTitle',
+                                    description:
+                                      'v2_1.ProductGroupIdDescription',
+                                  },
+                                  itemName: {
+                                    itemNameTranslationKey:
+                                      'arrays.productGroupIdsItemName',
+                                  },
+                                  relevanceLevels: {
+                                    csaf_base: 'optional',
+                                    csaf_security_incident_response:
+                                      'nice_to_know',
+                                    csaf_informational_advisory: 'excluded',
+                                    csaf_security_advisory: 'nice_to_know',
+                                    csaf_vex: 'mandatory',
+                                  },
+                                },
                                 minLength: 1,
                                 examples: [
                                   'CSAFGID-0001',
@@ -7876,6 +7908,19 @@ export default {
                             title: 'List of product_ids',
                             description:
                               'Specifies a list of product_ids to give context to the parent item.',
+                            metaData: {
+                              relevanceLevels: {
+                                csaf_base: 'optional',
+                                csaf_security_incident_response: 'nice_to_know',
+                                csaf_informational_advisory: 'excluded',
+                                csaf_security_advisory: 'nice_to_know',
+                                csaf_vex: 'mandatory',
+                              },
+                              i18n: {
+                                title: 'v2_1.ProductsTitle',
+                                description: 'v2_1.ProductsDescription',
+                              },
+                            },
                             type: 'ARRAY',
                             metaInfo: {
                               arrayType: {
@@ -7888,7 +7933,25 @@ export default {
                                 title: 'Reference token for product instance',
                                 description:
                                   'Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.',
-                                metaData: {},
+                                metaData: {
+                                  uiType: 'STRING_PRODUCT_ID',
+                                  i18n: {
+                                    title: 'v2_1.ProductIdTitle',
+                                    description: 'v2_1.ProductIdDescription',
+                                  },
+                                  itemName: {
+                                    itemNameTranslationKey:
+                                      'arrays.productsItemName',
+                                  },
+                                  relevanceLevels: {
+                                    csaf_base: 'optional',
+                                    csaf_security_incident_response:
+                                      'nice_to_know',
+                                    csaf_informational_advisory: 'excluded',
+                                    csaf_security_advisory: 'nice_to_know',
+                                    csaf_vex: 'mandatory',
+                                  },
+                                },
                                 minLength: 1,
                                 examples: ['CSAFPID-0004', 'CSAFPID-0008'],
                                 metaInfo: {},

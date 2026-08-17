@@ -3355,6 +3355,42 @@ export default {
     },
     itemName: { itemNameTranslationKey: 'arrays.idsItemName' },
   },
+  '$.vulnerabilities.ids.group_ids': {
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'nice_to_know',
+      csaf_informational_advisory: 'excluded',
+      csaf_security_advisory: 'nice_to_know',
+      csaf_vex: 'mandatory',
+    },
+    i18n: {
+      title: 'ProductGroupsTitle',
+      description: 'ProductGroupsDescription',
+    },
+  },
+  '$.vulnerabilities.ids.group_ids[]': {
+    i18n: {
+      title: 'ProductGroupIdTitle',
+      description: 'ProductGroupIdDescription',
+    },
+    itemName: { itemNameTranslationKey: 'arrays.productGroupIdsItemName' },
+    uiType: 'STRING_GROUP_ID',
+  },
+  '$.vulnerabilities.ids.product_ids': {
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'nice_to_know',
+      csaf_informational_advisory: 'excluded',
+      csaf_security_advisory: 'nice_to_know',
+      csaf_vex: 'mandatory',
+    },
+    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
+  },
+  '$.vulnerabilities.ids.product_ids[]': {
+    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
+    itemName: { itemNameTranslationKey: 'arrays.productsItemName' },
+    uiType: 'STRING_PRODUCT_ID',
+  },
   '$.vulnerabilities.ids.system_name': {
     userDocumentation: {
       specification:
