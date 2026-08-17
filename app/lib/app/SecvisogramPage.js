@@ -193,7 +193,10 @@ const SecvisogramPage = () => {
             }
           }
           fileReader.readAsText(file)
-        }).catch(handleError)
+        }).catch((err) => {
+          setState((state) => ({ ...state, isLoading: false }))
+          handleError(err)
+        })
       }}
       onChangeTab={(tab, document) => {
         if (isTabLocked) return
