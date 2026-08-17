@@ -18,9 +18,17 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
   const updateMarkdownText = (/** @type string */ mdPath) => {
     if (mdPath) {
       fetch(mdPath)
-        .then((resp) => resp.text())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Failed to load markdown file: ${mdPath}`)
+          }
+          return resp.text()
+        })
         .then((mdText) => {
           setMdText(mdText)
+        })
+        .catch(() => {
+          setMdText(t('sidebar.noDocumentationAvailable'))
         })
     }
   }
