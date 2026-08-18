@@ -260,7 +260,7 @@ function View({
     if (toast) {
       timeout = setTimeout(() => {
         setToast(null)
-      }, 5000)
+      }, 10000)
     }
     return () => {
       if (timeout !== null) {
