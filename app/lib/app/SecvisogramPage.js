@@ -199,11 +199,11 @@ const SecvisogramPage = () => {
                 }
                 resolve(parsedDoc)
               } else {
-                reject({ message: 'Failed to read file' })
+                reject(new Error('Failed to read file'))
               }
             } catch (err) {
               if (err instanceof TypeError) {
-                reject({ message: 'Invalid UTF-8 encoding' })
+                reject(new Error('Invalid UTF-8 encoding'))
               }
               reject(err)
             }
