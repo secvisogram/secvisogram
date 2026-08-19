@@ -233,6 +233,35 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
     await expect(infoPanelContent).toContainText('Acknowledgments - Usage')
   })
 
+  test('shows a fallback message instead of crashing for a field without usage docs', async ({
+    page,
+  }) => {
+    await page.route(
+      '/.well-known/appspecific/de.bsi.secvisogram.json',
+      (route) => route.fulfill({ status: 404, json: {} }),
+    )
+
+    await page.goto('?tab=EDITOR')
+
+    await page.locator('#csafVersionSelect').selectOption('v2.1')
+    await page.getByTestId('beta_version-confirm_button').click()
+
+    // x_extensions is 'optional' relevance and only rendered at that layer
+    await page.getByTestId('layer-button-optional').click()
+
+    // x_extensions has no authored userDocumentation entry (metaData.js)
+    await page.getByTestId('x_extensions-infoButton').click()
+    await page.getByTestId('sideBar-DOCUMENTATION-button').click()
+
+    const infoPanelContent = page.getByTestId('infoPanel-content')
+    await expect(infoPanelContent).toContainText(
+      'No documentation available for this field.',
+    )
+
+    // the click must not have tripped the ErrorBoundary/ErrorScreen
+    await expect(page.getByTestId('sideBar-DOCUMENTATION-button')).toBeVisible()
+  })
+
   test.describe('can add and remove new array items from object editor', () => {
     test('/product_tree/branches', async ({ page }) => {
       await page.route(

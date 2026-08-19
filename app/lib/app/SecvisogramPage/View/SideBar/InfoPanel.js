@@ -1,4 +1,5 @@
 import { uiSchemas } from '#lib/uiSchemas.js'
+import { t } from 'i18next'
 import React, { useEffect } from 'react'
 
 import ReactMarkdown from 'react-markdown'
@@ -17,9 +18,17 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
   const updateMarkdownText = (/** @type string */ mdPath) => {
     if (mdPath) {
       fetch(mdPath)
-        .then((resp) => resp.text())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Failed to load markdown file: ${mdPath}`)
+          }
+          return resp.text()
+        })
         .then((mdText) => {
           setMdText(mdText)
+        })
+        .catch(() => {
+          setMdText(t('sidebar.noDocumentationAvailable'))
         })
     }
   }
@@ -28,13 +37,18 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
     if (!selectedPath.length) {
       /* eslint-disable-next-line react-hooks/set-state-in-effect */
       setMdText('')
+      return
     }
 
     const jsonPath = `$.${selectedPath.join('.')}`.replaceAll(/\.\d+/g, '')
-    if (jsonPath in metaData) {
-      // @ts-ignore
-      const meta = metaData[jsonPath]
+    const meta = /** @type {typeof metaData[keyof metaData] | undefined} */ (
+      Reflect.get(metaData, jsonPath)
+    )
+    if (meta && 'userDocumentation' in meta && meta.userDocumentation.usage) {
       updateMarkdownText(meta.userDocumentation.usage)
+    } else {
+      // not every field has authored usage documentation yet
+      setMdText(t('sidebar.noDocumentationAvailable'))
     }
   }, [selectedPath, metaData])
 

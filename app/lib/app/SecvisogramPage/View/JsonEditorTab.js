@@ -198,11 +198,17 @@ export default function JsonEditorTab({
   )
 
   const updateEditorSettings = useCallback(() => {
+    // The csaf 2.1 schema includes an id that ends in `?strict` which is
+    // different than the value accept for the `$schema` document property.
+    // Therefore we remove this search param here.
+    const url = new URL(uiSchema.jsonSchema.$id)
+    url.search = ''
+
     monaco?.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       schemas: [
         {
-          uri: uiSchema.jsonSchema.$id,
+          uri: url.href,
           fileMatch: ['*'],
           schema: uiSchema.jsonSchema,
         },
