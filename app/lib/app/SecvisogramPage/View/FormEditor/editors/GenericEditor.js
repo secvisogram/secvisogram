@@ -25,6 +25,7 @@ import Attribute from './GenericEditor/Attributes/shared/Attribute.js'
 import TextAreaAttribute from './GenericEditor/Attributes/TextAreaAttribute.js'
 import TextAttribute from './GenericEditor/Attributes/TextAttribute.js'
 import ObjectEditor from './GenericEditor/ObjectEditor.js'
+import CheckboxAttribute from './GenericEditor/Attributes/CheckboxAttribute.js'
 
 /**
  * utility function to get the color of circles identifying errors
@@ -316,6 +317,17 @@ export default function Editor({
       >
         {typeof value === 'number' ? String(value) : ''}
       </Attribute>
+    ))
+  } else if (property.type === 'BOOLEAN') {
+    return wrapIfSingleton(() => (
+      <CheckboxAttribute
+        label={label}
+        description={description}
+        instancePath={instancePath}
+        value={value ? true : false}
+        property={property}
+        disabled={disabled}
+      />
     ))
   } else if (property.type === 'RECURSION') {
     // type is handled in ArrayEditor
