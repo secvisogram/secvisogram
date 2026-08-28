@@ -15,6 +15,7 @@ This document gives an overview on how to develop Secvisogram, the general techn
 - [Building & Deploying Secvisogram into Production](#building--deploying-secvisogram-into-production)
   - [Create and Building a release](#create-and-building-a-release)
   - [Deploy to production using nginx](#deploy-to-production-using-nginx)
+  - [Using Secvisogram with the CSAF Validator Service](#using-secvisogram-with-the-csaf-validator-service)
 - [Secvisogram folder structure](#secvisogram-folder-structure)
 - [Technical Design](#technical-design)
   - [Form Editor](#form-editor)
@@ -134,7 +135,7 @@ Below you'll find an example configuration for hosting Secvisogram in a producti
 
 #### Full nginx configuration example
 
-**File: `/etc/nginx/site-available/secvisogram.conf`**
+**File: `/etc/nginx/sites-available/secvisogram.conf`**
 
 ```
 ##
@@ -235,6 +236,42 @@ add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsaf
 add_header Referrer-Policy no-referrer;
 add_header Permissions-Policy "geolocation=(), camera=(), fullscreen=*, usb=(), payment=(), microphone=(), gyroscope=(), accelerometer=()";
 ```
+
+### Using Secvisogram with the CSAF Validator Service
+
+Secvisogram can offer extended CSAF document validation via CTRL + ALT + V by delegating to a separate
+[csaf-validator-service](https://github.com/secvisogram/csaf-validator-service).
+To integrate this service into Secvisogram, the following steps are required:
+
+Start the validator service separately (e.g. `npx @secvisogram/csaf-validator-service`,
+see the [csaf-validator-service README](https://github.com/secvisogram/csaf-validator-service)).
+
+Make the following addition to `/etc/nginx/sites-available/secvisogram.conf` (inside the `server` block from the example above):
+
+```
+location /validator/ {
+    proxy_pass http://127.0.0.1:8082/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
+Create the directory `/var/www/secvisogram.de/.well-known/appspecific/`
+and inside it, create the file `de.bsi.secvisogram.json` with the following content:
+
+```json
+{
+  "loginAvailable": false,
+  "loginUrl": "",
+  "logoutUrl": "",
+  "userInfoUrl": "",
+  "validatorUrl": "/validator"
+}
+```
+
+Update the value of the `Content-Security-Policy` header: change `connect-src 'none'` to `connect-src 'self'` in both the header example
+and the `ssl-secvisogram.conf` snippet above so the validation request is permitted.
 
 ## Secvisogram folder structure
 
