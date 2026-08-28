@@ -4,12 +4,7 @@
   "title": "CSAF Extension Content",
   "description": "Representation of additional information extending a CSAF Document.",
   "type": "object",
-  "required": [
-    "$schema",
-    "category",
-    "critical",
-    "content"
-  ],
+  "required": ["$schema", "category", "critical", "content"],
   "properties": {
     "$schema": {
       "title": "CSAF Extension Schema",
@@ -20,11 +15,7 @@
       "title": "Extension Category",
       "description": "Holds the category of the extension content.",
       "type": "string",
-      "enum": [
-        "critical",
-        "high_value",
-        "informational"
-      ]
+      "enum": ["critical", "high_value", "informational"]
     },
     "content": {
       "title": "Content",

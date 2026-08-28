@@ -28,7 +28,9 @@
         { "$ref": "https://json-schema.org/draft/2020-12/meta/unevaluated" },
         { "$ref": "https://json-schema.org/draft/2020-12/meta/validation" },
         { "$ref": "https://json-schema.org/draft/2020-12/meta/meta-data" },
-        { "$ref": "https://json-schema.org/draft/2020-12/meta/format-assertion" }
+        {
+          "$ref": "https://json-schema.org/draft/2020-12/meta/format-assertion"
+        }
       ]
     }
   },
@@ -83,23 +85,13 @@
       "title": "CSAF Extension Schema Required Properties",
       "description": "Contains the list of required properties.",
       "type": "array",
-      "const": [
-        "$schema",
-        "category",
-        "critical",
-        "content"
-      ]
+      "const": ["$schema", "category", "critical", "content"]
     },
     "properties": {
       "title": "CSAF Extension Schema Properties",
       "description": "Contains the definition of the properties a CSAF Extension Schema needs.",
       "type": "object",
-      "required": [
-        "$schema",
-        "category",
-        "critical",
-        "content"
-      ],
+      "required": ["$schema", "category", "critical", "content"],
       "properties": {
         "$schema": {
           "title": "CSAF Extension Schema",
@@ -107,12 +99,7 @@
           "type": "object",
           "maxProperties": 5,
           "minProperties": 5,
-          "required": [
-            "title",
-            "description",
-            "type",
-            "format"
-          ],
+          "required": ["title", "description", "type", "format"],
           "properties": {
             "title": {
               "title": "Title of the CSAF Extension $schema value",
@@ -158,12 +145,7 @@
           "title": "CSAF Extension Category",
           "description": "Contains the definition of the object of the CSAF Extension Category.",
           "type": "object",
-          "required": [
-            "title",
-            "description",
-            "type",
-            "enum"
-          ],
+          "required": ["title", "description", "type", "enum"],
           "properties": {
             "title": {
               "title": "Title of the CSAF Extension Category value",
@@ -194,11 +176,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "critical",
-                  "high_value",
-                  "informational"
-                ]
+                "enum": ["critical", "high_value", "informational"]
               }
             }
           },
@@ -209,11 +187,7 @@
           "description": "Contains the definition of the object of the CSAF Extension critical.",
           "type": "object",
           "maxProperties": 5,
-          "required": [
-            "title",
-            "description",
-            "type"
-          ],
+          "required": ["title", "description", "type"],
           "properties": {
             "title": {
               "title": "Title of the CSAF Extension Critical value",
@@ -239,19 +213,13 @@
               "title": "Default of the CSAF Extension Critical value",
               "description": "Contains the default of the critical value - either `true` or `false`.",
               "type": "string",
-              "enum": [
-                "false",
-                "true"
-              ]
+              "enum": ["false", "true"]
             },
             "const": {
               "title": "Constant value of the CSAF Extension Critical value",
               "description": "Contains the only allowed value of the critical value as defined by the CSAF Extension Schema - either `true` or `false`.",
               "type": "boolean",
-              "enum": [
-                false,
-                true
-              ]
+              "enum": [false, true]
             }
           },
           "additionalProperties": false

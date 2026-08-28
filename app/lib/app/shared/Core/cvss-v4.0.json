@@ -24,47 +24,27 @@
   "$id": "https://www.first.org/cvss/cvss-v4.0.json?20260226",
   "title": "JSON Schema for Common Vulnerability Scoring System version 4.0, Revision 2",
   "type": "object",
-    "$defs": {
+  "$defs": {
     "attackComplexityType": {
       "type": "string",
-      "enum": [
-        "HIGH",
-        "LOW"
-      ]
+      "enum": ["HIGH", "LOW"]
     },
     "attackRequirementsType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "PRESENT"
-      ]
+      "enum": ["NONE", "PRESENT"]
     },
     "attackVectorType": {
       "type": "string",
-      "enum": [
-        "NETWORK",
-        "ADJACENT",
-        "LOCAL",
-        "PHYSICAL"
-      ]
+      "enum": ["NETWORK", "ADJACENT", "LOCAL", "PHYSICAL"]
     },
     "automatableType": {
       "type": "string",
-      "enum": [
-        "NO",
-        "YES",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NO", "YES", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "ciaRequirementType": {
       "type": "string",
-      "enum": [
-        "LOW",
-        "MEDIUM",
-        "HIGH",
-        "NOT_DEFINED"
-      ],
+      "enum": ["LOW", "MEDIUM", "HIGH", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "criticalScoreType": {
@@ -78,12 +58,7 @@
     },
     "exploitMaturityType": {
       "type": "string",
-      "enum": [
-        "UNREPORTED",
-        "PROOF_OF_CONCEPT",
-        "ATTACKED",
-        "NOT_DEFINED"
-      ],
+      "enum": ["UNREPORTED", "PROOF_OF_CONCEPT", "ATTACKED", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "highScoreType": {
@@ -114,82 +89,42 @@
     },
     "modifiedAttackComplexityType": {
       "type": "string",
-      "enum": [
-        "HIGH",
-        "LOW",
-        "NOT_DEFINED"
-      ],
+      "enum": ["HIGH", "LOW", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedAttackRequirementsType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "PRESENT",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NONE", "PRESENT", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedAttackVectorType": {
       "type": "string",
-      "enum": [
-        "NETWORK",
-        "ADJACENT",
-        "LOCAL",
-        "PHYSICAL",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NETWORK", "ADJACENT", "LOCAL", "PHYSICAL", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedPrivilegesRequiredType": {
       "type": "string",
-      "enum": [
-        "HIGH",
-        "LOW",
-        "NONE",
-        "NOT_DEFINED"
-      ],
+      "enum": ["HIGH", "LOW", "NONE", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedSubCType": {
       "type": "string",
-      "enum": [
-        "NEGLIGIBLE",
-        "LOW",
-        "HIGH",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NEGLIGIBLE", "LOW", "HIGH", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedSubIaType": {
       "type": "string",
-      "enum": [
-        "NEGLIGIBLE",
-        "LOW",
-        "HIGH",
-        "SAFETY",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NEGLIGIBLE", "LOW", "HIGH", "SAFETY", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedUserInteractionType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "PASSIVE",
-        "ACTIVE",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NONE", "PASSIVE", "ACTIVE", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "modifiedVulnCiaType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "LOW",
-        "HIGH",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NONE", "LOW", "HIGH", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "noneScoreType": {
@@ -202,92 +137,47 @@
     },
     "privilegesRequiredType": {
       "type": "string",
-      "enum": [
-        "HIGH",
-        "LOW",
-        "NONE"
-      ]
+      "enum": ["HIGH", "LOW", "NONE"]
     },
     "providerUrgencyType": {
       "type": "string",
-      "enum": [
-        "CLEAR",
-        "GREEN",
-        "AMBER",
-        "RED",
-        "NOT_DEFINED"
-      ],
+      "enum": ["CLEAR", "GREEN", "AMBER", "RED", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "recoveryType": {
       "type": "string",
-      "enum": [
-        "AUTOMATIC",
-        "USER",
-        "IRRECOVERABLE",
-        "NOT_DEFINED"
-      ],
+      "enum": ["AUTOMATIC", "USER", "IRRECOVERABLE", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "safetyType": {
       "type": "string",
-      "enum": [
-        "NEGLIGIBLE",
-        "PRESENT",
-        "NOT_DEFINED"
-      ],
+      "enum": ["NEGLIGIBLE", "PRESENT", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "subCiaType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "LOW",
-        "HIGH"
-      ]
+      "enum": ["NONE", "LOW", "HIGH"]
     },
     "userInteractionType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "PASSIVE",
-        "ACTIVE"
-      ]
+      "enum": ["NONE", "PASSIVE", "ACTIVE"]
     },
     "valueDensityType": {
       "type": "string",
-      "enum": [
-        "DIFFUSE",
-        "CONCENTRATED",
-        "NOT_DEFINED"
-      ],
+      "enum": ["DIFFUSE", "CONCENTRATED", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     },
     "vulnCiaType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "LOW",
-        "HIGH"
-      ]
+      "enum": ["NONE", "LOW", "HIGH"]
     },
     "vulnerabilityResponseEffortType": {
       "type": "string",
-      "enum": [
-        "LOW",
-        "MODERATE",
-        "HIGH",
-        "NOT_DEFINED"
-      ],
+      "enum": ["LOW", "MODERATE", "HIGH", "NOT_DEFINED"],
       "default": "NOT_DEFINED"
     }
   },
-  "required": [
-    "version",
-    "vectorString",
-    "baseScore",
-    "baseSeverity"
-  ],
+  "required": ["version", "vectorString", "baseScore", "baseSeverity"],
   "properties": {
     "Automatable": {
       "$ref": "#/$defs/automatableType"
@@ -380,9 +270,7 @@
     "version": {
       "description": "CVSS Version",
       "type": "string",
-      "enum": [
-        "4.0"
-      ]
+      "enum": ["4.0"]
     },
     "vulnAvailabilityImpact": {
       "$ref": "#/$defs/vulnCiaType"
