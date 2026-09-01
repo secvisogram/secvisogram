@@ -32,12 +32,25 @@ yargs(process.argv.slice(2))
     parseLanguageTagExtensionList,
   )
   .command(
-    'generate-preview-templating-table',
+    'generate-preview-templating-table-2.0',
     '',
     /** @type {any} */ (
       (/** @type {import('yargs').Argv} */ command) =>
         command
-          .option('csaf21Schema', { alias: 'csaf', type: 'string' })
+          .option('csaf20Schema', { alias: 'csaf-2', type: 'string' })
+          .option('cvss20Schema', { alias: 'cvss-2', type: 'string' })
+          .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
+          .demandOption(['csaf20Schema', 'cvss20Schema', 'cvss31Schema'])
+    ),
+    /** @type {any} */ (generatePreviewTemplatingTable),
+  )
+  .command(
+    'generate-preview-templating-table-2.1',
+    '',
+    /** @type {any} */ (
+      (/** @type {import('yargs').Argv} */ command) =>
+        command
+          .option('csaf21Schema', { alias: 'csaf-2.1', type: 'string' })
           .option('cvss20Schema', { alias: 'cvss-2', type: 'string' })
           .option('cvss31Schema', { alias: 'cvss-3.1', type: 'string' })
           .option('cvss40Schema', { alias: 'cvss-4', type: 'string' })
