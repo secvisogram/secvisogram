@@ -38,7 +38,7 @@
     "@mui/styles": "^5.18.0",
     "@secvisogram/csaf-validator-lib": "^2.1.4",
     "ajv": "^8.18.0",
-    "ajv-formats": "^2.1.1",
+    "ajv-formats": "^3.0.1",
     "bcp47": "^1.1.2",
     "cvss2js": "^1.1.0",
     "i18next": "^26.3.6",
