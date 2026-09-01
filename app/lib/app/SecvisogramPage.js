@@ -11,6 +11,7 @@ import AppErrorContext from './shared/context/AppErrorContext.js'
 import HistoryContext from './shared/context/HistoryContext.js'
 import downloadFile from './shared/download.js'
 import sitemap from './shared/sitemap.js'
+import sortObjectKeys from './shared/sortObjectKeys.js'
 
 /**
  * Holds the application-state and provides memoized callbacks for the view
@@ -266,10 +267,16 @@ const SecvisogramPage = () => {
         [handleError, core],
       )}
       onGetDocMin={async () => {
-        return core.newDocMin()
+        const newDocMin = await core.newDocMin()
+        return /** @type {{}} */ (
+          sortObjectKeys(new Intl.Collator(), newDocMin)
+        )
       }}
       onGetDocMax={async () => {
-        return core.newDocMax()
+        const newDocMax = await core.newDocMax()
+        return /** @type {{}} */ (
+          sortObjectKeys(new Intl.Collator(), newDocMax)
+        )
       }}
       onCreateAdvisory={({ csaf, summary, legacyVersion }) => {
         return backend.createAdvisory({ csaf, summary, legacyVersion })

@@ -417,8 +417,8 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
 
     await page.getByTestId('document-tracking-infoButton').click()
 
-    // there should be 6 error cards (1 warning) under /document/tracking for the default minimal document
-    await expect(page.locator('[data-testid="error-cards"] div')).toHaveCount(7)
+    // there should be 6 error cards under /document/tracking for the default minimal document
+    await expect(page.locator('[data-testid="error-cards"] div')).toHaveCount(6)
 
     await page.getByTestId('menu_entry-/document/tracking').click()
     await page
