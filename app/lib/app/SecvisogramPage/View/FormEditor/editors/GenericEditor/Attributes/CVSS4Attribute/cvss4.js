@@ -1114,7 +1114,7 @@ export class Cvss4JsonWrapper {
         this.#data[metric.jsonName] =
           metricOptions?.optionsByKey.get(optionsKey) ?? ''
       })
-    } catch (error) {
+    } catch {
       flatMetrics.forEach((metric) => {
         this.#data[metric.jsonName] = ''
       })
