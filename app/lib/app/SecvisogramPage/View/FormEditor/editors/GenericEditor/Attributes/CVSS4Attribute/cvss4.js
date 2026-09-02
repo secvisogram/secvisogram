@@ -964,10 +964,10 @@ function calculateName2MetricMap() {
     name2Metric.set(metric.jsonName, {
       metricShort: metric.metricShort,
       optionsByValue: new Map(
-        metric.options.map((option) => [option.optionValue, option.optionKey])
+        metric.options.map((option) => [option.optionValue, option.optionKey]),
       ),
       optionsByKey: new Map(
-        metric.options.map((option) => [option.optionKey, option.optionValue])
+        metric.options.map((option) => [option.optionKey, option.optionValue]),
       ),
     })
   })
@@ -985,7 +985,7 @@ function calculateScoreObject(cvss40, metricTypeId) {
   flatMetrics
     .filter(
       (metric) =>
-        metric.metricTypeId !== metricTypeId && metric.metricTypeId !== 'BASE'
+        metric.metricTypeId !== metricTypeId && metric.metricTypeId !== 'BASE',
     )
     .forEach((metric) => {
       calculator.vector.updateMetric(metric.metricShort, metric.initialOption)
@@ -1084,7 +1084,7 @@ export class Cvss4JsonWrapper {
         const metricOptionValue = metric.optionsByValue.get(String(value))
         calculation.vector.updateMetric(
           metric.metricShort,
-          metricOptionValue ?? ''
+          metricOptionValue ?? '',
         )
       }
     }
