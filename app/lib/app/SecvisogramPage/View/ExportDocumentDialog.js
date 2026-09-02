@@ -313,10 +313,14 @@ export default /**
                         const iframeWindow = iframeRef.current.contentWindow
                         iframeRef.current.contentDocument.open()
                         iframeRef.current.contentDocument.write(html)
+                        // We need to wait for Firefox to have styles loaded
+                        iframeWindow.onload = () => {
+                          if (iframeRef.current) {
+                            iframeRef.current.focus()
+                            iframeWindow.print()
+                          }
+                        }
                         iframeRef.current.contentDocument.close()
-
-                        iframeRef.current.focus()
-                        iframeWindow.print()
                       })
                       .catch(handleError)
                     break
