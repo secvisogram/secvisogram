@@ -2,18 +2,18 @@ import React from 'react'
 
 /**
  * @typedef {object} HistoryContext
- * @property {Location} location
+ * @property {URL} location
  * @property {any} state
- * @property {History['pushState']} pushState
- * @property {History['replaceState']} replaceState
+ * @property {(url: string | URL) => void} pushState
+ * @property {(url: string | URL) => void} replaceState
  */
 
 /** @type {HistoryContext} */
 const defaultValue = {
-  location: window.location,
+  location: new URL(window.location.href),
   state: null,
-  pushState: window.history.pushState.bind(window.history),
-  replaceState: window.history.replaceState.bind(window.history),
+  pushState: (url) => window.history.pushState(null, '', url),
+  replaceState: (url) => window.history.replaceState(null, '', url),
 }
 
 export default React.createContext(defaultValue)
