@@ -26,7 +26,7 @@ export default function CVSSV4Attribute({
   disabled,
 }) {
   const { doc, updateDoc, ...outerDocumentEditor } = React.useContext(
-    DocumentEditorContext
+    DocumentEditorContext,
   )
   const cvss40 = React.useMemo(() => new Cvss4JsonWrapper(value || {}), [value])
 
@@ -47,7 +47,7 @@ export default function CVSSV4Attribute({
         updateDoc(instancePath, cvss40.data)
       },
     }),
-    [outerDocumentEditor, updateDoc, instancePath, doc, cvss40]
+    [outerDocumentEditor, updateDoc, instancePath, doc, cvss40],
   )
 
   /** @type {(metricType: string) => any} */
@@ -71,13 +71,13 @@ export default function CVSSV4Attribute({
           .filter(
             (metric) =>
               metric.metricType === metricType &&
-              metric.metricGroup === groupName
+              metric.metricGroup === groupName,
           )
           .map((metric) => (
             <Fragment key={metric.jsonName}>
               {dropdownFor(
                 metric.jsonName,
-                metric.options.map((option) => option.optionValue)
+                metric.options.map((option) => option.optionValue),
               )}
             </Fragment>
           ))}
@@ -95,7 +95,7 @@ export default function CVSSV4Attribute({
       options,
       property,
       disabled,
-      disableClearable
+      disableClearable,
     )
   }
 
