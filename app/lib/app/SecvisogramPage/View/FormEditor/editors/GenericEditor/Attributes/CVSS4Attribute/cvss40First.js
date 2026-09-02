@@ -273,10 +273,10 @@ class Vector {
     let nomenclature = Vector.BASE_NOMENCLATURE
 
     const hasThreatMetrics = Object.keys(Vector.METRICS.THREAT).some(
-      (key) => this.metrics[key] !== 'X'
+      (key) => this.metrics[key] !== 'X',
     )
     const hasEnvironmentalMetrics = Object.keys(
-      Vector.METRICS.ENVIRONMENTAL
+      Vector.METRICS.ENVIRONMENTAL,
     ).some((key) => this.metrics[key] !== 'X')
 
     if (hasThreatMetrics) {
@@ -332,13 +332,13 @@ class Vector {
       macroVectorDetails.map((description, index) => {
         // Determine which lookup table to use based on the macrovector description
         const macroVectorValueOptions = macroVectorsWithTwoSeverities.includes(
-          description
+          description,
         )
           ? twoSeverities
           : threeSeverities
 
         return [description, macroVectorValueOptions[macroVector[index]]]
-      })
+      }),
     )
   }
 
@@ -398,7 +398,8 @@ class Vector {
     // Check if the prefix is correct
     if (metrics.shift() !== 'CVSS:4.0') {
       console.error(
-        'Error: invalid vector, missing CVSS v4.0 prefix from vector: ' + vector
+        'Error: invalid vector, missing CVSS v4.0 prefix from vector: ' +
+          vector,
       )
       return false
     }
@@ -431,7 +432,7 @@ class Vector {
       // Check if the value is valid for the given metric
       if (!expectedMetrics[mandatoryMetricIndex][1].includes(value)) {
         console.error(
-          `Error: invalid vector, for key ${key}, value ${value} is not in ${expectedMetrics[mandatoryMetricIndex][1]}`
+          `Error: invalid vector, for key ${key}, value ${value} is not in ${expectedMetrics[mandatoryMetricIndex][1]}`,
         )
         return false
       }
@@ -912,7 +913,7 @@ export class CVSS40 {
       this.vector = new Vector(input)
     } else {
       throw new Error(
-        `Invalid input type for CVSSv4.0 constructor. Expected a string or a Vector object in ${this.vector}`
+        `Invalid input type for CVSSv4.0 constructor. Expected a string or a Vector object in ${this.vector}`,
       )
     }
 
@@ -1005,7 +1006,7 @@ export class CVSS40 {
     // Exception for no impact on system
     if (
       NO_IMPACT_METRICS.every(
-        (metric) => this.vector.getEffectiveMetricValue(metric) === 'N'
+        (metric) => this.vector.getEffectiveMetricValue(metric) === 'N',
       )
     ) {
       return 0.0
@@ -1072,7 +1073,7 @@ export class CVSS40 {
 
       score_eq3eq6_next_lower_macro = Math.max(
         score_eq3eq6_next_lower_macro_left,
-        score_eq3eq6_next_lower_macro_right
+        score_eq3eq6_next_lower_macro_right,
       )
     } else {
       score_eq3eq6_next_lower_macro =
@@ -1226,7 +1227,7 @@ export class CVSS40 {
     //    distance so computed. This score is rounded to one decimal place.
     return roundToDecimalPlaces(
       Math.max(0, Math.min(10, value - meanDistance)),
-      1
+      1,
     )
   }
 
