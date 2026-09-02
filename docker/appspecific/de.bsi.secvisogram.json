@@ -3,6 +3,5 @@
   "loginUrl": "",
   "logoutUrl": "",
   "userInfoUrl": "",
-  "validatorUrl": "http://localhost:8082",
-  "mode": "embedded"
+  "validatorUrl": "http://localhost:8082"
 }

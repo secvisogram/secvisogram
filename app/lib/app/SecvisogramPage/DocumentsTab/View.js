@@ -19,7 +19,7 @@ export default function DocumentsTabView({
   onChangeWorkflowState,
   onCreateNewVersion,
 }) {
-  const history = React.useContext(HistoryContext)
+  const { pushState } = React.useContext(HistoryContext)
   const { handleError } = React.useContext(AppErrorContext)
 
   const [alert, setAlert] = React.useState(
@@ -70,7 +70,7 @@ export default function DocumentsTabView({
    */
   const onEditAdvisory = ({ advisoryId }) => {
     onOpenAdvisory({ advisoryId }, () => {
-      history.pushState(null, '', sitemap.home.href([['tab', 'EDITOR']]))
+      pushState(sitemap.home.href([['tab', 'EDITOR']]))
     })
   }
 

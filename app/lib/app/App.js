@@ -16,7 +16,7 @@ import UserInfoContext from './shared/context/UserInfoContext.js'
 export default function App({ secvisogramPage }) {
   const defaultAppConfig = React.useContext(AppConfigContext)
   const [appConfig, setAppConfig] = useState(defaultAppConfig)
-  const history = useHistory({ embedded: appConfig.mode === 'embedded' })
+  const history = useHistory({ embedded: true })
 
   useEffect(() => {
     api.appConfig.getAppConfig().then((response) => {

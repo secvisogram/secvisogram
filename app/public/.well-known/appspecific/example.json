@@ -4,7 +4,6 @@
   "logoutUrl": "/oauth2/sign_out?rd=http%3A%2F%2Flocalhost%3A8080",
   "userInfoUrl": "/oauth2/userinfo",
   "validatorUrl": "http://localhost:8082",
-  "mode": "standalone",
   "keyBindings": {
     "keySave": "ctrl+s",
     "keyValidate": "ctrl+alt+v",

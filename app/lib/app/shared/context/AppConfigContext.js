@@ -10,7 +10,6 @@ import React from 'react'
  * @property {string} validatorUrl
  * @property {KeyBindings} keyBindings
  * @property {boolean} configLoaded
- * @property {"embedded"|"standalone"} mode
  */
 
 /**
@@ -44,7 +43,6 @@ const defaultValue = {
   userInfoUrl: '',
   validatorUrl: '',
   configLoaded: false,
-  mode: 'embedded',
   keyBindings: {
     keySave: 'ctrl+s',
     keyValidate: 'ctrl+alt+v',
