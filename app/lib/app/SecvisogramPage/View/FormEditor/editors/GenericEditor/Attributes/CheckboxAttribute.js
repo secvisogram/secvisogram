@@ -5,7 +5,6 @@ import Attribute from './shared/Attribute.js'
 /**
  * @typedef {object} Props
  * @property {boolean} [required]
- * @property {boolean} [readOnly]
  * @property {boolean} value
  * @property {boolean} disabled
  */
@@ -17,7 +16,6 @@ import Attribute from './shared/Attribute.js'
  */
 export default function CheckboxAttribute({
   required = false,
-  readOnly = false,
   value,
   disabled,
   ...props
@@ -30,7 +28,6 @@ export default function CheckboxAttribute({
         checked={value}
         type={'checkbox'}
         required={required}
-        readOnly={readOnly}
         onChange={() => {
           updateDoc(props.instancePath, !value)
         }}
