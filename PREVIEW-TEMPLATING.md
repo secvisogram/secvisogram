@@ -7,7 +7,8 @@
 - [Technical Overview](#technical-overview)
   - [Mustache template example](#mustache-template-example)
 - [Full list of template attributes](#full-list-of-template-attributes)
-- [Full list of extended template attributes](#full-list-of-extended-template-attributes)
+  - [CSAF 2.0](#csaf-20)
+  - [CSAF 2.1](#csaf-21)
 
 <!-- /TOC -->
 
