@@ -18,42 +18,79 @@ module.exports = function generatePreviewTemplatingTable(args) {
   const rootSchema = isV21
     ? require(resolve(args.csaf21Schema))
     : require(resolve(args.csaf20Schema))
-  const cvss4Schema = isV21 && require(resolve(args.cvss40Schema))
+  const cvss4Schema = isV21 ? require(resolve(args.cvss40Schema)) : undefined
   const cvss3Schema = require(resolve(args.cvss31Schema))
   const cvss2Schema = require(resolve(args.cvss20Schema))
-  const ssvc2Schema = isV21 && require(resolve(args.ssvc20Schema))
-  const extensionContentSchema =
-    isV21 && require(resolve(args.csafExtensionContentSchema))
-  const extensionMetaschemaSchema =
-    isV21 && require(resolve(args.csafExtensionMetaschemaSchema))
+  const ssvc2Schema = isV21 ? require(resolve(args.ssvc20Schema)) : undefined
+  const extensionContentSchema = isV21
+    ? require(resolve(args.csafExtensionContentSchema))
+    : undefined
+  const extensionMetaschemaSchema = isV21
+    ? require(resolve(args.csafExtensionMetaschemaSchema))
+    : undefined
 
-  if (isV21) {
-    Object.assign(
-      rootSchema.$defs,
-      cvss4Schema.$defs,
-      cvss3Schema.$defs,
-      cvss2Schema.$defs,
-      ssvc2Schema.$defs,
-      extensionContentSchema.$defs,
-      extensionMetaschemaSchema.$defs,
-    )
-  } else {
-    Object.assign(rootSchema.$defs, cvss3Schema.$defs, cvss2Schema.$defs)
+  /**
+   * Registry of all loaded schema documents, keyed by their `$id` with any
+   * query string and fragment stripped. Used to resolve `$ref`s against the
+   * document they actually belong to, instead of a single flattened
+   * `rootSchema`, so that same-named `$defs` in different documents
+   * (e.g. CVSS 4.0 vs CVSS 3.1) never collide.
+   * @type {Record<string, any>}
+   */
+  const documents = {}
+  for (const doc of [
+    rootSchema,
+    cvss4Schema,
+    cvss3Schema,
+    cvss2Schema,
+    ssvc2Schema,
+    extensionContentSchema,
+    extensionMetaschemaSchema,
+  ]) {
+    if (doc && doc.$id) {
+      documents[normalizeUrl(doc.$id)] = doc
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @returns {string}
+   */
+  function normalizeUrl(url) {
+    return url.split('#')[0].split('?')[0]
+  }
+
+  /**
+   * Resolves a `$ref` against the document it was found in (`currentDoc`),
+   * following fragment-qualified refs into whichever document they actually
+   * point at (which may be a different document than `currentDoc`).
+   * @param {string} ref
+   * @param {any} currentDoc
+   * @returns {{ schema: any; doc: any } | undefined}
+   */
+  function resolveRef(ref, currentDoc) {
+    const [base, fragment] = ref.split('#')
+    const targetDoc = base ? documents[normalizeUrl(base)] : currentDoc
+    if (!targetDoc) return undefined
+    const schema = fragment ? jsonPtr.get(targetDoc, fragment) : targetDoc
+    return { schema, doc: targetDoc }
   }
 
   /** @typedef {{ path: string; schema: any; items?: Array<Entry>; depth: number }} Entry */
 
   /**
    * @param {any} schema
+   * @param {any} currentDoc the document `schema` was taken from, used to
+   *   resolve any local (`#/...`) `$ref`s it contains
    * @param {string[]} instancePath
    * @param {number} depth
    * @returns {Array<Entry>}
    */
   function generateSchemaPaths(
     schema,
+    currentDoc,
     instancePath = [],
     depth = 1,
-    overwriteDescription = '',
   ) {
     const path = instancePath.length ? instancePath.join('.') : '.'
     if (depth > 10) return [{ path, schema, depth }]
@@ -62,7 +99,12 @@ module.exports = function generatePreviewTemplatingTable(args) {
         return [
           { path, schema, depth },
           ...Object.entries(schema.properties || {}).flatMap(([key, value]) =>
-            generateSchemaPaths(value, instancePath.concat([key]), depth + 1),
+            generateSchemaPaths(
+              value,
+              currentDoc,
+              instancePath.concat([key]),
+              depth + 1,
+            ),
           ),
         ]
       case 'array':
@@ -70,62 +112,37 @@ module.exports = function generatePreviewTemplatingTable(args) {
           {
             path,
             schema,
-            items: generateSchemaPaths(schema.items, [], depth + 1),
+            items: generateSchemaPaths(schema.items, currentDoc, [], depth + 1),
             depth,
           },
         ]
       default:
-        if (schema.$ref && schema.$ref.startsWith('#')) {
-          let refSchema = jsonPtr.get(rootSchema, schema.$ref.slice(1))
-          if (schema.description) {
-            refSchema = Object.assign({}, refSchema)
-            refSchema.description = schema.description
-          }
-          return generateSchemaPaths(refSchema, instancePath, depth)
-        }
-        // Common schemas
+        // CVSS 3.x is a `oneOf` between the 3.0 and 3.1 variants; both are
+        // represented here by the loaded 3.1 schema
         if (
           schema.oneOf?.find(
             (/** @type {any} */ s) =>
-              s.$ref === 'https://www.first.org/cvss/cvss-v3.1.json',
-          ) &&
-          cvss3Schema
+              normalizeUrl(s.$ref || '') === normalizeUrl(cvss3Schema.$id),
+          )
         ) {
-          return generateSchemaPaths(cvss3Schema, instancePath, depth)
+          return generateSchemaPaths(
+            cvss3Schema,
+            cvss3Schema,
+            instancePath,
+            depth,
+          )
         }
-        if (
-          schema.$ref === 'https://www.first.org/cvss/cvss-v2.0.json' &&
-          cvss2Schema
-        ) {
-          return generateSchemaPaths(cvss2Schema, instancePath, depth)
-        }
-        // CSAF 2.1 schemas
-        if (isV21) {
-          if (schema.$ref === 'https://www.first.org/cvss/cvss-v4.0.json') {
-            return generateSchemaPaths(cvss4Schema, instancePath, depth)
-          }
-          if (
-            schema.$ref ===
-            'https://certcc.github.io/SSVC/data/schema/v2/SelectionList_2_0_0.schema.json'
-          ) {
-            return generateSchemaPaths(ssvc2Schema, instancePath, depth)
-          }
-          if (
-            schema.$ref ===
-            'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-content.json'
-          ) {
+        if (schema.$ref) {
+          const resolved = resolveRef(schema.$ref, currentDoc)
+          if (resolved) {
+            let refSchema = resolved.schema
+            if (schema.description) {
+              refSchema = Object.assign({}, refSchema)
+              refSchema.description = schema.description
+            }
             return generateSchemaPaths(
-              extensionContentSchema,
-              instancePath,
-              depth,
-            )
-          }
-          if (
-            schema.$ref ===
-            'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-metaschema.json'
-          ) {
-            return generateSchemaPaths(
-              extensionMetaschemaSchema,
+              refSchema,
+              resolved.doc,
               instancePath,
               depth,
             )
@@ -151,6 +168,8 @@ module.exports = function generatePreviewTemplatingTable(args) {
       switch (entry.schema.type) {
         case 'number':
         case 'string':
+        case 'boolean':
+        case 'integer':
           return (
             markdown +
             `| \`${key}\` | ` +
@@ -186,6 +205,6 @@ module.exports = function generatePreviewTemplatingTable(args) {
   console.log(
     `| Attribute                                                          | Description                                                                                                                                                                                                                                                                                                                                                                             | Example value                                                                                                                                                                                           |\n` +
       `| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n` +
-      `${generateTable(generateSchemaPaths(rootSchema, []))}`,
+      `${generateTable(generateSchemaPaths(rootSchema, rootSchema, []))}`,
   )
 }
