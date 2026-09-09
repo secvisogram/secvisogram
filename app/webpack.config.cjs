@@ -12,12 +12,25 @@ module.exports = {
   entry: {
     style: ['./lib/style.css'],
     app: ['./lib/app.js'],
+    'secvisogram-editor': ['./lib/secvisogram-editor.js'],
   },
   module: {
     rules: [
       { test: /\.js$/, use: 'babel-loader' },
       {
         test: /\.css$/i,
+        resourceQuery: /adoptedStyleSheet/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: { exportType: 'css-style-sheet' },
+          },
+          { loader: 'postcss-loader' },
+        ],
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: { not: [/adoptedStyleSheet/] },
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',

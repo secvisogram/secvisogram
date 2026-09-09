@@ -11,13 +11,13 @@ import UserInfoContext from './shared/context/UserInfoContext.js'
 /**
  * @param {object} props
  * @param {JSX.Element} props.secvisogramPage
+ * @param {boolean} [props.embedded]
  * @returns
  */
-export default function App({ secvisogramPage }) {
-  const history = useHistory()
-
+export default function App({ secvisogramPage, embedded }) {
   const defaultAppConfig = React.useContext(AppConfigContext)
   const [appConfig, setAppConfig] = useState(defaultAppConfig)
+  const history = useHistory({ embedded })
 
   useEffect(() => {
     api.appConfig.getAppConfig().then((response) => {
