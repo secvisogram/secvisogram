@@ -128,10 +128,6 @@ export default function CVSSV4Attribute({
           {dropdownGroupsFor('Supplemental Metrics')}
         </Collapsible>
 
-        <CvssScore
-          score={value?.environmentalScore}
-          severity={value?.environmentalSeverity}
-        ></CvssScore>
         <Collapsible
           startCollapsed={true}
           title={t('cvssEditor.environmentalInputsBase')}
@@ -146,10 +142,6 @@ export default function CVSSV4Attribute({
           {dropdownGroupsFor('Environmental (Security Requirements)')}
         </Collapsible>
 
-        <CvssScore
-          score={value?.threatScore}
-          severity={value?.threatScore}
-        ></CvssScore>
         <Collapsible startCollapsed={true} title={t('cvssEditor.threatInputs')}>
           {dropdownGroupsFor('Threat Metrics')}
         </Collapsible>
