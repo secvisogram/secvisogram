@@ -1,40 +1,64 @@
 import React from 'react'
 
-export default function useHistory() {
-  const [history, setHistory] = React.useState({
-    location: window.location,
-    state: window.history.state,
-    pushState: /** @type {History['pushState']} */ (
-      (...args) => {
-        window.history.pushState(...args)
+/**
+ * @param {object} params
+ * @param {boolean} [params.embedded] Specifies if the editor is in embedded or standalone mode
+ *
+ *    **Embedded mode**: The editor does not register on location changes and does not
+ *      modify the browser history.
+ *
+ *    **Standalone mode**: The editor reads the url and changes it when the history
+ *      changes.
+ * @returns
+ */
+export default function useHistory({ embedded = false }) {
+  const defaultLocation = new URL(window.location.href)
+
+  if (embedded) {
+    // In embedded mode no search param is derived.
+    defaultLocation.search = ''
+  }
+
+  const [history, setHistory] = React.useState(
+    /** @satisfies {import('../shared/context/HistoryContext').HistoryContext} */ ({
+      location: defaultLocation,
+      state: window.history.state,
+      pushState: (url) => {
+        const newUrl = new URL(url, window.location.href)
+        if (!embedded) {
+          window.history.pushState(null, '', newUrl)
+        }
         setHistory((state) => ({
           ...state,
           state: window.history.state,
-          location: window.location,
+          location: newUrl,
         }))
-      }
-    ),
-    replaceState: /** @type {History['replaceState']} */ (
-      (...args) => {
-        window.history.replaceState(...args)
+      },
+      replaceState: (url) => {
+        const newUrl = new URL(url, window.location.href)
+        if (!embedded) {
+          window.history.replaceState(null, '', newUrl)
+        }
         setHistory((state) => ({
           ...state,
           state: window.history.state,
-          location: window.location,
+          location: newUrl,
         }))
-      }
-    ),
-  })
+      },
+    }),
+  )
 
   React.useEffect(() => {
+    if (embedded) return
+
     /**
-     * @param {PopStateEvent} e
+     * @param {PopStateEvent} event
      */
-    function handler(e) {
+    function handler(event) {
       setHistory((state) => ({
         ...state,
-        location: window.location,
-        state: e.state,
+        location: new URL(window.location.href),
+        state: event.state,
       }))
     }
 
@@ -42,7 +66,7 @@ export default function useHistory() {
     return () => {
       window.removeEventListener('popstate', handler)
     }
-  })
+  }, [embedded])
 
   return history
 }
