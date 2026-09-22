@@ -5,6 +5,19 @@ import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 /**
+ * @param {string} mdPath
+ * @returns {Promise<string>}
+ */
+function fetchMarkdown(mdPath) {
+  return fetch(mdPath).then((resp) => {
+    if (!resp.ok) {
+      throw new Error(`Failed to load markdown file: ${mdPath}`)
+    }
+    return resp.text()
+  })
+}
+
+/**
  * Defines the content of the SideBar displaying documentation of a selected path
  *
  * @param {object} props
@@ -12,45 +25,76 @@ import ReactMarkdown from 'react-markdown'
  * @param {import('#lib/uiSchemas').UiSchemaVersion} props.uiSchemaVersion
  */
 export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
-  const [mdText, setMdText] = React.useState('')
   const { metaData } = uiSchemas[uiSchemaVersion]
+
+  /**
+   * The markdown file to load documentation from for the currently selected
+   * path -- `null` if nothing is selected, `''` if something is selected but
+   * has no authored usage documentation.
+   */
+  const usagePath = React.useMemo(() => {
+    if (!selectedPath.length) return null
+    const jsonPath = `$.${selectedPath.join('.')}`.replaceAll(/\.\d+/g, '')
+    const meta = /** @type {typeof metaData[keyof metaData] | undefined} */ (
+      Reflect.get(metaData, jsonPath)
+    )
+    return meta && 'userDocumentation' in meta && meta.userDocumentation.usage
+      ? meta.userDocumentation.usage
+      : ''
+  }, [selectedPath, metaData])
+  const noDocumentationAvailable = t('sidebar.noDocumentationAvailable')
+
+  /**
+   * Text shown while nothing is loading: either nothing (no path selected)
+   * or the fallback message (a path is selected but has no authored usage
+   * documentation).
+   */
+  const defaultMdText = usagePath === null ? '' : noDocumentationAvailable
+
+  /**
+   * Markdown text loaded either automatically for `usagePath` (below) or
+   * manually by following a link inside the currently shown markdown (see
+   * `updateMarkdownText`).
+   */
+  const [loadedMdText, setLoadedMdText] = React.useState(
+    /** @type {string | null} */ (null),
+  )
+  // Discard any previously loaded markdown once the selected path's usage
+  // documentation changes, so we don't show stale content from a previously
+  // selected path while the new one loads.
+  const [prevUsagePath, setPrevUsagePath] = React.useState(usagePath)
+  if (usagePath !== prevUsagePath) {
+    setPrevUsagePath(usagePath)
+    setLoadedMdText(null)
+  }
+  const mdText = loadedMdText ?? defaultMdText
 
   const updateMarkdownText = (/** @type string */ mdPath) => {
     if (mdPath) {
-      fetch(mdPath)
-        .then((resp) => {
-          if (!resp.ok) {
-            throw new Error(`Failed to load markdown file: ${mdPath}`)
-          }
-          return resp.text()
-        })
+      fetchMarkdown(mdPath)
         .then((mdText) => {
-          setMdText(mdText)
+          setLoadedMdText(mdText)
         })
         .catch(() => {
-          setMdText(t('sidebar.noDocumentationAvailable'))
+          setLoadedMdText(noDocumentationAvailable)
         })
     }
   }
 
   useEffect(() => {
-    if (!selectedPath.length) {
-      /* eslint-disable-next-line react-hooks/set-state-in-effect */
-      setMdText('')
-      return
+    if (!usagePath) return
+    let active = true
+    fetchMarkdown(usagePath)
+      .then((mdText) => {
+        if (active) setLoadedMdText(mdText)
+      })
+      .catch(() => {
+        if (active) setLoadedMdText(noDocumentationAvailable)
+      })
+    return () => {
+      active = false
     }
-
-    const jsonPath = `$.${selectedPath.join('.')}`.replaceAll(/\.\d+/g, '')
-    const meta = /** @type {typeof metaData[keyof metaData] | undefined} */ (
-      Reflect.get(metaData, jsonPath)
-    )
-    if (meta && 'userDocumentation' in meta && meta.userDocumentation.usage) {
-      updateMarkdownText(meta.userDocumentation.usage)
-    } else {
-      // not every field has authored usage documentation yet
-      setMdText(t('sidebar.noDocumentationAvailable'))
-    }
-  }, [selectedPath, metaData])
+  }, [usagePath, noDocumentationAvailable])
 
   return (
     <article className="prose p-3" data-testid="infoPanel-content">
@@ -63,11 +107,10 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
           h5: 'strong',
           h6: 'strong',
           a: ({ href, children }) => {
-            const linkText = children[0]
             if (href?.startsWith('http')) {
               return (
                 <a href={href} target="_blank" rel="noreferrer">
-                  {linkText}
+                  {children}
                 </a>
               )
             }
@@ -76,7 +119,7 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
                 className="cursor-pointer"
                 onClick={() => updateMarkdownText('/docs/user/' + href)}
               >
-                {linkText}
+                {children}
               </a>
             )
           },

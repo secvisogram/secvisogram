@@ -72,9 +72,12 @@ const Alert = ({
   const defaultButtonRef = useRef(null)
   useEffect(() => {
     if (open) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         defaultButtonRef.current?.focus()
       }, 100)
+      return () => {
+        clearTimeout(timeout)
+      }
     }
   }, [open])
 

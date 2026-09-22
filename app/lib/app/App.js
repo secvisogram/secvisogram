@@ -10,7 +10,7 @@ import UserInfoContext from './shared/context/UserInfoContext.js'
 
 /**
  * @param {object} props
- * @param {JSX.Element} props.secvisogramPage
+ * @param {React.JSX.Element} props.secvisogramPage
  * @param {boolean} [props.embedded]
  * @returns
  */
@@ -43,33 +43,35 @@ export default function App({ secvisogramPage, embedded }) {
   )
 
   useEffect(() => {
-    if (appConfig.loginAvailable) {
-      api.auth
-        .getUserInfo(appConfig.userInfoUrl)
-        .then(
-          (result) => {
-            setUserInfo(result)
-          },
-          (error) => {
-            if (401 !== error.status) throw error
-            setUserInfo(null)
-          },
-        )
-        .catch(applicationError.handleError)
-    } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUserInfo(null)
-    }
+    if (!appConfig.loginAvailable) return
+    api.auth
+      .getUserInfo(appConfig.userInfoUrl)
+      .then(
+        (result) => {
+          setUserInfo(result)
+        },
+        (error) => {
+          if (401 !== error.status) throw error
+          setUserInfo(null)
+        },
+      )
+      .catch(applicationError.handleError)
   }, [
     applicationError.handleError,
     appConfig.loginAvailable,
     appConfig.userInfoUrl,
   ])
 
+  /**
+   * There is no user when login is not available, regardless of what the
+   * last fetch (if any) resolved to.
+   */
+  const effectiveUserInfo = appConfig.loginAvailable ? userInfo : null
+
   return (
     <AppErrorContext.Provider value={applicationError}>
       <AppConfigContext.Provider value={appConfig}>
-        <UserInfoContext.Provider value={userInfo}>
+        <UserInfoContext.Provider value={effectiveUserInfo}>
           <HistoryContext.Provider value={history}>
             <ErrorBoundary FallbackComponent={ErrorScreen}>
               {secvisogramPage}

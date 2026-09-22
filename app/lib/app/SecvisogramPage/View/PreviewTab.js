@@ -46,13 +46,21 @@ export default function PreviewTab({
    * Updates the content of the preview iframe.
    */
   React.useEffect(() => {
-    if (!iframeRef.current?.contentDocument) return
-    iframeRef.current.contentDocument.open()
-    iframeRef.current.contentDocument.write(html)
-    iframeRef.current.contentDocument.addEventListener('focus', () => {
+    const contentDocument = iframeRef.current?.contentDocument
+    if (!contentDocument) return
+
+    const blurIframe = () => {
       iframeRef.current?.blur()
-    })
-    iframeRef.current.contentDocument.close()
+    }
+
+    contentDocument.open()
+    contentDocument.write(html)
+    contentDocument.addEventListener('focus', blurIframe)
+    contentDocument.close()
+
+    return () => {
+      contentDocument.removeEventListener('focus', blurIframe)
+    }
   }, [html, showRendered])
 
   /**

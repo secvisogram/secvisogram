@@ -53,7 +53,7 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
               : ''
           return (
             <div
-              key={i}
+              key={`${err.instancePath}-${err.message}`}
               className={
                 'p-2 m-1 rounded border hover:cursor-pointer ' +
                 color +

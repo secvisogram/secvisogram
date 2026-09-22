@@ -58,11 +58,14 @@ export default function DropdownAttribute({
   const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
   const persistedValue = /** @type {string} */ (value ?? '')
   const [inputValue, setInputValue] = React.useState(persistedValue)
-
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+  // Keeps the displayed text in sync whenever the underlying value changes
+  // from the outside (e.g. undo/redo, loading a different document).
+  const [prevPersistedValue, setPrevPersistedValue] =
+    React.useState(persistedValue)
+  if (persistedValue !== prevPersistedValue) {
+    setPrevPersistedValue(persistedValue)
     setInputValue(persistedValue)
-  }, [persistedValue])
+  }
 
   return (
     <Attribute disabled={disabled} {...props}>

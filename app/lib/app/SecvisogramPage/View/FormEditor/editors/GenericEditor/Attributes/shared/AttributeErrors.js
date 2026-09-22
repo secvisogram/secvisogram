@@ -1,6 +1,5 @@
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
 import { getErrorTextColor } from '../../../GenericEditor.js'
 
 /**
@@ -12,13 +11,13 @@ export default function AttributeErrors({ validationErrors, maxWidth }) {
   return validationErrors.length ? (
     <div className="m-1">
       <ul className="block list-disc list-inside">
-        {validationErrors.map((e, i) => {
+        {validationErrors.map((e) => {
           const msg = e.message
             ? e.message.charAt(0).toUpperCase() + e.message.slice(1)
             : 'error message'
 
           return (
-            <li key={`${i}-${e.message}`} className="flex">
+            <li key={`${e.instancePath}-${e.message}`} className="flex">
               <div className="grid place-items-center px-2">
                 <FontAwesomeIcon
                   icon={faCircle}

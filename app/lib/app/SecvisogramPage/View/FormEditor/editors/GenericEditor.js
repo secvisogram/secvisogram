@@ -100,7 +100,7 @@ export default function Editor({
 
   /**
    * helper function to wrap singleton input fields in a div with layout information
-   * @param {() => JSX.Element} componentFn
+   * @param {() => React.JSX.Element} componentFn
    */
   function wrapIfSingleton(componentFn) {
     return parentProperty?.type === 'ARRAY' ? (

@@ -87,7 +87,7 @@ function View({
   const sortButtonRef = React.useRef(null)
 
   const [newDocumentDialog, setNewDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const newDocumentDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
@@ -103,11 +103,11 @@ function View({
   }, [newDocumentDialog])
 
   const [newExportDocumentDialog, setNewExportDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
 
   const [versionSummaryDialog, setVersionSummaryDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const versionSummaryDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
@@ -120,38 +120,40 @@ function View({
   }, [versionSummaryDialog])
 
   const [aboutDialog, setAboutDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
 
-  const [betaVersionDialog, setBetaVersionDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+  const [manualBetaVersionDialog, setBetaVersionDialog] = React.useState(
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const betaVersionDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
   )
+
+  /**
+   * Shown either when the user manually switches to the csaf 2.1 ui version
+   * or when a pending file-open requires confirmation. Derived directly from
+   * `pendingBeta21Doc` instead of mirroring it into state, so that closing
+   * it (by clearing `pendingBeta21Doc` upstream) doesn't require a separate
+   * effect-driven state update.
+   */
+  const betaVersionDialog = pendingBeta21Doc ? (
+    <BetaVersionConfirmationDialog
+      ref={betaVersionDialogRef}
+      context="file-open"
+      onConfirm={onConfirmBeta21Open}
+      onClose={onCancelBeta21Open}
+    />
+  ) : (
+    manualBetaVersionDialog
+  )
+
+  const betaVersionDialogIsOpen = Boolean(betaVersionDialog)
   React.useEffect(() => {
-    if (betaVersionDialog) {
+    if (betaVersionDialogIsOpen) {
       betaVersionDialogRef.current?.showModal()
     }
-  }, [betaVersionDialog])
-
-  React.useEffect(() => {
-    if (!pendingBeta21Doc) return
-    setBetaVersionDialog(
-      <BetaVersionConfirmationDialog
-        ref={betaVersionDialogRef}
-        context="file-open"
-        onConfirm={() => {
-          onConfirmBeta21Open()
-          setBetaVersionDialog(null)
-        }}
-        onClose={() => {
-          onCancelBeta21Open()
-          setBetaVersionDialog(null)
-        }}
-      />,
-    )
-  }, [pendingBeta21Doc, onConfirmBeta21Open, onCancelBeta21Open])
+  }, [betaVersionDialogIsOpen])
 
   const [advisoryState, setAdvisoryState] = React.useState(
     /** @type {import('./shared/types.js').AdvisoryState | null} */ (
@@ -161,20 +163,31 @@ function View({
       }
     ),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAdvisoryState((state) =>
-      data
-        ? { type: 'NEW_ADVISORY', csaf: /** @type {{}} */ (data.doc) }
-        : state,
-    )
-  }, [data])
+  /**
+   * `data` changes whenever a new document is loaded from outside this
+   * component (e.g. from a file). When that happens the current
+   * `advisoryState` is superseded by a fresh "new advisory" wrapping the
+   * loaded document.
+   */
+  const [prevData, setPrevData] = React.useState(data)
+  if (data !== prevData) {
+    setPrevData(data)
+    if (data) {
+      setAdvisoryState({
+        type: 'NEW_ADVISORY',
+        csaf: /** @type {{}} */ (data.doc),
+      })
+    }
+  }
 
-  const [isLoading, setLoading] = React.useState(props.isLoading)
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoading(props.isLoading)
-  }, [props.isLoading])
+  /**
+   * Local loading-state for actions performed entirely inside this
+   * component (e.g. validating, creating a new document). Combined with
+   * `props.isLoading` below rather than mirrored into state, since we don't
+   * want to reset it whenever the upstream loading-prop changes.
+   */
+  const [isLocallyLoading, setLoading] = React.useState(false)
+  const isLoading = props.isLoading || isLocallyLoading
 
   // TEMPORARY FEATURE, see useDirectAdvisoryLinkRedirect.js for removal notes.
   useDirectAdvisoryLinkRedirect({
@@ -187,25 +200,33 @@ function View({
 
   const [isSaving, setSaving] = React.useState(false)
 
-  const [errors, setErrors] = React.useState(
-    /** @type {Array<import('./shared/types').TypedValidationError>} */ (
-      props.errors.map((e) => ({ ...e, type: 'error' }))
+  /**
+   * `doValidate` below can produce a manual, more up-to-date validation
+   * result. It is shown until the next incremental validation result
+   * (`props.errors`) arrives, at which point it takes precedence again.
+   */
+  const [manualErrors, setManualErrors] = React.useState(
+    /** @type {Array<import('./shared/types').TypedValidationError> | null} */ (
+      null
     ),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setErrors(props.errors)
-  }, [props.errors])
+  const [prevPropsErrors, setPrevPropsErrors] = React.useState(props.errors)
+  if (props.errors !== prevPropsErrors) {
+    setPrevPropsErrors(props.errors)
+    setManualErrors(null)
+  }
+  const errors = manualErrors ?? props.errors
 
-  const [alert, setAlert] = React.useState(
-    /** @type {JSX.Element | null} */ (
-      props.alert ? <Alert {...props.alert} /> : null
-    ),
+  /**
+   * `confirmDocumentReplacement` below can show its own confirmation dialog
+   * (e.g. "discard changes?"), unrelated to `props.alert`. It takes
+   * precedence for as long as it is shown; otherwise the alert is derived
+   * directly from `props.alert`.
+   */
+  const [manualAlert, setAlert] = React.useState(
+    /** @type {React.JSX.Element | null} */ (null),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAlert(props.alert ? <Alert {...props.alert} /> : null)
-  }, [props.alert])
+  const alert = manualAlert ?? (props.alert ? <Alert {...props.alert} /> : null)
 
   /**
    * Initial values for the editors. Can be used to detect changes of the
@@ -238,22 +259,27 @@ function View({
    */
   const debouncedChangedDoc = useDebounce(formValues.doc, 300)
 
-  const [toast, setToast] = React.useState(applicationError)
-
   const backendNotAvailableTryAgain = React.useMemo(
     () => t('alert.backendNotAvailableTryAgain'),
     [],
   )
-  React.useEffect(() => {
-    if (applicationError instanceof BackendUnavailableError) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setToast({
-        message: backendNotAvailableTryAgain,
-      })
-    } else {
-      setToast(applicationError)
-    }
-  }, [applicationError, backendNotAvailableTryAgain])
+  const toastFromApplicationError =
+    applicationError instanceof BackendUnavailableError
+      ? { message: backendNotAvailableTryAgain }
+      : applicationError
+
+  const [toast, setToast] = React.useState(toastFromApplicationError)
+  /**
+   * Whenever a (new) application error comes in it takes precedence over any
+   * previously shown or dismissed toast (e.g. one set manually by
+   * `doValidate`).
+   */
+  const [prevApplicationError, setPrevApplicationError] =
+    React.useState(applicationError)
+  if (applicationError !== prevApplicationError) {
+    setPrevApplicationError(applicationError)
+    setToast(toastFromApplicationError)
+  }
   React.useEffect(() => {
     /** @type {ReturnType<typeof setTimeout> | null} */
     let timeout = null
@@ -285,7 +311,7 @@ function View({
           setToast({
             message: t('alert.theDocumentIsInvalid'),
           })
-          const errors =
+          const validationErrors =
             /** @type {Array<import('./shared/types').TypedValidationError>} */ (
               json.tests.flatMap((t) =>
                 t.errors
@@ -304,7 +330,7 @@ function View({
                   ),
               )
             )
-          setErrors(errors)
+          setManualErrors(validationErrors)
         }
       })
       .catch(handleError)

@@ -85,10 +85,7 @@ export default function JsonEditorTab({
     }
   }, [originalValues.doc, editor])
 
-  const [{ value, parseError }, setState] = React.useState(() => ({
-    value: JSON.stringify(doc, null, 2),
-    parseError: null,
-  }))
+  const [value, setValue] = React.useState(() => JSON.stringify(doc, null, 2))
   React.useEffect(() => {
     if (initialMountRef.current && editor) {
       initialMountRef.current = false
@@ -99,6 +96,32 @@ export default function JsonEditorTab({
   const [showErrors, setShowErrors] = React.useState(false)
   const debouncedValue = useDebounce(value)
 
+  // Hides the errors panel once there is nothing left to show.
+  const [prevErrorsLength, setPrevErrorsLength] = React.useState(errors.length)
+  if (errors.length !== prevErrorsLength) {
+    setPrevErrorsLength(errors.length)
+    if (errors.length === 0) {
+      setShowErrors(false)
+    }
+  }
+
+  /**
+   * Parses the (debounced) editor input. Kept as a memoized derivation of
+   * `debouncedValue` instead of state, since it never needs to diverge from
+   * it.
+   */
+  const parsedValue = React.useMemo(() => {
+    try {
+      return {
+        result: /** @type {{} | null} */ (JSON.parse(debouncedValue)),
+        error: /** @type {any} */ (null),
+      }
+    } catch (/** @type {any} */ e) {
+      return { result: /** @type {{} | null} */ (null), error: e }
+    }
+  }, [debouncedValue])
+  const parseError = parsedValue.error
+
   /**
    * Locks the tab navigation if there are any parse errors.
    */
@@ -108,26 +131,13 @@ export default function JsonEditorTab({
   }, [parseError, onLockTab, onUnlockTab])
 
   /**
-   * Parses the editor input and replaces the document.
+   * Replaces the document with the parsed editor input.
    */
   React.useEffect(() => {
-    /** @type {{} | null} */
-    let result = null
-    try {
-      result = JSON.parse(debouncedValue)
-      setState((state) => ({ ...state, parseError: null }))
-    } catch (/** @type {any} */ e) {
-      setState((state) => ({ ...state, parseError: e }))
-      return
+    if (!parsedValue.error) {
+      onChange(parsedValue.result)
     }
-    onChange(result)
-  }, [debouncedValue, onChange])
-
-  React.useEffect(() => {
-    if (errors.length === 0) {
-      setShowErrors(false)
-    }
-  }, [errors])
+  }, [parsedValue, onChange])
 
   React.useEffect(() => {
     if (monaco && editor && debouncedValue) {
@@ -277,10 +287,7 @@ export default function JsonEditorTab({
   }, [updateEditorSettings])
 
   const onChangeMonaco = (/** @type {any} */ newValue) => {
-    setState((state) => ({
-      ...state,
-      value: newValue,
-    }))
+    setValue(newValue)
   }
 
   /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneEditorConstructionOptions} */
@@ -318,8 +325,8 @@ export default function JsonEditorTab({
                 </h2>
               </div>
               <div className="mx-2 grow overflow-auto h-full">
-                {errors.map((error, i) => (
-                  <div key={i}>
+                {errors.map((error) => (
+                  <div key={`${error.instancePath}-${error.message}`}>
                     <a
                       href={'#' + error.instancePath}
                       className={`validation_error${

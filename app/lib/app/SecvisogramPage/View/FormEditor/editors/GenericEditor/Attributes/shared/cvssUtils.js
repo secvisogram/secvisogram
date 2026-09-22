@@ -1,5 +1,4 @@
 import DropdownAttribute from '../DropdownAttribute.js'
-import React from 'react'
 
 const firstCharCapital = (/** @type {string} */ s) =>
   s.charAt(0).toUpperCase() + s.substring(1)

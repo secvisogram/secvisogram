@@ -52,10 +52,10 @@ export default function IdAttribute({ onCollectIds, ...props }) {
           onFocus={handleFocus}
         />
       )}
-      renderOption={(props, option) => {
+      renderOption={({ key: _key, ...props }, option) => {
         const o = /** @type {string} */ (option)
         return (
-          <li {...props} key={o}>
+          <li key={o} {...props}>
             {displayIdAndName(o)}
           </li>
         )
