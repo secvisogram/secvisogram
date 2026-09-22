@@ -54,7 +54,7 @@
     "react-dom": "^19.3.0",
     "react-error-boundary": "^6.1.5",
     "react-hot-keys": "^3.0.0",
-    "react-i18next": "^17.0.13",
+    "react-i18next": "^17.0.14",
     "react-markdown": "^10.1.0",
     "react-monaco-editor": "^0.59.0",
     "semver": "^7.7.4",
