@@ -226,7 +226,7 @@ const SecvisogramPage = () => {
               isLoading: false,
               errors: result.errors,
             }))
-            pushState(null, '', sitemap.home.href([['tab', tab]]))
+            pushState(sitemap.home.href([['tab', tab]]))
           })
           .catch(handleError)
       }}
