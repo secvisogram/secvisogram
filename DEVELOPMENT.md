@@ -16,6 +16,7 @@ This document gives an overview on how to develop Secvisogram, the general techn
   - [Create and Building a release](#create-and-building-a-release)
   - [Deploy to production using nginx](#deploy-to-production-using-nginx)
   - [Using Secvisogram with the CSAF Validator Service](#using-secvisogram-with-the-csaf-validator-service)
+  - [Docker Compose production setup example](#docker-compose-production-setup-example)
 - [Secvisogram folder structure](#secvisogram-folder-structure)
 - [Technical Design](#technical-design)
   - [Form Editor](#form-editor)
@@ -272,6 +273,40 @@ and inside it, create the file `de.bsi.secvisogram.json` with the following cont
 
 Update the value of the `Content-Security-Policy` header: change `connect-src 'none'` to `connect-src 'self'` in both the header example
 and the `ssl-secvisogram.conf` snippet above so the validation request is permitted.
+
+### Docker Compose production setup example
+
+As an alternative to the bare-metal nginx setup above, Secvisogram and the csaf-validator-service can be run
+together using Docker Compose, with nginx inside the `secvisogram` container terminating TLS directly using
+the same certificate, cipher and header setup as the bare-metal example above, and proxying `/validator/`
+requests to the `validator` container.
+
+The example files are located in [`docker/production`](docker/production):
+
+- [`docker-compose.yml`](docker/production/docker-compose.yml) — starts the `secvisogram` and `validator` containers on a shared compose network, publishing ports 80 and 443 and bind-mounting the TLS certificate and dhparam from the host
+- [`nginx.conf`](docker/production/nginx.conf) — nginx configuration used inside the `secvisogram` container: redirects HTTP to HTTPS, terminates TLS using the same certificate/cipher/HSTS setup as the TLS configuration parameters example above, serves the static files, and proxies `/validator/` to the `validator` container
+- [`appspecific/de.bsi.secvisogram.json`](docker/production/appspecific/de.bsi.secvisogram.json) — Secvisogram configuration with `validatorUrl` set to the same-origin `/validator` path
+
+The checked-in `nginx.conf` and `docker-compose.yml` use `secvisogram.de` as a placeholder domain, matching
+the bare-metal example above — it is not a real, working certificate path. Before starting the stack, obtain
+a TLS certificate for your own domain on the host (e.g. using certbot, as in the example above), then replace
+every `secvisogram.de` occurrence with your domain: `server_name` and the `ssl_certificate*` paths in
+`nginx.conf`, and the two `/etc/letsencrypt/secvisogram.de` bind-mount paths in `docker-compose.yml`.
+
+Only the _container-side_ half of those bind mounts (the part after the `:` in
+`docker-compose.yml`'s `volumes:`) actually has to match `nginx.conf`'s `ssl_certificate*` paths, since that's
+what nginx inside the container reads. The _host-side_ half is not fixed to `/etc/letsencrypt/secvisogram.de` —
+point it at wherever the certificate and dhparam actually live on that host.
+
+Start the stack with:
+
+```sh
+cd docker/production
+docker compose up -d
+```
+
+Secvisogram is then available at `https://<your-domain>`, with CTRL + ALT + V delegating validation to the
+`validator` container.
 
 ## Secvisogram folder structure
 
