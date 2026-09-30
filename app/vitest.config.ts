@@ -42,5 +42,13 @@ export default defineConfig({
   plugins: [rawHtmlLoader, jsxInJsLoader],
   test: {
     include: ['tests/unit/**/*.test.{js,ts}'],
+    server: {
+      deps: {
+        // @pandatix/js-cvss ships broken ESM (extensionless relative imports),
+        // which fails when Node loads it natively; force Vite to transform it.
+        // It was newly included in csaf-validator-lib:
+        inline: ['@secvisogram/csaf-validator-lib'],
+      },
+    },
   },
 })
