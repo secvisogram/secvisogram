@@ -39,10 +39,10 @@ export default function useDirectAdvisoryLinkRedirect({
         .catch(handleError)
         .finally(() => {
           setLoading(false)
-          replaceState(null, '', sitemap.home.href([['tab', 'EDITOR']]))
+          replaceState(sitemap.home.href([['tab', 'EDITOR']]))
         })
     } else {
-      replaceState(null, '', sitemap.home.href([['tab', 'EDITOR']]))
+      replaceState(sitemap.home.href([['tab', 'EDITOR']]))
     }
   }, [
     appConfig.configLoaded,
