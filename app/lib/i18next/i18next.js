@@ -1,3 +1,4 @@
+/* global __webpack_public_path__ */
 import i18next from 'i18next'
 import Backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
@@ -14,7 +15,7 @@ i18next
       escapeValue: false,
     },
     backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
+      loadPath: `${__webpack_public_path__}locales/{{lng}}/translation.json`,
     },
   })
 
