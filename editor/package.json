@@ -1,0 +1,29 @@
+{
+  "name": "@secvisogram/editor",
+  "version": "0.1.0",
+  "description": "An embeddable <secvisogram-editor> custom element for editing CSAF security advisories, packaged as a static asset bundle.",
+  "keywords": [
+    "CSAF",
+    "Secvisogram",
+    "Common Security Advisory Framework",
+    "custom-element",
+    "web-component"
+  ],
+  "author": "eXXcellent solutions GmbH",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/secvisogram/secvisogram.git",
+    "directory": "editor"
+  },
+  "main": "dist/secvisogram-editor.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "node scripts/check-build-output.cjs"
+  }
+}
