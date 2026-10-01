@@ -13,7 +13,10 @@ npm install @secvisogram/editor
 For example, configure your web server to expose `node_modules/@secvisogram/editor/dist/` at `https://static.example.com/secvisogram-editor/`, then use:
 
 ```html
-<script type="module" src="https://static.example.com/secvisogram-editor/secvisogram-editor.js"></script>
+<script
+  type="module"
+  src="https://static.example.com/secvisogram-editor/secvisogram-editor.js"
+></script>
 <secvisogram-editor></secvisogram-editor>
 ```
 

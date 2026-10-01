@@ -17,7 +17,9 @@
     "directory": "editor"
   },
   "main": "dist/secvisogram-editor.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },

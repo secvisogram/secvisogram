@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
-import translation from '../../locales/en/translation.json' with { type: 'json' }
 import { fileURLToPath } from 'node:url'
+import translation from '../../locales/en/translation.json' with { type: 'json' }
 
 const editorBuilds = [
   {
