@@ -7,95 +7,117 @@ const gitRevisionPlugin = new GitRevisionPlugin()
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 const path = require('path')
 
-/** @type {import('webpack').Configuration} */
-module.exports = {
-  entry: {
-    style: ['./lib/style.css'],
-    app: ['./lib/app.js'],
-    'secvisogram-editor': ['./lib/secvisogram-editor.js'],
-  },
-  module: {
-    rules: [
-      { test: /\.js$/, use: 'babel-loader' },
-      {
-        test: /\.css$/i,
-        resourceQuery: /adoptedStyleSheet/,
-        use: [
-          {
-            loader: 'css-loader',
-            options: { exportType: 'css-style-sheet' },
+/** @type {(env?: { editor?: boolean }) => import('webpack').Configuration} */
+module.exports = (env = {}) => {
+  const editorOnly = env.editor === true
+
+  return {
+    ...(editorOnly
+      ? {
+          output: {
+            path: path.resolve(__dirname, '../editor/dist'),
+            clean: true,
           },
-          { loader: 'postcss-loader' },
+        }
+      : {}),
+    entry: editorOnly
+      ? { 'secvisogram-editor': ['./lib/secvisogram-editor.js'] }
+      : {
+          style: ['./lib/style.css'],
+          app: ['./lib/app.js'],
+          'secvisogram-editor': ['./lib/secvisogram-editor.js'],
+        },
+    module: {
+      rules: [
+        { test: /\.js$/, use: 'babel-loader' },
+        {
+          test: /\.css$/i,
+          resourceQuery: /adoptedStyleSheet/,
+          use: [
+            {
+              loader: 'css-loader',
+              options: { exportType: 'css-style-sheet' },
+            },
+            { loader: 'postcss-loader' },
+          ],
+        },
+        {
+          test: /\.css$/i,
+          resourceQuery: { not: [/adoptedStyleSheet/] },
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            { loader: 'postcss-loader' },
+          ],
+        },
+        { test: /\.html$/, use: 'raw-loader' },
+      ],
+    },
+    plugins: [
+      gitRevisionPlugin,
+      new Webpack.DefinePlugin({
+        SECVISOGRAM_VERSION: JSON.stringify(gitRevisionPlugin.version()),
+      }),
+      new MiniCssExtractPlugin(),
+      ...(!editorOnly
+        ? [
+            new HTMLWebpackPlugin({
+              chunks: ['style', 'app'],
+              template: './lib/index.html',
+            }),
+          ]
+        : []),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: 'vendor/first',
+            to: 'vendor/first',
+          },
+          ...(!editorOnly
+            ? [
+                {
+                  from: '../docs/user',
+                  to: 'docs/user',
+                },
+              ]
+            : []),
+          {
+            from: 'locales',
+            to: 'locales',
+          },
         ],
-      },
-      {
-        test: /\.css$/i,
-        resourceQuery: { not: [/adoptedStyleSheet/] },
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          { loader: 'postcss-loader' },
-        ],
-      },
-      { test: /\.html$/, use: 'raw-loader' },
+      }),
+      ...(!editorOnly && process.env.NODE_ENV !== 'production'
+        ? [
+            new HTMLWebpackPlugin({
+              chunks: ['style', 'view-tests'],
+              filename: 'view-tests.html',
+            }),
+            new HTMLWebpackPlugin({
+              chunks: ['style', 'view-tests-canvas'],
+              filename: 'view-tests-canvas.html',
+              template: './lib/index.html',
+            }),
+          ]
+        : []),
+      new MonacoWebpackPlugin({
+        languages: ['json'],
+      }),
     ],
-  },
-  plugins: [
-    gitRevisionPlugin,
-    new Webpack.DefinePlugin({
-      SECVISOGRAM_VERSION: JSON.stringify(gitRevisionPlugin.version()),
-    }),
-    new MiniCssExtractPlugin(),
-    new HTMLWebpackPlugin({
-      chunks: ['style', 'app'],
-      template: './lib/index.html',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
+    devServer: {
+      historyApiFallback: true,
+      static: [
         {
-          from: 'vendor/first',
-          to: 'vendor/first',
+          directory: path.join(__dirname, 'public'),
         },
         {
-          from: '../docs/user',
-          to: 'docs/user',
-        },
-        {
-          from: 'locales',
-          to: 'locales',
+          directory: path.join(__dirname, 'public/.well-known/appspecific'),
         },
       ],
-    }),
-    ...(process.env.NODE_ENV === 'production'
-      ? []
-      : [
-          new HTMLWebpackPlugin({
-            chunks: ['style', 'view-tests'],
-            filename: 'view-tests.html',
-          }),
-          new HTMLWebpackPlugin({
-            chunks: ['style', 'view-tests-canvas'],
-            filename: 'view-tests-canvas.html',
-            template: './lib/index.html',
-          }),
-        ]),
-    new MonacoWebpackPlugin({
-      languages: ['json'],
-    }),
-  ],
-  devServer: {
-    historyApiFallback: true,
-    static: [
-      {
-        directory: path.join(__dirname, 'public'),
-      },
-      {
-        directory: path.join(__dirname, 'public/.well-known/appspecific'),
-      },
-    ],
-    proxy: [
-      { context: ['/api'], target: 'http://localhost:4180' },
-      { context: ['/oauth2'], target: 'http://localhost:4180' },
-    ],
-  },
+      proxy: [
+        { context: ['/api'], target: 'http://localhost:4180' },
+        { context: ['/oauth2'], target: 'http://localhost:4180' },
+      ],
+    },
+  }
 }
