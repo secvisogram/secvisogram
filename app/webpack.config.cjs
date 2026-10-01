@@ -73,14 +73,10 @@ module.exports = (env = {}) => {
             from: 'vendor/first',
             to: 'vendor/first',
           },
-          ...(!editorOnly
-            ? [
-                {
-                  from: '../docs/user',
-                  to: 'docs/user',
-                },
-              ]
-            : []),
+          {
+            from: '../docs/user',
+            to: 'docs/user',
+          },
           {
             from: 'locales',
             to: 'locales',
