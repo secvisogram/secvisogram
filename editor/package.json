@@ -1,6 +1,7 @@
 {
   "name": "@secvisogram/editor",
   "version": "0.1.0",
+  "type": "module",
   "description": "An embeddable <secvisogram-editor> custom element for editing CSAF security advisories, packaged as a static asset bundle.",
   "keywords": [
     "CSAF",
@@ -24,6 +25,6 @@
     "access": "public"
   },
   "scripts": {
-    "prepack": "node scripts/check-build-output.cjs"
+    "prepack": "node scripts/check-build-output.js"
   }
 }
