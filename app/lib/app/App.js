@@ -11,15 +11,27 @@ import UserInfoContext from './shared/context/UserInfoContext.js'
 /**
  * @param {object} props
  * @param {React.JSX.Element} props.secvisogramPage
- * @param {boolean} [props.embedded]
+ * @param {boolean} [props.embedded] Embedded editors neither fetch an app
+ *   configuration nor talk to the CMS backend.
+ * @param {string} [props.validatorUrl] Only used if `embedded`.
  * @returns
  */
-export default function App({ secvisogramPage, embedded }) {
+export default function App({ secvisogramPage, embedded, validatorUrl }) {
   const defaultAppConfig = React.useContext(AppConfigContext)
-  const [appConfig, setAppConfig] = useState(defaultAppConfig)
+  const [fetchedAppConfig, setAppConfig] = useState(defaultAppConfig)
+  const embeddedAppConfig = React.useMemo(
+    () => ({
+      ...defaultAppConfig,
+      validatorUrl: validatorUrl ?? '',
+      configLoaded: true,
+    }),
+    [defaultAppConfig, validatorUrl],
+  )
+  const appConfig = embedded ? embeddedAppConfig : fetchedAppConfig
   const history = useHistory({ embedded })
 
   useEffect(() => {
+    if (embedded) return
     api.appConfig.getAppConfig().then((response) => {
       const mergedConfig = {
         ...defaultAppConfig,
@@ -28,7 +40,7 @@ export default function App({ secvisogramPage, embedded }) {
       }
       setAppConfig(mergedConfig)
     })
-  }, [defaultAppConfig])
+  }, [defaultAppConfig, embedded])
 
   const defaultUserInfo = React.useContext(UserInfoContext)
   const [userInfo, setUserInfo] = useState(defaultUserInfo)

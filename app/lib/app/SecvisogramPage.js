@@ -16,8 +16,15 @@ import sortObjectKeys from './shared/sortObjectKeys.js'
 /**
  * Holds the application-state and provides memoized callbacks for the view
  * to communicate with the core.
+ *
+ * @param {object} props
+ * @param {import('#lib/editorHost.js').EditorHost} [props.host] Set if the
+ *   editor is embedded in another page.
+ * @param {{ doc: {} } | null} [props.documentRequest] A document the
+ *   embedding page asks to load. Every request object loads its document,
+ *   even if it carries the same document as a previous one.
  */
-const SecvisogramPage = () => {
+const SecvisogramPage = ({ host, documentRequest = null }) => {
   const { pushState, location } = React.useContext(HistoryContext)
   const { t } = useTranslation()
   const searchParams = new URL(location.href).searchParams
@@ -71,10 +78,49 @@ const SecvisogramPage = () => {
     pendingBeta21Doc: null,
   })
   const core = coreRecord[uiSchemaVersion]
-  const [doc, setDoc] = React.useState(core.newDocMin())
-  const data = React.useMemo(() => ({ doc }), [doc])
+  // Every loaded document gets its own `data` object, so that loading the
+  // same document again still resets the editor.
+  const [data, setData] = React.useState(() => ({ doc: core.newDocMin() }))
 
   const { handleError } = React.useContext(AppErrorContext)
+
+  /**
+   * Loads a document that was parsed from a file or supplied by the embedding
+   * page.
+   *
+   * @param {any} parsedDoc
+   */
+  function loadDocument(parsedDoc) {
+    const detectedVersion = parsedDoc?.document?.csaf_version
+
+    if (detectedVersion === '2.1' && uiSchemaVersion !== 'v2.1') {
+      // When opening a csaf document we first check the version.
+      // Since the csaf 2.1 functionality is still beta we warn the
+      // user before opening a document with that version ...
+
+      setState((state) => ({
+        ...state,
+        isLoading: false,
+        pendingBeta21Doc: parsedDoc,
+      }))
+    } else {
+      // ... otherwise we just proceed loading the document
+
+      setState((state) => ({
+        ...state,
+        isLoading: false,
+      }))
+      setData({ doc: parsedDoc })
+    }
+  }
+
+  const [prevDocumentRequest, setPrevDocumentRequest] = React.useState(
+    /** @type {typeof documentRequest} */ (null),
+  )
+  if (documentRequest !== prevDocumentRequest) {
+    setPrevDocumentRequest(documentRequest)
+    if (documentRequest) loadDocument(documentRequest.doc)
+  }
 
   const alertSaveInvalidTranslationStrings = useMemo(() => {
     return {
@@ -107,6 +153,7 @@ const SecvisogramPage = () => {
       stripResult={stripResult}
       previewResult={previewResult}
       data={data}
+      host={host}
       alert={alert}
       DocumentsTab={DocumentsTab}
       generatorEngineData={core.getGeneratorEngineData()}
@@ -177,27 +224,7 @@ const SecvisogramPage = () => {
                 const cleanText = jsonString.replace(/^\uFEFF/, '')
                 const parsedDoc = JSON.parse(cleanText)
 
-                const detectedVersion = parsedDoc?.document?.csaf_version
-
-                if (detectedVersion === '2.1' && uiSchemaVersion !== 'v2.1') {
-                  // When opening a csaf document we first check the version.
-                  // Since the csaf 2.1 functionality is still beta we warn the
-                  // user before opening a document with that version ...
-
-                  setState((state) => ({
-                    ...state,
-                    isLoading: false,
-                    pendingBeta21Doc: parsedDoc,
-                  }))
-                } else {
-                  // ... otherwise we just proceed loading the file
-
-                  setState((state) => ({
-                    ...state,
-                    isLoading: false,
-                  }))
-                  setDoc(parsedDoc)
-                }
+                loadDocument(parsedDoc)
                 resolve(parsedDoc)
               } else {
                 reject(new Error('Failed to read file'))
@@ -232,13 +259,14 @@ const SecvisogramPage = () => {
       }}
       onValidate={React.useCallback(
         (doc) => {
-          core
+          return core
             .validate({ document: doc })
             .then((result) => {
               setState((state) => ({
                 ...state,
                 errors: result.errors,
               }))
+              return result
             })
             .catch(handleError)
         },
@@ -422,8 +450,8 @@ const SecvisogramPage = () => {
           uiSchemaVersion: 'v2.1',
           pendingBeta21Doc: null,
         }))
-        setDoc(pendingBeta21Doc)
-      }, [pendingBeta21Doc, setState, setDoc])}
+        setData({ doc: pendingBeta21Doc })
+      }, [pendingBeta21Doc, setState, setData])}
       onCancelBeta21Open={React.useCallback(() => {
         setState((state) => ({ ...state, pendingBeta21Doc: null }))
       }, [setState])}

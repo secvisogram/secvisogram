@@ -1,17 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { fileURLToPath } from 'node:url'
 import translation from '../../locales/en/translation.json' with { type: 'json' }
-
-const editorBuilds = [
-  {
-    name: 'application build',
-    outputDirectory: new URL('../../dist/', import.meta.url),
-  },
-  {
-    name: 'editor package build',
-    outputDirectory: new URL('../../../editor/dist/', import.meta.url),
-  },
-]
+import { editorBuilds, serveEditor } from './helpers/serveEditor.js'
 
 for (const { name, outputDirectory } of editorBuilds) {
   test(`loads editor translations from a nested base path (${name})`, async ({
@@ -31,38 +20,7 @@ for (const { name, outputDirectory } of editorBuilds) {
       }
     })
 
-    await page.route(`**${editorBasePath}/**`, async (route) => {
-      const requestPath = new URL(route.request().url()).pathname
-      const assetPath = requestPath.slice(editorBasePath.length)
-
-      if (assetPath === '/index.html') {
-        await route.fulfill({
-          contentType: 'text/html',
-          body: `<!doctype html>
-<html>
-  <head>
-    <script type="module" src="./secvisogram-editor.js"></script>
-  </head>
-  <body>
-    <secvisogram-editor></secvisogram-editor>
-  </body>
-</html>`,
-        })
-        return
-      }
-
-      if (assetPath === '/.well-known/appspecific/de.bsi.secvisogram.json') {
-        await route.fulfill({
-          contentType: 'application/json',
-          body: JSON.stringify({ loginAvailable: false }),
-        })
-        return
-      }
-
-      await route.fulfill({
-        path: fileURLToPath(new URL(assetPath.slice(1), outputDirectory)),
-      })
-    })
+    await serveEditor(page, { outputDirectory, basePath: editorBasePath })
 
     await page.goto(`${editorBasePath}/index.html`)
 

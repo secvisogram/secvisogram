@@ -1,4 +1,5 @@
 import React from 'react'
+import type { EditorHost } from '../../../editorHost.js'
 import { UiSchemaVersion } from '../../../uiSchemas.js'
 import {
   Advisory,
@@ -16,6 +17,8 @@ export interface Props {
   data: {
     doc: unknown
   } | null
+  /** Set if the editor is embedded in another page. */
+  host?: EditorHost | undefined
   defaultAdvisoryState?: AdvisoryState | null
   activeTab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS'
   alert: {
@@ -55,7 +58,10 @@ export interface Props {
     tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS',
     document: {},
   ): void
-  onValidate(document: {}): void
+  onValidate(document: {}): Promise<void | {
+    isValid: boolean
+    errors: TypedValidationError[]
+  }>
   onServiceValidate(params: { validatorUrl: string; csaf: {} }): Promise<{
     isValid: boolean
     tests: Array<{
