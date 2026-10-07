@@ -1,5 +1,5 @@
 import * as basic from '@secvisogram/csaf-validator-lib/csaf_2_1/basic.js'
-import * as recommendedTests from '@secvisogram/csaf-validator-lib/csaf_2_1/recommendedTests.js'
+import { recommendedTests } from './v2_1/recommendedTests.js'
 import libStrip from '@secvisogram/csaf-validator-lib/strip.js'
 import libValidate from '@secvisogram/csaf-validator-lib/validate.js'
 import { compose, set } from 'lodash/fp.js'
@@ -10,7 +10,7 @@ import { DocumentEntity } from './v2_1/entities.js'
 const INSTANT_TESTS =
   /** @type {import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
     Object.values(basic)
-  ).concat(Object.values(recommendedTests))
+  ).concat(recommendedTests)
 
 const secvisogramName = 'Secvisogram'
 
@@ -27,7 +27,7 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
   compose(
     set('document.tracking.generator.engine.name', secvisogramName),
     set('document.tracking.generator.engine.version', secvisogramVersion),
-    set('document.tracking.generator.date', date.toISOString()),
+    set('document.tracking.generator.date', date.toISOString())
   )
 
 /**
@@ -52,19 +52,19 @@ export async function validate({ document }) {
     errors: res.tests.flatMap((t) =>
       t.errors
         .map(
-          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e }),
+          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e })
         )
         .concat(
           t.warnings.map(
             (e) =>
-              /** @type {TypedValidationError} */ ({ type: 'warning', ...e }),
-          ),
+              /** @type {TypedValidationError} */ ({ type: 'warning', ...e })
+          )
         )
         .concat(
           t.infos.map(
-            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e }),
-          ),
-        ),
+            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e })
+          )
+        )
     ),
   }
 }
