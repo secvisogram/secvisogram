@@ -86,8 +86,8 @@ describe('v2_1 recommended tests selection', () => {
       result.errors.some(
         (e) =>
           e.instancePath === '/product_tree/full_product_names/0/product_id' &&
-          e.message === 'is not referenced'
-      )
+          e.message === 'is not referenced',
+      ),
     ).to.equal(true)
   })
 })
