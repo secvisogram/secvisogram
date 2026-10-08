@@ -1,3 +1,4 @@
+/* global __webpack_public_path__ */
 import { uiSchemas } from '#lib/uiSchemas.js'
 import { t } from 'i18next'
 import React, { useEffect } from 'react'
@@ -9,7 +10,8 @@ import ReactMarkdown from 'react-markdown'
  * @returns {Promise<string>}
  */
 function fetchMarkdown(mdPath) {
-  return fetch(mdPath).then((resp) => {
+  const markdownUrl = `${__webpack_public_path__}${mdPath.replace(/^\/+/, '')}`
+  return fetch(markdownUrl).then((resp) => {
     if (!resp.ok) {
       throw new Error(`Failed to load markdown file: ${mdPath}`)
     }
