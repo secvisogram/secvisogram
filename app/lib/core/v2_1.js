@@ -27,7 +27,7 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
   compose(
     set('document.tracking.generator.engine.name', secvisogramName),
     set('document.tracking.generator.engine.version', secvisogramVersion),
-    set('document.tracking.generator.date', date.toISOString())
+    set('document.tracking.generator.date', date.toISOString()),
   )
 
 /**
@@ -52,19 +52,19 @@ export async function validate({ document }) {
     errors: res.tests.flatMap((t) =>
       t.errors
         .map(
-          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e })
+          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e }),
         )
         .concat(
           t.warnings.map(
             (e) =>
-              /** @type {TypedValidationError} */ ({ type: 'warning', ...e })
-          )
+              /** @type {TypedValidationError} */ ({ type: 'warning', ...e }),
+          ),
         )
         .concat(
           t.infos.map(
-            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e })
-          )
-        )
+            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e }),
+          ),
+        ),
     ),
   }
 }
