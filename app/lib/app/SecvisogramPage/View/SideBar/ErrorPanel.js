@@ -28,6 +28,7 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
         )
       })
     : errors
+  const errorOccurrences = new Map()
 
   return (
     <>
@@ -39,6 +40,9 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
       </div>
       <div className="p-3" data-testid="error-cards">
         {errorsUnderPath.map((err, i) => {
+          const errorKey = `${err.type}-${err.instancePath}-${err.message}`
+          const occurrence = errorOccurrences.get(errorKey) ?? 0
+          errorOccurrences.set(errorKey, occurrence + 1)
           const color =
             err.type === 'error'
               ? 'border-red-800 bg-red-600/75'
@@ -53,7 +57,7 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
               : ''
           return (
             <div
-              key={`${err.instancePath}-${err.message}`}
+              key={`${errorKey}-${occurrence}`}
               className={
                 'p-2 m-1 rounded border hover:cursor-pointer ' +
                 color +
