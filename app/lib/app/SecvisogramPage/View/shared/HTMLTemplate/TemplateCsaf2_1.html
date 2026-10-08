@@ -9,7 +9,6 @@
 </head>
 
 <body>
-  <p>{{$schema}}</p>
   <h1>{{#document.tracking.id}}{{document.tracking.id}}: {{/document.tracking.id}}{{document.title}}</h1>
 
   <table>
@@ -30,7 +29,7 @@
       <td>Status: {{document.tracking.status}}</td>
     </tr>
     <tr>
-      <td>CVSSv3.1 Base Score: {{document.max_base_score}}</td>
+      <td>CVSSv{{document.max_base_score_version}} Base Score: {{document.max_base_score}}</td>
       <td>Severity:
         {{#document.aggregate_severity.namespace}} <a {{#secureHref}}{{document.aggregate_severity.namespace}}{{/secureHref}}>{{document.aggregate_severity.text}}</a>{{/document.aggregate_severity.namespace}}
         {{^document.aggregate_severity.namespace}} {{document.aggregate_severity.text}}{{/document.aggregate_severity.namespace}}
