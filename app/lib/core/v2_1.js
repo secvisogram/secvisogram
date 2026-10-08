@@ -1,5 +1,5 @@
 import * as basic from '@secvisogram/csaf-validator-lib/csaf_2_1/basic.js'
-import * as recommendedTests from '@secvisogram/csaf-validator-lib/csaf_2_1/recommendedTests.js'
+import * as recommendedTests from './v2_1/recommendedTests.js'
 import libStrip from '@secvisogram/csaf-validator-lib/strip.js'
 import libValidate from '@secvisogram/csaf-validator-lib/validate.js'
 import { compose, set } from 'lodash/fp.js'
