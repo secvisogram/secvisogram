@@ -10,9 +10,13 @@ import appStylesheet from './style.css?adoptedStyleSheet'
 import App from './app/App.js'
 import SecvisogramPage from './app/SecvisogramPage.js'
 import LoadingIndicator from './app/SecvisogramPage/View/LoadingIndicator.js'
+import i18next from 'i18next'
+import { createEditorHost } from './editorHost.js'
 import './i18next/i18next.js'
 import '../vendor/first/cvsscalc30.js'
 import '../vendor/first/cvsscalc31.js'
+
+const DEFAULT_LOCALE = 'en'
 
 // Font Awesome would otherwise auto-inject its stylesheet into
 // `document.head`, which is unreachable from within a shadow root.
@@ -26,6 +30,73 @@ class SecvisogramEditor extends HTMLElement {
     this.shadow.append(this.mountPoint)
     /** @type {import('react-dom/client').Root | null} */
     this.root = null
+    this.host = this.#createHost()
+    /** @type {{ doc: {} } | null} */
+    this.documentRequest = null
+    /** @type {string | undefined} */
+    this._validatorUrl = undefined
+    /** @type {string | undefined} */
+    this._locale = undefined
+  }
+
+  /**
+   * The document currently held by the editor. Writing it loads a new
+   * document, which resets the editor and is not reported via `csaf-change`.
+   *
+   * @type {{} | undefined}
+   */
+  get doc() {
+    return this.host.getDocument() ?? this.documentRequest?.doc
+  }
+
+  set doc(value) {
+    // `undefined` is what hosts write while they do not have a document yet.
+    if (value === null || typeof value !== 'object') return
+    this.documentRequest = { doc: value }
+    this.host.loadDocument(value)
+    this.render()
+  }
+
+  /**
+   * Language code of the editor's own i18next instance.
+   *
+   * @type {string | undefined}
+   */
+  get locale() {
+    return this._locale
+  }
+
+  set locale(value) {
+    this._locale = value
+    i18next.changeLanguage(value || DEFAULT_LOCALE)
+  }
+
+  /**
+   * Base URL of the validator service. Remote validation is only offered if
+   * it is set.
+   *
+   * @type {string | undefined}
+   */
+  get validatorUrl() {
+    return this._validatorUrl
+  }
+
+  set validatorUrl(value) {
+    this._validatorUrl = value
+    this.render()
+  }
+
+  #createHost() {
+    return createEditorHost({
+      onChange: (doc) => {
+        this.dispatchEvent(new CustomEvent('csaf-change', { detail: { doc } }))
+      },
+      onValidate: ({ errors, valid }) => {
+        this.dispatchEvent(
+          new CustomEvent('csaf-validate', { detail: { errors, valid } }),
+        )
+      },
+    })
   }
 
   connectedCallback() {
@@ -35,12 +106,12 @@ class SecvisogramEditor extends HTMLElement {
       monacoStylesheet,
     ]
 
-    const emotionCache = createCache({
+    this.emotionCache = createCache({
       key: 'secvisogram-editor',
       container: this.shadow,
     })
 
-    const theme = createTheme({
+    this.theme = createTheme({
       typography: {
         fontFamily:
           'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
@@ -61,20 +132,41 @@ class SecvisogramEditor extends HTMLElement {
     })
 
     this.root = createRoot(this.mountPoint)
+    this.render()
+  }
+
+  disconnectedCallback() {
+    // A reconnected element starts a new editor session with the document
+    // the previous one ended with.
+    const doc = this.doc
+    this.documentRequest = doc ? { doc } : null
+    this.host = this.#createHost()
+    if (doc) this.host.loadDocument(doc)
+    this.root?.unmount()
+    this.root = null
+  }
+
+  render() {
+    if (!this.root || !this.emotionCache || !this.theme) return
+
     this.root.render(
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
+      <CacheProvider value={this.emotionCache}>
+        <ThemeProvider theme={this.theme}>
           <React.Suspense fallback={<LoadingIndicator label="" />}>
-            <App secvisogramPage={<SecvisogramPage />} embedded />
+            <App
+              secvisogramPage={
+                <SecvisogramPage
+                  host={this.host}
+                  documentRequest={this.documentRequest}
+                />
+              }
+              embedded
+              validatorUrl={this._validatorUrl}
+            />
           </React.Suspense>
         </ThemeProvider>
       </CacheProvider>,
     )
-  }
-
-  disconnectedCallback() {
-    this.root?.unmount()
-    this.root = null
   }
 }
 

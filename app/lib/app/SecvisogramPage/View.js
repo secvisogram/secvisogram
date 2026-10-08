@@ -1,3 +1,4 @@
+import { remoteValidationErrors } from '#lib/editorHost.js'
 import { uiSchemas } from '#lib/uiSchemas.js'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -47,6 +48,7 @@ function View({
   activeTab,
   isTabLocked,
   data,
+  host,
   defaultAdvisoryState = null,
   stripResult,
   previewResult,
@@ -215,7 +217,6 @@ function View({
     setPrevPropsErrors(props.errors)
     setManualErrors(null)
   }
-  const errors = manualErrors ?? props.errors
 
   /**
    * `confirmDocumentReplacement` below can show its own confirmation dialog
@@ -253,6 +254,25 @@ function View({
   const formValues = /** @type {import('./shared/types').FormValues} */ (
     state.formValues
   )
+
+  /**
+   * An embedded editor merges the validator service's result into the client
+   * validation result, for as long as `formValues.doc` is the validated
+   * document.
+   */
+  const [remoteResult, setRemoteResult] = React.useState(
+    /** @type {{ doc: {}; errors: Array<import('./shared/types').TypedValidationError> } | null} */ (
+      null
+    ),
+  )
+  const embeddedErrors = React.useMemo(
+    () =>
+      remoteResult?.doc === formValues.doc
+        ? [...props.errors, ...remoteResult.errors]
+        : props.errors,
+    [props.errors, remoteResult, formValues.doc],
+  )
+  const errors = host ? embeddedErrors : (manualErrors ?? props.errors)
 
   /**
    * Enables debounced validation.
@@ -296,12 +316,15 @@ function View({
   }, [toast])
 
   async function doValidate() {
+    if (host && !appConfig.validatorUrl) return
+    const validatedDoc = formValues.doc
     setLoading(true)
     onServiceValidate({
       validatorUrl: appConfig.validatorUrl,
-      csaf: formValues.doc,
+      csaf: validatedDoc,
     })
       .then((json) => {
+        const validationErrors = remoteValidationErrors(json)
         if (json.isValid) {
           setToast({
             message: t('alert.theDocumentIsValid'),
@@ -311,26 +334,14 @@ function View({
           setToast({
             message: t('alert.theDocumentIsInvalid'),
           })
-          const validationErrors =
-            /** @type {Array<import('./shared/types').TypedValidationError>} */ (
-              json.tests.flatMap((t) =>
-                t.errors
-                  .map((e) => ({ ...e, type: 'error' }))
-                  .concat(
-                    t.warnings.map((w) => ({
-                      ...w,
-                      type: 'warning',
-                    })),
-                  )
-                  .concat(
-                    t.infos.map((i) => ({
-                      ...i,
-                      type: 'info',
-                    })),
-                  ),
-              )
-            )
           setManualErrors(validationErrors)
+        }
+        if (host) {
+          setRemoteResult({ doc: validatedDoc, errors: validationErrors })
+          host.remoteValidated(validatedDoc, {
+            errors: validationErrors,
+            valid: json.isValid,
+          })
         }
       })
       .catch(handleError)
@@ -340,6 +351,9 @@ function View({
   }
 
   const onSaveHandler = () => {
+    // Persisting documents is up to the embedding page.
+    if (host) return
+
     if (advisoryState?.type === 'NEW_ADVISORY') {
       setVersionSummaryDialog(
         <VersionSummaryDialog
@@ -650,11 +664,25 @@ function View({
   }, [originalValues, formValues])
 
   /**
+   * Reports the document the editor holds to the embedding page.
+   */
+  React.useEffect(() => {
+    host?.documentChanged(formValues.doc)
+  }, [host, formValues.doc])
+
+  /**
    * Triggers debounced validation.
    */
   React.useEffect(() => {
-    onValidate(debouncedChangedDoc)
-  }, [debouncedChangedDoc, onValidate])
+    Promise.resolve(onValidate(debouncedChangedDoc)).then((result) => {
+      if (result) {
+        host?.clientValidated(debouncedChangedDoc, {
+          errors: result.errors,
+          valid: result.isValid,
+        })
+      }
+    })
+  }, [debouncedChangedDoc, onValidate, host])
 
   const tabButtonProps = React.useCallback(
     (/** @type {typeof activeTab} */ tab) => {
@@ -1136,7 +1164,9 @@ function View({
                           {t('menu.sortDocument')}
                         </button>
                       )}
-                      {appConfig.loginAvailable && userInfo && (
+                      {(host
+                        ? Boolean(appConfig.validatorUrl)
+                        : appConfig.loginAvailable && userInfo) && (
                         <button
                           data-testid="validate_button"
                           type="button"
