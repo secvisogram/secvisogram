@@ -1,0 +1,13 @@
+Secvisogram
+Copyright (c) 2021-present, Bundesamt für Sicherheit in der Informationstechnik (BSI)
+
+This product includes software developed at Bundesamt für Sicherheit in der Informationstechnik (BSI).
+
+-------------------------------------------------------------------------------
+This product includes software developed by third parties:
+
+- [@secvisogram/is-leap-second@1.0.0](https://github.com/secvisogram/is-leap-second) - Apache-2.0
+- [@webassemblyjs/leb128@1.13.2](https://github.com/xtuc/webassemblyjs) - Apache-2.0
+- [@xtuc/long@4.2.2](https://github.com/dcodeIO/long.js) - Apache-2.0
+- [baseline-browser-mapping@2.11.21](https://github.com/web-platform-dx/baseline-browser-mapping) - Apache-2.0
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0

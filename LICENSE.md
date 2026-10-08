@@ -4,15 +4,207 @@ This file declares the Secvisogram license and lists the license of the producti
 
 ## Secvisogram License
 
-The MIT License (MIT)
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1.  Definitions.
+
+    "License" shall mean the terms and conditions for use, reproduction,
+    and distribution as defined by Sections 1 through 9 of this document.
+
+    "Licensor" shall mean the copyright owner or entity authorized by
+    the copyright owner that is granting the License.
+
+    "Legal Entity" shall mean the union of the acting entity and all
+    other entities that control, are controlled by, or are under common
+    control with that entity. For the purposes of this definition,
+    "control" means (i) the power, direct or indirect, to cause the
+    direction or management of such entity, whether by contract or
+    otherwise, or (ii) ownership of fifty percent (50%) or more of the
+    outstanding shares, or (iii) beneficial ownership of such entity.
+
+    "You" (or "Your") shall mean an individual or Legal Entity
+    exercising permissions granted by this License.
+
+    "Source" form shall mean the preferred form for making modifications,
+    including but not limited to software source code, documentation
+    source, and configuration files.
+
+    "Object" form shall mean any form resulting from mechanical
+    transformation or translation of a Source form, including but
+    not limited to compiled object code, generated documentation,
+    and conversions to other media types.
+
+    "Work" shall mean the work of authorship, whether in Source or
+    Object form, made available under the License, as indicated by a
+    copyright notice that is included in or attached to the work
+    (an example is provided in the Appendix below).
+
+    "Derivative Works" shall mean any work, whether in Source or Object
+    form, that is based on (or derived from) the Work and for which the
+    editorial revisions, annotations, elaborations, or other modifications
+    represent, as a whole, an original work of authorship. For the purposes
+    of this License, Derivative Works shall not include works that remain
+    separable from, or merely link (or bind by name) to the interfaces of,
+    the Work and Derivative Works thereof.
+
+    "Contribution" shall mean any work of authorship, including
+    the original version of the Work and any modifications or additions
+    to that Work or Derivative Works thereof, that is intentionally
+    submitted to Licensor for inclusion in the Work by the copyright owner
+    or by an individual or Legal Entity authorized to submit on behalf of
+    the copyright owner. For the purposes of this definition, "submitted"
+    means any form of electronic, verbal, or written communication sent
+    to the Licensor or its representatives, including but not limited to
+    communication on electronic mailing lists, source code control systems,
+    and issue tracking systems that are managed by, or on behalf of, the
+    Licensor for the purpose of discussing and improving the Work, but
+    excluding communication that is conspicuously marked or otherwise
+    designated in writing by the copyright owner as "Not a Contribution."
+
+    "Contributor" shall mean Licensor and any individual or Legal Entity
+    on behalf of whom a Contribution has been received by Licensor and
+    subsequently incorporated within the Work.
+
+2.  Grant of Copyright License. Subject to the terms and conditions of
+    this License, each Contributor hereby grants to You a perpetual,
+    worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+    copyright license to reproduce, prepare Derivative Works of,
+    publicly display, publicly perform, sublicense, and distribute the
+    Work and such Derivative Works in Source or Object form.
+
+3.  Grant of Patent License. Subject to the terms and conditions of
+    this License, each Contributor hereby grants to You a perpetual,
+    worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+    (except as stated in this section) patent license to make, have made,
+    use, offer to sell, sell, import, and otherwise transfer the Work,
+    where such license applies only to those patent claims licensable
+    by such Contributor that are necessarily infringed by their
+    Contribution(s) alone or by combination of their Contribution(s)
+    with the Work to which such Contribution(s) was submitted. If You
+    institute patent litigation against any entity (including a
+    cross-claim or counterclaim in a lawsuit) alleging that the Work
+    or a Contribution incorporated within the Work constitutes direct
+    or contributory patent infringement, then any patent licenses
+    granted to You under this License for that Work shall terminate
+    as of the date such litigation is filed.
+
+4.  Redistribution. You may reproduce and distribute copies of the
+    Work or Derivative Works thereof in any medium, with or without
+    modifications, and in Source or Object form, provided that You
+    meet the following conditions:
+
+    (a) You must give any other recipients of the Work or
+    Derivative Works a copy of this License; and
+
+    (b) You must cause any modified files to carry prominent notices
+    stating that You changed the files; and
+
+    (c) You must retain, in the Source form of any Derivative Works
+    that You distribute, all copyright, patent, trademark, and
+    attribution notices from the Source form of the Work,
+    excluding those notices that do not pertain to any part of
+    the Derivative Works; and
+
+    (d) If the Work includes a "NOTICE" text file as part of its
+    distribution, then any Derivative Works that You distribute must
+    include a readable copy of the attribution notices contained
+    within such NOTICE file, excluding those notices that do not
+    pertain to any part of the Derivative Works, in at least one
+    of the following places: within a NOTICE text file distributed
+    as part of the Derivative Works; within the Source form or
+    documentation, if provided along with the Derivative Works; or,
+    within a display generated by the Derivative Works, if and
+    wherever such third-party notices normally appear. The contents
+    of the NOTICE file are for informational purposes only and
+    do not modify the License. You may add Your own attribution
+    notices within Derivative Works that You distribute, alongside
+    or as an addendum to the NOTICE text from the Work, provided
+    that such additional attribution notices cannot be construed
+    as modifying the License.
+
+    You may add Your own copyright statement to Your modifications and
+    may provide additional or different license terms and conditions
+    for use, reproduction, or distribution of Your modifications, or
+    for any such Derivative Works as a whole, provided Your use,
+    reproduction, and distribution of the Work otherwise complies with
+    the conditions stated in this License.
+
+5.  Submission of Contributions. Unless You explicitly state otherwise,
+    any Contribution intentionally submitted for inclusion in the Work
+    by You to the Licensor shall be under the terms and conditions of
+    this License, without any additional terms or conditions.
+    Notwithstanding the above, nothing herein shall supersede or modify
+    the terms of any separate license agreement you may have executed
+    with Licensor regarding such Contributions.
+
+6.  Trademarks. This License does not grant permission to use the trade
+    names, trademarks, service marks, or product names of the Licensor,
+    except as required for reasonable and customary use in describing the
+    origin of the Work and reproducing the content of the NOTICE file.
+
+7.  Disclaimer of Warranty. Unless required by applicable law or
+    agreed to in writing, Licensor provides the Work (and each
+    Contributor provides its Contributions) on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+    implied, including, without limitation, any warranties or conditions
+    of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+    PARTICULAR PURPOSE. You are solely responsible for determining the
+    appropriateness of using or redistributing the Work and assume any
+    risks associated with Your exercise of permissions under this License.
+
+8.  Limitation of Liability. In no event and under no legal theory,
+    whether in tort (including negligence), contract, or otherwise,
+    unless required by applicable law (such as deliberate and grossly
+    negligent acts) or agreed to in writing, shall any Contributor be
+    liable to You for damages, including any direct, indirect, special,
+    incidental, or consequential damages of any character arising as a
+    result of this License or out of the use or inability to use the
+    Work (including but not limited to damages for loss of goodwill,
+    work stoppage, computer failure or malfunction, or any and all
+    other commercial damages or losses), even if such Contributor
+    has been advised of the possibility of such damages.
+
+9.  Accepting Warranty or Additional Liability. While redistributing
+    the Work or Derivative Works thereof, You may choose to offer,
+    and charge a fee for, acceptance of support, warranty, indemnity,
+    or other liability obligations and/or rights consistent with this
+    License. However, in accepting such obligations, You may act only
+    on Your own behalf and on Your sole responsibility, not on behalf
+    of any other Contributor, and only if You agree to indemnify,
+    defend, and hold each Contributor harmless for any liability
+    incurred by, or claims asserted against, such Contributor by reason
+    of your accepting any such warranty or additional liability.
+
+END OF TERMS AND CONDITIONS
+
+APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
 
 Copyright (c) 2021-present, Bundesamt für Sicherheit in der Informationstechnik (BSI)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ## Third Party Library Licenses
 
@@ -26,39 +218,66 @@ The list can be updated using `npx license-checker-rseidelsohn --production --ma
     in /app
 -->
 
-- [@babel/runtime@7.27.0](https://github.com/babel/babel) - MIT
-- [@emotion/hash@0.8.0](https://github.com/emotion-js/emotion.git#master) - MIT
-- [@fortawesome/fontawesome-common-types@6.7.2](https://github.com/FortAwesome/Font-Awesome) - MIT
-- [@fortawesome/fontawesome-svg-core@6.7.2](https://github.com/FortAwesome/Font-Awesome) - MIT
-- [@fortawesome/free-regular-svg-icons@6.7.2](https://github.com/FortAwesome/Font-Awesome) - (CC-BY-4.0 AND MIT)
-- [@fortawesome/free-solid-svg-icons@6.7.2](https://github.com/FortAwesome/Font-Awesome) - (CC-BY-4.0 AND MIT)
-- [@fortawesome/react-fontawesome@0.2.2](https://github.com/FortAwesome/react-fontawesome) - MIT
-- [@jridgewell/gen-mapping@0.3.8](https://github.com/jridgewell/gen-mapping) - MIT
+- [@babel/code-frame@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/generator@7.29.8](https://github.com/babel/babel) - MIT
+- [@babel/helper-globals@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/helper-module-imports@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/helper-string-parser@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/helper-validator-identifier@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/parser@7.29.8](https://github.com/babel/babel) - MIT
+- [@babel/runtime@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/runtime@8.0.0](https://github.com/babel/babel) - MIT
+- [@babel/template@7.29.7](https://github.com/babel/babel) - MIT
+- [@babel/traverse@7.29.8](https://github.com/babel/babel) - MIT
+- [@babel/types@7.29.8](https://github.com/babel/babel) - MIT
+- [@emotion/babel-plugin@11.13.5](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/cache@11.14.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/hash@0.9.2](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/is-prop-valid@1.4.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/memoize@0.9.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/react@11.14.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/serialize@1.3.3](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/sheet@1.4.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/styled@11.14.1](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/unitless@0.10.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/use-insertion-effect-with-fallbacks@1.2.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/utils@1.4.2](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@emotion/weak-memoize@0.4.0](https://github.com/emotion-js/emotion.git#main) - MIT
+- [@fortawesome/fontawesome-common-types@7.3.1](https://github.com/FortAwesome/Font-Awesome) - MIT
+- [@fortawesome/fontawesome-svg-core@7.3.1](https://github.com/FortAwesome/Font-Awesome) - MIT
+- [@fortawesome/free-regular-svg-icons@7.3.1](https://github.com/FortAwesome/Font-Awesome) - (CC-BY-4.0 AND MIT)
+- [@fortawesome/free-solid-svg-icons@7.3.1](https://github.com/FortAwesome/Font-Awesome) - (CC-BY-4.0 AND MIT)
+- [@fortawesome/react-fontawesome@3.5.0](https://github.com/FortAwesome/react-fontawesome) - MIT
+- [@jridgewell/gen-mapping@0.3.13](https://github.com/jridgewell/sourcemaps) - MIT
 - [@jridgewell/resolve-uri@3.1.2](https://github.com/jridgewell/resolve-uri) - MIT
-- [@jridgewell/set-array@1.2.1](https://github.com/jridgewell/set-array) - MIT
-- [@jridgewell/source-map@0.3.6](https://github.com/jridgewell/source-map) - MIT
-- [@jridgewell/sourcemap-codec@1.5.0](https://github.com/jridgewell/sourcemap-codec) - MIT
-- [@jridgewell/trace-mapping@0.3.25](https://github.com/jridgewell/trace-mapping) - MIT
-- [@material-ui/core@4.12.4](https://github.com/mui-org/material-ui) - MIT
-- [@material-ui/lab@4.0.0-alpha.61](https://github.com/mui-org/material-ui) - MIT
-- [@material-ui/styles@4.11.5](https://github.com/mui-org/material-ui) - MIT
-- [@material-ui/system@4.12.2](https://github.com/mui-org/material-ui) - MIT
-- [@material-ui/types@5.1.0](https://github.com/mui-org/material-ui) - MIT
-- [@material-ui/utils@4.11.3](https://github.com/mui-org/material-ui) - MIT
-- [@types/debug@4.1.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/eslint-scope@3.7.7](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/eslint@9.6.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/estree@1.0.7](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/hast@2.3.10](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@jridgewell/source-map@0.3.11](https://github.com/jridgewell/sourcemaps) - MIT
+- [@jridgewell/sourcemap-codec@1.6.0](https://github.com/jridgewell/sourcemaps) - MIT
+- [@jridgewell/trace-mapping@0.3.31](https://github.com/jridgewell/sourcemaps) - MIT
+- [@mui/core-downloads-tracker@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/material@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/private-theming@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/styled-engine@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/system@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/types@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@mui/utils@9.4.0](https://github.com/mui/material-ui) - MIT
+- [@popperjs/core@2.11.8](https://github.com/popperjs/popper-core) - MIT
+- [@secvisogram/csaf-validator-lib@2.1.5](https://github.com/secvisogram/csaf-validator-lib) - MIT
+- [@secvisogram/is-leap-second@1.0.0](https://github.com/secvisogram/is-leap-second) - Apache-2.0
+- [@types/debug@4.1.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/estree-jsx@1.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/estree@1.0.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/hast@3.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/json-schema@7.0.15](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/mdast@3.0.15](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/mdast@4.0.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/ms@2.1.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@18.19.86](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/prop-types@15.7.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@24.13.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/parse-json@4.0.2](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/prop-types@15.7.15](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/react-transition-group@4.4.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/react@17.0.85](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/scheduler@0.16.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/react@19.3.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/unist@2.0.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/unist@3.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@ungap/structured-clone@1.4.0](https://github.com/ungap/structured-clone) - ISC
 - [@webassemblyjs/ast@1.14.1](https://github.com/xtuc/webassemblyjs) - MIT
 - [@webassemblyjs/floating-point-hex-parser@1.13.2](https://github.com/xtuc/webassemblyjs) - MIT
 - [@webassemblyjs/helper-api-error@1.13.2](https://github.com/xtuc/webassemblyjs) - MIT
@@ -76,91 +295,99 @@ The list can be updated using `npx license-checker-rseidelsohn --production --ma
 - [@webassemblyjs/wast-printer@1.14.1](https://github.com/xtuc/webassemblyjs) - MIT
 - [@xtuc/ieee754@1.2.0](https://github.com/feross/ieee754) - BSD-3-Clause
 - [@xtuc/long@4.2.2](https://github.com/dcodeIO/long.js) - Apache-2.0
-- [acorn@8.14.1](https://github.com/acornjs/acorn) - MIT
+- [acorn@8.18.0](https://github.com/acornjs/acorn) - MIT
 - [ajv-formats@2.1.1](https://github.com/ajv-validator/ajv-formats) - MIT
+- [ajv-formats@3.0.1](https://github.com/ajv-validator/ajv-formats) - MIT
 - [ajv-keywords@5.1.0](https://github.com/epoberezkin/ajv-keywords) - MIT
-- [ajv@8.17.1](https://github.com/ajv-validator/ajv) - MIT
+- [ajv@8.20.0](https://github.com/ajv-validator/ajv) - MIT
+- [babel-plugin-macros@3.1.0](https://github.com/kentcdodds/babel-plugin-macros) - MIT
 - [bail@2.0.2](https://github.com/wooorm/bail) - MIT
+- [baseline-browser-mapping@2.11.21](https://github.com/web-platform-dx/baseline-browser-mapping) - Apache-2.0
 - [bcp47@1.1.2](https://github.com/gagle/node-bcp47) - MIT
 - [big.js@5.2.2](https://github.com/MikeMcl/big.js) - MIT
-- [browserslist@4.24.4](https://github.com/browserslist/browserslist) - MIT
+- [browserslist@4.28.9](https://github.com/browserslist/browserslist) - MIT
 - [buffer-from@1.1.2](https://github.com/LinusU/buffer-from) - MIT
-- [caniuse-lite@1.0.30001712](https://github.com/browserslist/caniuse-lite) - CC-BY-4.0
+- [callsites@3.1.0](https://github.com/sindresorhus/callsites) - MIT
+- [caniuse-lite@1.0.30001810](https://github.com/browserslist/caniuse-lite) - CC-BY-4.0
+- [ccount@2.0.1](https://github.com/wooorm/ccount) - MIT
+- [character-entities-html4@2.1.0](https://github.com/wooorm/character-entities-html4) - MIT
+- [character-entities-legacy@3.0.0](https://github.com/wooorm/character-entities-legacy) - MIT
 - [character-entities@2.0.2](https://github.com/wooorm/character-entities) - MIT
+- [character-reference-invalid@2.0.1](https://github.com/wooorm/character-reference-invalid) - MIT
 - [chrome-trace-event@1.0.4](https://github.com/samccone/chrome-trace-event) - MIT
-- [clsx@1.2.1](https://github.com/lukeed/clsx) - MIT
+- [clsx@2.1.1](https://github.com/lukeed/clsx) - MIT
 - [comma-separated-tokens@2.0.3](https://github.com/wooorm/comma-separated-tokens) - MIT
 - [commander@2.20.3](https://github.com/tj/commander.js) - MIT
-- [cross-fetch@4.0.0](https://github.com/lquixada/cross-fetch) - MIT
-- [css-vendor@2.0.8](https://github.com/cssinjs/css-vendor) - MIT
-- [csstype@2.6.21](https://github.com/frenic/csstype) - MIT
-- [csstype@3.1.3](https://github.com/frenic/csstype) - MIT
+- [convert-source-map@1.9.0](https://github.com/thlorenz/convert-source-map) - MIT
+- [cosmiconfig@7.1.0](https://github.com/davidtheclark/cosmiconfig) - MIT
+- [cross-fetch@4.1.0](https://github.com/lquixada/cross-fetch) - MIT
+- [csstype@3.2.3](https://github.com/frenic/csstype) - MIT
 - [cvss2js@1.1.0](https://github.com/sparticvs/cvss2js) - MIT
-- [debug@4.4.0](https://github.com/debug-js/debug) - MIT
-- [decode-named-character-reference@1.1.0](https://github.com/wooorm/decode-named-character-reference) - MIT
+- [debug@4.4.3](https://github.com/debug-js/debug) - MIT
+- [decode-named-character-reference@1.3.0](https://github.com/wooorm/decode-named-character-reference) - MIT
 - [dequal@2.0.3](https://github.com/lukeed/dequal) - MIT
-- [detect-node-es@1.1.0](https://github.com/thekashey/detect-node) - MIT
 - [devlop@1.1.0](https://github.com/wooorm/devlop) - MIT
-- [diff@5.2.0](https://github.com/kpdecker/jsdiff) - BSD-3-Clause
 - [dom-helpers@5.2.1](https://github.com/react-bootstrap/dom-helpers) - MIT
-- [electron-to-chromium@1.5.134](https://github.com/kilian/electron-to-chromium) - ISC
+- [electron-to-chromium@1.5.425](https://github.com/Kilian/electron-to-chromium) - ISC
 - [emojis-list@3.0.0](https://github.com/kikobeats/emojis-list) - MIT
-- [enhanced-resolve@5.18.1](https://github.com/webpack/enhanced-resolve) - MIT
-- [es-module-lexer@1.6.0](https://github.com/guybedford/es-module-lexer) - MIT
+- [enhanced-resolve@5.24.5](https://github.com/webpack/enhanced-resolve) - MIT
+- [error-ex@1.3.4](https://github.com/qix-/node-error-ex) - MIT
+- [es-errors@1.3.0](https://github.com/ljharb/es-errors) - MIT
+- [es-module-lexer@2.3.2](https://github.com/guybedford/es-module-lexer) - MIT
 - [escalade@3.2.0](https://github.com/lukeed/escalade) - MIT
-- [eslint-scope@5.1.1](https://github.com/eslint/eslint-scope) - BSD-2-Clause
-- [esrecurse@4.3.0](https://github.com/estools/esrecurse) - BSD-2-Clause
-- [estraverse@4.3.0](https://github.com/estools/estraverse) - BSD-2-Clause
-- [estraverse@5.3.0](https://github.com/estools/estraverse) - BSD-2-Clause
+- [escape-string-regexp@4.0.0](https://github.com/sindresorhus/escape-string-regexp) - MIT
+- [estree-util-is-identifier-name@3.0.0](https://github.com/syntax-tree/estree-util-is-identifier-name) - MIT
 - [events@3.3.0](https://github.com/Gozala/events) - MIT
 - [extend@3.0.2](https://github.com/justmoon/node-extend) - MIT
 - [fast-deep-equal@3.1.3](https://github.com/epoberezkin/fast-deep-equal) - MIT
-- [fast-uri@3.0.6](https://github.com/fastify/fast-uri) - BSD-3-Clause
-- [focus-lock@0.9.2](https://github.com/theKashey/focus-lock) - MIT
+- [fast-uri@3.1.7](https://github.com/fastify/fast-uri) - BSD-3-Clause
+- [find-root@1.1.0](https://github.com/js-n/find-root) - MIT
 - [foreach@2.0.6](https://github.com/manuelstofer/foreach) - MIT
-- [get-nonce@1.0.1](https://github.com/theKashey/get-nonce) - MIT
-- [glob-to-regexp@0.4.1](https://github.com/fitzgen/glob-to-regexp) - BSD-2-Clause
+- [function-bind@1.1.2](https://github.com/Raynos/function-bind) - MIT
 - [graceful-fs@4.2.11](https://github.com/isaacs/node-graceful-fs) - ISC
 - [has-flag@4.0.0](https://github.com/sindresorhus/has-flag) - MIT
-- [hast-util-whitespace@2.0.1](https://github.com/syntax-tree/hast-util-whitespace) - MIT
+- [hasown@2.0.4](https://github.com/inspect-js/hasOwn) - MIT
+- [hast-util-to-jsx-runtime@2.3.6](https://github.com/syntax-tree/hast-util-to-jsx-runtime) - MIT
+- [hast-util-whitespace@3.0.0](https://github.com/syntax-tree/hast-util-whitespace) - MIT
 - [hoist-non-react-statics@3.3.2](https://github.com/mridgway/hoist-non-react-statics) - BSD-3-Clause
-- [hotkeys-js@3.13.9](https://github.com/jaywcjlove/hotkeys-js) - MIT
-- [html-parse-stringify@3.0.1](https://github.com/henrikjoreteg/html-parse-stringify) - MIT
-- [hyphenate-style-name@1.1.0](https://github.com/rexxars/hyphenate-style-name) - BSD-3-Clause
-- [i18next-http-backend@3.0.2](https://github.com/i18next/i18next-http-backend) - MIT
-- [i18next@24.2.3](https://github.com/i18next/i18next) - MIT
+- [hotkeys-js@4.0.8](https://github.com/jaywcjlove/hotkeys-js) - MIT
+- [html-parse-stringify@4.0.1](https://github.com/i18next/html-parse-stringify) - MIT
+- [html-url-attributes@3.0.1](https://github.com/rehypejs/rehype-minify.git#main) - MIT
+- [i18next-http-backend@3.0.6](https://github.com/i18next/i18next-http-backend) - MIT
+- [i18next@26.4.2](https://github.com/i18next/i18next) - MIT
 - [immutability-helper@3.1.1](https://github.com/kolodny/immutability-helper) - MIT
-- [inline-style-parser@0.1.1](https://github.com/remarkablemark/inline-style-parser) - MIT
-- [is-buffer@2.0.5](https://github.com/feross/is-buffer) - MIT
-- [is-in-browser@1.1.3](https://github.com/tuxsudo/is-in-browser) - MIT
+- [import-fresh@3.3.1](https://github.com/sindresorhus/import-fresh) - MIT
+- [inline-style-parser@0.2.7](https://github.com/remarkablemark/inline-style-parser) - MIT
+- [is-alphabetical@2.0.1](https://github.com/wooorm/is-alphabetical) - MIT
+- [is-alphanumerical@2.0.1](https://github.com/wooorm/is-alphanumerical) - MIT
+- [is-arrayish@0.2.1](https://github.com/qix-/node-is-arrayish) - MIT
+- [is-core-module@2.16.2](https://github.com/inspect-js/is-core-module) - MIT
+- [is-decimal@2.0.1](https://github.com/wooorm/is-decimal) - MIT
+- [is-hexadecimal@2.0.1](https://github.com/wooorm/is-hexadecimal) - MIT
 - [is-plain-obj@4.1.0](https://github.com/sindresorhus/is-plain-obj) - MIT
 - [jest-worker@27.5.1](https://github.com/facebook/jest) - MIT
 - [js-tokens@4.0.0](https://github.com/lydell/js-tokens) - MIT
+- [jsesc@3.1.0](https://github.com/mathiasbynens/jsesc) - MIT
 - [json-parse-even-better-errors@2.3.1](https://github.com/npm/json-parse-even-better-errors) - MIT
 - [json-pointer@0.6.2](https://github.com/manuelstofer/json-pointer) - MIT
 - [json-schema-traverse@1.0.0](https://github.com/epoberezkin/json-schema-traverse) - MIT
 - [json-source-map@0.6.1](https://github.com/epoberezkin/json-source-map) - MIT
 - [json5@2.2.3](https://github.com/json5/json5) - MIT
-- [jss-plugin-camel-case@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-default-unit@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-global@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-nested@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-props-sort@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-rule-value-function@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss-plugin-vendor-prefixer@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [jss@10.10.0](https://github.com/cssinjs/jss) - MIT
-- [kleur@4.1.5](https://github.com/lukeed/kleur) - MIT
-- [loader-runner@4.3.0](https://github.com/webpack/loader-runner) - MIT
+- [lines-and-columns@1.2.4](https://github.com/eventualbuddha/lines-and-columns) - MIT
 - [loader-utils@2.0.4](https://github.com/webpack/loader-utils) - MIT
-- [lodash@4.17.21](https://github.com/lodash/lodash) - MIT
+- [lodash@4.18.1](https://github.com/lodash/lodash) - MIT
+- [longest-streak@3.1.0](https://github.com/wooorm/longest-streak) - MIT
 - [loose-envify@1.4.0](https://github.com/zertosh/loose-envify) - MIT
-- [match-sorter@6.3.4](https://github.com/kentcdodds/match-sorter) - MIT
-- [mdast-util-definitions@5.1.2](https://github.com/syntax-tree/mdast-util-definitions) - MIT
-- [mdast-util-from-markdown@1.3.1](https://github.com/syntax-tree/mdast-util-from-markdown) - MIT
-- [mdast-util-to-hast@12.3.0](https://github.com/syntax-tree/mdast-util-to-hast) - MIT
-- [mdast-util-to-string@3.2.0](https://github.com/syntax-tree/mdast-util-to-string) - MIT
+- [match-sorter@8.3.0](https://github.com/kentcdodds/match-sorter) - MIT
+- [mdast-util-from-markdown@2.0.3](https://github.com/syntax-tree/mdast-util-from-markdown) - MIT
+- [mdast-util-mdx-expression@2.0.1](https://github.com/syntax-tree/mdast-util-mdx-expression) - MIT
+- [mdast-util-mdx-jsx@3.2.0](https://github.com/syntax-tree/mdast-util-mdx-jsx) - MIT
+- [mdast-util-mdxjs-esm@2.0.1](https://github.com/syntax-tree/mdast-util-mdxjs-esm) - MIT
+- [mdast-util-phrasing@4.1.0](https://github.com/syntax-tree/mdast-util-phrasing) - MIT
+- [mdast-util-to-hast@13.2.1](https://github.com/syntax-tree/mdast-util-to-hast) - MIT
+- [mdast-util-to-markdown@2.1.2](https://github.com/syntax-tree/mdast-util-to-markdown) - MIT
+- [mdast-util-to-string@4.0.0](https://github.com/syntax-tree/mdast-util-to-string) - MIT
 - [merge-stream@2.0.0](https://github.com/grncdr/merge-stream) - MIT
-- [micromark-core-commonmark@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-core-commonmark@2.0.3](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-extension-gfm-autolink-literal@2.1.0](https://github.com/micromark/micromark-extension-gfm-autolink-literal) - MIT
 - [micromark-extension-gfm-footnote@2.1.0](https://github.com/micromark/micromark-extension-gfm-footnote) - MIT
@@ -169,125 +396,102 @@ The list can be updated using `npx license-checker-rseidelsohn --production --ma
 - [micromark-extension-gfm-tagfilter@2.0.0](https://github.com/micromark/micromark-extension-gfm-tagfilter) - MIT
 - [micromark-extension-gfm-task-list-item@2.1.0](https://github.com/micromark/micromark-extension-gfm-task-list-item) - MIT
 - [micromark-extension-gfm@3.0.0](https://github.com/micromark/micromark-extension-gfm) - MIT
-- [micromark-factory-destination@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-factory-destination@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-factory-label@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-factory-label@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-factory-space@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-factory-space@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-factory-title@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-factory-title@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-factory-whitespace@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-factory-whitespace@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-character@1.2.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-character@2.1.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-chunked@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-chunked@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-classify-character@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-classify-character@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-combine-extensions@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-combine-extensions@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-decode-numeric-character-reference@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-decode-numeric-character-reference@2.0.2](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-decode-string@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-encode@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
+- [micromark-util-decode-string@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-encode@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-html-tag-name@1.2.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-html-tag-name@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-normalize-identifier@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-normalize-identifier@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-resolve-all@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-resolve-all@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-sanitize-uri@1.2.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-sanitize-uri@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-subtokenize@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-subtokenize@2.1.0](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-symbol@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-symbol@2.0.1](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark-util-types@1.1.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark-util-types@2.0.2](https://github.com/micromark/micromark.git#main) - MIT
-- [micromark@3.2.0](https://github.com/micromark/micromark.git#main) - MIT
 - [micromark@4.0.2](https://github.com/micromark/micromark.git#main) - MIT
-- [mime-db@1.52.0](https://github.com/jshttp/mime-db) - MIT
-- [mime-types@2.1.35](https://github.com/jshttp/mime-types) - MIT
-- [monaco-editor-webpack-plugin@7.1.0](https://github.com/microsoft/monaco-editor) - MIT
-- [monaco-editor@0.44.0](https://github.com/microsoft/monaco-editor) - MIT
-- [mri@1.2.0](https://github.com/lukeed/mri) - MIT
+- [mime-db@1.54.0](https://github.com/jshttp/mime-db) - MIT
+- [minimizer-webpack-plugin@5.10.0](https://github.com/webpack/minimizer-webpack-plugin) - MIT
+- [monaco-editor-webpack-plugin@7.1.1](https://github.com/microsoft/monaco-editor) - MIT
+- [monaco-editor@0.52.2](https://github.com/microsoft/monaco-editor) - MIT
 - [ms@2.1.3](https://github.com/vercel/ms) - MIT
 - [mustache@4.2.0](https://github.com/janl/mustache.js) - MIT
 - [neo-async@2.6.2](https://github.com/suguru03/neo-async) - MIT
 - [node-fetch@2.7.0](https://github.com/bitinn/node-fetch) - MIT
-- [node-releases@2.0.19](https://github.com/chicoxyzzy/node-releases) - MIT
+- [node-releases@2.0.55](https://github.com/chicoxyzzy/node-releases) - MIT
 - [object-assign@4.1.1](https://github.com/sindresorhus/object-assign) - MIT
+- [packageurl-js@2.0.1](https://github.com/package-url/packageurl-js) - MIT
+- [parent-module@1.0.1](https://github.com/sindresorhus/parent-module) - MIT
+- [parse-entities@4.0.2](https://github.com/wooorm/parse-entities) - MIT
+- [parse-json@5.2.0](https://github.com/sindresorhus/parse-json) - MIT
+- [path-parse@1.0.7](https://github.com/jbgutierrez/path-parse) - MIT
+- [path-type@4.0.0](https://github.com/sindresorhus/path-type) - MIT
 - [picocolors@1.1.1](https://github.com/alexeyraspopov/picocolors) - ISC
-- [popper.js@1.16.1-lts](https://github.com/FezVrasta/popper.js) - MIT
 - [prop-types@15.8.1](https://github.com/facebook/prop-types) - MIT
-- [property-information@6.5.0](https://github.com/wooorm/property-information) - MIT
-- [randombytes@2.1.0](https://github.com/crypto-browserify/randombytes) - MIT
-- [react-clientside-effect@1.2.7](https://github.com/thekashey/react-clientside-effect) - MIT
-- [react-dom@17.0.2](https://github.com/facebook/react) - MIT
-- [react-error-boundary@4.1.2](https://github.com/bvaughn/react-error-boundary) - MIT
-- [react-focus-lock@2.5.2](https://github.com/theKashey/react-focus-lock) - MIT
-- [react-hot-keys@2.7.3](https://github.com/jaywcjlove/react-hotkeys) - MIT
-- [react-i18next@15.4.1](https://github.com/i18next/react-i18next) - MIT
+- [property-information@7.2.0](https://github.com/wooorm/property-information) - MIT
+- [react-dom@19.3.0](https://github.com/react/react) - MIT
+- [react-error-boundary@6.1.5](https://github.com/bvaughn/react-error-boundary) - MIT
+- [react-hot-keys@3.0.0](https://github.com/jaywcjlove/react-hotkeys) - MIT
+- [react-i18next@17.0.13](https://github.com/i18next/react-i18next) - MIT
 - [react-is@16.13.1](https://github.com/facebook/react) - MIT
-- [react-is@17.0.2](https://github.com/facebook/react) - MIT
-- [react-is@18.3.1](https://github.com/facebook/react) - MIT
-- [react-markdown@8.0.7](https://github.com/remarkjs/react-markdown) - MIT
-- [react-monaco-editor@0.55.0](https://github.com/react-monaco-editor/react-monaco-editor) - MIT
-- [react-remove-scroll-bar@2.3.8](https://github.com/theKashey/react-remove-scroll-bar) - MIT
-- [react-remove-scroll@2.4.3](https://github.com/theKashey/react-remove-scroll) - MIT
-- [react-style-singleton@2.2.3](https://github.com/theKashey/react-style-singleton) - MIT
+- [react-is@19.2.8](https://github.com/react/react) - MIT
+- [react-markdown@10.1.0](https://github.com/remarkjs/react-markdown) - MIT
+- [react-monaco-editor@0.59.0](https://github.com/react-monaco-editor/react-monaco-editor) - MIT
 - [react-transition-group@4.4.5](https://github.com/reactjs/react-transition-group) - BSD-3-Clause
-- [react@17.0.2](https://github.com/facebook/react) - MIT
-- [regenerator-runtime@0.14.1](https://github.com/facebook/regenerator.git#main) - MIT
-- [remark-parse@10.0.2](https://github.com/remarkjs/remark.git#main) - MIT
-- [remark-rehype@10.1.0](https://github.com/remarkjs/remark-rehype) - MIT
+- [react@19.3.0](https://github.com/react/react) - MIT
+- [remark-parse@11.0.0](https://github.com/remarkjs/remark.git#main) - MIT
+- [remark-rehype@11.1.2](https://github.com/remarkjs/remark-rehype) - MIT
 - [remove-accents@0.5.0](https://github.com/tyxla/remove-accents) - MIT
 - [require-from-string@2.0.2](https://github.com/floatdrop/require-from-string) - MIT
-- [sade@1.8.1](https://github.com/lukeed/sade) - MIT
-- [safe-buffer@5.2.1](https://github.com/feross/safe-buffer) - MIT
-- [scheduler@0.20.2](https://github.com/facebook/react) - MIT
-- [schema-utils@4.3.0](https://github.com/webpack/schema-utils) - MIT
-- [semver@7.7.1](https://github.com/npm/node-semver) - ISC
-- [serialize-javascript@6.0.2](https://github.com/yahoo/serialize-javascript) - BSD-3-Clause
+- [resolve-from@4.0.0](https://github.com/sindresorhus/resolve-from) - MIT
+- [resolve@1.22.12](https://github.com/browserify/resolve) - MIT
+- [scheduler@0.28.0](https://github.com/react/react) - MIT
+- [schema-utils@4.3.3](https://github.com/webpack/schema-utils) - MIT
+- [semver@7.8.5](https://github.com/npm/node-semver) - ISC
 - [shallowequal@1.1.0](https://github.com/dashed/shallowequal) - MIT
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [source-map@0.5.7](https://github.com/mozilla/source-map) - BSD-3-Clause
 - [source-map@0.6.1](https://github.com/mozilla/source-map) - BSD-3-Clause
 - [space-separated-tokens@2.0.2](https://github.com/wooorm/space-separated-tokens) - MIT
-- [style-to-object@0.4.4](https://github.com/remarkablemark/style-to-object) - MIT
+- [stringify-entities@4.0.4](https://github.com/wooorm/stringify-entities) - MIT
+- [style-to-js@1.1.21](https://github.com/remarkablemark/style-to-js) - MIT
+- [style-to-object@1.0.14](https://github.com/remarkablemark/style-to-object) - MIT
+- [stylis@4.2.0](https://github.com/thysultan/stylis.js) - MIT
 - [supports-color@8.1.1](https://github.com/chalk/supports-color) - MIT
-- [tabbable@5.3.3](https://github.com/focus-trap/tabbable) - MIT
-- [tapable@2.2.1](https://github.com/webpack/tapable) - MIT
-- [terser-webpack-plugin@5.3.14](https://github.com/webpack-contrib/terser-webpack-plugin) - MIT
-- [terser@5.39.0](https://github.com/terser/terser) - BSD-2-Clause
-- [tiny-invariant@1.3.3](https://github.com/alexreardon/tiny-invariant) - MIT
-- [tiny-warning@1.0.3](https://github.com/alexreardon/tiny-warning) - MIT
+- [supports-preserve-symlinks-flag@1.0.0](https://github.com/inspect-js/node-supports-preserve-symlinks-flag) - MIT
+- [tapable@2.3.3](https://github.com/webpack/tapable) - MIT
+- [temporal-polyfill@0.3.2](https://github.com/fullcalendar/temporal-polyfill) - MIT
+- [temporal-spec@0.3.1](https://github.com/fullcalendar/temporal-polyfill) - ISC
+- [terser@5.51.2](https://github.com/terser/terser) - BSD-2-Clause
 - [tr46@0.0.3](https://github.com/Sebmaster/tr46.js) - MIT
 - [trim-lines@3.0.1](https://github.com/wooorm/trim-lines) - MIT
 - [trough@2.2.0](https://github.com/wooorm/trough) - MIT
-- [tslib@1.14.1](https://github.com/Microsoft/tslib) - 0BSD
-- [tslib@2.8.1](https://github.com/Microsoft/tslib) - 0BSD
-- [undici-types@5.26.5](https://github.com/nodejs/undici) - MIT
-- [unified@10.1.2](https://github.com/unifiedjs/unified) - MIT
-- [unist-util-generated@2.0.1](https://github.com/syntax-tree/unist-util-generated) - MIT
-- [unist-util-is@5.2.1](https://github.com/syntax-tree/unist-util-is) - MIT
-- [unist-util-position@4.0.4](https://github.com/syntax-tree/unist-util-position) - MIT
-- [unist-util-stringify-position@3.0.3](https://github.com/syntax-tree/unist-util-stringify-position) - MIT
-- [unist-util-visit-parents@5.1.3](https://github.com/syntax-tree/unist-util-visit-parents) - MIT
-- [unist-util-visit@4.1.2](https://github.com/syntax-tree/unist-util-visit) - MIT
-- [update-browserslist-db@1.1.3](https://github.com/browserslist/update-db) - MIT
-- [use-callback-ref@1.3.3](https://github.com/theKashey/use-callback-ref) - MIT
-- [use-sidecar@1.1.3](https://github.com/theKashey/use-sidecar) - MIT
-- [uvu@0.5.6](https://github.com/lukeed/uvu) - MIT
-- [vfile-message@3.1.4](https://github.com/vfile/vfile-message) - MIT
-- [vfile@5.3.7](https://github.com/vfile/vfile) - MIT
-- [void-elements@3.1.0](https://github.com/pugjs/void-elements) - MIT
-- [watchpack@2.4.2](https://github.com/webpack/watchpack) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [undici-types@7.18.2](https://github.com/nodejs/undici) - MIT
+- [undici@6.28.1](https://github.com/nodejs/undici) - MIT
+- [unified@11.0.5](https://github.com/unifiedjs/unified) - MIT
+- [unist-util-is@6.0.1](https://github.com/syntax-tree/unist-util-is) - MIT
+- [unist-util-position@5.0.0](https://github.com/syntax-tree/unist-util-position) - MIT
+- [unist-util-stringify-position@4.0.0](https://github.com/syntax-tree/unist-util-stringify-position) - MIT
+- [unist-util-visit-parents@6.0.2](https://github.com/syntax-tree/unist-util-visit-parents) - MIT
+- [unist-util-visit@5.1.0](https://github.com/syntax-tree/unist-util-visit) - MIT
+- [update-browserslist-db@1.3.2](https://github.com/browserslist/update-db) - MIT
+- [use-sync-external-store@1.6.0](https://github.com/facebook/react) - MIT
+- [vfile-message@4.0.3](https://github.com/vfile/vfile-message) - MIT
+- [vfile@6.0.3](https://github.com/vfile/vfile) - MIT
+- [watchpack@2.5.2](https://github.com/webpack/watchpack) - MIT
 - [webidl-conversions@3.0.1](https://github.com/jsdom/webidl-conversions) - BSD-2-Clause
-- [webpack-sources@3.2.3](https://github.com/webpack/webpack-sources) - MIT
-- [webpack@5.99.5](https://github.com/webpack/webpack) - MIT
+- [webpack-sources@3.5.1](https://github.com/webpack/webpack-sources) - MIT
+- [webpack@5.110.3](https://github.com/webpack/webpack) - MIT
 - [whatwg-url@5.0.0](https://github.com/jsdom/whatwg-url) - MIT
+- [yaml@1.10.3](https://github.com/eemeli/yaml) - ISC
+- [zwitch@2.0.4](https://github.com/wooorm/zwitch) - MIT
 
 ### [@webassemblyjs/leb128](https://github.com/xtuc/webassemblyjs)
 
