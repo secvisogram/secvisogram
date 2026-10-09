@@ -1,4 +1,6 @@
-import { CVSS40 } from '@pandatix/js-cvss'
+import cvssCalculator from 'ae-cvss-calculator'
+
+const { Cvss4P0 } = cvssCalculator
 
 // list of all metrics in cvss40 mainly from  https://github.com/RedHatProductSecurity/cvss-v4-calculator/blob/main/metrics.json
 export const flatMetrics = [
@@ -959,14 +961,14 @@ function calculateName2MetricMap() {
 
 /**
  * calculate the score and severity for the given metricTypeId
- * @param {CVSS40} cvss40
+ * @param {Cvss4P0} cvss40
  * @return [{{score: number, severity: string}}]
  */
 function calculateScoreObject(cvss40) {
-  const score = cvss40.Score()
+  const score = cvss40.calculateScores().overall
   return {
     score,
-    severity: CVSS40.Rating(score),
+    severity: score === 0 ? 'NONE' : score < 4 ? 'LOW' : score < 7 ? 'MEDIUM' : score < 9 ? 'HIGH' : 'CRITICAL',
   }
 }
 
@@ -975,7 +977,7 @@ function calculateScoreObject(cvss40) {
  * @return [{{score: number, severity: string, metricTypeId: string }}]
  */
 export function calculateCvss4_0_Score(vectorString) {
-  return calculateScoreObject(new CVSS40(vectorString))
+  return calculateScoreObject(new Cvss4P0(vectorString))
 }
 
 /**
@@ -1001,7 +1003,7 @@ export class Cvss4JsonWrapper {
     this.#data = data
     this.#data['version'] = '4.0'
     const calculation = this.#createCvssCalculationValuesFromData()
-    this.#data.vectorString = calculation.Vector()
+    this.#data.vectorString = calculation.toString()
   }
 
   /**
@@ -1011,7 +1013,7 @@ export class Cvss4JsonWrapper {
   set(property, value) {
     this.#data[property] = value
     const calculation = this.#createCvssCalculationValuesFromData()
-    this.#data.vectorString = calculation.Vector()
+    this.#data.vectorString = calculation.toString()
     return this
   }
 
@@ -1036,17 +1038,17 @@ export class Cvss4JsonWrapper {
   }
 
   /**
-   * create a CVSS40 object form the existing _data
-   * @returns {CVSS40}
+   * create a Cvss4P0 object from the existing _data
+   * @returns {Cvss4P0}
    */
   #createCvssCalculationValuesFromData() {
-    const calculation = new CVSS40()
+    const calculation = new Cvss4P0()
     for (const [key, value] of Object.entries(this.#data)) {
       const metric = name2Metric.get(key)
       if (metric && value) {
         const metricOptionValue = metric.optionsByValue.get(String(value))
         if (metricOptionValue) {
-          calculation.Set(metric.metricShort, metricOptionValue)
+          calculation.applyComponentString(metric.metricShort, metricOptionValue)
         }
       }
     }
@@ -1065,11 +1067,11 @@ export class Cvss4JsonWrapper {
   updateFromVectorString(vectorString) {
     try {
       this.#data.vectorString = vectorString
-      const calculator = new CVSS40(vectorString)
+      const calculator = new Cvss4P0(vectorString)
       flatMetrics.forEach((metric) => {
         let optionsKey
         try {
-          optionsKey = calculator.Get(metric.metricShort)
+          optionsKey = calculator.getComponentByString(metric.metricShort).shortName
         } catch {
           optionsKey = undefined
         }
