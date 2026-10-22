@@ -1,6 +1,6 @@
 {
   "name": "@secvisogram/editor",
-  "version": "0.1.0-demo.1",
+  "version": "0.1.0-demo.2",
   "type": "module",
   "description": "An embeddable <secvisogram-editor> custom element for editing CSAF security advisories, packaged as a static asset bundle.",
   "keywords": [
