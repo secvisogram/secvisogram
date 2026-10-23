@@ -18,6 +18,7 @@ export default /**
   defaultSource = 'CSAFJSON',
   uiSchemaVersion,
   advisoryState,
+  host,
   documentIsValid,
   formValues,
   originalValues,
@@ -49,8 +50,9 @@ export default /**
       : HTMLTemplate2_0({ document: parsedDoc })
   }
 
-  const exportText =
-    advisoryState?.type === 'NEW_ADVISORY'
+  const exportText = host
+    ? ''
+    : advisoryState?.type === 'NEW_ADVISORY'
       ? t('exportModal.unsavedFileExportOnlyLocal')
       : formValues !== originalValues
         ? t('exportModal.unsavedChangesSelectExportLocation')
