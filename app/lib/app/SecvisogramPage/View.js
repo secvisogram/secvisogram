@@ -549,6 +549,7 @@ function View({
         defaultSource={preselected}
         originalValues={originalValues}
         advisoryState={advisoryState}
+        host={host}
         uiSchemaVersion={uiSchemaVersion}
         formValues={formValues}
         documentIsValid={!errors.length}
@@ -749,7 +750,7 @@ function View({
     } else if (keyName === appConfig.keyBindings.keyNew) {
       // ctrl+N could not be overwritten
       //https://stackoverflow.com/questions/38838302/any-way-to-override-ctrln-to-open-a-new-window-in-chrome
-      onNewHandler()
+      if (!host) onNewHandler()
     } else if (keyName === appConfig.keyBindings.keyExportStripped) {
       openExportDialogPreselected('CSAFJSONSTRIPPED')
     } else if (keyName === appConfig.keyBindings.keyExportNotStripped) {
@@ -1111,11 +1112,12 @@ function View({
                 {activeTab !== 'DOCUMENTS' && (
                   <div className="col-span-2 bg-slate-600 flex items-center justify-between">
                     <div className="pl-5">
-                      {(appConfig.loginAvailable &&
+                      {!host &&
+                      ((appConfig.loginAvailable &&
                         userInfo?.groups &&
                         canCreateDocuments(userInfo.groups)) ||
-                      (appConfig.loginAvailable && !userInfo) ||
-                      !appConfig.loginAvailable ? (
+                        (appConfig.loginAvailable && !userInfo) ||
+                        !appConfig.loginAvailable) ? (
                         <button
                           data-testid="new_document_button"
                           className="text-gray-300 hover:bg-slate-700 hover:text-white text-sm font-bold p-2 h-auto"
