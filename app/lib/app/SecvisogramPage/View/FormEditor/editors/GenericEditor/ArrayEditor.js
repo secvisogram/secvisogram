@@ -15,6 +15,7 @@ import { getErrorTextColor } from '../GenericEditor.js'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import AppConfigContext from '../../../../../shared/context/AppConfigContext.js'
+import EditorModeContext from '../../../../../shared/context/EditorModeContext.js'
 import UserInfoContext from '../../../../../shared/context/UserInfoContext.js'
 import { set } from 'lodash/fp.js'
 import pruneEmpty from '../../../../../shared/pruneEmpty.js'
@@ -133,6 +134,7 @@ function Menu({ instancePath, level = 1, ...props }) {
   const { getChildItem } = useChildItem()
 
   const { loginAvailable } = React.useContext(AppConfigContext)
+  const { embedded } = React.useContext(EditorModeContext)
   const userInfo = React.useContext(UserInfoContext)
 
   const { t } = useTranslation()
@@ -165,9 +167,10 @@ function Menu({ instancePath, level = 1, ...props }) {
   }
 
   const deletable = !(
-    loginAvailable &&
-    userInfo &&
-    property.metaData?.uiType === 'ARRAY_REVISION_HISTORY'
+    embedded ||
+    (loginAvailable &&
+      userInfo &&
+      property.metaData?.uiType === 'ARRAY_REVISION_HISTORY')
   )
 
   return (
