@@ -80,7 +80,7 @@ test.describe('<secvisogram-editor> contract', () => {
   }) => {
     const { editor, externalRequests } = await openEditor(page)
 
-    await expect(editor.getByTestId('new_document_button')).toBeVisible()
+    await expect(editor.getByTestId('new_export_document_button')).toBeVisible()
     await expect(editor.getByTestId('save_button')).toHaveCount(0)
     await expect(editor.getByTestId('tab_button-DOCUMENTS')).toHaveCount(0)
     expect(externalRequests).toEqual([])
@@ -126,30 +126,6 @@ test.describe('<secvisogram-editor> contract', () => {
       .toMatchObject({
         detail: { doc: { document: { title: 'Edited advisory' } } },
       })
-  })
-
-  test('emits csaf-change when a local template is applied', async ({
-    page,
-  }) => {
-    const { editor } = await openEditor(page)
-    await writeDoc(editor, csafDocument('2.0', 'Hosted advisory'))
-    await expect.poll(() => readDoc(editor)).toBeTruthy()
-
-    await editor.getByTestId('new_document_button').click()
-    await editor.getByTestId('new_document-template_button').check()
-    await editor
-      .getByTestId('new_document-templates-select')
-      .selectOption({ label: 'Minimal' })
-    await editor.getByTestId('new_document-create_document_button').click()
-    // The current document has not been edited, so no confirmation is needed.
-
-    await expect
-      .poll(async () => (await eventsOf(page, 'csaf-change')).length)
-      .toBeGreaterThan(0)
-    const [change] = await eventsOf(page, 'csaf-change')
-    expect(change.detail.doc.document.csaf_version).toEqual('2.0')
-    expect(change.detail.doc.document.title).not.toEqual('Hosted advisory')
-    expect(await readDoc(editor)).toEqual(change.detail.doc)
   })
 
   test('asks for confirmation before loading a CSAF 2.1 document', async ({
@@ -199,6 +175,90 @@ test.describe('<secvisogram-editor> contract', () => {
     expect(localeRequests).toContain(`${basePath}/locales/de/translation.json`)
   })
 
+  test.describe('embedded restrictions', () => {
+    test('locks the tracking fields', async ({ page }) => {
+      const { editor } = await openEditor(page)
+      await writeDoc(editor, csafDocument('2.0', 'Hosted advisory'))
+      await editor.getByTestId('layer-button-optional').click()
+
+      await editor.getByTestId('menu_entry-/document/tracking').click()
+      await editor
+        .getByTestId('menu_entry-/document/tracking/generator')
+        .click()
+      await editor
+        .getByTestId('menu_entry-/document/tracking/generator/engine')
+        .click()
+      await expect(
+        editor
+          .getByTestId('attribute-document-tracking-generator-engine-name')
+          .locator('input'),
+      ).toBeDisabled()
+    })
+
+    test('offers no way to add or delete revision-history items', async ({
+      page,
+    }) => {
+      const { editor } = await openEditor(page)
+      await writeDoc(editor, {
+        document: {
+          category: 'csaf_base',
+          csaf_version: '2.0',
+          title: 'Hosted advisory',
+          tracking: {
+            revision_history: [
+              {
+                date: '2024-01-01T00:00:00.000Z',
+                number: '1',
+                summary: 'Initial',
+              },
+            ],
+          },
+        },
+      })
+      await editor.getByTestId('layer-button-optional').click()
+      await editor.getByTestId('menu_entry-/document/tracking').click()
+
+      await expect(
+        editor.getByTestId('menu_entry-/document/tracking/revision_history'),
+      ).toBeVisible()
+      await expect(
+        editor.getByTestId(
+          'menu_entry-/document/tracking/revision_history-hover_menu_button',
+        ),
+      ).toHaveCount(0)
+      await editor
+        .getByTestId('menu_entry-/document/tracking/revision_history')
+        .click()
+      await expect(
+        editor.getByTestId('menu_entry-/document/tracking/revision_history/0'),
+      ).toBeVisible()
+      await expect(
+        editor.getByTestId('document-tracking-revision_history-0-deleteButton'),
+      ).toHaveCount(0)
+    })
+
+    test('does not offer the unsaved file text in the export dialog', async ({
+      page,
+    }) => {
+      const { editor } = await openEditor(page)
+      await editor.getByTestId('new_export_document_button').click()
+
+      await expect(editor.getByTestId('export_document_dialog')).toBeVisible()
+      await expect(
+        editor.getByText(translation.exportModal.unsavedFileExportOnlyLocal),
+      ).toHaveCount(0)
+    })
+
+    test('does not offer the New button or its hotkey', async ({ page }) => {
+      const { editor } = await openEditor(page)
+      await expect(editor.getByTestId('new_document_button')).toHaveCount(0)
+
+      await page.keyboard.press('Control+o')
+
+      await expect(editor.getByTestId('new_document_dialog')).toHaveCount(0)
+    })
+  })
+
   test.describe('validation', () => {
     const validatorUrl = 'https://validator.example.test'
 
@@ -223,7 +283,9 @@ test.describe('<secvisogram-editor> contract', () => {
       page,
     }) => {
       const { editor, externalRequests } = await openEditor(page)
-      await expect(editor.getByTestId('new_document_button')).toBeVisible()
+      await expect(
+        editor.getByTestId('new_export_document_button'),
+      ).toBeVisible()
       await expect(editor.getByTestId('validate_button')).toHaveCount(0)
       expect(externalRequests).toEqual([])
 
