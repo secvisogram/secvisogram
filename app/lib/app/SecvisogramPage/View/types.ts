@@ -1,4 +1,5 @@
 import React from 'react'
+import type { EditorHost } from '../../../editorHost.js'
 import { UiSchemaVersion } from '../../../uiSchemas.js'
 import {
   Advisory,
@@ -6,7 +7,6 @@ import {
   TypedValidationError,
 } from '../shared/types.js'
 import CsafTab from './CsafTab.js'
-import PreviewTab from './PreviewTab.js'
 
 export interface Props {
   uiSchemaVersion: UiSchemaVersion
@@ -16,6 +16,8 @@ export interface Props {
   data: {
     doc: unknown
   } | null
+  /** Set if the editor is embedded in another page. */
+  host?: EditorHost | undefined
   defaultAdvisoryState?: AdvisoryState | null
   activeTab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS'
   alert: {
@@ -27,7 +29,6 @@ export interface Props {
     onCancel(): void
   } | null
   stripResult: React.ComponentProps<typeof CsafTab>['stripResult']
-  previewResult: React.ComponentProps<typeof PreviewTab>['previewResult']
   pendingBeta21Doc: { document?: { csaf_version?: string } } | null
   DocumentsTab: React.ComponentType<{
     onOpenAdvisory(
@@ -55,7 +56,10 @@ export interface Props {
     tab: 'EDITOR' | 'SOURCE' | 'PREVIEW' | 'CSAF-JSON' | 'DOCUMENTS',
     document: {},
   ): void
-  onValidate(document: {}): void
+  onValidate(document: {}): Promise<void | {
+    isValid: boolean
+    errors: TypedValidationError[]
+  }>
   onServiceValidate(params: { validatorUrl: string; csaf: {} }): Promise<{
     isValid: boolean
     tests: Array<{
@@ -72,8 +76,6 @@ export interface Props {
     legacyVersion: string
   }): Promise<{ id: string; revision: string }>
   onStrip(document: {}): void
-  onPreview(document: {}): void
-  onPrepareDocumentForTemplate(document: {}): Promise<{ document: {} }>
   onExportCSAF(doc: {}): void
   onExportHTML(html: string, doc: {}): void
   onLockTab(): void

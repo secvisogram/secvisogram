@@ -1,3 +1,4 @@
+import { remoteValidationErrors } from '#lib/editorHost.js'
 import { uiSchemas } from '#lib/uiSchemas.js'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -47,12 +48,11 @@ function View({
   activeTab,
   isTabLocked,
   data,
+  host,
   defaultAdvisoryState = null,
   stripResult,
-  previewResult,
   DocumentsTab,
   generatorEngineData,
-  onPrepareDocumentForTemplate,
   onLoadAdvisory,
   onUpdateAdvisory,
   onDownload,
@@ -63,7 +63,6 @@ function View({
   onGetDocMax,
   onCreateAdvisory,
   onStrip,
-  onPreview,
   onExportCSAF,
   onExportHTML,
   onLockTab,
@@ -87,7 +86,7 @@ function View({
   const sortButtonRef = React.useRef(null)
 
   const [newDocumentDialog, setNewDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const newDocumentDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
@@ -103,11 +102,11 @@ function View({
   }, [newDocumentDialog])
 
   const [newExportDocumentDialog, setNewExportDocumentDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
 
   const [versionSummaryDialog, setVersionSummaryDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const versionSummaryDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
@@ -120,38 +119,40 @@ function View({
   }, [versionSummaryDialog])
 
   const [aboutDialog, setAboutDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+    /** @type {React.JSX.Element | null} */ (null),
   )
 
-  const [betaVersionDialog, setBetaVersionDialog] = React.useState(
-    /** @type {JSX.Element | null} */ (null),
+  const [manualBetaVersionDialog, setBetaVersionDialog] = React.useState(
+    /** @type {React.JSX.Element | null} */ (null),
   )
   const betaVersionDialogRef = React.useRef(
     /** @type {HTMLDialogElement | null} */ (null),
   )
+
+  /**
+   * Shown either when the user manually switches to the csaf 2.1 ui version
+   * or when a pending file-open requires confirmation. Derived directly from
+   * `pendingBeta21Doc` instead of mirroring it into state, so that closing
+   * it (by clearing `pendingBeta21Doc` upstream) doesn't require a separate
+   * effect-driven state update.
+   */
+  const betaVersionDialog = pendingBeta21Doc ? (
+    <BetaVersionConfirmationDialog
+      ref={betaVersionDialogRef}
+      context="file-open"
+      onConfirm={onConfirmBeta21Open}
+      onClose={onCancelBeta21Open}
+    />
+  ) : (
+    manualBetaVersionDialog
+  )
+
+  const betaVersionDialogIsOpen = Boolean(betaVersionDialog)
   React.useEffect(() => {
-    if (betaVersionDialog) {
+    if (betaVersionDialogIsOpen) {
       betaVersionDialogRef.current?.showModal()
     }
-  }, [betaVersionDialog])
-
-  React.useEffect(() => {
-    if (!pendingBeta21Doc) return
-    setBetaVersionDialog(
-      <BetaVersionConfirmationDialog
-        ref={betaVersionDialogRef}
-        context="file-open"
-        onConfirm={() => {
-          onConfirmBeta21Open()
-          setBetaVersionDialog(null)
-        }}
-        onClose={() => {
-          onCancelBeta21Open()
-          setBetaVersionDialog(null)
-        }}
-      />,
-    )
-  }, [pendingBeta21Doc, onConfirmBeta21Open, onCancelBeta21Open])
+  }, [betaVersionDialogIsOpen])
 
   const [advisoryState, setAdvisoryState] = React.useState(
     /** @type {import('./shared/types.js').AdvisoryState | null} */ (
@@ -161,20 +162,31 @@ function View({
       }
     ),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAdvisoryState((state) =>
-      data
-        ? { type: 'NEW_ADVISORY', csaf: /** @type {{}} */ (data.doc) }
-        : state,
-    )
-  }, [data])
+  /**
+   * `data` changes whenever a new document is loaded from outside this
+   * component (e.g. from a file). When that happens the current
+   * `advisoryState` is superseded by a fresh "new advisory" wrapping the
+   * loaded document.
+   */
+  const [prevData, setPrevData] = React.useState(data)
+  if (data !== prevData) {
+    setPrevData(data)
+    if (data) {
+      setAdvisoryState({
+        type: 'NEW_ADVISORY',
+        csaf: /** @type {{}} */ (data.doc),
+      })
+    }
+  }
 
-  const [isLoading, setLoading] = React.useState(props.isLoading)
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoading(props.isLoading)
-  }, [props.isLoading])
+  /**
+   * Local loading-state for actions performed entirely inside this
+   * component (e.g. validating, creating a new document). Combined with
+   * `props.isLoading` below rather than mirrored into state, since we don't
+   * want to reset it whenever the upstream loading-prop changes.
+   */
+  const [isLocallyLoading, setLoading] = React.useState(false)
+  const isLoading = props.isLoading || isLocallyLoading
 
   // TEMPORARY FEATURE, see useDirectAdvisoryLinkRedirect.js for removal notes.
   useDirectAdvisoryLinkRedirect({
@@ -187,25 +199,32 @@ function View({
 
   const [isSaving, setSaving] = React.useState(false)
 
-  const [errors, setErrors] = React.useState(
-    /** @type {Array<import('./shared/types').TypedValidationError>} */ (
-      props.errors.map((e) => ({ ...e, type: 'error' }))
+  /**
+   * `doValidate` below can produce a manual, more up-to-date validation
+   * result. It is shown until the next incremental validation result
+   * (`props.errors`) arrives, at which point it takes precedence again.
+   */
+  const [manualErrors, setManualErrors] = React.useState(
+    /** @type {Array<import('./shared/types').TypedValidationError> | null} */ (
+      null
     ),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setErrors(props.errors)
-  }, [props.errors])
+  const [prevPropsErrors, setPrevPropsErrors] = React.useState(props.errors)
+  if (props.errors !== prevPropsErrors) {
+    setPrevPropsErrors(props.errors)
+    setManualErrors(null)
+  }
 
-  const [alert, setAlert] = React.useState(
-    /** @type {JSX.Element | null} */ (
-      props.alert ? <Alert {...props.alert} /> : null
-    ),
+  /**
+   * `confirmDocumentReplacement` below can show its own confirmation dialog
+   * (e.g. "discard changes?"), unrelated to `props.alert`. It takes
+   * precedence for as long as it is shown; otherwise the alert is derived
+   * directly from `props.alert`.
+   */
+  const [manualAlert, setAlert] = React.useState(
+    /** @type {React.JSX.Element | null} */ (null),
   )
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAlert(props.alert ? <Alert {...props.alert} /> : null)
-  }, [props.alert])
+  const alert = manualAlert ?? (props.alert ? <Alert {...props.alert} /> : null)
 
   /**
    * Initial values for the editors. Can be used to detect changes of the
@@ -234,26 +253,50 @@ function View({
   )
 
   /**
+   * An embedded editor merges the validator service's result into the client
+   * validation result, for as long as `formValues.doc` is the validated
+   * document.
+   */
+  const [remoteResult, setRemoteResult] = React.useState(
+    /** @type {{ doc: {}; errors: Array<import('./shared/types').TypedValidationError> } | null} */ (
+      null
+    ),
+  )
+  const embeddedErrors = React.useMemo(
+    () =>
+      remoteResult?.doc === formValues.doc
+        ? [...props.errors, ...remoteResult.errors]
+        : props.errors,
+    [props.errors, remoteResult, formValues.doc],
+  )
+  const errors = host ? embeddedErrors : (manualErrors ?? props.errors)
+
+  /**
    * Enables debounced validation.
    */
   const debouncedChangedDoc = useDebounce(formValues.doc, 300)
-
-  const [toast, setToast] = React.useState(applicationError)
 
   const backendNotAvailableTryAgain = React.useMemo(
     () => t('alert.backendNotAvailableTryAgain'),
     [],
   )
-  React.useEffect(() => {
-    if (applicationError instanceof BackendUnavailableError) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setToast({
-        message: backendNotAvailableTryAgain,
-      })
-    } else {
-      setToast(applicationError)
-    }
-  }, [applicationError, backendNotAvailableTryAgain])
+  const toastFromApplicationError =
+    applicationError instanceof BackendUnavailableError
+      ? { message: backendNotAvailableTryAgain }
+      : applicationError
+
+  const [toast, setToast] = React.useState(toastFromApplicationError)
+  /**
+   * Whenever a (new) application error comes in it takes precedence over any
+   * previously shown or dismissed toast (e.g. one set manually by
+   * `doValidate`).
+   */
+  const [prevApplicationError, setPrevApplicationError] =
+    React.useState(applicationError)
+  if (applicationError !== prevApplicationError) {
+    setPrevApplicationError(applicationError)
+    setToast(toastFromApplicationError)
+  }
   React.useEffect(() => {
     /** @type {ReturnType<typeof setTimeout> | null} */
     let timeout = null
@@ -270,12 +313,15 @@ function View({
   }, [toast])
 
   async function doValidate() {
+    if (host && !appConfig.validatorUrl) return
+    const validatedDoc = formValues.doc
     setLoading(true)
     onServiceValidate({
       validatorUrl: appConfig.validatorUrl,
-      csaf: formValues.doc,
+      csaf: validatedDoc,
     })
       .then((json) => {
+        const validationErrors = remoteValidationErrors(json)
         if (json.isValid) {
           setToast({
             message: t('alert.theDocumentIsValid'),
@@ -285,26 +331,14 @@ function View({
           setToast({
             message: t('alert.theDocumentIsInvalid'),
           })
-          const errors =
-            /** @type {Array<import('./shared/types').TypedValidationError>} */ (
-              json.tests.flatMap((t) =>
-                t.errors
-                  .map((e) => ({ ...e, type: 'error' }))
-                  .concat(
-                    t.warnings.map((w) => ({
-                      ...w,
-                      type: 'warning',
-                    })),
-                  )
-                  .concat(
-                    t.infos.map((i) => ({
-                      ...i,
-                      type: 'info',
-                    })),
-                  ),
-              )
-            )
-          setErrors(errors)
+          setManualErrors(validationErrors)
+        }
+        if (host) {
+          setRemoteResult({ doc: validatedDoc, errors: validationErrors })
+          host.remoteValidated(validatedDoc, {
+            errors: validationErrors,
+            valid: json.isValid,
+          })
         }
       })
       .catch(handleError)
@@ -314,6 +348,9 @@ function View({
   }
 
   const onSaveHandler = () => {
+    // Persisting documents is up to the embedding page.
+    if (host) return
+
     if (advisoryState?.type === 'NEW_ADVISORY') {
       setVersionSummaryDialog(
         <VersionSummaryDialog
@@ -515,7 +552,6 @@ function View({
         uiSchemaVersion={uiSchemaVersion}
         formValues={formValues}
         documentIsValid={!errors.length}
-        onPrepareDocumentForTemplate={onPrepareDocumentForTemplate}
         onDownload={onDownload}
         onExportCSAF={onExportCSAF}
         onExportHTML={onExportHTML}
@@ -560,10 +596,6 @@ function View({
   const onStripCallback = React.useCallback(() => {
     onStrip(formValues.doc)
   }, [formValues.doc, onStrip])
-
-  const onPreviewCallback = React.useCallback(() => {
-    onPreview(formValues.doc)
-  }, [formValues.doc, onPreview])
 
   /**
    * @param {() => void} callback
@@ -624,11 +656,25 @@ function View({
   }, [originalValues, formValues])
 
   /**
+   * Reports the document the editor holds to the embedding page.
+   */
+  React.useEffect(() => {
+    host?.documentChanged(formValues.doc)
+  }, [host, formValues.doc])
+
+  /**
    * Triggers debounced validation.
    */
   React.useEffect(() => {
-    onValidate(debouncedChangedDoc)
-  }, [debouncedChangedDoc, onValidate])
+    Promise.resolve(onValidate(debouncedChangedDoc)).then((result) => {
+      if (result) {
+        host?.clientValidated(debouncedChangedDoc, {
+          errors: result.errors,
+          valid: result.isValid,
+        })
+      }
+    })
+  }, [debouncedChangedDoc, onValidate, host])
 
   const tabButtonProps = React.useCallback(
     (/** @type {typeof activeTab} */ tab) => {
@@ -877,7 +923,7 @@ function View({
               }}
             >
               <div
-                className="mx-auto w-full h-screen grid grid-cols-[1fr_auto] grid-rows-[53px_36px_minmax(0,1fr)]"
+                className="mx-auto w-full h-full grid grid-cols-[1fr_auto] grid-rows-[53px_36px_minmax(0,1fr)]"
                 tabIndex={0}
               >
                 <div className="col-span-2 flex justify-between bg-slate-700">
@@ -1110,7 +1156,9 @@ function View({
                           {t('menu.sortDocument')}
                         </button>
                       )}
-                      {appConfig.loginAvailable && userInfo && (
+                      {(host
+                        ? Boolean(appConfig.validatorUrl)
+                        : appConfig.loginAvailable && userInfo) && (
                         <button
                           data-testid="validate_button"
                           type="button"
@@ -1224,8 +1272,7 @@ function View({
                     />
                   ) : activeTab === 'PREVIEW' ? (
                     <PreviewTab
-                      previewResult={previewResult}
-                      onPreview={onPreviewCallback}
+                      doc={formValues.doc}
                       schemaVersion={uiSchemaVersion}
                     />
                   ) : activeTab === 'CSAF-JSON' ? (

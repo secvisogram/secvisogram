@@ -1,5 +1,5 @@
 import { max } from 'lodash'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef } from 'react'
 import DocumentEditorContext from '../../shared/DocumentEditorContext.js'
 
 export const PRODUCT_PREFIX = 'CSAFPID-'
@@ -56,7 +56,9 @@ function useUniqueId(
   /** @type {string} */ idKey,
 ) {
   const { doc } = useContext(DocumentEditorContext)
-  const [scanTrigger, setScanTrigger] = useState(false)
+  // Not stored in state since it doesn't need to trigger a render by itself
+  // -- it only flags that the *next* `doc` change should trigger a rescan.
+  const scanTriggerRef = useRef(false)
 
   const scanDoc = useCallback(() => {
     counters[idKey] = getNextIdForPrefix(prefix, idKey, doc)
@@ -65,15 +67,14 @@ function useUniqueId(
   // enable rescan trigger on reset
   const resetCounter = () => {
     counters[idKey] = 0
-    setScanTrigger(true)
+    scanTriggerRef.current = true
   }
 
   // rescan document after it changed if scan trigger is set
   useEffect(() => {
-    if (scanTrigger) {
+    if (scanTriggerRef.current) {
+      scanTriggerRef.current = false
       scanDoc()
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setScanTrigger(false)
     }
   }, [doc]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -192,15 +193,13 @@ const getCurrentDateRounded = function () {
  * function to extract current release date from revision history
  *
  * @param {Record<string, any>} doc
- * @return string|undefined
- */
+ * @return {{date: string, number: string, summary?: string}|undefined} */
 const getCurrentReleaseDate = function (doc) {
   /** @type {{date: string, number: string}[]} */
   const revisionHistory = doc?.document?.tracking?.revision_history
-  return revisionHistory
-    ?.map((x) => x.date)
-    .sort()
-    .reverse()?.[0]
+  return revisionHistory?.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  )[0]
 }
 
 /**

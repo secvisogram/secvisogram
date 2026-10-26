@@ -3,9 +3,13 @@ import React from 'react'
 import createFileName from '../../../shared/createFileName.js'
 import * as api from '../../shared/api.js'
 import AppErrorContext from '../../shared/context/AppErrorContext.js'
-import { parseMarkdown } from './PreviewTab/markdownParser.js'
-import HTMLTemplate2_0 from './shared/HTMLTemplate2_0.js'
-import HTMLTemplate2_1 from './shared/HTMLTemplate2_1.js'
+import {
+  enrichDocumentV2_0,
+  enrichDocumentV2_1,
+  HTMLTemplate2_0,
+  HTMLTemplate2_1,
+  renderMarkdown,
+} from '@secvisogram/html-template'
 
 export default /**
  * @param {import('./ExportDocumentDialog/types.js').Props} props
@@ -17,7 +21,6 @@ export default /**
   documentIsValid,
   formValues,
   originalValues,
-  onPrepareDocumentForTemplate,
   onExportCSAF,
   onExportHTML,
   onDownload,
@@ -33,6 +36,18 @@ export default /**
 
   /** @type {React.MutableRefObject<HTMLIFrameElement | null>} */
   const iframeRef = React.useRef(null)
+
+  /** @param {{}} doc */
+  const renderHtml = (doc) => {
+    const { document: enrichedDoc } =
+      uiSchemaVersion === 'v2.1'
+        ? enrichDocumentV2_1(doc)
+        : enrichDocumentV2_0(doc)
+    const parsedDoc = renderMarkdown(enrichedDoc)
+    return uiSchemaVersion === 'v2.1'
+      ? HTMLTemplate2_1({ document: parsedDoc })
+      : HTMLTemplate2_0({ document: parsedDoc })
+  }
 
   const exportText =
     advisoryState?.type === 'NEW_ADVISORY'
@@ -281,44 +296,35 @@ export default /**
                     onExportCSAF(formValues.doc)
                     break
                   case 'HTMLDOCUMENT':
-                    onPrepareDocumentForTemplate(formValues.doc)
-                      .then(({ document: doc }) => {
-                        const markdownParsedDoc = parseMarkdown(doc)
-                        const html =
-                          uiSchemaVersion === 'v2.1'
-                            ? HTMLTemplate2_1({ document: doc })
-                            : HTMLTemplate2_0({
-                                document: markdownParsedDoc,
-                              })
-                        onExportHTML(html, formValues.doc)
-                      })
-                      .catch(handleError)
+                    try {
+                      onExportHTML(renderHtml(formValues.doc), formValues.doc)
+                    } catch (error) {
+                      handleError(/** @type {any} */ (error))
+                    }
                     break
                   case 'PDFDOCUMENT':
-                    onPrepareDocumentForTemplate(formValues.doc)
-                      .then(({ document: doc }) => {
-                        if (
-                          !iframeRef.current?.contentWindow ||
-                          !iframeRef.current.contentDocument
-                        ) {
-                          return
+                    try {
+                      if (
+                        !iframeRef.current?.contentWindow ||
+                        !iframeRef.current.contentDocument
+                      ) {
+                        break
+                      }
+                      const html = renderHtml(formValues.doc)
+                      const iframeWindow = iframeRef.current.contentWindow
+                      iframeRef.current.contentDocument.open()
+                      iframeRef.current.contentDocument.write(html)
+                      // We need to wait for Firefox to have styles loaded
+                      iframeWindow.onload = () => {
+                        if (iframeRef.current) {
+                          iframeRef.current.focus()
+                          iframeWindow.print()
                         }
-                        const markdownParsedDoc = parseMarkdown(doc)
-                        const html =
-                          uiSchemaVersion === 'v2.1'
-                            ? HTMLTemplate2_1({ document: doc })
-                            : HTMLTemplate2_0({
-                                document: markdownParsedDoc,
-                              })
-                        const iframeWindow = iframeRef.current.contentWindow
-                        iframeRef.current.contentDocument.open()
-                        iframeRef.current.contentDocument.write(html)
-                        iframeRef.current.contentDocument.close()
-
-                        iframeRef.current.focus()
-                        iframeWindow.print()
-                      })
-                      .catch(handleError)
+                      }
+                      iframeRef.current.contentDocument.close()
+                    } catch (error) {
+                      handleError(/** @type {any} */ (error))
+                    }
                     break
                 }
               }}

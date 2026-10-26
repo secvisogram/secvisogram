@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest'
-import HTMLTemplate2_1 from '../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2_1.js'
-import DocumentEntityCsaf21 from '../../../lib/core/v2_1/entities/DocumentEntity.js'
+import {
+  enrichDocumentV2_1,
+  HTMLTemplate2_1,
+  renderMarkdown,
+} from '@secvisogram/html-template'
 import { testDocuments } from '../../fixtures/vulnerabilityFlagsTests.js'
 
 const testDocument = (
   /** @type {any} */ document,
   /** @type {RegExp[]} */ expectedOutputs,
 ) => {
-  const preview = new DocumentEntityCsaf21().preview({ document })
-  const html = HTMLTemplate2_1(preview)
+  const enriched = enrichDocumentV2_1(document)
+  const html = HTMLTemplate2_1({
+    document: renderMarkdown(enriched.document),
+  })
 
   expectedOutputs.forEach((eo) => {
     // expand regex to make sure no brackets come after the given regex

@@ -23,7 +23,9 @@ This document gives an overview on how to develop Secvisogram, the general techn
   - [Sanitizing](#sanitizing)
   - [Data Model](#data-model)
 - [Debugging & Testing Secvisogram](#debugging--testing-secvisogram)
+  - [Preperation](#preperation)
   - [Unit Tests](#unit-tests)
+  - [E2E Tests](#e2e-tests)
 - [CLI](#cli)
 
 <!-- /TOC -->
@@ -77,30 +79,30 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 
 ### Frameworks & Libraries
 
-| Domain        | Package        | Description & Justification                                                                                                                               |
-| ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Build         | Webpack        | Bundles the source-code and coordinates the build-pipeline with transpilation-tools like postcss and babel                                                |
-|               | npm            | Is the package-manager which is used to install dependencies and update or remove them                                                                    |
-|               | Dependabot     | Automated dependency updates. See [https://dependabot.com/](https://dependabot.com/)                                                                      |
-|               | postcss        | Used to compile tailwindcss stylesheet. See [https://postcss.org/](https://postcss.org/)                                                                  |
-|               | babel          | JavaScript transcompiler to convert ECMAScript ES6+ code into older JavaScript. See [https://babeljs.io/](https://babeljs.io/)                            |
-| Linting       | eslint         | Lints the source-code for its quality and accordance to configured rules                                                                                  |
-| Styling       | tailwind       | A utility-first CSS framework. See [https://tailwindcss.com/](https://tailwindcss.com/)                                                                   |
-|               | fontawesome    | Font-based icons set                                                                                                                                      |
-| IDE           | VS Code        | De facto standard IDE for web development. See [https://code.visualstudio.com/](https://code.visualstudio.com/)                                           |
-| Codestyle     | Prettier       | An opinionated code formatter to enforce a consistent coding-style. See [https://prettier.io/](https://prettier.io/)                                      |
-| Typechecking  | Typescript     | ES with TS annotations. See [Typescript JSDoc supported types](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)                   |
-| UI            | React          | A JavaScript library for building user interfaces. See [https://reactjs.org/](https://reactjs.org/)                                                       |
-|               | Reach-UI       | Reach-UI is library of primitive components to build accessible user-interfaces. See [https://reach.tech/](https://reach.tech/)                           |
-| Validation    | AJV            | Performs the JSON Schema validation according to the CSAF specification. See [AJV](https://github.com/ajv-validator/ajv)                                  |
-| HTML-Template | mustache       | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                                                 |
-| Testing       | electron-mocha | Mocha testing in Electron. See [electron-mocha](https://github.com/jprichardson/electron-mocha)                                                           |
-|               | mocha          | Mocha is a feature-rich JavaScript test framework. See [https://mochajs.org/](https://mochajs.org/)                                                       |
-|               | Storybook      | Storybook is a frontend workshop tool to develop ui components in isolation                                                                               |
-| Parsing       | xml2js         | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                                                |
-|               | json-pointer   | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                                  |
-| CLI           | yargs          | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                                         |
-| JSON-Editor   | monaco editor  | monaco is an embeddable code editor written in JavaScript. See [https://github.com/microsoft/monaco-editor/](https://github.com/microsoft/monaco-editor/) |
+| Domain        | Package       | Description & Justification                                                                                                                               |
+| ------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Build         | Webpack       | Bundles the source-code and coordinates the build-pipeline with transpilation-tools like postcss and babel                                                |
+|               | npm           | Is the package-manager which is used to install dependencies and update or remove them                                                                    |
+|               | Dependabot    | Automated dependency updates. See [https://dependabot.com/](https://dependabot.com/)                                                                      |
+|               | postcss       | Used to compile tailwindcss stylesheet. See [https://postcss.org/](https://postcss.org/)                                                                  |
+|               | babel         | JavaScript transcompiler to convert ECMAScript ES6+ code into older JavaScript. See [https://babeljs.io/](https://babeljs.io/)                            |
+| Linting       | ESLint        | Lints the source-code for its quality and accordance to configured rules. See [https://eslint.org/](https://eslint.org/)                                  |
+| Styling       | tailwind      | A utility-first CSS framework. See [https://tailwindcss.com/](https://tailwindcss.com/)                                                                   |
+|               | fontawesome   | Font-based icons set                                                                                                                                      |
+| IDE           | VS Code       | De facto standard IDE for web development. See [https://code.visualstudio.com/](https://code.visualstudio.com/)                                           |
+| Codestyle     | Prettier      | An opinionated code formatter to enforce a consistent coding-style. See [https://prettier.io/](https://prettier.io/)                                      |
+| Typechecking  | Typescript    | ES with TS annotations. See [Typescript JSDoc supported types](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)                   |
+| UI            | React         | A JavaScript library for building user interfaces. See [https://reactjs.org/](https://reactjs.org/)                                                       |
+|               | Reach-UI      | Reach-UI is library of primitive components to build accessible user-interfaces. See [https://reach.tech/](https://reach.tech/)                           |
+| Validation    | AJV           | Performs the JSON Schema validation according to the CSAF specification. See [AJV](https://github.com/ajv-validator/ajv)                                  |
+| HTML-Template | mustache      | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                                                 |
+| Testing       | Vitest        | Next generation testing framework powered by Vite. See [Vitest](https://vitest.dev/)                                                                      |
+|               | Playwright    | Playwright Test is a full-featured test runner built for end-to-end testing. See [https://playwright.dev/](https://playwright.dev/)                       |
+|               | Storybook     | Storybook is a frontend workshop tool to develop ui components in isolation. See [https://storybook.js.org/](https://storybook.js.org/)                   |
+| Parsing       | xml2js        | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                                                |
+|               | json-pointer  | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                                  |
+| CLI           | yargs         | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                                         |
+| JSON-Editor   | monaco editor | monaco is an embeddable code editor written in JavaScript. See [https://github.com/microsoft/monaco-editor/](https://github.com/microsoft/monaco-editor/) |
 
 ## Building Secvisogram
 
@@ -120,6 +122,16 @@ To provide a production release of Secvisogram, follow the following steps:
 - Run `npm run build`
 - Deploy the content of the `app/dist` folder to a webserver
 - Configure TLS and HTTP headers according to the template (see nginx)
+
+### Publish an editor demo prerelease
+
+Demo prereleases of `@secvisogram/editor` are published to the GitHub Packages npm registry by `.github/workflows/editor-demo-publish.yml`.
+
+1. Set `version` in `editor/package.json` to `<semver>-demo.N` and merge it through review.
+2. Push the tag `editor-v<semver>-demo.N` on that commit.
+3. After the first publish, a package admin sets the package visibility to public (irreversible). Installing still needs a token with `read:packages`; `GITHUB_TOKEN` works in Actions.
+
+Published versions are immutable, so every new publish needs a new `-demo.N`. Keep the demo tags (no deletion, no force-push) until the demo is torn down so the pinned artifact stays reproducible.
 
 ### Deploy to production using nginx
 
@@ -281,13 +293,29 @@ The application state is maintained in the `app/lib/SecvisogramPage.js`. It cont
 
 ## Debugging & Testing Secvisogram
 
+## Preperation
+
+The E2E tests require to run `npm run build && npm run build:editor` once.
+
+All tests together can be run via `npm test` from root or `/app` (the following commands must be run from the `/app` folder).
+
 ### Unit Tests
 
-Unit tests account for the logic behind the `Core` component and are written using mocha.
+Unit tests account for the logic behind the `Core` component and are written using Vitest.
 
-You can run them from CLI via `npm test`. Alternatively, you can open http://localhost:8080/tests.html in your browser, which provides you with the ability to run specific tests only.
+You can run them from CLI via `npm test:unit`. You can enter the watch mode to re-run tests (automatically) you are currently working on via `npm test:unit:watch`.
 
-These are located in the folder `/app/tests`.
+These are located in the folder `/app/tests/unit`.
+
+## E2E Tests
+
+End to End tests check the correct behaviour for the `SecvisogramPage` and `SecvisogramEditor` in the browser, using Playwright.
+
+You can run them from CLI via `npm test:playwright` (headless) or via `npm test:playwright:ui` (interactive UI mode).
+
+The results will be shown in the browser at [http://localhost:9323](http://localhost:9323) (last results can be opened anytime via `npm test:playwright:report`)
+
+These are located in the folder `/app/tests/e2e`.
 
 ## CLI
 

@@ -8,7 +8,7 @@ import React from 'react'
  * @param {{
  *  startCollapsed: boolean
  *  title: string
- *  children: string | JSX.Element | JSX.Element[]
+ *  children: string | React.JSX.Element | React.JSX.Element[]
  * }} props
  */
 export default function Collapsible({ startCollapsed, title, children }) {

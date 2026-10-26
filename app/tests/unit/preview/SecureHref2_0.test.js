@@ -1,13 +1,18 @@
 import { describe, expect, it } from 'vitest'
-import HTMLTemplate2_0 from '../../../lib/app/SecvisogramPage/View/shared/HTMLTemplate2_0.js'
-import DocumentEntity from '../../../lib/core/v2_0/entities/DocumentEntity.js'
+import {
+  enrichDocumentV2_0,
+  HTMLTemplate2_0,
+  renderMarkdown,
+} from '@secvisogram/html-template'
 import secureHrefTests from '../../fixtures/secureHrefTests.js'
 
 describe('secureHrefTests', () => {
   secureHrefTests.forEach((test, i) => {
     it(test.title ?? `Test #${i + 1}`, () => {
-      const preview = new DocumentEntity().preview({ document: test.content })
-      const html = HTMLTemplate2_0(preview)
+      const enriched = enrichDocumentV2_0(test.content)
+      const html = HTMLTemplate2_0({
+        document: renderMarkdown(enriched.document),
+      })
       // during HTML generation some characters are being replaced, so they are being replaced here as well
       const url = test.url.replaceAll('/', '&#x2F;').replaceAll('=', '&#x3D;')
       const hasHref = html.match(new RegExp(`<a href="${url}">.*</a>`))

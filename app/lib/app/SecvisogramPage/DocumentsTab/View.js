@@ -19,14 +19,14 @@ export default function DocumentsTabView({
   onChangeWorkflowState,
   onCreateNewVersion,
 }) {
-  const history = React.useContext(HistoryContext)
+  const { pushState } = React.useContext(HistoryContext)
   const { handleError } = React.useContext(AppErrorContext)
 
   const [alert, setAlert] = React.useState(
     /** @type {React.ComponentProps<typeof Alert> | null} */ (null),
   )
   const [data, setData] = React.useState(defaultData)
-  const [isLoading, setLoading] = React.useState(!defaultData)
+  const [isLoading, setLoading] = React.useState(true)
 
   const [editWorkflowStateDialogProps, setEditWorkflowStateDialogProps] =
     React.useState(
@@ -35,7 +35,7 @@ export default function DocumentsTabView({
       ),
     )
   /** @type {React.MutableRefObject<any>} */
-  const editWorkflowStateDialogRef = React.useRef()
+  const editWorkflowStateDialogRef = React.useRef(undefined)
   React.useEffect(() => {
     if (editWorkflowStateDialogProps) {
       editWorkflowStateDialogRef.current.showModal()
@@ -45,8 +45,6 @@ export default function DocumentsTabView({
   React.useEffect(() => {
     let active = true
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoading(true)
     onGetData()
       .then((data) => {
         if (!active) return
@@ -70,7 +68,7 @@ export default function DocumentsTabView({
    */
   const onEditAdvisory = ({ advisoryId }) => {
     onOpenAdvisory({ advisoryId }, () => {
-      history.pushState(null, '', sitemap.home.href([['tab', 'EDITOR']]))
+      pushState(sitemap.home.href([['tab', 'EDITOR']]))
     })
   }
 

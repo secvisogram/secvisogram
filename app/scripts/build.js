@@ -1,6 +1,13 @@
 import { spawn } from 'child_process'
 
-spawn('webpack --mode production', {
+const webpackCommand = [
+  'webpack',
+  '--mode',
+  'production',
+  ...process.argv.slice(2),
+].join(' ')
+
+spawn(webpackCommand, {
   env: {
     ...process.env,
     NODE_ENV: 'production',

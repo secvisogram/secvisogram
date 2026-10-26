@@ -145,19 +145,6 @@ export async function strip({ document }) {
   return res
 }
 
-/**
- * Extends the current document with data required for preview and returns the extended document.
- *
- * @param {{
- *  document: {}
- *  strict?: boolean
- * }} params
- */
-export async function preview({ document }) {
-  const documentEntity = new DocumentEntity()
-  return documentEntity.preview({ document })
-}
-
 export function getGeneratorEngineData() {
   return {
     name: secvisogramName,

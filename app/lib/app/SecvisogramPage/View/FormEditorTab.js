@@ -1,4 +1,3 @@
-import React from 'react'
 import { uiSchemas } from '../../../uiSchemas.js'
 import { GenericEditor } from './FormEditor/editors.js'
 

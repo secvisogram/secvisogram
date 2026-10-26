@@ -1,0 +1,38 @@
+# Publishes @secvisogram/editor demo prereleases to GitHub Packages.
+
+name: Editor Demo Package
+
+on:
+  push:
+    tags:
+      - 'editor-v*-demo.*'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: https://npm.pkg.github.com
+          scope: '@secvisogram'
+      - name: Check tag version and branch
+        run: |
+          version=$(node -p "require('./editor/package.json').version")
+          [ "$TAG" = "editor-v$version" ] || { echo "Tag $TAG does not match editor/package.json version $version"; exit 1; }
+        env:
+          TAG: ${{ github.ref_name }}
+      - run: cd app && npm ci
+      - run: npm run build:editor
+      - name: Publish demo prerelease
+        run: npm publish --registry https://npm.pkg.github.com --tag demo
+        working-directory: editor
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

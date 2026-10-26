@@ -16,7 +16,7 @@ import Attribute from './shared/Attribute.js'
  *  property: import('../../../shared/types').Property
  *  disabled: boolean
  *  disableClearable: boolean
- *  renderOption?: React.ComponentProps<typeof Autocomplete>['renderOption']
+ *  renderOption?: React.ComponentProps<typeof Autocomplete<string, false, boolean, boolean>>['renderOption']
  *  forcePopupIcon?: React.ComponentProps<typeof Autocomplete<string>>['forcePopupIcon']
  *  noOptionsText?: React.ComponentProps<typeof Autocomplete<string>>['noOptionsText']
  *  renderInput?: React.ComponentProps<typeof Autocomplete<string>>['renderInput']
@@ -58,11 +58,14 @@ export default function DropdownAttribute({
   const { doc, updateDoc, replaceDoc } = React.useContext(DocumentEditorContext)
   const persistedValue = /** @type {string} */ (value ?? '')
   const [inputValue, setInputValue] = React.useState(persistedValue)
-
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+  // Keeps the displayed text in sync whenever the underlying value changes
+  // from the outside (e.g. undo/redo, loading a different document).
+  const [prevPersistedValue, setPrevPersistedValue] =
+    React.useState(persistedValue)
+  if (persistedValue !== prevPersistedValue) {
+    setPrevPersistedValue(persistedValue)
     setInputValue(persistedValue)
-  }, [persistedValue])
+  }
 
   return (
     <Attribute disabled={disabled} {...props}>
@@ -74,7 +77,7 @@ export default function DropdownAttribute({
             disableClearable={disableClearable}
             options={options}
             freeSolo={!isEnum}
-            value={value}
+            value={/** @type {string | undefined} */ (value)}
             onChange={(_, newValue) => {
               updateDoc(
                 props.instancePath,

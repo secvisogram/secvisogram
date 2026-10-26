@@ -7,6 +7,7 @@ import LoadingIndicator from './app/SecvisogramPage/View/LoadingIndicator.js'
 import './i18next/i18next.js'
 
 const root = document.createElement('div')
+root.style.height = '100%'
 document.body.appendChild(root)
 
 const theme = createTheme({

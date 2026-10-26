@@ -23,7 +23,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.62.0-noble
+      image: mcr.microsoft.com/playwright:v1.64.0-noble
       options: --user 1001
     steps:
       - uses: actions/checkout@v7
@@ -33,4 +33,6 @@ jobs:
         with:
           node-version: '24'
       - run: npm ci
+      - run: npm run build
+      - run: npm run build:editor
       - run: npm run-script test

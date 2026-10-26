@@ -13,6 +13,24 @@ declare module '*/extensions.json' {
 
 declare module '*.md'
 
+// Imported via webpack's `resourceQuery` rule for `.css` files, which
+// exports the stylesheet as a constructed `CSSStyleSheet` instead of
+// injecting it into `document.head`. Used to populate `adoptedStyleSheets`
+// on a shadow root (see `lib/secvisogram-editor.js`).
+declare module '*.css?adoptedStyleSheet' {
+  const sheet: CSSStyleSheet
+  export default sheet
+}
+
+// Imported via webpack's inline loader syntax to get a `CSSStyleSheet`
+// export for third-party stylesheets whose package `exports` field would
+// otherwise reject the `?adoptedStyleSheet` resource query (see
+// `lib/secvisogram-editor.js`).
+declare module '!!css-loader?exportType=css-style-sheet!*' {
+  const sheet: CSSStyleSheet
+  export default sheet
+}
+
 declare module '*/metaData2.json' {
   const metadata: Object
   export default metadata

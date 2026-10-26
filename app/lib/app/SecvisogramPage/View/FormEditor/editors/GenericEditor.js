@@ -17,6 +17,7 @@ import ArrayEditor from './GenericEditor/ArrayEditor.js'
 import CSAF21CweAttribute from './GenericEditor/Attributes/csaf_2_1/CweAttribute.js'
 import CVSSV2Attribute from './GenericEditor/Attributes/CVSS2Attribute.js'
 import CVSSV3Attribute from './GenericEditor/Attributes/CVSS3Attribute.js'
+import CVSSV4Attribute from './GenericEditor/Attributes/CVSS4Attribute.js'
 import CweAttribute from './GenericEditor/Attributes/CweAttribute.js'
 import DateAttribute from './GenericEditor/Attributes/DateAttribute.js'
 import DropdownAttribute from './GenericEditor/Attributes/DropdownAttribute.js'
@@ -25,6 +26,7 @@ import Attribute from './GenericEditor/Attributes/shared/Attribute.js'
 import TextAreaAttribute from './GenericEditor/Attributes/TextAreaAttribute.js'
 import TextAttribute from './GenericEditor/Attributes/TextAttribute.js'
 import ObjectEditor from './GenericEditor/ObjectEditor.js'
+import CheckboxAttribute from './GenericEditor/Attributes/CheckboxAttribute.js'
 
 /**
  * utility function to get the color of circles identifying errors
@@ -99,7 +101,7 @@ export default function Editor({
 
   /**
    * helper function to wrap singleton input fields in a div with layout information
-   * @param {() => JSX.Element} componentFn
+   * @param {() => React.JSX.Element} componentFn
    */
   function wrapIfSingleton(componentFn) {
     return parentProperty?.type === 'ARRAY' ? (
@@ -132,7 +134,14 @@ export default function Editor({
           : property.key === 'date'
             ? () => updateDoc(instancePath, getCurrentDateRounded())
             : property.key === 'current_release_date'
-              ? () => updateDoc(instancePath, getCurrentReleaseDate(doc))
+              ? () => {
+                  const currentReleaseDate = getCurrentReleaseDate(doc)
+                  updateDoc(instancePath, currentReleaseDate?.date)
+                  const versionInstancePath = instancePath
+                    .slice(0, -1)
+                    .concat('version')
+                  updateDoc(versionInstancePath, currentReleaseDate?.number)
+                }
               : property.key === 'initial_release_date'
                 ? () => updateDoc(instancePath, getInitialReleaseDate(doc))
                 : undefined
@@ -178,6 +187,15 @@ export default function Editor({
     } else if (uiType === 'OBJECT_CVSS_3') {
       return (
         <CVSSV3Attribute
+          instancePath={instancePath}
+          value={/** @type {{[key: string]: string | number }} */ (value)}
+          property={property}
+          disabled={disabled}
+        />
+      )
+    } else if (uiType === 'OBJECT_CVSS_4') {
+      return (
+        <CVSSV4Attribute
           instancePath={instancePath}
           value={/** @type {{[key: string]: string | number }} */ (value)}
           property={property}
@@ -316,6 +334,17 @@ export default function Editor({
       >
         {typeof value === 'number' ? String(value) : ''}
       </Attribute>
+    ))
+  } else if (property.type === 'BOOLEAN') {
+    return wrapIfSingleton(() => (
+      <CheckboxAttribute
+        label={label}
+        description={description}
+        instancePath={instancePath}
+        value={value ? true : false}
+        property={property}
+        disabled={disabled}
+      />
     ))
   } else if (property.type === 'RECURSION') {
     // type is handled in ArrayEditor

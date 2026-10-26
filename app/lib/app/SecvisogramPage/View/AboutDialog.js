@@ -80,7 +80,7 @@ export default /**
           href="https://github.com/secvisogram/secvisogram/blob/main/LICENSE.md"
           className="underline"
         >
-          MIT
+          Apache-2.0
         </a>
         <br />
         {t('aboutModal.usageInstructions')}{' '}

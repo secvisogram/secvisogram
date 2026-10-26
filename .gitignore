@@ -1,5 +1,6 @@
 /node_modules
 /example-*.json
+/editor/dist/
 
 # intellij
 /secvisogram.iml

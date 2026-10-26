@@ -726,6 +726,18 @@ test.describe('SecvisogramPage', () => {
           await page
             .getByTestId('export_document-export_document_button')
             .click()
+
+          // Fire the load event manually via the test runner
+          // This forces the application's iframeWindow.onload callback to execute
+          await page.evaluate(() => {
+            const iframe = document.querySelector(
+              '[data-testid="pdf_document_iframe"]',
+            ) as HTMLIFrameElement
+            if (iframe?.contentWindow) {
+              iframe.contentWindow.dispatchEvent(new Event('load'))
+            }
+          })
+
           const printCalled = await page.evaluate(() => {
             const iframe = document.querySelector(
               '[data-testid="pdf_document_iframe"]',

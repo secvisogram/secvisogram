@@ -13,7 +13,6 @@ export interface Props {
     | 'HTMLDOCUMENT'
     | 'PDFDOCUMENT'
     | 'MARKDOWN'
-  onPrepareDocumentForTemplate(doc: {}): Promise<{ document: {} }>
   onDownload(doc: {}): void
   onExportCSAF(doc: {}): void
   onExportHTML(html: string, doc: {}): void

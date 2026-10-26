@@ -1,6 +1,5 @@
 import { t } from 'i18next'
 import { getSeverityColors } from './cvssUtils.js'
-import React from 'react'
 
 /**
  *
