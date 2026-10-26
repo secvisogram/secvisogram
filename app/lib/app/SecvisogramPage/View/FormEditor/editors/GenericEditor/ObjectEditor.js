@@ -187,10 +187,8 @@ export default function ObjectEditor({
             menuItem.instancePath.every((p, i) => selectedSubPath[i] === p)
 
           const canAdd = !(
-            embedded ||
-            (loginAvailable &&
-              userInfo &&
-              menuItem.property.metaData?.uiType === 'ARRAY_REVISION_HISTORY')
+            menuItem.property.metaData?.uiType === 'ARRAY_REVISION_HISTORY' &&
+            (embedded || (loginAvailable && userInfo))
           )
 
           return (

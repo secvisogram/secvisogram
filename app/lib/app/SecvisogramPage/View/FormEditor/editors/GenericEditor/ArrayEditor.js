@@ -167,10 +167,8 @@ function Menu({ instancePath, level = 1, ...props }) {
   }
 
   const deletable = !(
-    embedded ||
-    (loginAvailable &&
-      userInfo &&
-      property.metaData?.uiType === 'ARRAY_REVISION_HISTORY')
+    property.metaData?.uiType === 'ARRAY_REVISION_HISTORY' &&
+    (embedded || (loginAvailable && userInfo))
   )
 
   return (

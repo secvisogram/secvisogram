@@ -237,6 +237,29 @@ test.describe('<secvisogram-editor> contract', () => {
       ).toHaveCount(0)
     })
 
+    test('keeps add and delete available for other arrays', async ({
+      page,
+    }) => {
+      const { editor } = await openEditor(page)
+      await writeDoc(editor, {
+        document: {
+          category: 'csaf_base',
+          csaf_version: '2.0',
+          title: 'Hosted advisory',
+          notes: [{ category: 'summary', text: 'A note' }],
+        },
+      })
+      await editor.getByTestId('layer-button-optional').click()
+
+      await expect(
+        editor.getByTestId('menu_entry-/document/notes-hover_menu_button'),
+      ).toHaveCount(1)
+      await editor.getByTestId('menu_entry-/document/notes').click()
+      await expect(
+        editor.getByTestId('document-notes-0-deleteButton'),
+      ).toHaveCount(1)
+    })
+
     test('does not offer the unsaved file text in the export dialog', async ({
       page,
     }) => {
