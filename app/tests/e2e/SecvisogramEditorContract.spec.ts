@@ -5,6 +5,8 @@ import { editorPackageOutput, serveEditor } from './helpers/serveEditor.js'
 
 const basePath = '/editor'
 
+const backendPath = /(\.well-known\/appspecific|(^|\/)api\/|(^|\/)oauth2\/)/
+
 type EditorEvent = { type: 'csaf-change' | 'csaf-validate'; detail: any }
 
 function csafDocument(version: '2.0' | '2.1', title: string) {
@@ -16,15 +18,18 @@ function csafDocument(version: '2.0' | '2.1', title: string) {
 /**
  * Serves the editor package and opens a host page with a
  * `<secvisogram-editor>` element. Everything the page requests outside of the
- * editor's asset tree is recorded in `externalRequests`.
+ * editor's asset tree, and everything that looks like a backend request
+ * (`.well-known/appspecific`, `api/`, `oauth2/`) below any base path, is
+ * recorded in `externalRequests`.
  */
-async function openEditor(page: Page) {
+async function openEditor(page: Page, { search = '' } = {}) {
   const externalRequests: string[] = []
   page.on('request', (request) => {
     const url = new URL(request.url())
     if (
       url.protocol.startsWith('http') &&
-      !url.pathname.startsWith(`${basePath}/`)
+      (!url.pathname.startsWith(`${basePath}/`) ||
+        backendPath.test(url.pathname))
     ) {
       externalRequests.push(`${request.method()} ${url.href}`)
     }
@@ -34,7 +39,7 @@ async function openEditor(page: Page) {
     outputDirectory: editorPackageOutput,
     basePath,
   })
-  await page.goto(`${basePath}/index.html`)
+  await page.goto(`${basePath}/index.html${search}`)
 
   const editor = page.locator('secvisogram-editor')
   await expect(editor.getByText(translation.menu.formEditor)).toBeVisible()
@@ -259,26 +264,109 @@ test.describe('<secvisogram-editor> contract', () => {
         editor.getByTestId('document-notes-0-deleteButton'),
       ).toHaveCount(1)
     })
+  })
 
-    test('does not offer the unsaved file text in the export dialog', async ({
+  test.describe('backend inertness', () => {
+    test('shows no backend version in About', async ({ page }) => {
+      const { editor, externalRequests } = await openEditor(page)
+
+      await editor.getByText(translation.menu.about, { exact: true }).click()
+
+      const dialog = editor.getByTestId('about_dialog')
+      await expect(dialog).toBeVisible()
+      await expect(dialog).toContainText(translation.aboutModal.version)
+      await expect(dialog).not.toContainText(
+        translation.aboutModal.backendVersion,
+      )
+      expect(externalRequests).toEqual([])
+    })
+
+    test('offers no New button and opens no dialog for its hotkey', async ({
       page,
     }) => {
-      const { editor } = await openEditor(page)
+      const { editor, externalRequests } = await openEditor(page)
+
+      await expect(
+        editor.getByTestId('new_export_document_button'),
+      ).toBeVisible()
+      await expect(editor.getByTestId('new_document_button')).toHaveCount(0)
+
+      await page.keyboard.press('Control+o')
+
+      await expect(editor.getByTestId('new_document_dialog')).toHaveCount(0)
+      expect(externalRequests).toEqual([])
+    })
+
+    test('sends no request and shows no error for the save and validate shortcuts', async ({
+      page,
+    }) => {
+      const { editor, externalRequests } = await openEditor(page)
+      await writeDoc(editor, csafDocument('2.0', 'Hosted advisory'))
+      await openDocumentSection(editor)
+
+      await page.keyboard.press('Control+s')
+      await page.keyboard.press('Control+Alt+v')
+
+      await expect(editor.getByTestId('submit_version')).toHaveCount(0)
+      await expect(editor.getByTestId('error_toast_message')).toHaveCount(0)
+      expect(externalRequests).toEqual([])
+    })
+
+    test('renders no login, logout, user or advisory elements', async ({
+      page,
+    }) => {
+      const { editor, externalRequests } = await openEditor(page)
+      await writeDoc(editor, csafDocument('2.0', 'Hosted advisory'))
+      await openDocumentSection(editor)
+
+      for (const testId of [
+        'login_button',
+        'logout_button',
+        'user_info',
+        'advisory_id',
+        'advisory_revision',
+        'document_tracking_id',
+        'save_button',
+        'tab_button-DOCUMENTS',
+      ]) {
+        await expect(editor.getByTestId(testId)).toHaveCount(0)
+      }
+      await expect(
+        editor.getByText(translation.menu.login, { exact: true }),
+      ).toHaveCount(0)
+      await expect(
+        editor.getByText(translation.menu.logout, { exact: true }),
+      ).toHaveCount(0)
+      expect(externalRequests).toEqual([])
+    })
+
+    test('ignores advisoryId and tab=DOCUMENTS in the host URL', async ({
+      page,
+    }) => {
+      const { editor, externalRequests } = await openEditor(page, {
+        search: '?advisoryId=abc&tab=DOCUMENTS',
+      })
+
+      await expect(editor.getByTestId('tab_button-EDITOR')).toHaveClass(
+        /bg-slate-900/,
+      )
+      await expect(editor.getByTestId('tab_button-DOCUMENTS')).toHaveCount(0)
+      await expect(editor.getByTestId('advisory_id')).toHaveCount(0)
+      expect(externalRequests).toEqual([])
+    })
+
+    test('does not mention an unsaved file in the export dialog', async ({
+      page,
+    }) => {
+      const { editor, externalRequests } = await openEditor(page)
+
       await editor.getByTestId('new_export_document_button').click()
 
       await expect(editor.getByTestId('export_document_dialog')).toBeVisible()
       await expect(
         editor.getByText(translation.exportModal.unsavedFileExportOnlyLocal),
       ).toHaveCount(0)
-    })
-
-    test('does not offer the New button or its hotkey', async ({ page }) => {
-      const { editor } = await openEditor(page)
-      await expect(editor.getByTestId('new_document_button')).toHaveCount(0)
-
-      await page.keyboard.press('Control+o')
-
-      await expect(editor.getByTestId('new_document_dialog')).toHaveCount(0)
+      expect(externalRequests).toEqual([])
     })
   })
 
