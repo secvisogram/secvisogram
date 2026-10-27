@@ -23,7 +23,7 @@ This document gives an overview on how to develop Secvisogram, the general techn
   - [Sanitizing](#sanitizing)
   - [Data Model](#data-model)
 - [Debugging & Testing Secvisogram](#debugging--testing-secvisogram)
-  - [Preperation](#preperation)
+  - [Preparation](#preparation)
   - [Unit Tests](#unit-tests)
   - [E2E Tests](#e2e-tests)
 - [CLI](#cli)
@@ -293,7 +293,7 @@ The application state is maintained in the `app/lib/SecvisogramPage.js`. It cont
 
 ## Debugging & Testing Secvisogram
 
-## Preperation
+### Preparation
 
 The E2E tests require to run `npm run build && npm run build:editor` once.
 
@@ -303,17 +303,17 @@ All tests together can be run via `npm test` from root or `/app` (the following 
 
 Unit tests account for the logic behind the `Core` component and are written using Vitest.
 
-You can run them from CLI via `npm test:unit`. You can enter the watch mode to re-run tests (automatically) you are currently working on via `npm test:unit:watch`.
+You can run them from CLI via `npm run test:unit`. You can enter the watch mode to re-run tests (automatically) you are currently working on via `npm run test:unit:watch`.
 
 These are located in the folder `/app/tests/unit`.
 
-## E2E Tests
+### E2E Tests
 
 End to End tests check the correct behaviour for the `SecvisogramPage` and `SecvisogramEditor` in the browser, using Playwright.
 
-You can run them from CLI via `npm test:playwright` (headless) or via `npm test:playwright:ui` (interactive UI mode).
+You can run them from CLI via `npm run test:playwright` (headless) or via `npm run test:playwright:ui` (interactive UI mode).
 
-The results will be shown in the browser at [http://localhost:9323](http://localhost:9323) (last results can be opened anytime via `npm test:playwright:report`)
+The results will be shown in the browser at [http://localhost:9323](http://localhost:9323) (last results can be opened anytime via `npm run test:playwright:report`)
 
 These are located in the folder `/app/tests/e2e`.
 
