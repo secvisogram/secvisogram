@@ -153,6 +153,19 @@ module.exports = function generatePreviewTemplatingTable(args) {
   }
 
   /**
+   * Makes arbitrary text safe for use inside a single markdown table cell by
+   * collapsing line breaks and escaping pipe characters.
+   * @param {unknown} text
+   * @returns {string}
+   */
+  function toCell(text) {
+    return String(text ?? '')
+      .replace(/\s*\n\s*/g, ' ')
+      .replace(/\|/g, '\\|')
+      .trim()
+  }
+
+  /**
    * @param {Array<Entry>} entries
    * @param {string} parentPath
    * @returns {string}
@@ -173,10 +186,12 @@ module.exports = function generatePreviewTemplatingTable(args) {
           return (
             markdown +
             `| \`${key}\` | ` +
-            (entry.schema.description ? `${entry.schema.description} ` : '') +
+            (entry.schema.description
+              ? `${toCell(entry.schema.description)} `
+              : '') +
             `| ` +
             (entry.schema.examples
-              ? `${entry.schema.examples.join(', ')} `
+              ? `${toCell(entry.schema.examples.join(', '))} `
               : '') +
             `|\n`
           )
@@ -185,14 +200,20 @@ module.exports = function generatePreviewTemplatingTable(args) {
           return (
             markdown +
             `| \`${key}\` | ` +
-            (entry.schema.description ? `${entry.schema.description} ` : '') +
+            (entry.schema.description
+              ? `${toCell(entry.schema.description)} `
+              : '') +
             `| |\n`
           )
 
         case 'array':
           return (
             markdown +
-            `| \`${key}\` | ${entry.schema.description}| |\n` +
+            `| \`${key}\` | ` +
+            (entry.schema.description
+              ? `${toCell(entry.schema.description)} `
+              : '') +
+            `| |\n` +
             (entry.items ? `${generateTable(entry.items, key + '[]')}` : '')
           )
 
