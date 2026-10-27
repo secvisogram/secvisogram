@@ -154,13 +154,14 @@ module.exports = function generatePreviewTemplatingTable(args) {
 
   /**
    * Makes arbitrary text safe for use inside a single markdown table cell by
-   * collapsing line breaks and escaping pipe characters.
+   * collapsing line breaks and escaping backslashes and pipe characters.
    * @param {unknown} text
    * @returns {string}
    */
   function toCell(text) {
     return String(text ?? '')
       .replace(/\s*\n\s*/g, ' ')
+      .replace(/\\/g, '\\\\')
       .replace(/\|/g, '\\|')
       .trim()
   }
