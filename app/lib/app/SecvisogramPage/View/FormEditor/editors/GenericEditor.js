@@ -3,6 +3,7 @@ import { t } from 'i18next'
 import React from 'react'
 import AppConfigContext from '../../../../shared/context/AppConfigContext.js'
 import AppErrorContext from '../../../../shared/context/AppErrorContext.js'
+import EditorModeContext from '../../../../shared/context/EditorModeContext.js'
 import UserInfoContext from '../../../../shared/context/UserInfoContext.js'
 import DocumentEditorContext from '../../shared/DocumentEditorContext.js'
 import {
@@ -61,6 +62,7 @@ export default function Editor({
   enable_last_rev_hist_item,
 }) {
   const { loginAvailable } = React.useContext(AppConfigContext)
+  const { embedded } = React.useContext(EditorModeContext)
   const userInfo = React.useContext(UserInfoContext)
 
   const { doc, updateDoc, collectIds, uiSchemaVersion } = React.useContext(
@@ -77,7 +79,9 @@ export default function Editor({
     [instancePath],
   )
   /** @type {boolean} */ let disabled
-  if (
+  if (embedded) {
+    disabled = property.metaData?.disable?.ifServerMode || false
+  } else if (
     enable_last_rev_hist_item &&
     ['legacy_version', 'summary'].includes(attributeName)
   ) {

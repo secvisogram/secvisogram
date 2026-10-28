@@ -24,4 +24,13 @@ The same layout works at a nested base path. Serve the page over HTTP(S); `file:
 
 When the asset tree is hosted on a different origin from the page, configure that host to allow cross-origin requests for the module workers (`editor.worker.js` and `json.worker.js`) and fetched assets such as locales and field-help Markdown. Public CDNs commonly permit these requests; self-hosted storage must provide suitable CORS headers.
 
+## Embedded behavior
+
+The host owns the document lifecycle, so the embedded editor restricts the features that would conflict with it:
+
+- The tracking fields (`document.tracking.id`, the revision-history `date`, `legacy_version`, `number` and `summary`, and the generator engine `name` and `version`) are read-only. The host CMS owns their values.
+- Revision-history entries can be neither added nor deleted.
+- The export dialog does not show the "unsaved file" notice.
+- **New** is not offered, neither as a button nor through its hotkey (`keyBindings.keyNew`, default `ctrl+o`). Load content through `doc` instead. If `doc` is omitted, the editor starts on its empty initial document. Opening files or URLs inside the editor is not available. The JSON tab and the form can still be used for editing.
+
 See the [embedding contract](https://github.com/secvisogram/csaf-cms-frontend/blob/main/docs/embedding-contract.md) for the element's properties and events.

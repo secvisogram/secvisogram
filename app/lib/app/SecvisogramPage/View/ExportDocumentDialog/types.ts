@@ -1,3 +1,4 @@
+import type { EditorHost } from '#lib/editorHost.js'
 import { UiSchemaVersion } from '#lib/uiSchemas.js'
 import { AdvisoryState } from '../../shared/types'
 
@@ -6,6 +7,7 @@ export interface Props {
   originalValues: { doc: {} }
   documentIsValid: boolean
   advisoryState: AdvisoryState | null
+  host?: EditorHost | undefined
   uiSchemaVersion: UiSchemaVersion
   defaultSource?:
     | 'CSAFJSON'

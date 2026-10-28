@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { t } from 'i18next'
 import React from 'react'
 import AppConfigContext from '../../../../../shared/context/AppConfigContext.js'
+import EditorModeContext from '../../../../../shared/context/EditorModeContext.js'
 import UserInfoContext from '../../../../../shared/context/UserInfoContext.js'
 import isPropertyRelevant from '../../../../shared/isPropertyRelevant.js'
 import SelectedPathContext from '../../../shared/context/SelectedPathContext.js'
@@ -40,6 +41,7 @@ export default function ObjectEditor({
   const { getChildItem } = useChildItem()
 
   const { loginAvailable } = React.useContext(AppConfigContext)
+  const { embedded } = React.useContext(EditorModeContext)
   const userInfo = React.useContext(UserInfoContext)
 
   const fieldProperties = property.metaInfo.propertyList?.filter(
@@ -185,9 +187,8 @@ export default function ObjectEditor({
             menuItem.instancePath.every((p, i) => selectedSubPath[i] === p)
 
           const canAdd = !(
-            loginAvailable &&
-            userInfo &&
-            menuItem.property.metaData?.uiType === 'ARRAY_REVISION_HISTORY'
+            menuItem.property.metaData?.uiType === 'ARRAY_REVISION_HISTORY' &&
+            (embedded || (loginAvailable && userInfo))
           )
 
           return (
