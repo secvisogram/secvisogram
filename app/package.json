@@ -26,9 +26,7 @@
     "test:playwright:report": "playwright show-report",
     "build": "node scripts/build.js",
     "build:editor": "node scripts/build.js --env editor",
-    "dev": "node scripts/dev.js",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "dev": "node scripts/dev.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -72,8 +70,6 @@
     "@eslint-react/eslint-plugin": "^5.19.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.1",
-    "@storybook/addon-webpack5-compiler-swc": "^4.0.3",
-    "@storybook/react-webpack5": "^10.6.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/json-pointer": "^1.0.31",
     "@types/lodash": "^4.17.23",
@@ -99,7 +95,6 @@
     "postcss-loader": "^6.2.1",
     "raw-loader": "^4.0.2",
     "rolldown": "^1.1.5",
-    "storybook": "^10.2.17",
     "tailwindcss": "^3.4.19",
     "vitest": "^4.1.10",
     "webpack": "^5.110.3",
