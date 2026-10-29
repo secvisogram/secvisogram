@@ -97,8 +97,7 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 | Validation    | AJV           | Performs the JSON Schema validation according to the CSAF specification. See [AJV](https://github.com/ajv-validator/ajv)                                  |
 | HTML-Template | mustache      | Logic-less templates. See [mustache](https://github.com/janl/mustache.js)                                                                                 |
 | Testing       | Vitest        | Next generation testing framework powered by Vite. See [Vitest](https://vitest.dev/)                                                                      |
-|               | Playwright    | Playwright Test is a full-featured test runner built for end-to-end testing. See [https://playwright.dev/](https://playwright.dev/)                       |
-|               | Storybook     | Storybook is a frontend workshop tool to develop ui components in isolation. See [https://storybook.js.org/](https://storybook.js.org/)                   |
+|               | Playwright    | Playwright Test is a full-featured test runner built for end-to-end testing. See [https://playwright.dev/](https://playwright.dev/)                       |     |
 | Parsing       | xml2js        | XML-parser. See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)                                                                                |
 |               | json-pointer  | Some utilities for JSON pointers described by RFC 6901. See [json-pointer](https://github.com/manuelstofer/json-pointer)                                  |
 | CLI           | yargs         | Yargs helps you build interactive command line tools. See [yargs](https://github.com/yargs/yargs)                                                         |
@@ -106,12 +105,11 @@ Tailwind-CSS is a CSS-Framework and library of CSS-classes to be reused across c
 
 ## Building Secvisogram
 
-| Command             | Purpose                                                             |
-| ------------------- | ------------------------------------------------------------------- |
-| `npm run dev`       | Starts the development server                                       |
-| `npm test`          | Runs typecheck, the linter and the test suite                       |
-| `npm run build`     | Builds the application as a static asset and places it into `dist/` |
-| `npm run storybook` | Run the storybook                                                   |
+| Command         | Purpose                                                             |
+| --------------- | ------------------------------------------------------------------- |
+| `npm run dev`   | Starts the development server                                       |
+| `npm test`      | Runs typecheck, the linter and the test suite                       |
+| `npm run build` | Builds the application as a static asset and places it into `dist/` |
 
 ## Building & Deploying Secvisogram into Production
 
