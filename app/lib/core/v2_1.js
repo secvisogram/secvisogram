@@ -1,16 +1,40 @@
-import * as basic from '@secvisogram/csaf-validator-lib/csaf_2_1/basic.js'
-import * as recommendedTests from './v2_1/recommendedTests.js'
-import libStrip from '@secvisogram/csaf-validator-lib/strip.js'
-import libValidate from '@secvisogram/csaf-validator-lib/validate.js'
 import { compose, set } from 'lodash/fp.js'
 import doc_max from './v2_1/doc-max.json'
 import doc_min from './v2_1/doc-min.json'
 import { DocumentEntity } from './v2_1/entities.js'
 
-const INSTANT_TESTS =
-  /** @type {import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
-    Object.values(basic)
-  ).concat(Object.values(recommendedTests))
+/**
+ * The validator library compiles a JSON schema for every test when it is
+ * loaded, which blocks the main thread for several seconds. It is therefore
+ * loaded on first use instead of at application startup.
+ */
+let validatorPromise = /** @type {ReturnType<typeof loadValidator> | null} */ (
+  null
+)
+
+async function loadValidator() {
+  const [
+    basic,
+    recommendedTests,
+    { default: libStrip },
+    { default: libValidate },
+  ] = await Promise.all([
+    import('@secvisogram/csaf-validator-lib/csaf_2_1/basic.js'),
+    import('./v2_1/recommendedTests.js'),
+    import('@secvisogram/csaf-validator-lib/strip.js'),
+    import('@secvisogram/csaf-validator-lib/validate.js'),
+  ])
+  const instantTests =
+    /** @type {import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
+      Object.values(basic)
+    ).concat(Object.values(recommendedTests))
+  return { instantTests, libStrip, libValidate }
+}
+
+function getValidator() {
+  validatorPromise ??= loadValidator()
+  return validatorPromise
+}
 
 const secvisogramName = 'Secvisogram'
 
@@ -45,7 +69,8 @@ const setGeneratorFields = (/** @type {Date} */ date) =>
  * @param {{}} params.document
  */
 export async function validate({ document }) {
-  const res = await libValidate(INSTANT_TESTS, document)
+  const { instantTests, libValidate } = await getValidator()
+  const res = await libValidate(instantTests, document)
   return {
     isValid: res.isValid,
     /** @type {TypedValidationError[]} */
@@ -135,7 +160,8 @@ export async function newDocMax() {
  * @param {{}} params.document
  */
 export async function strip({ document }) {
-  const res = await libStrip(INSTANT_TESTS, document)
+  const { instantTests, libStrip } = await getValidator()
+  const res = await libStrip(instantTests, document)
 
   return res
 }
