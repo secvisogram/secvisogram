@@ -1,5 +1,6 @@
 import { t } from 'i18next'
 import React from 'react'
+import { testIdUrl } from '#lib/shared/testId.js'
 import DocumentEditorContext from '../shared/DocumentEditorContext.js'
 import SelectedPathContext from '../shared/context/SelectedPathContext.js'
 
@@ -11,7 +12,7 @@ import SelectedPathContext from '../shared/context/SelectedPathContext.js'
  * }} props
  */
 export default function ErrorPanel({ sideBarSelectedPath }) {
-  const { errors } = React.useContext(DocumentEditorContext)
+  const { errors, uiSchemaVersion } = React.useContext(DocumentEditorContext)
   const { selectedPath, setSelectedPath } =
     React.useContext(SelectedPathContext)
 
@@ -69,6 +70,22 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
               }
             >
               <b>{err.instancePath}</b>: {err.message}
+              {err.testId && (
+                <>
+                  {' '}
+                  <a
+                    href={testIdUrl(err.testId, uiSchemaVersion)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline font-bold"
+                    title={t('sidebar.testIdLink')}
+                    data-testid={`error_test_id-${err.instancePath}-${i}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    ({err.testId})
+                  </a>{' '}
+                </>
+              )}
             </div>
           )
         })}

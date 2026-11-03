@@ -107,6 +107,7 @@
   "sidebar": {
     "contextSpecificErrors": "Context specific Errors",
     "allErrors": "All errors:",
+    "testIdLink": "Open the chapter of this test in the CSAF specification",
     "collapseSidebar": "collapse Sidebar",
     "noDocumentationAvailable": "No documentation available for this field."
   },
