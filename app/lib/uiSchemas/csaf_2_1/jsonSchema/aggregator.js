@@ -1,3 +1,4 @@
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/aggregator.json (21 October 2026)
 export default {
   $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/aggregator.json',
@@ -75,9 +76,8 @@ export default {
       description:
         'Contains the URL of the Aggregator JSON schema which the document promises to be valid for.',
       type: 'string',
-      enum: [
+      const:
         'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/aggregator.json',
-      ],
       format: 'uri',
     },
     aggregator: {
@@ -132,7 +132,7 @@ export default {
       description:
         'Gives the version of the CSAF aggregator specification which the document was generated for.',
       type: 'string',
-      enum: ['2.1'],
+      const: '2.1',
     },
     canonical_url: {
       title: 'Canonical URL',

@@ -298,6 +298,80 @@ test.describe('SecvisogramPage / FormEditor Tab', () => {
         ),
       ).toBeHidden()
     })
+
+    test('CSAF 2.1 involvement entities and actions', async ({ page }) => {
+      await page.route(
+        '/.well-known/appspecific/de.bsi.secvisogram.json',
+        (route) => route.fulfill({ status: 404, json: {} }),
+      )
+
+      await page.goto('?tab=EDITOR')
+      await page.locator('#csafVersionSelect').selectOption('v2.1')
+      await page.getByTestId('beta_version-confirm_button').click()
+      await page.getByTestId('layer-button-optional').click()
+      await page.getByTestId('menu_entry-/document/involvement').click()
+
+      for (const [path, testId] of [
+        [
+          '/document/involvement/entities',
+          'document-involvement-entities-0-deleteButton',
+        ],
+        [
+          '/document/involvement/actions',
+          'document-involvement-actions-0-deleteButton',
+        ],
+        [
+          '/document/involvement/entity_groups',
+          'document-involvement-entity_groups-0-deleteButton',
+        ],
+      ]) {
+        await page.getByTestId(`menu_entry-${path}`).click()
+        await clickHoverButton(
+          page.getByTestId(`menu_entry-${path}-add_item_button`),
+        )
+        await expect(page.getByTestId(`menu_entry-${path}/0`)).toHaveClass(
+          /menu_entry-selected/,
+        )
+        await clickHoverButton(page.getByTestId(testId))
+        await expect(page.getByTestId(`menu_entry-${path}/0`)).toBeHidden()
+      }
+    })
+
+    test('selects the CSAF vulnerability report profile', async ({ page }) => {
+      await page.route(
+        '/.well-known/appspecific/de.bsi.secvisogram.json',
+        (route) => route.fulfill({ status: 404, json: {} }),
+      )
+
+      await page.goto('?tab=EDITOR')
+      await page.locator('#csafVersionSelect').selectOption('v2.1')
+      await page.getByTestId('beta_version-confirm_button').click()
+      await page.getByTestId('menu_entry-/document').click()
+
+      const category = page.getByTestId('attribute-document-category')
+      await category.locator('input').fill('csaf_vulnerability_report')
+      await category.locator('input').press('Enter')
+
+      await page.getByTestId('layer-button-mandatory').click()
+      await expect(page.getByTestId('menu_entry-/product_tree')).toBeAttached()
+      await expect(
+        page.getByTestId('menu_entry-/vulnerabilities'),
+      ).toBeAttached()
+      await clickHoverButton(
+        page.getByTestId('menu_entry-/vulnerabilities-add_item_button'),
+      )
+      await expect(
+        page.getByTestId('attribute-vulnerabilities-0-cve'),
+      ).toBeAttached()
+
+      await page.getByTestId('layer-button-best_practice').click()
+      await expect(
+        page.getByTestId('menu_entry-/document/acknowledgments'),
+      ).toBeAttached()
+      await expect(
+        page.getByTestId('menu_entry-/vulnerabilities/0/metrics'),
+      ).toBeAttached()
+    })
   })
 
   test('shows fields based on selected level', async ({ page }) => {

@@ -1,0 +1,466 @@
+{
+  "$schema": "https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json",
+  "document": {
+    "acknowledgments": [
+      {
+        "names": ["Security Researcher"],
+        "organization": "Example Organization",
+        "summary": "Thank you for reporting this issue.",
+        "urls": ["https://example.com/acknowledgment"]
+      }
+    ],
+    "aggregate_severity": {
+      "namespace": "https://example.com/severity",
+      "text": "High"
+    },
+    "category": "csaf_vulnerability_report",
+    "csaf_version": "2.1",
+    "distribution": {
+      "text": "Distribution permitted.",
+      "tlp": {
+        "label": "CLEAR",
+        "url": "https://www.first.org/tlp/"
+      },
+      "sharing_group": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Example sharing group"
+      }
+    },
+    "involvement": {
+      "entities": [
+        {
+          "entity_id": "EID-0001",
+          "name": "Example Security Team",
+          "category": "vendor",
+          "contact": {
+            "email": "security@example.com",
+            "url": "https://example.com/security/contact"
+          }
+        },
+        {
+          "entity_id": "EID-0002",
+          "name": "Example Coordinating CERT",
+          "category": "coordinator",
+          "contact": {
+            "email": "cert@example.com",
+            "url": "https://example.com/cert/contact"
+          }
+        }
+      ],
+      "entity_groups": [
+        {
+          "entity_group_id": "EGID-0001",
+          "name": "Coordinating entities",
+          "summary": "Entities coordinating the response",
+          "entity_ids": ["EID-0001", "EID-0002"]
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "AID-0001",
+          "category": "notification",
+          "date": "2026-10-21T12:00:00Z",
+          "status": "completed",
+          "summary": "The coordinating parties were notified",
+          "acting_entity_refs": ["EID-0001"],
+          "receiving_entity_refs": ["EGID-0001"],
+          "referenced_action_ids": ["AID-0002"],
+          "dl_vuln_ids": ["VULN-0001"],
+          "group_ids": ["CSAFGID-0001"],
+          "product_ids": ["CSAFPID-0001"]
+        },
+        {
+          "action_id": "AID-0002",
+          "category": "fix_release",
+          "date": "2026-10-21T13:00:00Z",
+          "status": "completed",
+          "summary": "The vendor prepared a security update",
+          "acting_entity_refs": ["EID-0002"],
+          "receiving_entity_refs": ["EID-0001"],
+          "referenced_action_ids": ["AID-0001"],
+          "dl_vuln_ids": ["VULN-0001"],
+          "group_ids": ["CSAFGID-0001"],
+          "product_ids": ["CSAFPID-0002"]
+        }
+      ]
+    },
+    "lang": "en-US",
+    "notes": [
+      {
+        "audience": "all",
+        "category": "description",
+        "text": "Example document-level note.",
+        "title": "Document note"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact": {
+        "details": "Security contact",
+        "email": "security@example.com",
+        "public_openpgp_key_url": "https://example.com/security.asc",
+        "url": "https://example.com/security"
+      },
+      "issuing_authority": "Example Security",
+      "name": "Example Publisher",
+      "namespace": "https://example.com"
+    },
+    "references": [
+      {
+        "category": "external",
+        "summary": "Publisher security page",
+        "url": "https://example.com/security"
+      }
+    ],
+    "source_lang": "en-US",
+    "title": "Example security advisory",
+    "tracking": {
+      "aliases": ["EXAMPLE-2026-001"],
+      "current_release_date": "2026-10-21T12:00:00Z",
+      "generator": {
+        "date": "2026-10-21T12:00:00Z",
+        "engine": {
+          "name": "Secvisogram",
+          "version": "2.6.16"
+        }
+      },
+      "id": "EXAMPLE-2026-001",
+      "initial_release_date": "2026-10-21T12:00:00Z",
+      "revision_history": [
+        {
+          "date": "2026-10-21T12:00:00Z",
+          "legacy_version": "1",
+          "number": "1",
+          "summary": "Initial release."
+        }
+      ],
+      "status": "final",
+      "version": "1"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "category": "vendor",
+        "name": "Example Vendor",
+        "branches": [
+          {
+            "category": "product_name",
+            "name": "Example Product",
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "1.0",
+                "product": {
+                  "name": "Example Product 1.0",
+                  "product_id": "CSAFPID-0001",
+                  "product_identification_helper": {
+                    "cpe": "cpe:2.3:a:example:product:1.0:*:*:*:*:*:*:*",
+                    "hashes": [
+                      {
+                        "file_hashes": [
+                          {
+                            "algorithm": "sha256",
+                            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                          }
+                        ],
+                        "filename": "example.bin"
+                      }
+                    ],
+                    "model_numbers": ["MODEL-1"],
+                    "purls": ["pkg:generic/example@1.0"],
+                    "sbom_urls": ["https://example.com/sbom.json"],
+                    "serial_numbers": ["SERIAL-1"],
+                    "skus": ["SKU-1"],
+                    "x_generic_uris": [
+                      {
+                        "namespace": "https://example.com/ids",
+                        "uri": "https://example.com/products/1"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "full_product_names": [
+      {
+        "name": "Example Product 1.0 (standalone)",
+        "product_id": "CSAFPID-0002",
+        "product_identification_helper": {
+          "cpe": "cpe:2.3:a:example:product:1.0:*:*:*:*:*:*:*",
+          "hashes": [
+            {
+              "file_hashes": [
+                {
+                  "algorithm": "sha256",
+                  "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                }
+              ],
+              "filename": "example-standalone.bin"
+            }
+          ],
+          "model_numbers": ["MODEL-1S"],
+          "purls": ["pkg:generic/example-standalone@1.0"],
+          "sbom_urls": ["https://example.com/sbom-standalone.json"],
+          "serial_numbers": ["SERIAL-2"],
+          "skus": ["SKU-2"],
+          "x_generic_uris": [
+            {
+              "namespace": "https://example.com/ids",
+              "uri": "https://example.com/products/2"
+            }
+          ]
+        }
+      }
+    ],
+    "product_groups": [
+      {
+        "group_id": "CSAFGID-0001",
+        "product_ids": ["CSAFPID-0001", "CSAFPID-0002"],
+        "summary": "All affected Example products"
+      }
+    ],
+    "product_paths": [
+      {
+        "beginning_product_reference": "CSAFPID-0001",
+        "full_product_name": {
+          "name": "Example Product component",
+          "product_id": "CSAFPID-0003"
+        },
+        "subpaths": [
+          {
+            "category": "installed_with",
+            "next_product_reference": "CSAFPID-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "acknowledgments": [
+        {
+          "names": ["Security Researcher"],
+          "organization": "Example Organization",
+          "summary": "Thank you for reporting this issue.",
+          "urls": ["https://example.com/acknowledgment"]
+        }
+      ],
+      "cve": "CVE-2026-12345",
+      "cwes": [
+        {
+          "id": "CWE-79",
+          "name": "Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)",
+          "version": "4.17"
+        }
+      ],
+      "discovery_date": "2026-10-01T12:00:00Z",
+      "flags": [
+        {
+          "date": "2026-10-02T12:00:00Z",
+          "group_ids": ["CSAFGID-0001"],
+          "label": "component_not_present",
+          "product_ids": ["CSAFPID-0001"]
+        }
+      ],
+      "ids": [
+        {
+          "system_name": "Example Issue Tracker",
+          "text": "EXAMPLE-123"
+        }
+      ],
+      "dl_vuln_id": "VULN-0001",
+      "notes": [
+        {
+          "audience": "all",
+          "category": "description",
+          "text": "An example vulnerability affects Example Product.",
+          "title": "Vulnerability description"
+        }
+      ],
+      "product_status": {
+        "first_affected": ["CSAFPID-0001"],
+        "first_fixed": ["CSAFPID-0001"],
+        "fixed": ["CSAFPID-0001"],
+        "known_affected": ["CSAFPID-0001"],
+        "known_not_affected": ["CSAFPID-0001"],
+        "last_affected": ["CSAFPID-0001"],
+        "recommended": ["CSAFPID-0001"],
+        "under_investigation": ["CSAFPID-0001"]
+      },
+      "references": [
+        {
+          "category": "external",
+          "summary": "Issue details",
+          "url": "https://example.com/security/CVE-2026-12345"
+        }
+      ],
+      "disclosure_date": "2026-10-10T12:00:00Z",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2026-10-21T12:00:00Z",
+          "details": "Update to the latest version.",
+          "entitlements": ["Free update"],
+          "group_ids": ["CSAFGID-0001"],
+          "product_ids": ["CSAFPID-0001"],
+          "restart_required": {
+            "category": "service",
+            "details": "Restart the application service."
+          },
+          "url": "https://example.com/download"
+        }
+      ],
+      "metrics": [
+        {
+          "content": {
+            "cvss_v2": {
+              "version": "2.0",
+              "vectorString": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+              "baseScore": 7.5,
+              "accessVector": "NETWORK",
+              "accessComplexity": "LOW",
+              "authentication": "NONE",
+              "confidentialityImpact": "PARTIAL",
+              "integrityImpact": "PARTIAL",
+              "availabilityImpact": "PARTIAL",
+              "exploitability": "FUNCTIONAL",
+              "remediationLevel": "OFFICIAL_FIX",
+              "reportConfidence": "CONFIRMED",
+              "temporalScore": 6.4,
+              "collateralDamagePotential": "LOW",
+              "targetDistribution": "LOW",
+              "confidentialityRequirement": "MEDIUM",
+              "integrityRequirement": "MEDIUM",
+              "availabilityRequirement": "MEDIUM",
+              "environmentalScore": 6
+            },
+            "cvss_v3": {
+              "version": "3.1",
+              "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "baseScore": 9.8,
+              "baseSeverity": "CRITICAL",
+              "attackVector": "NETWORK",
+              "attackComplexity": "LOW",
+              "privilegesRequired": "NONE",
+              "userInteraction": "NONE",
+              "scope": "UNCHANGED",
+              "confidentialityImpact": "HIGH",
+              "integrityImpact": "HIGH",
+              "availabilityImpact": "HIGH",
+              "exploitCodeMaturity": "FUNCTIONAL",
+              "remediationLevel": "OFFICIAL_FIX",
+              "reportConfidence": "CONFIRMED",
+              "temporalScore": 9.1,
+              "temporalSeverity": "CRITICAL",
+              "confidentialityRequirement": "HIGH",
+              "integrityRequirement": "HIGH",
+              "availabilityRequirement": "HIGH",
+              "modifiedAttackVector": "NETWORK",
+              "modifiedAttackComplexity": "LOW",
+              "modifiedPrivilegesRequired": "NONE",
+              "modifiedUserInteraction": "NONE",
+              "modifiedScope": "UNCHANGED",
+              "modifiedConfidentialityImpact": "HIGH",
+              "modifiedIntegrityImpact": "HIGH",
+              "modifiedAvailabilityImpact": "HIGH",
+              "environmentalScore": 9.1,
+              "environmentalSeverity": "CRITICAL"
+            },
+            "cvss_v4": {
+              "version": "4.0",
+              "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+              "baseScore": 9.3,
+              "baseSeverity": "CRITICAL",
+              "attackVector": "NETWORK",
+              "attackComplexity": "LOW",
+              "attackRequirements": "NONE",
+              "privilegesRequired": "NONE",
+              "userInteraction": "NONE",
+              "vulnConfidentialityImpact": "HIGH",
+              "vulnIntegrityImpact": "HIGH",
+              "vulnAvailabilityImpact": "HIGH",
+              "subConfidentialityImpact": "HIGH",
+              "subIntegrityImpact": "HIGH",
+              "subAvailabilityImpact": "HIGH",
+              "exploitMaturity": "ATTACKED",
+              "confidentialityRequirement": "HIGH",
+              "integrityRequirement": "HIGH",
+              "availabilityRequirement": "HIGH",
+              "modifiedAttackVector": "NETWORK",
+              "modifiedAttackComplexity": "LOW",
+              "modifiedAttackRequirements": "NONE",
+              "modifiedPrivilegesRequired": "NONE",
+              "modifiedUserInteraction": "NONE",
+              "modifiedVulnConfidentialityImpact": "HIGH",
+              "modifiedVulnIntegrityImpact": "HIGH",
+              "modifiedVulnAvailabilityImpact": "HIGH",
+              "modifiedSubConfidentialityImpact": "HIGH",
+              "modifiedSubIntegrityImpact": "HIGH",
+              "modifiedSubAvailabilityImpact": "HIGH",
+              "Safety": "NEGLIGIBLE",
+              "Automatable": "YES",
+              "Recovery": "AUTOMATIC",
+              "valueDensity": "CONCENTRATED",
+              "vulnerabilityResponseEffort": "LOW",
+              "providerUrgency": "RED",
+              "threatSeverity": "CRITICAL",
+              "environmentalSeverity": "CRITICAL"
+            },
+            "ssvc_v2": {
+              "timestamp": "2026-10-21T12:00:00Z",
+              "schemaVersion": "2.0.0",
+              "selections": [
+                {
+                  "namespace": "ssvc/csaf",
+                  "key": "Exploitation",
+                  "version": "2.0.0",
+                  "values": [
+                    {
+                      "key": "N"
+                    }
+                  ]
+                }
+              ],
+              "target_ids": ["CVE-2026-12345"],
+              "decision_point_resources": [
+                {
+                  "uri": "https://example.com/ssvc/decision-points",
+                  "summary": "Example SSVC decision points"
+                }
+              ],
+              "references": [
+                {
+                  "uri": "https://example.com/ssvc/report",
+                  "summary": "Example SSVC assessment"
+                }
+              ]
+            },
+            "epss": {
+              "percentile": "0.95",
+              "probability": "0.75",
+              "timestamp": "2026-10-21T12:00:00Z"
+            },
+            "qualitative_severity_rating": "critical"
+          },
+          "products": ["CSAFPID-0001", "CSAFPID-0002"],
+          "source": "https://example.com/security"
+        }
+      ],
+      "threats": [
+        {
+          "category": "exploit_status",
+          "date": "2026-10-20T12:00:00Z",
+          "details": "No known exploitation at the time of publication.",
+          "group_ids": ["CSAFGID-0001"],
+          "product_ids": ["CSAFPID-0001"]
+        }
+      ],
+      "title": "Example cross-site scripting vulnerability"
+    }
+  ]
+}

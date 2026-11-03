@@ -1,3 +1,4 @@
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/extension-metadata.json (21 October 2026)
 export default {
   $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-metadata.json',

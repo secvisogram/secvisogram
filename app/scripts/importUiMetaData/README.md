@@ -147,6 +147,7 @@ Available profiles:
 - csaf_informational_advisory
 - csaf_security_advisory
 - csaf_vex
+- csaf_vulnerability_report
 
 Available relevance levels:
 
@@ -164,7 +165,8 @@ Example:
   "csaf_security_incident_response": "optional",
   "csaf_informational_advisory": "optional",
   "csaf_security_advisory": "best_practice",
-  "csaf_vex": "want_to_have"
+  "csaf_vex": "want_to_have",
+  "csaf_vulnerability_report": "optional"
 }
 ```
 

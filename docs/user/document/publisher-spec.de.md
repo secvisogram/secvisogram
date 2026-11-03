@@ -6,9 +6,9 @@ Publisher (`publisher`) hat den Wertetyp `object` mit den obligatorischen Eigens
 * [Name](document/publisher/name-spec.de.md) (`name`)
 * [Namespace](document/publisher/namespace-spec.de.md) (`namespace`)
 
-und liefert Informationen über die veröffentlichende Entität. Die 2 anderen optionalen Eigenschaften sind:
+und liefert Informationen über die veröffentlichende Entität. Die anderen optionalen Eigenschaften sind:
 
-* [Kontaktangaben](document/publisher/issuing_authority-spec.de.md) (`contact_details`)
+* Kontakt (`contact`)
 * [Ausstellende Behörde](document/publisher/issuing_authority-spec.de.md) (`issuing_authority`)
 
 ```javascript
@@ -18,7 +18,7 @@ und liefert Informationen über die veröffentlichende Entität. Die 2 anderen o
     "category": {
       // ...
     },
-    "contact_details": {
+    "contact": {
       // ...
     },
     "issuing_authority": {

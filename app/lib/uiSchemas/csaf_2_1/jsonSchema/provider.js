@@ -1,3 +1,4 @@
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/provider.json (21 October 2026)
 export default {
   $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/provider.json',
@@ -43,7 +44,7 @@ export default {
       description:
         'Contains the URL of the provider-metadata.json JSON schema which the document promises to be valid for.',
       type: 'string',
-      enum: ['https://docs.oasis-open.org/csaf/csaf/v2.1/schema/provider.json'],
+      const: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/provider.json',
       format: 'uri',
     },
     canonical_url: {
@@ -199,7 +200,7 @@ export default {
       description:
         'Gives the version of the CSAF provider metadata specification which the document was generated for.',
       type: 'string',
-      enum: ['2.1'],
+      const: '2.1',
     },
     mirror_on_CSAF_aggregators: {
       title: 'Mirror on CSAF aggregators',

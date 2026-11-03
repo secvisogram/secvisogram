@@ -1,4 +1,4 @@
-// https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json from 06.05.2026
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/meta.json (21 October 2026)
 export default {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',

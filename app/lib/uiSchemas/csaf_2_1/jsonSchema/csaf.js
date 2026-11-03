@@ -1,3 +1,4 @@
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/csaf.json (21 October 2026)
 export default {
   $schema: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/meta.json',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json',
@@ -68,6 +69,15 @@ export default {
         additionalProperties: false,
       },
     },
+    action_id_t: {
+      title: 'Reference token for action instance',
+      description:
+        'Contains a token required to identify an action uniquely in the context of the current document so that it can be referred to from other parts in the document.',
+      type: 'string',
+      pattern: '^[^\\s\\-_\\.](.*[^\\s\\-_\\.])?$',
+      minLength: 1,
+      examples: ['1', 'AID-0001', 'Some ID'],
+    },
     branches_t: {
       title: 'List of branches',
       description:
@@ -83,9 +93,7 @@ export default {
         minProperties: 3,
         required: ['category', 'name'],
         properties: {
-          branches: {
-            $ref: '#/$defs/branches_t',
-          },
+          branches: { $ref: '#/$defs/branches_t' },
           category: {
             title: 'Category of the branch',
             description: 'Describes the characteristics of the labeled branch.',
@@ -122,12 +130,124 @@ export default {
               'Windows',
             ],
           },
-          product: {
-            $ref: '#/$defs/full_product_name_t',
-          },
+          product: { $ref: '#/$defs/full_product_name_t' },
         },
         additionalProperties: false,
       },
+    },
+    contact_t: {
+      title: 'Contact',
+      description: 'Contains information on how to contact the party.',
+      type: 'object',
+      minProperties: 1,
+      dependentRequired: { public_openpgp_key_url: ['email'] },
+      properties: {
+        details: {
+          title: 'Contact Details',
+          description:
+            'Contains details regarding ways to reach the party, e.g. through web sites, phone numbers, and postal mail addresses.',
+          type: 'string',
+          minLength: 1,
+          examples: [
+            'Example Company can be reached at tel:+493023125232, or via our website at https://www.example.com/contact.',
+          ],
+        },
+        email: {
+          title: 'Email',
+          description:
+            'Contains the email address that can be used to reach the party.',
+          type: 'string',
+          format: 'email',
+          minLength: 6,
+          examples: [
+            'productcert@example.net',
+            'psirt@example.com',
+            'reporter@securityresearcher.example',
+            'vulnerability@coordinator.example',
+          ],
+        },
+        public_openpgp_key_url: {
+          title: 'Public OpenPGP Key URL',
+          description:
+            'Contains a URL pointing to a public OpenPGP key valid for the email of party provided in the sibling property `email`.',
+          type: 'string',
+          format: 'uri',
+          pattern: '^https:\\/\\/',
+          minLength: 11,
+          examples: [
+            'https://coordinator.example/.well-known/openpgpkey/hu/nxdcs8npc6mn3xyfpcbiqhcu9s357r5m?l=vulnerability',
+            'https://example.net/.well-known/openpgpkey/hu/euwmpyfh4rzf8ymbqhjjhrirgib4dyfs?l=productcert',
+            'https://openpgpkey.securityresearcher.example/.well-known/openpgpkey/securityresearcher.example/hu/enudbakzkbdym3ymwjy9pcxztka75f73?l=reporter',
+            'https://psirt.example.com/security/openpgp/latest',
+          ],
+        },
+        url: {
+          title: 'Contact URL',
+          description: 'Contains a URL that can be used to reach the party.',
+          type: 'string',
+          format: 'uri',
+          pattern: '^https:\\/\\/',
+          minLength: 11,
+          examples: [
+            'https://www.example.com/psirt/contact',
+            'https://www.example.net/psirt/report-a-vulnerability--expert-form',
+            'https://www.example.org/.well-known/security.txt',
+          ],
+        },
+      },
+      additionalProperties: false,
+    },
+    dl_vuln_id_t: {
+      title: 'Document-local reference token for vulnerability instance',
+      description:
+        'Contains a token required to identify a vulnerability uniquely in the context of the current document so that it can be referred to from other parts in the document.',
+      type: 'string',
+      pattern: '^VULN-[0-9A-Za-z._-]+$',
+      minLength: 6,
+      examples: ['VULN-0001', 'VULN-CVE-1900-0001'],
+    },
+    entity_group_id_t: {
+      title: 'Reference token for entity group instance',
+      description:
+        'Contains a token required to identify a group of entities uniquely in the context of the current document so that it can be referred to from other parts in the document.',
+      type: 'string',
+      pattern: '^EGID-[0-9A-Za-z][0-9A-Za-z._-]*$',
+      minLength: 6,
+      examples: [
+        'EGID-0001',
+        'EGID-CERTs',
+        'EGID-Coordinators',
+        'EGID-vendors',
+      ],
+    },
+    entity_id_t: {
+      title: 'Reference token for entity instance',
+      description:
+        'Contains a token required to identify an entity uniquely in the context of the current document so that it can be referred to from other parts in the document.',
+      type: 'string',
+      pattern: '^EID-[0-9A-Za-z][0-9A-Za-z._-]*$',
+      minLength: 5,
+      examples: [
+        'EID-0001',
+        'EID-CERT',
+        'EID-Example_Company',
+        'EID-org.example',
+      ],
+    },
+    entity_refs_t: {
+      title: 'List of entity references',
+      description:
+        'Specifies a list of entity_ids or entity_group_ids to give context to the parent item.',
+      type: 'array',
+      minItems: 1,
+      uniqueItems: true,
+      items: {
+        anyOf: [
+          { $ref: '#/$defs/entity_group_id_t' },
+          { $ref: '#/$defs/entity_id_t' },
+        ],
+      },
+      unevaluatedItems: false,
     },
     extensions_t: {
       title: 'List of extensions',
@@ -158,9 +278,7 @@ export default {
             'Microsoft Host Integration Server 2006 Service Pack 1',
           ],
         },
-        product_id: {
-          $ref: '#/$defs/product_id_t',
-        },
+        product_id: { $ref: '#/$defs/product_id_t' },
         product_identification_helper: {
           title: 'Helper to identify the product',
           description:
@@ -413,12 +531,8 @@ export default {
               'summary',
             ],
           },
-          group_ids: {
-            $ref: '#/$defs/product_groups_t',
-          },
-          product_ids: {
-            $ref: '#/$defs/products_t',
-          },
+          group_ids: { $ref: '#/$defs/product_groups_t' },
+          product_ids: { $ref: '#/$defs/products_t' },
           text: {
             title: 'Note content',
             description:
@@ -458,9 +572,7 @@ export default {
       type: 'array',
       minItems: 1,
       uniqueItems: true,
-      items: {
-        $ref: '#/$defs/product_group_id_t',
-      },
+      items: { $ref: '#/$defs/product_group_id_t' },
     },
     product_id_t: {
       title: 'Reference token for product instance',
@@ -477,9 +589,7 @@ export default {
       type: 'array',
       minItems: 1,
       uniqueItems: true,
-      items: {
-        $ref: '#/$defs/product_id_t',
-      },
+      items: { $ref: '#/$defs/product_id_t' },
     },
     references_t: {
       title: 'List of references',
@@ -563,7 +673,7 @@ export default {
       description:
         'Contains the URL of the CSAF JSON schema which the document promises to be valid for.',
       type: 'string',
-      enum: ['https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json'],
+      const: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/csaf.json',
       format: 'uri',
     },
     document: {
@@ -621,6 +731,7 @@ export default {
             'csaf_base',
             'csaf_security_advisory',
             'csaf_vex',
+            'csaf_vulnerability_report',
             'Example Company Security Notice',
           ],
         },
@@ -629,7 +740,7 @@ export default {
           description:
             'Gives the version of the CSAF specification which the document was generated for.',
           type: 'string',
-          enum: ['2.1'],
+          const: '2.1',
         },
         distribution: {
           title: 'Rules for document sharing',
@@ -715,6 +826,220 @@ export default {
           },
           additionalProperties: false,
         },
+        involvement: {
+          title: 'Involvement',
+          description:
+            'Contains the coordination record stating entities and actions between them.',
+          type: 'object',
+          required: ['actions', 'entities'],
+          properties: {
+            actions: {
+              title: 'List of actions',
+              description: 'Contains the timeline of actions.',
+              type: 'array',
+              minItems: 1,
+              uniqueItems: true,
+              items: {
+                title: 'Action',
+                description:
+                  'Contains details about a single event in the timeline.',
+                type: 'object',
+                required: [
+                  'acting_entity_refs',
+                  'action_id',
+                  'category',
+                  'date',
+                  'status',
+                ],
+                properties: {
+                  acting_entity_refs: {
+                    title: 'List of acting entities',
+                    description: 'Contains a list of entities that act.',
+                    $ref: '#/$defs/entity_refs_t',
+                  },
+                  action_id: {
+                    title: 'Action ID',
+                    description:
+                      'Contains the reference token for this action.',
+                    $ref: '#/$defs/action_id_t',
+                  },
+                  category: {
+                    title: 'Action category',
+                    description:
+                      'Specifies the category which this action belongs to.',
+                    type: 'string',
+                    enum: [
+                      'assessment',
+                      'confirmation',
+                      'coordination',
+                      'discovery',
+                      'dispute',
+                      'embargo',
+                      'exploitation',
+                      'fix_deployment',
+                      'fix_release',
+                      'notification',
+                      'observation',
+                    ],
+                  },
+                  date: {
+                    title: 'Date of the action',
+                    description: 'Contains the date when the action occurred.',
+                    type: 'string',
+                    format: 'date-time',
+                  },
+                  dl_vuln_ids: {
+                    title: 'List of document-local vuln IDs',
+                    description:
+                      'Contains a list of local IDs referring to vulnerabilities within the same document that this action applies to.',
+                    type: 'array',
+                    minItems: 1,
+                    uniqueItems: true,
+                    items: { $ref: '#/$defs/dl_vuln_id_t' },
+                  },
+                  group_ids: { $ref: '#/$defs/product_groups_t' },
+                  product_ids: { $ref: '#/$defs/products_t' },
+                  receiving_entity_refs: {
+                    title: 'List of receiving entities',
+                    description:
+                      'Contains a list of entities that receive the action.',
+                    $ref: '#/$defs/entity_refs_t',
+                  },
+                  referenced_action_ids: {
+                    title: 'List of referenced actions',
+                    description:
+                      'Contains a list of other actions reference by this action.',
+                    type: 'array',
+                    minItems: 1,
+                    uniqueItems: true,
+                    items: { $ref: '#/$defs/action_id_t' },
+                  },
+                  summary: {
+                    title: 'Summary of the action',
+                    description: 'Contains information about the action.',
+                    type: 'string',
+                    minLength: 1,
+                  },
+                  status: {
+                    title: 'Action status',
+                    description: 'Contains an observation about the action.',
+                    type: 'string',
+                    enum: [
+                      'attempted',
+                      'completed',
+                      'deferred',
+                      'discontinued',
+                      'in_progress',
+                      'outstanding',
+                      'planned',
+                    ],
+                  },
+                },
+                additionalProperties: false,
+              },
+            },
+            entities: {
+              title: 'List of entities',
+              description: 'Contains a list of entities related.',
+              type: 'array',
+              minItems: 1,
+              uniqueItems: true,
+              items: {
+                title: 'Entity',
+                description: 'Contains information about a single entity.',
+                type: 'object',
+                required: ['category', 'entity_id'],
+                properties: {
+                  category: {
+                    title: 'Entity category',
+                    description: 'Specifies the category of the party.',
+                    type: 'string',
+                    enum: [
+                      'adversary',
+                      'coordinator',
+                      'discoverer',
+                      'multiplier',
+                      'other',
+                      'public',
+                      'reporting_authority',
+                      'user',
+                      'vendor',
+                    ],
+                  },
+                  contact: {
+                    title: 'Contact of the entity',
+                    description:
+                      'Contains information on how to contact the entity.',
+                    $ref: '#/$defs/contact_t',
+                  },
+                  entity_id: {
+                    title: 'Entity ID',
+                    description: 'Contains an ID for the entity.',
+                    $ref: '#/$defs/entity_id_t',
+                  },
+                  name: {
+                    title: 'Name of the entity',
+                    description: 'Contains the name of the entity.',
+                    type: 'string',
+                    minLength: 1,
+                  },
+                },
+                additionalProperties: false,
+              },
+            },
+            entity_groups: {
+              title: 'List of entity groups',
+              description: 'Contains a list of entity groups.',
+              type: 'array',
+              minItems: 1,
+              uniqueItems: true,
+              items: {
+                title: 'Entity group',
+                description:
+                  'Defines a new logical group of entities that can then be referred to in other parts of the document to address a group of entities with a single identifier.',
+                type: 'object',
+                required: ['entity_group_id', 'entity_ids', 'name'],
+                properties: {
+                  entity_group_id: {
+                    title: 'Entity Group ID',
+                    description: 'Contains an ID for the entity group.',
+                    $ref: '#/$defs/entity_group_id_t',
+                  },
+                  entity_ids: {
+                    title: 'List of Entity IDs',
+                    description:
+                      'Lists the Entity IDs of those entities which are known as one group in the document.',
+                    type: 'array',
+                    minItems: 2,
+                    uniqueItems: true,
+                    items: { $ref: '#/$defs/entity_id_t' },
+                  },
+                  name: {
+                    title: 'Name of the entity group',
+                    description:
+                      'Contains a human-readable name for the entities grouped.',
+                    type: 'string',
+                    minLength: 1,
+                    examples: [
+                      'Coordinating CSIRTs',
+                      'European Railway Regulators',
+                      'Researchers',
+                    ],
+                  },
+                  summary: {
+                    title: 'Summary of the entity group',
+                    description:
+                      'Contains a human-readable summary stating the purpose of the group.',
+                    type: 'string',
+                    minLength: 1,
+                  },
+                },
+                additionalProperties: false,
+              },
+            },
+          },
+          additionalProperties: false,
+        },
         lang: {
           title: 'Document language',
           description:
@@ -761,15 +1086,11 @@ export default {
                 'vendor',
               ],
             },
-            contact_details: {
-              title: 'Contact details',
+            contact: {
+              title: 'Contact',
               description:
-                'Information on how to contact the publisher, possibly including details such as web sites, email addresses, phone numbers, and postal mail addresses.',
-              type: 'string',
-              minLength: 1,
-              examples: [
-                'Example Company can be reached at contact_us@example.com, or via our website at https://www.example.com/contact.',
-              ],
+                'Contains information on how to contact the publisher.',
+              $ref: '#/$defs/contact_t',
             },
             issuing_authority: {
               title: 'Issuing authority',
@@ -777,6 +1098,12 @@ export default {
                 "Provides information about the authority of the issuing party to release the document, in particular, the party's constituency and responsibilities or other obligations.",
               type: 'string',
               minLength: 1,
+              examples: [
+                'Example Company PSIRT is responsible for vulnerability handling across all Example Company products and services.',
+                'Example CERT as designated CSIRT according to Directive (EU) 2022/2555 Article 12 section 1 acts as coordinator for the purposes of coordinated vulnerability disclosure.',
+                'Example ISAC publishes security information for products used by or relevant for its constituency enriched by a sector-specific assessment.',
+                'The Example Organization Security Team is responsible for vulnerability handling across all Example Organization offerings.',
+              ],
             },
             name: {
               title: 'Name of publisher',
@@ -945,9 +1272,7 @@ export default {
                     type: 'string',
                     minLength: 1,
                   },
-                  number: {
-                    $ref: '#/$defs/version_t',
-                  },
+                  number: { $ref: '#/$defs/version_t' },
                   summary: {
                     title: 'Summary of the revision',
                     description:
@@ -966,9 +1291,7 @@ export default {
               type: 'string',
               enum: ['draft', 'final', 'interim'],
             },
-            version: {
-              $ref: '#/$defs/version_t',
-            },
+            version: { $ref: '#/$defs/version_t' },
           },
           additionalProperties: false,
         },
@@ -988,17 +1311,13 @@ export default {
       type: 'object',
       minProperties: 1,
       properties: {
-        branches: {
-          $ref: '#/$defs/branches_t',
-        },
+        branches: { $ref: '#/$defs/branches_t' },
         full_product_names: {
           title: 'List of full product names',
           description: 'Contains a list of full product names.',
           type: 'array',
           minItems: 1,
-          items: {
-            $ref: '#/$defs/full_product_name_t',
-          },
+          items: { $ref: '#/$defs/full_product_name_t' },
         },
         product_groups: {
           title: 'List of product groups',
@@ -1012,19 +1331,15 @@ export default {
             type: 'object',
             required: ['group_id', 'product_ids'],
             properties: {
-              group_id: {
-                $ref: '#/$defs/product_group_id_t',
-              },
+              group_id: { $ref: '#/$defs/product_group_id_t' },
               product_ids: {
                 title: 'List of Product IDs',
                 description:
-                  'Lists the product_ids of those products which known as one group in the document.',
+                  'Lists the product_ids of those products which are known as one group in the document.',
                 type: 'array',
                 minItems: 2,
                 uniqueItems: true,
-                items: {
-                  $ref: '#/$defs/product_id_t',
-                },
+                items: { $ref: '#/$defs/product_id_t' },
               },
               summary: {
                 title: 'Summary of the product group',
@@ -1063,18 +1378,14 @@ export default {
                   'Holds a Product ID that refers to the Full Product Name element, which is the beginning node of the product path.',
                 $ref: '#/$defs/product_id_t',
               },
-              full_product_name: {
-                $ref: '#/$defs/full_product_name_t',
-              },
+              full_product_name: { $ref: '#/$defs/full_product_name_t' },
               subpaths: {
                 title: 'List of product subpaths',
                 description:
                   'Contains an ordered list of product subpaths, each one relating to the path defined by all previous elements up to the beginning node of the product path.',
                 type: 'array',
                 minItems: 1,
-                items: {
-                  $ref: '#/$defs/subpath_t',
-                },
+                items: { $ref: '#/$defs/subpath_t' },
               },
             },
             additionalProperties: false,
@@ -1147,7 +1458,8 @@ export default {
                   description:
                     'Holds the version string of the CWE specification this weakness was extracted from.',
                   type: 'string',
-                  pattern: '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.\\d+)?$',
+                  pattern:
+                    '^[1-9]\\d*\\.([0-9]|([1-9]\\d+))(\\.([0-9]|([1-9]\\d+)))?$',
                   examples: ['1.0', '3.4.1', '4.0', '4.11', '4.12'],
                 },
               },
@@ -1167,6 +1479,12 @@ export default {
               'Holds the date and time the vulnerability was originally discovered.',
             type: 'string',
             format: 'date-time',
+          },
+          dl_vuln_id: {
+            title: 'Document-local Vuln ID',
+            description:
+              'Contains the local ID referring to this vulnerability from another part of the same document.',
+            $ref: '#/$defs/dl_vuln_id_t',
           },
           first_known_exploitation_dates: {
             title: 'List of first known exploitation dates',
@@ -1197,12 +1515,8 @@ export default {
                   type: 'string',
                   format: 'date-time',
                 },
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
+                group_ids: { $ref: '#/$defs/product_groups_t' },
+                product_ids: { $ref: '#/$defs/products_t' },
               },
               additionalProperties: false,
             },
@@ -1227,9 +1541,7 @@ export default {
                   type: 'string',
                   format: 'date-time',
                 },
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
+                group_ids: { $ref: '#/$defs/product_groups_t' },
                 label: {
                   title: 'Label of the flag',
                   description: 'Specifies the machine readable label.',
@@ -1242,9 +1554,7 @@ export default {
                     'vulnerable_code_not_present',
                   ],
                 },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
+                product_ids: { $ref: '#/$defs/products_t' },
               },
               additionalProperties: false,
             },
@@ -1263,12 +1573,8 @@ export default {
               type: 'object',
               required: ['system_name', 'text'],
               properties: {
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
+                group_ids: { $ref: '#/$defs/product_groups_t' },
+                product_ids: { $ref: '#/$defs/products_t' },
                 system_name: {
                   title: 'System name',
                   description:
@@ -1288,75 +1594,6 @@ export default {
                   type: 'string',
                   minLength: 1,
                   examples: ['CSCso66472', 'oasis-tcs/csaf#210', '#1217'],
-                },
-              },
-              additionalProperties: false,
-            },
-          },
-          involvements: {
-            title: 'List of involvements',
-            description: 'Contains a list of involvements.',
-            type: 'array',
-            minItems: 1,
-            uniqueItems: true,
-            items: {
-              title: 'Involvement',
-              description:
-                'Is a container, that allows the document producers to comment on the level of involvement (or engagement) of themselves or third parties in the vulnerability identification, scoping, and remediation process.',
-              type: 'object',
-              required: ['party', 'status'],
-              properties: {
-                contact: {
-                  title: 'Party contact information',
-                  description:
-                    'Contains the contact information of the party that was used in this state.',
-                  type: 'string',
-                  minLength: 1,
-                },
-                date: {
-                  title: 'Date of involvement',
-                  description:
-                    'Holds the date and time of the involvement entry.',
-                  type: 'string',
-                  format: 'date-time',
-                },
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
-                party: {
-                  title: 'Party category',
-                  description: 'Defines the category of the involved party.',
-                  type: 'string',
-                  enum: [
-                    'coordinator',
-                    'discoverer',
-                    'other',
-                    'user',
-                    'vendor',
-                  ],
-                },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
-                status: {
-                  title: 'Party status',
-                  description: 'Defines contact status of the involved party.',
-                  type: 'string',
-                  enum: [
-                    'completed',
-                    'contact_attempted',
-                    'disputed',
-                    'in_progress',
-                    'not_contacted',
-                    'open',
-                  ],
-                },
-                summary: {
-                  title: 'Summary of the involvement',
-                  description:
-                    'Contains additional context regarding what is going on.',
-                  type: 'string',
-                  minLength: 1,
                 },
               },
               additionalProperties: false,
@@ -1390,12 +1627,8 @@ export default {
                     cvss_v3: {
                       title: 'CVSS v3',
                       oneOf: [
-                        {
-                          $ref: 'https://www.first.org/cvss/cvss-v3.0.json',
-                        },
-                        {
-                          $ref: 'https://www.first.org/cvss/cvss-v3.1.json',
-                        },
+                        { $ref: 'https://www.first.org/cvss/cvss-v3.0.json' },
+                        { $ref: 'https://www.first.org/cvss/cvss-v3.1.json' },
                       ],
                     },
                     cvss_v4: {
@@ -1452,9 +1685,7 @@ export default {
                   },
                   additionalProperties: false,
                 },
-                products: {
-                  $ref: '#/$defs/products_t',
-                },
+                products: { $ref: '#/$defs/products_t' },
                 source: {
                   title: 'Source',
                   description:
@@ -1474,7 +1705,7 @@ export default {
           product_status: {
             title: 'Product status',
             description:
-              'Contains different lists of product_ids which provide details on the status of the referenced product related to the current vulnerability. ',
+              'Contains different lists of product_ids which provide details on the status of the referenced product related to the current vulnerability.',
             type: 'object',
             minProperties: 1,
             properties: {
@@ -1595,12 +1826,8 @@ export default {
                     minLength: 1,
                   },
                 },
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
+                group_ids: { $ref: '#/$defs/product_groups_t' },
+                product_ids: { $ref: '#/$defs/products_t' },
                 restart_required: {
                   title: 'Restart required by remediation',
                   description:
@@ -1680,12 +1907,8 @@ export default {
                   type: 'string',
                   minLength: 1,
                 },
-                group_ids: {
-                  $ref: '#/$defs/product_groups_t',
-                },
-                product_ids: {
-                  $ref: '#/$defs/products_t',
-                },
+                group_ids: { $ref: '#/$defs/product_groups_t' },
+                product_ids: { $ref: '#/$defs/products_t' },
               },
               additionalProperties: false,
             },
