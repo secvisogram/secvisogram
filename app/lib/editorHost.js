@@ -3,6 +3,8 @@
  * `<secvisogram-editor>` element. It decides what is reported to the page.
  */
 
+import { testIdFromName } from './shared/testId.js'
+
 /**
  * @typedef {import('./app/SecvisogramPage/shared/types.js').TypedValidationError} TypedValidationError
  */
@@ -33,6 +35,7 @@
  *
  * @param {{
  *   tests: Array<{
+ *     name?: string
  *     errors: Array<{ instancePath: string; message: string }>
  *     warnings: Array<{ instancePath: string; message: string }>
  *     infos: Array<{ instancePath: string; message: string }>
@@ -41,14 +44,22 @@
  * @returns {TypedValidationError[]}
  */
 export function remoteValidationErrors(response) {
-  return response.tests.flatMap((test) => [
-    ...test.errors.map((e) => ({ ...e, type: /** @type {const} */ ('error') })),
-    ...test.warnings.map((e) => ({
-      ...e,
-      type: /** @type {const} */ ('warning'),
-    })),
-    ...test.infos.map((e) => ({ ...e, type: /** @type {const} */ ('info') })),
-  ])
+  return response.tests.flatMap((test) => {
+    const testId = testIdFromName(test.name)
+    /** @param {TypedValidationError['type']} type */
+    const typed =
+      (type) => (/** @type {{ instancePath: string; message: string }} */ e) =>
+        /** @type {TypedValidationError} */ ({
+          ...e,
+          type,
+          ...(testId ? { testId } : {}),
+        })
+    return [
+      ...test.errors.map(typed('error')),
+      ...test.warnings.map(typed('warning')),
+      ...test.infos.map(typed('info')),
+    ]
+  })
 }
 
 /**
@@ -82,7 +93,12 @@ export function createEditorHost({ onChange, onValidate }) {
     if (!clientResult) return
     onValidate({
       errors: [...clientResult.errors, ...(remoteResult?.errors ?? [])].map(
-        ({ type, instancePath, message }) => ({ type, instancePath, message }),
+        ({ type, instancePath, message, testId }) => ({
+          type,
+          instancePath,
+          message,
+          ...(testId ? { testId } : {}),
+        }),
       ),
       valid: clientResult.valid && (remoteResult?.valid ?? true),
     })
