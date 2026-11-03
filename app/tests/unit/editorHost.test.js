@@ -254,4 +254,28 @@ describe('remoteValidationErrors', () => {
       { type: 'info', instancePath: '/c', message: 'i1' },
     ])
   })
+
+  it('adds the test id derived from the test name', () => {
+    const errors = remoteValidationErrors({
+      tests: [
+        {
+          name: 'mandatoryTest_6_1_27_11',
+          errors: [{ instancePath: '/a', message: 'e1' }],
+          warnings: [],
+          infos: [],
+        },
+        {
+          name: 'csaf_2_0_strict',
+          errors: [{ instancePath: '/b', message: 'e2' }],
+          warnings: [],
+          infos: [],
+        },
+      ],
+    })
+
+    expect(errors).toEqual([
+      { type: 'error', instancePath: '/a', message: 'e1', testId: '6.1.27.11' },
+      { type: 'error', instancePath: '/b', message: 'e2' },
+    ])
+  })
 })

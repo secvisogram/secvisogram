@@ -91,3 +91,26 @@ describe('v2_1 recommended tests selection', () => {
     ).to.equal(true)
   })
 })
+
+describe('v2_1 validation errors', () => {
+  it('contain the test id of the failed test', async () => {
+    const document = {
+      ...MINIMAL_DOC,
+      product_tree: {
+        full_product_names: [
+          { name: 'Some unreferenced product', product_id: 'CSAFPID-0001' },
+        ],
+      },
+    }
+
+    const result = await core.validate({ document })
+
+    expect(
+      result.errors.find(
+        (e) =>
+          e.instancePath === '/product_tree/full_product_names/0/product_id' &&
+          e.message === 'is not referenced',
+      )?.testId,
+    ).to.equal('6.2.1')
+  })
+})
