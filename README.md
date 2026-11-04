@@ -203,6 +203,8 @@ When running with the [CSAF CMS Server](https://github.com/secvisogram/csaf-cms-
 _Identifying & Solving Validation issues_
 Opening the error view in the sidebar will reveal a linked list of validation issues. Here you can click on any validation issue and directly jump to the affected form elements.
 
+Each issue that was reported by a numbered test of the CSAF specification (e.g. `6.1.2`) shows the test ID in front of the document path. The test ID is a link to the corresponding chapter in the CSAF specification (the CSAF 2.0 or the CSAF 2.1 draft, depending on the selected CSAF version). Issues of the JSON schema validation have no test ID.
+
 The Form Editor's interface and behavior can be configured by adjusting field [metadata](app/scripts/importUiMetaData/metaData.js).
 For more detail, see the corresponding [readme](app/scripts/importUiMetaData/README.md).
 

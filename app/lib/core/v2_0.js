@@ -4,14 +4,22 @@ import * as optionalTests from '@secvisogram/csaf-validator-lib/optionalTests.js
 import libStrip from '@secvisogram/csaf-validator-lib/strip.js'
 import libValidate from '@secvisogram/csaf-validator-lib/validate.js'
 import { compose, set } from 'lodash/fp.js'
+import { testIdFromName } from '#lib/shared/testId.js'
 import doc_max from './v2_0/doc-max.json'
 import doc_min from './v2_0/doc-min.json'
 import { DocumentEntity } from './v2_0/entities.js'
 
-const INSTANT_TESTS =
-  /** @type {import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest[]} */ (
-    Object.values(basic)
-  ).concat(Object.values(optionalTests))
+// The export keys are used to determine the test IDs, because the function
+// names are not reliable in the minified browser bundle.
+const INSTANT_TEST_ENTRIES =
+  /** @type {[string, import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest][]} */ (
+    Object.entries(basic)
+  ).concat(
+    /** @type {[string, import('@secvisogram/csaf-validator-lib/lib/shared/types.js').DocumentTest][]} */ (
+      Object.entries(optionalTests)
+    ),
+  )
+const INSTANT_TESTS = INSTANT_TEST_ENTRIES.map(([, test]) => test)
 
 const secvisogramName = 'Secvisogram'
 
@@ -51,26 +59,23 @@ export async function validate({ document }) {
   return {
     isValid: res.isValid,
     /** @type {TypedValidationError[]} */
-    errors: res.tests.flatMap((t) =>
-      t.errors
-        .map(
-          (e) => /** @type {TypedValidationError} */ ({ type: 'error', ...e }),
-        )
-        .concat(
-          t.warnings.map(
-            (e) =>
-              /** @type {TypedValidationError} */ ({
-                type: 'warning',
-                ...e,
-              }),
-          ),
-        )
-        .concat(
-          t.infos.map(
-            (e) => /** @type {TypedValidationError} */ ({ type: 'info', ...e }),
-          ),
-        ),
-    ),
+    errors: res.tests.flatMap((t, i) => {
+      const testId = testIdFromName(INSTANT_TEST_ENTRIES[i]?.[0])
+      /**
+       * @param {'error' | 'warning' | 'info'} type
+       * @param {{ instancePath: string; message: string }} e
+       */
+      const toTyped = (type, e) =>
+        /** @type {TypedValidationError} */ ({
+          type,
+          ...e,
+          ...(testId ? { testId } : {}),
+        })
+      return t.errors
+        .map((e) => toTyped('error', e))
+        .concat(t.warnings.map((e) => toTyped('warning', e)))
+        .concat(t.infos.map((e) => toTyped('info', e)))
+    }),
   }
 }
 

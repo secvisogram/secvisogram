@@ -21,6 +21,8 @@ export interface TypedValidationError {
   type: 'error' | 'warning' | 'info'
   message: string
   instancePath: string
+  /** CSAF test ID with dots, e.g. `6.1.27.11` */
+  testId?: string
 }
 
 export interface FormValues {
