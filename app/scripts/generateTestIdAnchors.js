@@ -27,9 +27,7 @@ function anchors(/** @type {string} */ html) {
   /** @type {Record<string, string>} */
   const result = {}
   for (const heading of html.matchAll(/<h([2-6])([^>]*)>(.*?)<\/h\1>/gs)) {
-    const number = heading[3]
-      .replace(/<[^>]*>/g, '')
-      .match(/^\s*(6(?:\.\d+)+)\s/)?.[1]
+    const number = heading[3].match(/^\s*(6(?:\.\d+)+)\s/)?.[1]
     if (!number) continue
     const anchor =
       heading[3].match(/<a id=['"]([^'"]+)['"]/)?.[1] ??
