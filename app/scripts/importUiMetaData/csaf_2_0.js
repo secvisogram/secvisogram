@@ -5,7 +5,7 @@ import prettier from 'prettier'
 
 const { metaData, jsonSchema } = uiSchemas['v2.0']
 
-/** @typedef {import('./cvss-v2.0.json')} CVSS2JSONSchema */
+/** @typedef {typeof import('./cvss-v2.0.json')} CVSS2JSONSchema */
 
 /** @type {CVSS2JSONSchema} */
 const cvss2Schema = JSON.parse(

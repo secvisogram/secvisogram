@@ -9,6 +9,9 @@ export default class CsrfApiRequest extends ApiRequest {
    */
   constructor(request) {
     super(request)
+    // Initialize the inherited request property in this subclass as well so
+    // its methods can safely access it under strict property initialization.
+    this.request = request
   }
 
   async send() {
