@@ -23,7 +23,7 @@ export async function validateCSAF(validatorUrl, { csaf }) {
     .send()
 
   /**
-   * @type {{ isValid: boolean, tests: Array<{ errors: Array<{ instancePath: string; message: string }>; warnings: Array<{ instancePath: string; message: string }>; infos: Array<{ instancePath: string; message: string }> }> }}
+   * @type {{ isValid: boolean, tests: Array<{ name: string; errors: Array<{ instancePath: string; message: string }>; warnings: Array<{ instancePath: string; message: string }>; infos: Array<{ instancePath: string; message: string }> }> }}
    */
   return await validateResponse.json()
 }

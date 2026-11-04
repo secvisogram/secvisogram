@@ -69,6 +69,14 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
               }
             >
               <b>{err.instancePath}</b>: {err.message}
+              {err.testId ? (
+                <>
+                  {' '}
+                  <b data-testid={`error_test_id-${err.instancePath}-${i}`}>
+                    ({err.testId})
+                  </b>
+                </>
+              ) : null}
             </div>
           )
         })}

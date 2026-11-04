@@ -57,3 +57,23 @@ describe('Core', () => {
     })
   })
 })
+
+describe('Core v2.0 test ids', () => {
+  it('adds the test id to errors of numbered tests', async () => {
+    const document = {
+      document: { category: 'csaf_base', csaf_version: '2.0' },
+      product_tree: {
+        full_product_names: [
+          { name: 'Some unreferenced product', product_id: 'CSAFPID-0001' },
+        ],
+      },
+    }
+
+    const result = await core.validate({ document })
+
+    expect(
+      result.errors.find((e) => e.testId === '6.2.1'),
+      'unused product id is reported with test id 6.2.1',
+    ).toBeDefined()
+  })
+})
