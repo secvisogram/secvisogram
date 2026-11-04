@@ -42,5 +42,8 @@ export default defineConfig({
   plugins: [rawHtmlLoader, jsxInJsLoader],
   test: {
     include: ['tests/unit/**/*.test.{js,ts}'],
+    // The first validation lazily loads the validator library, which compiles
+    // several hundred JSON schemas.
+    testTimeout: 30000,
   },
 })
