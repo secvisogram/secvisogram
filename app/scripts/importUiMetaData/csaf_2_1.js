@@ -166,6 +166,20 @@ function convertSchema(subschema, defs, path) {
     }
   }
 
+  if ('anyOf' in subschema || 'oneOf' in subschema) {
+    const variants = 'anyOf' in subschema ? subschema.anyOf : subschema.oneOf
+    const resolvedVariants = variants.map((variant) =>
+      convertSchema(variant, defs, path),
+    )
+    // The form editor renders a single editor per field, so only the first
+    // variant determines the generated UI schema.
+    return {
+      ...resolvedVariants[0],
+      title: subschema.title ?? resolvedVariants[0].title,
+      description: subschema.description ?? resolvedVariants[0].description,
+    }
+  }
+
   if (subschema.type === 'object') {
     let propertyList = Object.entries(subschema.properties ?? {})
     if (metaData && 'propertyOrder' in metaData) {

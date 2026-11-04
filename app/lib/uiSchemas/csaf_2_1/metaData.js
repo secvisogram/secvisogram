@@ -15,6 +15,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
   },
   '$.document': {
@@ -29,6 +30,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
   },
   '$.document.acknowledgments': {
@@ -42,6 +44,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'best_practice',
     },
     i18n: {
       title: 'DocumentAcknowledgmentsTitle',
@@ -72,6 +75,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsNamesTitle',
@@ -104,6 +108,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsOrganizationTitle',
@@ -123,6 +128,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsSummaryTitle',
@@ -142,6 +148,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsUrlsTitle',
@@ -172,6 +179,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'best_practice',
     },
     i18n: {
       title: 'DocumentAggregateSeverityTitle',
@@ -190,6 +198,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentAggregateSeverityNamespaceTitle',
@@ -207,6 +216,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentAggregateSeverityTextTitle',
@@ -225,6 +235,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentCategoryTitle',
@@ -237,6 +248,7 @@ export default {
       'csaf_informational_advisory',
       'csaf_security_advisory',
       'csaf_vex',
+      'csaf_vulnerability_report',
     ],
   },
   '$.document.csaf_version': {
@@ -250,6 +262,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentCsafVersionTitle',
@@ -268,6 +281,7 @@ export default {
       csaf_informational_advisory: 'best_practice',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionTitle',
@@ -285,6 +299,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionTextTitle',
@@ -303,6 +318,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionTlpTitle',
@@ -320,6 +336,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentDistributionTlpLabelTitle',
@@ -338,6 +355,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionTlpUrlTitle',
@@ -355,6 +373,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionSharingGroupTitle',
@@ -373,6 +392,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentDistributionSharingGroupIdTitle',
@@ -392,6 +412,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentDistributionSharingGroupNameTitle',
@@ -409,6 +430,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentLangTitle',
@@ -426,6 +448,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentLicenseExpressionTitle',
@@ -443,6 +466,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentNotesTitle',
@@ -471,6 +495,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'NotesItemsAudienceTitle',
@@ -488,6 +513,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'NotesItemsCategoryTitle',
@@ -506,6 +532,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'NotesItemsTextTitle',
@@ -524,6 +551,7 @@ export default {
       csaf_informational_advisory: 'best_practice',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'NotesItemsTitleTitle',
@@ -537,6 +565,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -558,6 +587,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -577,6 +607,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentPublisherTitle',
@@ -594,30 +625,13 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentPublisherCategoryTitle',
       description: 'DocumentPublisherCategoryDescription',
     },
     uiType: 'STRING_ENUM',
-  },
-  '$.document.publisher.contact_details': {
-    userDocumentation: {
-      specification: 'docs/user/document/publisher/contact_details-spec.en.md',
-      usage: 'docs/user/document/publisher/contact_details-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'want_to_have',
-      csaf_security_incident_response: 'want_to_have',
-      csaf_informational_advisory: 'want_to_have',
-      csaf_security_advisory: 'best_practice',
-      csaf_vex: 'best_practice',
-    },
-    i18n: {
-      title: 'DocumentPublisherContactDetailsTitle',
-      description: 'DocumentPublisherContactDetailsDescription',
-    },
-    uiType: 'STRING_MULTI_LINE',
   },
   '$.document.publisher.issuing_authority': {
     userDocumentation: {
@@ -631,6 +645,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentPublisherIssuingAuthorityTitle',
@@ -649,6 +664,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentPublisherNameTitle',
@@ -666,6 +682,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentPublisherNamespaceTitle',
@@ -683,6 +700,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentReferencesTitle',
@@ -711,6 +729,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ReferencesItemsCategoryTitle',
@@ -729,6 +748,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ReferencesItemsSummaryTitle',
@@ -747,6 +767,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ReferencesItemsUrlTitle',
@@ -764,6 +785,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentSourceLangTitle',
@@ -781,6 +803,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTitleTitle',
@@ -798,6 +821,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingTitle',
@@ -815,6 +839,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentTrackingAliasesTitle',
@@ -844,6 +869,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingCurrentReleaseDateTitle',
@@ -861,6 +887,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentTrackingGeneratorTitle',
@@ -878,6 +905,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentTrackingGeneratorDateTitle',
@@ -895,6 +923,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingGeneratorEngineTitle',
@@ -913,6 +942,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingGeneratorEngineNameTitle',
@@ -932,6 +962,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentTrackingGeneratorEngineVersionTitle',
@@ -950,6 +981,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingIdTitle',
@@ -969,6 +1001,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingInitialReleaseDateTitle',
@@ -986,6 +1019,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingRevisionHistoryTitle',
@@ -1022,6 +1056,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingRevisionHistoryItemsDateTitle',
@@ -1042,6 +1077,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentTrackingRevisionHistoryItemsLegacyVersionTitle',
@@ -1063,6 +1099,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'VersionTitle', description: 'VersionDescription' },
     disable: { ifStandaloneMode: false, ifServerMode: true },
@@ -1080,6 +1117,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingRevisionHistoryItemsSummaryTitle',
@@ -1099,6 +1137,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'DocumentTrackingStatusTitle',
@@ -1117,6 +1156,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'VersionTitle', description: 'VersionDescription' },
   },
@@ -1131,6 +1171,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductTreeTitle', description: 'ProductTreeDescription' },
   },
@@ -1145,6 +1186,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'BranchesTitle', description: 'BranchesDescription' },
   },
@@ -1181,6 +1223,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'BranchesItemsCategoryTitle',
@@ -1199,6 +1242,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'BranchesItemsNameTitle',
@@ -1227,6 +1271,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'FullProductNameNameTitle',
@@ -1245,6 +1290,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
@@ -1262,6 +1308,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperTitle',
@@ -1281,6 +1328,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperCpeTitle',
@@ -1300,6 +1348,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperHashesTitle',
@@ -1335,6 +1384,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1373,6 +1423,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1395,6 +1446,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1417,6 +1469,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1439,6 +1492,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperModelNumbersTitle',
@@ -1475,6 +1529,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperPurlTitle',
@@ -1494,6 +1549,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperPurlsTitle',
@@ -1513,6 +1569,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperSbomUrlsTitle',
@@ -1548,6 +1605,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSerialNumbersTitle',
@@ -1584,6 +1642,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperSkusTitle',
@@ -1618,6 +1677,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperXGenericUrisTitle',
@@ -1655,6 +1715,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1677,6 +1738,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1696,6 +1758,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductTreeFullProductNamesTitle',
@@ -1728,6 +1791,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'FullProductNameNameTitle',
@@ -1745,6 +1809,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
@@ -1762,6 +1827,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperTitle',
@@ -1781,6 +1847,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperCpeTitle',
@@ -1800,6 +1867,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperHashesTitle',
@@ -1835,6 +1903,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1873,6 +1942,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1895,6 +1965,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1917,6 +1988,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -1939,6 +2011,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperModelNumbersTitle',
@@ -1975,6 +2048,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperPurlTitle',
@@ -1994,6 +2068,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperPurlsTitle',
@@ -2013,6 +2088,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperSbomUrlsTitle',
@@ -2049,6 +2125,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSerialNumbersTitle',
@@ -2085,6 +2162,7 @@ export default {
       csaf_informational_advisory: 'nice_to_know',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameProductIdentificationHelperSkusTitle',
@@ -2119,6 +2197,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperXGenericUrisTitle',
@@ -2156,6 +2235,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2178,6 +2258,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2197,6 +2278,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductTreeProductGroupsTitle',
@@ -2232,6 +2314,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductGroupIdTitle',
@@ -2251,6 +2334,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductTreeProductGroupsItemsProductIdsTitle',
@@ -2279,6 +2363,7 @@ export default {
       csaf_informational_advisory: 'want_to_have',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductTreeProductGroupsItemsSummaryTitle',
@@ -2297,6 +2382,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductTreeRelationshipsTitle',
@@ -2329,6 +2415,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductTreeRelationshipsItemsCategoryTitle',
@@ -2349,6 +2436,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'FullProductNameTitle',
@@ -2367,6 +2455,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'FullProductNameNameTitle',
@@ -2385,6 +2474,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
@@ -2403,6 +2493,7 @@ export default {
         csaf_informational_advisory: 'want_to_have',
         csaf_security_advisory: 'want_to_have',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperTitle',
@@ -2423,6 +2514,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperCpeTitle',
@@ -2443,6 +2535,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperHashesTitle',
@@ -2479,6 +2572,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2517,6 +2611,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2539,6 +2634,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2561,6 +2657,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2583,6 +2680,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperModelNumbersTitle',
@@ -2620,6 +2718,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperPurlTitle',
@@ -2641,6 +2740,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperPurlsTitle',
@@ -2662,6 +2762,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSbomUrlsTitle',
@@ -2698,6 +2799,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSerialNumbersTitle',
@@ -2735,6 +2837,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSkusTitle',
@@ -2771,6 +2874,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperXGenericUrisTitle',
@@ -2808,6 +2912,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2830,6 +2935,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -2850,6 +2956,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductTreeRelationshipsItemsProductReferenceTitle',
@@ -2869,6 +2976,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductTreeRelationshipsItemsRelatesToProductReferenceTitle',
@@ -2888,6 +2996,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesTitle',
@@ -2921,6 +3030,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsAcknowledgmentsTitle',
@@ -2951,6 +3061,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsNamesTitle',
@@ -2983,6 +3094,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsOrganizationTitle',
@@ -3002,6 +3114,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsSummaryTitle',
@@ -3021,6 +3134,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'AcknowledgmentsItemsUrlsTitle',
@@ -3051,6 +3165,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCveTitle',
@@ -3068,6 +3183,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCwesTitle',
@@ -3086,6 +3202,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCwesTitle',
@@ -3105,6 +3222,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCwesIdTitle',
@@ -3123,6 +3241,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCwesNameTitle',
@@ -3141,6 +3260,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsCwesVersionTitle',
@@ -3160,6 +3280,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsDiscoveryDateTitle',
@@ -3177,6 +3298,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsFlagsTitle',
@@ -3208,6 +3330,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsFlagsItemsDateTitle',
@@ -3227,6 +3350,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -3258,6 +3382,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsFlagsItemsLabelTitle',
@@ -3278,6 +3403,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -3297,6 +3423,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -3318,6 +3445,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -3337,6 +3465,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsIdsTitle',
@@ -3362,6 +3491,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -3383,6 +3513,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -3404,6 +3535,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsIdsItemsSystemNameTitle',
@@ -3422,170 +3554,12 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsIdsItemsTextTitle',
       description: 'VulnerabilitiesItemsIdsItemsTextDescription',
     },
-  },
-  '$.vulnerabilities.involvements': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements-spec.en.md',
-      usage: 'docs/user/vulnerabilities/vulnerability/involvements-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'optional',
-      csaf_security_incident_response: 'nice_to_know',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'nice_to_know',
-      csaf_vex: 'nice_to_know',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsTitle',
-      description: 'VulnerabilitiesItemsInvolvementsDescription',
-    },
-  },
-  '$.vulnerabilities.involvements[]': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement-spec.en.md',
-      usage:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement-usage.en.md',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsDescription',
-    },
-    itemName: { itemNameTranslationKey: 'arrays.involvementsItemName' },
-  },
-  '$.vulnerabilities.involvements.contact': {
-    relevanceLevels: {
-      csaf_base: 'want_to_have',
-      csaf_security_incident_response: 'want_to_have',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'best_practice',
-      csaf_vex: 'best_practice',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsContactTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsContactDescription',
-    },
-  },
-  '$.vulnerabilities.involvements.date': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/date-spec.en.md',
-      usage:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/date-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'want_to_have',
-      csaf_security_incident_response: 'want_to_have',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'best_practice',
-      csaf_vex: 'best_practice',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsDateTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsDateDescription',
-    },
-  },
-  '$.vulnerabilities.involvements.party': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/party-spec.en.md',
-      usage:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/party-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'mandatory',
-      csaf_security_incident_response: 'mandatory',
-      csaf_informational_advisory: 'mandatory',
-      csaf_security_advisory: 'mandatory',
-      csaf_vex: 'mandatory',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsPartyTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsPartyDescription',
-    },
-    uiType: 'STRING_ENUM',
-  },
-  '$.vulnerabilities.involvements.status': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/status-spec.en.md',
-      usage:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/status-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'mandatory',
-      csaf_security_incident_response: 'mandatory',
-      csaf_informational_advisory: 'mandatory',
-      csaf_security_advisory: 'mandatory',
-      csaf_vex: 'mandatory',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsStatusTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsStatusDescription',
-    },
-    uiType: 'STRING_ENUM',
-  },
-  '$.vulnerabilities.involvements.summary': {
-    userDocumentation: {
-      specification:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/summary-spec.en.md',
-      usage:
-        'docs/user/vulnerabilities/vulnerability/involvements/involvement/summary-usage.en.md',
-    },
-    relevanceLevels: {
-      csaf_base: 'want_to_have',
-      csaf_security_incident_response: 'want_to_have',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'best_practice',
-      csaf_vex: 'best_practice',
-    },
-    i18n: {
-      title: 'VulnerabilitiesItemsInvolvementsItemsSummaryTitle',
-      description: 'VulnerabilitiesItemsInvolvementsItemsSummaryDescription',
-    },
-    uiType: 'STRING_MULTI_LINE',
-  },
-  '$.vulnerabilities.involvements.group_ids': {
-    relevanceLevels: {
-      csaf_base: 'optional',
-      csaf_security_incident_response: 'nice_to_know',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'nice_to_know',
-      csaf_vex: 'nice_to_know',
-    },
-    i18n: {
-      title: 'ProductGroupsTitle',
-      description: 'ProductGroupsDescription',
-    },
-  },
-  '$.vulnerabilities.involvements.group_ids[]': {
-    i18n: {
-      title: 'ProductGroupIdTitle',
-      description: 'ProductGroupIdDescription',
-    },
-    itemName: { itemNameTranslationKey: 'arrays.productGroupIdsItemName' },
-    uiType: 'STRING_GROUP_ID',
-  },
-  '$.vulnerabilities.involvements.product_ids': {
-    relevanceLevels: {
-      csaf_base: 'optional',
-      csaf_security_incident_response: 'nice_to_know',
-      csaf_informational_advisory: 'excluded',
-      csaf_security_advisory: 'nice_to_know',
-      csaf_vex: 'nice_to_know',
-    },
-    i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
-  },
-  '$.vulnerabilities.involvements.product_ids[]': {
-    i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
-    itemName: { itemNameTranslationKey: 'arrays.productsItemName' },
-    uiType: 'STRING_PRODUCT_ID',
   },
   '$.vulnerabilities.notes': {
     userDocumentation: {
@@ -3598,6 +3572,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsNotesTitle',
@@ -3626,6 +3601,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'NotesItemsAudienceTitle',
@@ -3643,6 +3619,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'NotesItemsCategoryTitle',
@@ -3660,6 +3637,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'NotesItemsTextTitle',
@@ -3678,6 +3656,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'NotesItemsTitleTitle',
@@ -3691,6 +3670,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -3712,6 +3692,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -3733,6 +3714,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusTitle',
@@ -3752,6 +3734,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusFirstAffectedTitle',
@@ -3780,6 +3763,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusFirstFixedTitle',
@@ -3808,6 +3792,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusFixedTitle',
@@ -3836,6 +3821,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusKnownAffectedTitle',
@@ -3864,6 +3850,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusKnownNotAffectedTitle',
@@ -3893,6 +3880,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusLastAffectedTitle',
@@ -3921,6 +3909,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusRecommendedTitle',
@@ -3949,6 +3938,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusUnderInvestigationTitle',
@@ -3978,6 +3968,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsProductStatusUnknownTitle',
@@ -4005,6 +3996,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'best_practice',
     },
     i18n: {
       title: 'VulnerabilitiesItemsReferencesTitle',
@@ -4033,6 +4025,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ReferencesItemsCategoryTitle',
@@ -4050,6 +4043,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ReferencesItemsSummaryTitle',
@@ -4068,6 +4062,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ReferencesItemsUrlTitle',
@@ -4087,6 +4082,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsDisclosureDateTitle',
@@ -4105,6 +4101,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsTitle',
@@ -4137,6 +4134,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsCategoryTitle',
@@ -4157,6 +4155,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsDateTitle',
@@ -4176,6 +4175,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsDetailsTitle',
@@ -4196,6 +4196,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsEntitlementsTitle',
@@ -4231,6 +4232,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -4262,6 +4264,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -4287,6 +4290,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsRestartRequiredTitle',
@@ -4307,6 +4311,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title:
@@ -4329,6 +4334,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsRestartRequiredDetailsTitle',
@@ -4350,6 +4356,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsRemediationsItemsUrlTitle',
@@ -4368,6 +4375,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'best_practice',
     },
     i18n: {
       title: 'VulnerabilitiesItemsScoresTitle',
@@ -4399,6 +4407,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsMetricsContentTitle',
@@ -4418,6 +4427,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsMetricsSourceTitle',
@@ -4431,6 +4441,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsMetricsContentQualitativeSeverityRatingTitle',
@@ -4455,6 +4466,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'CvssV2Title', description: 'CvssV2Description' },
     uiType: 'OBJECT_CVSS_2',
@@ -4472,6 +4484,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV2VersionTitle',
@@ -4491,6 +4504,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV2VectorStringTitle',
@@ -4510,6 +4524,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2AccessVectorTitle',
@@ -4529,6 +4544,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2AccessComplexityTitle',
@@ -4548,6 +4564,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2AuthenticationTitle',
@@ -4567,6 +4584,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2ConfidentialityImpactTitle',
@@ -4586,6 +4604,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2IntegrityImpactTitle',
@@ -4605,6 +4624,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2AvailabilityImpactTitle',
@@ -4624,6 +4644,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV2BaseScoreTitle',
@@ -4643,6 +4664,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2ExploitabilityTitle',
@@ -4662,6 +4684,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2RemediationLevelTitle',
@@ -4681,6 +4704,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2ReportConfidenceTitle',
@@ -4700,6 +4724,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2TemporalScoreTitle',
@@ -4719,6 +4744,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2CollateralDamagePotentialTitle',
@@ -4738,6 +4764,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2TargetDistributionTitle',
@@ -4757,6 +4784,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2ConfidentialityRequirementTitle',
@@ -4776,6 +4804,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2IntegrityRequirementTitle',
@@ -4795,6 +4824,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2AvailabilityRequirementTitle',
@@ -4814,6 +4844,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV2EnvironmentalScoreTitle',
@@ -4836,6 +4867,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'CvssV3Title', description: 'CvssV3Description' },
     uiType: 'OBJECT_CVSS_3',
@@ -4853,6 +4885,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV3VersionTitle',
@@ -4872,6 +4905,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV3VectorStringTitle',
@@ -4891,6 +4925,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3AttackVectorTitle',
@@ -4910,6 +4945,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3AttackComplexityTitle',
@@ -4929,6 +4965,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3PrivilegesRequiredTitle',
@@ -4948,6 +4985,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3UserInteractionTitle',
@@ -4967,6 +5005,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'CvssV3ScopeTitle', description: 'CvssV3ScopeDescription' },
   },
@@ -4983,6 +5022,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ConfidentialityImpactTitle',
@@ -5002,6 +5042,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3IntegrityImpactTitle',
@@ -5021,6 +5062,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3AvailabilityImpactTitle',
@@ -5040,6 +5082,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV3BaseScoreTitle',
@@ -5059,6 +5102,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'CvssV3BaseSeverityTitle',
@@ -5078,6 +5122,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'nice_to_know',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ExploitCodeMaturityTitle',
@@ -5097,6 +5142,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3RemediationLevelTitle',
@@ -5116,6 +5162,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ReportConfidenceTitle',
@@ -5135,6 +5182,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3TemporalScoreTitle',
@@ -5154,6 +5202,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'want_to_have',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3TemporalSeverityTitle',
@@ -5173,6 +5222,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ConfidentialityRequirementTitle',
@@ -5192,6 +5242,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3IntegrityRequirementTitle',
@@ -5211,6 +5262,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3AvailabilityRequirementTitle',
@@ -5230,6 +5282,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedAttackVectorTitle',
@@ -5249,6 +5302,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedAttackComplexityTitle',
@@ -5268,6 +5322,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedPrivilegesRequiredTitle',
@@ -5287,6 +5342,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedUserInteractionTitle',
@@ -5306,6 +5362,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedScopeTitle',
@@ -5325,6 +5382,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedConfidentialityImpactTitle',
@@ -5344,6 +5402,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedIntegrityImpactTitle',
@@ -5363,6 +5422,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3ModifiedAvailabilityImpactTitle',
@@ -5382,6 +5442,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3EnvironmentalScoreTitle',
@@ -5401,6 +5462,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'CvssV3EnvironmentalSeverityTitle',
@@ -5408,9 +5470,9 @@ export default {
     },
   },
   '$.vulnerabilities.metrics.content.cvss_v4': {
-    title: 'CVSS v3',
+    title: 'CVSS v4',
     description:
-      'JSON Schema for Common Vulnerability Scoring System version 3.0',
+      'JSON Schema for Common Vulnerability Scoring System version 4.0',
     userDocumentation: {
       specification:
         'docs/user/vulnerabilities/vulnerability/scores/score/cvss_v4-spec.en.md',
@@ -5423,8 +5485,10 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'CvssV4Title', description: 'CvssV4Description' },
+    uiType: 'OBJECT_CVSS_4',
   },
   '$.vulnerabilities.metrics.content.ssvc_v1': {
     title: 'SSVC V1',
@@ -5442,6 +5506,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'SsvcV1Title', description: 'SsvcV1Description' },
   },
@@ -5458,6 +5523,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -5482,6 +5548,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'nice_to_know',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsThreatsTitle',
@@ -5514,6 +5581,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsThreatsItemsCategoryTitle',
@@ -5534,6 +5602,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsThreatsItemsDateTitle',
@@ -5553,6 +5622,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsThreatsItemsDetailsTitle',
@@ -5573,6 +5643,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductGroupsTitle',
@@ -5604,6 +5675,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'ProductsTitle', description: 'ProductsDescription' },
   },
@@ -5627,6 +5699,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'want_to_have',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsTitleTitle',
@@ -5640,6 +5713,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'RootXExtensionsTitle',
@@ -5659,6 +5733,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -5672,6 +5747,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -5685,6 +5761,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -5698,6 +5775,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -5711,6 +5789,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'DocumentXExtensionsTitle',
@@ -5730,6 +5809,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -5743,6 +5823,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -5756,6 +5837,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -5769,6 +5851,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -5782,6 +5865,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameXExtensionsTitle',
@@ -5801,6 +5885,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -5814,6 +5899,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -5827,6 +5913,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -5840,6 +5927,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -5853,6 +5941,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameXExtensionsTitle',
@@ -5872,6 +5961,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -5885,6 +5975,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -5898,6 +5989,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -5911,6 +6003,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -5924,6 +6017,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'FullProductNameXExtensionsTitle',
@@ -5943,6 +6037,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -5956,6 +6051,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -5969,6 +6065,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -5982,6 +6079,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -5995,6 +6093,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsXExtensionsTitle',
@@ -6014,6 +6113,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -6027,6 +6127,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -6040,6 +6141,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -6053,6 +6155,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -6066,6 +6169,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsMetricsContentXExtensionsTitle',
@@ -6085,6 +6189,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsSchemaTitle',
@@ -6098,6 +6203,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCategoryTitle',
@@ -6111,6 +6217,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsContentTitle',
@@ -6124,6 +6231,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ExtensionsItemsCriticalTitle',
@@ -6137,6 +6245,7 @@ export default {
       csaf_informational_advisory: 'optional',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'ProductTreeProductPathsTitle',
@@ -6153,6 +6262,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductPathBeginningProductReferenceTitle',
@@ -6174,6 +6284,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'FullProductNameNameTitle',
@@ -6187,6 +6298,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: { title: 'ProductIdTitle', description: 'ProductIdDescription' },
     uiType: 'STRING_GENERATE_PRODUCT_ID',
@@ -6199,6 +6311,7 @@ export default {
         csaf_informational_advisory: 'want_to_have',
         csaf_security_advisory: 'want_to_have',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperTitle',
@@ -6213,6 +6326,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperCpeTitle',
@@ -6227,6 +6341,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperHashesTitle',
@@ -6251,6 +6366,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6277,6 +6393,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6293,6 +6410,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6309,6 +6427,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6325,6 +6444,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperModelNumbersTitle',
@@ -6350,6 +6470,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperPurlTitle',
@@ -6365,6 +6486,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperPurlsTitle',
@@ -6380,6 +6502,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSbomUrlsTitle',
@@ -6404,6 +6527,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSerialNumbersTitle',
@@ -6429,6 +6553,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'nice_to_know',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperSkusTitle',
@@ -6453,6 +6578,7 @@ export default {
         csaf_informational_advisory: 'nice_to_know',
         csaf_security_advisory: 'nice_to_know',
         csaf_vex: 'want_to_have',
+        csaf_vulnerability_report: 'optional',
       },
       i18n: {
         title: 'FullProductNameProductIdentificationHelperXGenericUrisTitle',
@@ -6478,6 +6604,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6494,6 +6621,7 @@ export default {
         csaf_informational_advisory: 'mandatory',
         csaf_security_advisory: 'mandatory',
         csaf_vex: 'mandatory',
+        csaf_vulnerability_report: 'mandatory',
       },
       i18n: {
         title:
@@ -6509,6 +6637,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'ProductPathSubpathsTitle',
@@ -6525,6 +6654,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'SubpathCategoryTitle',
@@ -6538,6 +6668,7 @@ export default {
       csaf_informational_advisory: 'mandatory',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'SubpathNextProductReferenceTitle',
@@ -6552,6 +6683,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: {
       title: 'VulnerabilitiesItemsFirstKnownExploitationDatesTitle',
@@ -6572,6 +6704,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'VulnerabilitiesItemsFirstKnownExploitationDatesItemsDateTitle',
@@ -6587,6 +6720,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title:
@@ -6603,6 +6737,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'optional',
       csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'EpssTitle', description: 'EpssDescription' },
   },
@@ -6613,6 +6748,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'EpssPercentileTitle',
@@ -6626,6 +6762,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'EpssProbabilityTitle',
@@ -6639,6 +6776,7 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'mandatory',
       csaf_vex: 'mandatory',
+      csaf_vulnerability_report: 'mandatory',
     },
     i18n: {
       title: 'EpssTimestampTitle',
@@ -6656,7 +6794,610 @@ export default {
       csaf_informational_advisory: 'excluded',
       csaf_security_advisory: 'best_practice',
       csaf_vex: 'best_practice',
+      csaf_vulnerability_report: 'optional',
     },
     i18n: { title: 'SsvcV2Title', description: 'SsvcV2Description' },
+  },
+  '$.document.involvement': {
+    i18n: {
+      title: 'DocumentInvolvementTitle',
+      description: 'DocumentInvolvementDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+    userDocumentation: {
+      specification: 'docs/user/document/involvement-spec.en.md',
+      usage: 'docs/user/document/involvement-usage.en.md',
+    },
+  },
+  '$.document.involvement.actions': {
+    i18n: {
+      title: 'DocumentInvolvementActionsTitle',
+      description: 'DocumentInvolvementActionsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions[]': {
+    i18n: {
+      title: 'DocumentInvolvementActionsItemsTitle',
+      description: 'DocumentInvolvementActionsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.acting_entity_refs': {
+    i18n: { title: 'EntityRefsTitle', description: 'EntityRefsDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.acting_entity_refs[]': {
+    i18n: {
+      title: 'EntityRefsItemsTitle',
+      description: 'EntityRefsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.action_id': {
+    i18n: {
+      title: 'DocumentInvolvementActionsActionIdTitle',
+      description: 'DocumentInvolvementActionsActionIdDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.category': {
+    i18n: {
+      title: 'DocumentInvolvementActionsCategoryTitle',
+      description: 'DocumentInvolvementActionsCategoryDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.date': {
+    i18n: {
+      title: 'DocumentInvolvementActionsDateTitle',
+      description: 'DocumentInvolvementActionsDateDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.dl_vuln_ids': {
+    i18n: {
+      title: 'DocumentInvolvementActionsDlVulnIdsTitle',
+      description: 'DocumentInvolvementActionsDlVulnIdsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.dl_vuln_ids[]': {
+    i18n: {
+      title: 'DocumentInvolvementActionsDlVulnIdsItemsTitle',
+      description: 'DocumentInvolvementActionsDlVulnIdsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.group_ids': {
+    i18n: {
+      title: 'DocumentInvolvementActionsGroupIdsTitle',
+      description: 'DocumentInvolvementActionsGroupIdsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.group_ids[]': {
+    i18n: {
+      title: 'DocumentInvolvementActionsGroupIdsItemsTitle',
+      description: 'DocumentInvolvementActionsGroupIdsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.product_ids': {
+    i18n: {
+      title: 'DocumentInvolvementActionsProductIdsTitle',
+      description: 'DocumentInvolvementActionsProductIdsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.product_ids[]': {
+    i18n: {
+      title: 'DocumentInvolvementActionsProductIdsItemsTitle',
+      description: 'DocumentInvolvementActionsProductIdsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.receiving_entity_refs': {
+    i18n: { title: 'EntityRefsTitle', description: 'EntityRefsDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.receiving_entity_refs[]': {
+    i18n: {
+      title: 'EntityRefsItemsTitle',
+      description: 'EntityRefsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.referenced_action_ids': {
+    i18n: {
+      title: 'DocumentInvolvementActionsReferencedActionIdsTitle',
+      description: 'DocumentInvolvementActionsReferencedActionIdsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.referenced_action_ids[]': {
+    i18n: {
+      title: 'DocumentInvolvementActionsReferencedActionIdsItemsTitle',
+      description:
+        'DocumentInvolvementActionsReferencedActionIdsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.summary': {
+    i18n: {
+      title: 'DocumentInvolvementActionsSummaryTitle',
+      description: 'DocumentInvolvementActionsSummaryDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.actions.status': {
+    i18n: {
+      title: 'DocumentInvolvementActionsStatusTitle',
+      description: 'DocumentInvolvementActionsStatusDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities': {
+    i18n: {
+      title: 'DocumentInvolvementEntitiesTitle',
+      description: 'DocumentInvolvementEntitiesDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities[]': {
+    i18n: {
+      title: 'DocumentInvolvementEntitiesItemsTitle',
+      description: 'DocumentInvolvementEntitiesItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.category': {
+    i18n: {
+      title: 'DocumentInvolvementEntitiesCategoryTitle',
+      description: 'DocumentInvolvementEntitiesCategoryDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.contact': {
+    i18n: { title: 'ContactTitle', description: 'ContactDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.contact.details': {
+    i18n: {
+      title: 'ContactDetailsTitle',
+      description: 'ContactDetailsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.contact.email': {
+    i18n: {
+      title: 'ContactEmailTitle',
+      description: 'ContactEmailDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.contact.public_openpgp_key_url': {
+    i18n: {
+      title: 'ContactPublicOpenpgpKeyUrlTitle',
+      description: 'ContactPublicOpenpgpKeyUrlDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.contact.url': {
+    i18n: { title: 'ContactUrlTitle', description: 'ContactUrlDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.entity_id': {
+    i18n: {
+      title: 'DocumentInvolvementEntitiesEntityIdTitle',
+      description: 'DocumentInvolvementEntitiesEntityIdDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entities.name': {
+    i18n: {
+      title: 'DocumentInvolvementEntitiesNameTitle',
+      description: 'DocumentInvolvementEntitiesNameDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsTitle',
+      description: 'DocumentInvolvementEntityGroupsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups[]': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsItemsTitle',
+      description: 'DocumentInvolvementEntityGroupsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups.entity_group_id': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsEntityGroupIdTitle',
+      description: 'DocumentInvolvementEntityGroupsEntityGroupIdDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups.entity_ids': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsEntityIdsTitle',
+      description: 'DocumentInvolvementEntityGroupsEntityIdsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups.entity_ids[]': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsEntityIdsItemsTitle',
+      description: 'DocumentInvolvementEntityGroupsEntityIdsItemsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups.name': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsNameTitle',
+      description: 'DocumentInvolvementEntityGroupsNameDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.involvement.entity_groups.summary': {
+    i18n: {
+      title: 'DocumentInvolvementEntityGroupsSummaryTitle',
+      description: 'DocumentInvolvementEntityGroupsSummaryDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.publisher.contact': {
+    i18n: { title: 'ContactTitle', description: 'ContactDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+    userDocumentation: {
+      specification: 'docs/user/document/publisher/contact-spec.en.md',
+      usage: 'docs/user/document/publisher/contact-usage.en.md',
+    },
+  },
+  '$.document.publisher.contact.details': {
+    i18n: {
+      title: 'ContactDetailsTitle',
+      description: 'ContactDetailsDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+    userDocumentation: {
+      specification: 'docs/user/document/publisher/contact-spec.en.md',
+      usage: 'docs/user/document/publisher/contact-usage.en.md',
+    },
+  },
+  '$.document.publisher.contact.email': {
+    i18n: {
+      title: 'ContactEmailTitle',
+      description: 'ContactEmailDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.publisher.contact.public_openpgp_key_url': {
+    i18n: {
+      title: 'ContactPublicOpenpgpKeyUrlTitle',
+      description: 'ContactPublicOpenpgpKeyUrlDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.document.publisher.contact.url': {
+    i18n: { title: 'ContactUrlTitle', description: 'ContactUrlDescription' },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+  },
+  '$.vulnerabilities.dl_vuln_id': {
+    i18n: {
+      title: 'VulnerabilitiesDlVulnIdTitle',
+      description: 'VulnerabilitiesDlVulnIdDescription',
+    },
+    relevanceLevels: {
+      csaf_base: 'optional',
+      csaf_security_incident_response: 'optional',
+      csaf_informational_advisory: 'optional',
+      csaf_security_advisory: 'optional',
+      csaf_vex: 'optional',
+      csaf_vulnerability_report: 'optional',
+    },
+    userDocumentation: {
+      specification:
+        'docs/user/vulnerabilities/vulnerability/dl_vuln_id-spec.en.md',
+      usage: 'docs/user/vulnerabilities/vulnerability/dl_vuln_id-usage.en.md',
+    },
   },
 }

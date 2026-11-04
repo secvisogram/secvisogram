@@ -1,5 +1,11 @@
 export type Schema =
-  ObjectSchema | ArraySchema | StringSchema | NumberSchema | BooleanSchema | Ref
+  | ObjectSchema
+  | ArraySchema
+  | StringSchema
+  | NumberSchema
+  | BooleanSchema
+  | Ref
+  | VariantsSchema
 
 export type JSONSchema = Schema & { $defs?: Defs }
 
@@ -49,6 +55,9 @@ export interface Ref extends CommonSchemaFields {
   $ref: string
 }
 
+export type VariantsSchema = CommonSchemaFields &
+  ({ anyOf: Schema[] } | { oneOf: Schema[] })
+
 export interface CommonUiSchemaFields {
   title?: string
   description?: string
@@ -71,6 +80,7 @@ export interface CommonUiSchemaFields {
       | 'OBJECT_CWE'
       | 'OBJECT_CVSS_2'
       | 'OBJECT_CVSS_3'
+      | 'OBJECT_CVSS_4'
       | 'ARRAY_REVISION_HISTORY'
     relevanceLevels?: {}
     i18n?: {

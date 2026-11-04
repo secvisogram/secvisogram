@@ -1,3 +1,4 @@
+// https://docs.oasis-open.org/csaf/csaf/v2.1/csd04/schema/extension-metaschema.json (21 October 2026)
 export default {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: 'https://docs.oasis-open.org/csaf/csaf/v2.1/schema/extension-metaschema.json',
@@ -19,7 +20,11 @@ export default {
       type: 'string',
       format: 'uri',
       pattern:
-        '^(?!https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json)(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+        '^(https:\\/\\/[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?(\\.[a-z0-9](([a-z0-9-]){0,61}[a-z0-9])?)+\\/([^\\/\\s]+/)*[^\\/\\s]+_(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\\.json)$',
+      not: {
+        pattern:
+          '^https:\\/\\/docs\\.oasis-open\\.org\\/csaf\\/csaf\\/v2\\.1\\/([^\\/\\s]+/)*schema\\/extension-content\\.json$',
+      },
     },
     schema: {
       $dynamicAnchor: 'meta',
@@ -254,7 +259,6 @@ export default {
             'Contains the definition of the object of the CSAF Extension content.',
           type: 'object',
           $ref: '#/$defs/schema',
-          minProperties: 6,
           required: [
             'title',
             'description',
@@ -293,7 +297,13 @@ export default {
                 'Contains the number of properties within the `object`.',
               type: 'integer',
               minimum: 1,
-              multipleOf: 1,
+            },
+            properties: {
+              title: 'Properties of the CSAF Extension Content object',
+              description:
+                'Contains the properties as object of the CSAF Extension Schema.',
+              $ref: '#/$defs/schema',
+              minProperties: 1,
             },
             unevaluatedProperties: {
               title:

@@ -1,3 +1,5 @@
+import type { DocumentCategory } from '../../shared/types'
+
 export type Advisory = {
   advisoryId: string
   revision: string
@@ -73,13 +75,7 @@ type MetaData = Readonly<{
     | 'OBJECT_CVSS_3'
     | 'OBJECT_CVSS_4'
     | 'ARRAY_REVISION_HISTORY'
-  relevanceLevels?: {
-    csaf_base: RelevanceLevel
-    csaf_security_incident_response: RelevanceLevel
-    csaf_informational_advisory: RelevanceLevel
-    csaf_security_advisory: RelevanceLevel
-    csaf_vex: RelevanceLevel
-  }
+  relevanceLevels?: Partial<Record<DocumentCategory, RelevanceLevel>>
   userDocumentation?: {
     specification: string
     usage: string
