@@ -68,15 +68,15 @@ export default function ErrorPanel({ sideBarSelectedPath }) {
                 setSelectedPath(err.instancePath.split('/').slice(1))
               }
             >
-              {err.testId ? (
-                <span
-                  className="font-bold"
-                  data-testid={`error_test_id-${err.instancePath}-${i}`}
-                >
-                  {err.testId}{' '}
-                </span>
-              ) : null}
               <b>{err.instancePath}</b>: {err.message}
+              {err.testId ? (
+                <>
+                  {' '}
+                  <b data-testid={`error_test_id-${err.instancePath}-${i}`}>
+                    ({err.testId})
+                  </b>
+                </>
+              ) : null}
             </div>
           )
         })}
