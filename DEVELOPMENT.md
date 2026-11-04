@@ -20,6 +20,7 @@ This document gives an overview on how to develop Secvisogram, the general techn
   - [Form Editor](#form-editor)
   - [Navigation](#navigation)
   - [Validation](#validation)
+  - [Test IDs](#test-ids)
   - [Sanitizing](#sanitizing)
   - [Data Model](#data-model)
 - [Debugging & Testing Secvisogram](#debugging--testing-secvisogram)
@@ -280,6 +281,14 @@ Opening the app with an `advisoryId` query parameter (e.g. `/?advisoryId=<id>`) 
 ### Validation
 
 The application uses two validation patterns: The fast HTML5 validation; and the validation according to the JSON schema, which kicks in either 300ms after editing the document or when changing the tab. The status of the validation is shown in the "Form Editor" tab, the "JSON Editor" tab and the "Preview" tab.
+
+### Test IDs
+
+The error panel of the sidebar (`app/lib/app/SecvisogramPage/View/SideBar/ErrorPanel.js`) shows the ID of the CSAF test (e.g. `6.1.27.11`) that reported an error. The ID is optional (`testId` in `TypedValidationError`); errors without one, such as the schema tests (`csaf_2_x_strict`), are shown without an ID.
+
+- Client-side validation (`app/lib/core/v2_0.js`, `app/lib/core/v2_1.js`): The ID is derived from the _export key_ of the test in the validator library (e.g. `mandatoryTest_6_1_27_11`), not from `Function.name`, because function names are mangled in the minified browser bundle.
+- Validator service (`app/lib/editorHost.js`, `remoteValidationErrors`): The ID is derived from the `name` of each test in the service response.
+- In both cases `testIdFromName` in `app/lib/shared/testId.js` converts the name to the ID (`mandatoryTest_6_1_27_11` becomes `6.1.27.11`).
 
 ### Sanitizing
 
