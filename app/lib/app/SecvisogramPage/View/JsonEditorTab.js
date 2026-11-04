@@ -35,12 +35,12 @@ export default function JsonEditorTab({
   const uiSchema = uiSchemas[uiSchemaVersion]
 
   const [editor, setEditor] = React.useState(
-    /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
+    /** @type {import('monaco-editor').editor.IStandaloneCodeEditor | null} */ (
       null
     ),
   )
   const [monaco, setMonaco] = React.useState(
-    /** @type {import ("react-monaco-editor").monaco | null} */ (null),
+    /** @type {typeof import('react-monaco-editor').monaco | null} */ (null),
   )
 
   const stringifiedDoc = React.useMemo(

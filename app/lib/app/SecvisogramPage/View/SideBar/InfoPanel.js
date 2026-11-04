@@ -37,9 +37,10 @@ export default function InfoPanel({ selectedPath, uiSchemaVersion }) {
   const usagePath = React.useMemo(() => {
     if (!selectedPath.length) return null
     const jsonPath = `$.${selectedPath.join('.')}`.replaceAll(/\.\d+/g, '')
-    const meta = /** @type {typeof metaData[keyof metaData] | undefined} */ (
-      Reflect.get(metaData, jsonPath)
-    )
+    const meta =
+      /** @type {(typeof metaData)[keyof typeof metaData] | undefined} */ (
+        Reflect.get(metaData, jsonPath)
+      )
     return meta && 'userDocumentation' in meta && meta.userDocumentation.usage
       ? meta.userDocumentation.usage
       : ''

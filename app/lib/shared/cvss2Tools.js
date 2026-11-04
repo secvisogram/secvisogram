@@ -53,7 +53,7 @@ export function vectorUpdateFromVectorString(vector) {
     })
     .filter(
       /**
-       * @returns {entry is [readonly CVSSField, string]}
+       * @returns {entry is readonly [CVSSField, string]}
        */
       (entry) => Boolean(entry),
     )

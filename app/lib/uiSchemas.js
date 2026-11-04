@@ -5,7 +5,7 @@
  * See app/scripts/importUiMetaData/README.md for more information.
  */
 
-/** @typedef {keyof uiSchemas} UiSchemaVersion */
+/** @typedef {keyof typeof uiSchemas} UiSchemaVersion */
 
 export const uiSchemas = {
   'v2.0': await import('./uiSchemas/csaf_2_0.js'),
