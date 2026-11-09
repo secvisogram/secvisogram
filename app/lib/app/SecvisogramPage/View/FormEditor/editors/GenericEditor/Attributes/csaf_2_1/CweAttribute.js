@@ -80,14 +80,7 @@ export default function CweAttribute({ property, instancePath, disabled }) {
   )
   const [namePath, nameValue] = getChildPathAndValue(instancePath, doc, 'name')
 
-  const [versionTerm, setVersionTerm] = useState('')
-  // Keeps the term in sync whenever the underlying value changes from the
-  // outside (e.g. undo/redo, loading a different document).
-  const [prevVersionValue, setPrevVersionValue] = useState(versionValue)
-  if (versionValue !== prevVersionValue) {
-    setPrevVersionValue(versionValue)
-    setVersionTerm(String(versionValue))
-  }
+  const versionTerm = String(versionValue)
 
   const [cwec, setCwec] = useState(/** @type {Cwec | null} */ (null))
 
@@ -154,7 +147,7 @@ export default function CweAttribute({ property, instancePath, disabled }) {
         instancePath={/** @type string[] */ (versionPath)}
         value={versionTerm}
         onChange={(s) => {
-          setVersionTerm(s)
+          updateDoc(/** @type string[] */ (versionPath), s)
         }}
         property={property}
         disabled={disabled}
