@@ -7,16 +7,22 @@ import ApiRequest from '../ApiRequest.js'
  * @returns
  */
 export async function validateCSAF(validatorUrl, { csaf }) {
+  const version = /** @type {any} */ (csaf)?.document?.csaf_version
+  const tests =
+    version === '2.1'
+      ? [{ type: 'preset', name: 'full' }]
+      : [
+          { type: 'test', name: 'csaf_2_0_strict' },
+          { type: 'preset', name: 'mandatory' },
+          { type: 'preset', name: 'optional' },
+          { type: 'preset', name: 'informative' },
+        ]
+
   const validateResponse = await new ApiRequest(
     new Request(validatorUrl + '/api/v1/validate', { method: 'POST' }),
   )
     .setJsonRequestBody({
-      tests: [
-        { type: 'test', name: 'csaf_2_0_strict' },
-        { type: 'preset', name: 'mandatory' },
-        { type: 'preset', name: 'optional' },
-        { type: 'preset', name: 'informative' },
-      ],
+      tests,
       document: csaf,
     })
     .setContentType('application/json')
