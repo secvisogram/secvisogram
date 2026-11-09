@@ -5,8 +5,19 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/app'
     schedule:
-      interval: 'weekly'
-    # Disable version updates for this repository
+      interval: 'daily'
     open-pull-requests-limit: 5
     allow:
       - dependency-type: 'production'
+    groups:
+      npm-dependencies:
+        patterns:
+          - '*'
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    groups:
+      docker-images:
+        patterns:
+          - '*'
