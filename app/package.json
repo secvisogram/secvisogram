@@ -26,7 +26,8 @@
     "test:playwright:report": "playwright show-report",
     "build": "node scripts/build.js",
     "build:editor": "node scripts/build.js --env editor",
-    "dev": "node scripts/dev.js"
+    "dev": "node scripts/dev.js",
+    "ssvc:check-data": "node scripts/updateSsvcData.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
