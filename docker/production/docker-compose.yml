@@ -1,0 +1,23 @@
+services:
+  secvisogram:
+    image: ghcr.io/secvisogram/secvisogram:latest
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./appspecific:/usr/share/nginx/html/.well-known/appspecific:ro
+      # Left of the ':' is wherever the TLS certificate and dhparam actually
+      # live on this host (e.g. certbot's own layout) - point it there.
+      # Right of the ':' must match nginx.conf's ssl_certificate* paths.
+      - /etc/letsencrypt/secvisogram.de:/etc/letsencrypt/secvisogram.de:ro
+      - /etc/nginx/dhparams:/etc/nginx/dhparams:ro
+    depends_on:
+      - validator
+
+  validator:
+    image: ghcr.io/secvisogram/csaf-validator-service:latest
+    restart: unless-stopped
+    expose:
+      - '8082'
