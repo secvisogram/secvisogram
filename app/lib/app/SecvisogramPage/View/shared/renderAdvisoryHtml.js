@@ -7,41 +7,32 @@ import {
 } from '@secvisogram/html-template'
 
 /**
- * Names the HTML templates output without escaping (`{{{name}}}`). Only the
- * values `renderMarkdown` produces at the expected paths are safe there.
+ * Content-Security-Policy of the generated advisory HTML. The document needs
+ * no scripts, so none are allowed: markup from the CSAF document that reaches
+ * the output unescaped cannot run, neither in the preview nor in the exported
+ * HTML file wherever it is published. Inline styles (the template's own CSS)
+ * and images (markdown in the document) stay allowed.
  */
-const UNESCAPED_TEMPLATE_FIELDS = [
-  'details',
-  'issuing_authority',
-  'name',
-  'summary',
-  'text',
-]
+export const ADVISORY_HTML_CSP = [
+  "default-src 'none'",
+  "style-src 'unsafe-inline'",
+  'img-src http: https: data:',
+  "base-uri 'none'",
+  "form-action 'none'",
+].join('; ')
 
 /**
- * Mustache looks a name up in the enclosing objects when the current object
- * does not have it. An object without e.g. `text` would therefore print a
- * `text` property of an ancestor, which `renderMarkdown` never processed,
- * unescaped. Declaring the missing fields on every object ends the lookup
- * there and renders them empty, as if they were missing.
+ * Inserts the Content-Security-Policy as the first element of `<head>`. The
+ * head comes from the template itself and precedes all document data, so the
+ * policy applies to everything taken from the document.
  *
- * @param {unknown} value
- * @param {WeakSet<object>} [visited]
+ * @param {string} html
  */
-function declareUnescapedFields(value, visited = new WeakSet()) {
-  if (value === null || typeof value !== 'object' || visited.has(value)) return
-  visited.add(value)
-  if (Array.isArray(value)) {
-    value.forEach((item) => declareUnescapedFields(item, visited))
-    return
-  }
-  const record = /** @type {Record<string, unknown>} */ (value)
-  for (const field of UNESCAPED_TEMPLATE_FIELDS) {
-    if (!Object.prototype.hasOwnProperty.call(record, field)) {
-      record[field] = undefined
-    }
-  }
-  Object.values(record).forEach((item) => declareUnescapedFields(item, visited))
+function addContentSecurityPolicy(html) {
+  return html.replace(
+    '<head>',
+    `<head>\n  <meta http-equiv="Content-Security-Policy" content="${ADVISORY_HTML_CSP}" />`,
+  )
 }
 
 /**
@@ -56,8 +47,9 @@ export default function renderAdvisoryHtml(doc, schemaVersion) {
   const { document: enrichedDoc } =
     schemaVersion === 'v2.1' ? enrichDocumentV2_1(doc) : enrichDocumentV2_0(doc)
   const parsedDoc = renderMarkdown(enrichedDoc)
-  declareUnescapedFields(parsedDoc)
-  return schemaVersion === 'v2.1'
-    ? HTMLTemplate2_1({ document: parsedDoc })
-    : HTMLTemplate2_0({ document: parsedDoc })
+  const html =
+    schemaVersion === 'v2.1'
+      ? HTMLTemplate2_1({ document: parsedDoc })
+      : HTMLTemplate2_0({ document: parsedDoc })
+  return addContentSecurityPolicy(html)
 }
