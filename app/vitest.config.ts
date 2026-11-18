@@ -33,7 +33,11 @@ const jsxInJsLoader: Plugin = {
         lang: 'jsx',
         sourcemap: true,
       })
-      return { code: result.code, map: result.map }
+      const map = result.map && {
+        ...result.map,
+        sources: result.map.sources.map((source) => source ?? null),
+      }
+      return { code: result.code, map }
     }
   },
 }
