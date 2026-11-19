@@ -3,13 +3,8 @@ import React from 'react'
 import createFileName from '../../../shared/createFileName.js'
 import * as api from '../../shared/api.js'
 import AppErrorContext from '../../shared/context/AppErrorContext.js'
-import {
-  enrichDocumentV2_0,
-  enrichDocumentV2_1,
-  HTMLTemplate2_0,
-  HTMLTemplate2_1,
-  renderMarkdown,
-} from '@secvisogram/html-template'
+import { PREVIEW_IFRAME_SANDBOX } from './shared/previewIframeSandbox.js'
+import renderAdvisoryHtml from './shared/renderAdvisoryHtml.js'
 
 export default /**
  * @param {import('./ExportDocumentDialog/types.js').Props} props
@@ -39,16 +34,7 @@ export default /**
   const iframeRef = React.useRef(null)
 
   /** @param {{}} doc */
-  const renderHtml = (doc) => {
-    const { document: enrichedDoc } =
-      uiSchemaVersion === 'v2.1'
-        ? enrichDocumentV2_1(doc)
-        : enrichDocumentV2_0(doc)
-    const parsedDoc = renderMarkdown(enrichedDoc)
-    return uiSchemaVersion === 'v2.1'
-      ? HTMLTemplate2_1({ document: parsedDoc })
-      : HTMLTemplate2_0({ document: parsedDoc })
-  }
+  const renderHtml = (doc) => renderAdvisoryHtml(doc, uiSchemaVersion)
 
   const exportText = host
     ? ''
@@ -267,7 +253,12 @@ export default /**
             </div>
           ) : null}
           {source === 'PDFDOCUMENT' && isLocal && (
-            <iframe data-testid="pdf_document_iframe" hidden ref={iframeRef} />
+            <iframe
+              data-testid="pdf_document_iframe"
+              hidden
+              sandbox={PREVIEW_IFRAME_SANDBOX}
+              ref={iframeRef}
+            />
           )}
         </div>
         <footer className="p-2 border-t flex justify-between items-center">

@@ -1,11 +1,6 @@
 import React from 'react'
-import {
-  enrichDocumentV2_0,
-  enrichDocumentV2_1,
-  HTMLTemplate2_0,
-  HTMLTemplate2_1,
-  renderMarkdown,
-} from '@secvisogram/html-template'
+import renderAdvisoryHtml from './shared/renderAdvisoryHtml.js'
+import { PREVIEW_IFRAME_SANDBOX } from './shared/previewIframeSandbox.js'
 
 /**
  * Defines the layout of the preview tab.
@@ -19,16 +14,10 @@ export default function PreviewTab({ doc, schemaVersion }) {
   /** @type {React.MutableRefObject<HTMLIFrameElement | null>} */
   const iframeRef = React.useRef(null)
   const [showRendered, setShowRendered] = React.useState(true)
-  const html = React.useMemo(() => {
-    const { document: enrichedDoc } =
-      schemaVersion === 'v2.1'
-        ? enrichDocumentV2_1(doc)
-        : enrichDocumentV2_0(doc)
-    const parsedDoc = renderMarkdown(enrichedDoc)
-    return schemaVersion === 'v2.1'
-      ? HTMLTemplate2_1({ document: parsedDoc })
-      : HTMLTemplate2_0({ document: parsedDoc })
-  }, [doc, schemaVersion])
+  const html = React.useMemo(
+    () => renderAdvisoryHtml(doc, schemaVersion),
+    [doc, schemaVersion],
+  )
 
   /**
    * Updates the content of the preview iframe.
@@ -66,6 +55,7 @@ export default function PreviewTab({ doc, schemaVersion }) {
             <iframe
               id="preview"
               className="advisory w-full border h-full"
+              sandbox={PREVIEW_IFRAME_SANDBOX}
               ref={iframeRef}
             />
           </div>
