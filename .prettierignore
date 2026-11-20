@@ -6,3 +6,4 @@ build
 /app/.nyc_output
 /app/playwright-report
 /app/test-results
+/app/lib/shared/ssvc/data

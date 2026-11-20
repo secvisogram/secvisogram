@@ -3,3 +3,13 @@ Copyright (c) 2021-present, Bundesamt für Sicherheit in der Informationstechnik
 
 This product includes software developed at
 Bundesamt für Sicherheit in der Informationstechnik (BSI).
+
+---
+
+app/lib/shared/ssvc/data contains unmodified files from the data/ directory of
+CERTCC/SSVC (https://github.com/CERTCC/SSVC, commit bf3213bc0bd2bf3cf1329c9b48f72d7163a682b1):
+SSVC decision points, decision tables and JSON schemas.
+
+Copyright 2026 Carnegie Mellon University.
+Licensed under a MIT (SEI)-style license. The full license text, including the
+disclaimer of warranty, is in app/lib/shared/ssvc/data/LICENSE.

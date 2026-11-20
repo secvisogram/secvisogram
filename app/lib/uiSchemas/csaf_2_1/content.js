@@ -10910,10 +10910,17 @@ export default {
                                       csaf_vex: 'best_practice',
                                       csaf_vulnerability_report: 'optional',
                                     },
+                                    userDocumentation: {
+                                      specification:
+                                        'docs/user/vulnerabilities/vulnerability/metrics/metric/content/ssvc_v2-spec.en.md',
+                                      usage:
+                                        'docs/user/vulnerabilities/vulnerability/metrics/metric/content/ssvc_v2-usage.en.md',
+                                    },
                                     i18n: {
                                       title: 'v2_1.SsvcV2Title',
                                       description: 'v2_1.SsvcV2Description',
                                     },
+                                    uiType: 'OBJECT_SSVC_2',
                                   },
                                   type: 'OBJECT',
                                   metaInfo: { propertyList: [] },

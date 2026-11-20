@@ -59,6 +59,7 @@ Available uiTypes:
 | OBJECT_CWE                            | special type for CWE objects ensuring that ID and name match                                                                                        |
 | OBJECT_CVSS_2                         | special CVSS v2 object                                                                                                                              |
 | OBJECT_CVSS_3                         | special CVSS v3.0 / v3.1 object                                                                                                                     |
+| OBJECT_SSVC_2                         | special SSVC v2 object, edited with the SSVC dialog                                                                                                 |
 | ARRAY_REVISION_HISTORY                | special type of array, disabling some input values when the revision history is managed in the backend                                              |
 
 The `importUiMetaData.js` script can detect `STRING_DATETIME`, `STRING_URI`
