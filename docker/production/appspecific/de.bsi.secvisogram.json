@@ -1,0 +1,7 @@
+{
+  "loginAvailable": false,
+  "loginUrl": "",
+  "logoutUrl": "",
+  "userInfoUrl": "",
+  "validatorUrl": "/validator"
+}
